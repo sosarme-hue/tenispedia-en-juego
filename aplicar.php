@@ -14,6 +14,12 @@ foreach ($it as $f) {
   if (@copy($f->getPathname(), $t)) $n++; else $err++;
 }
 file_put_contents(__DIR__ . '/ultima-copia.txt', date('c') . " copiados=$n errores=$err\n");
+// Script temporal: si todo ha ido bien, se borra a sí mismo junto con la carpeta _subida.
+if (!$err) {
+  $del = new RecursiveIteratorIterator(new RecursiveDirectoryIterator(__DIR__, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
+  foreach ($del as $f) { $f->isDir() && !$f->isLink() ? @rmdir($f->getPathname()) : @unlink($f->getPathname()); }
+  @rmdir(__DIR__);
+}
 echo '<div style="font:20px sans-serif;text-align:center;margin-top:20vh">';
 echo $err ? "Copiados $n archivos, $err con error. Avisa a Claude." : '✅ ¡Listo! Mythicapedia ya está actualizada. Puedes cerrar esta página.';
 echo '</div>';
