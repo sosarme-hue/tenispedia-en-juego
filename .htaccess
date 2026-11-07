@@ -1,2 +1,4 @@
+<Files "aplicar.php">
+Require all granted
+</Files>
 Require all denied
-Deny from all
