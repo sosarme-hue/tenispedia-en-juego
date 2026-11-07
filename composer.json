@@ -1,0 +1,11 @@
+{
+    "name": "mythicapedia/actualizacion",
+    "description": "Rama de subida de Mythicapedia (no fusionar con main): copia mythicapedia-payload/ a public_html sin borrar nada",
+    "require": {},
+    "scripts": {
+        "post-install-cmd": [
+            "cp -Rf mythicapedia-payload/. ../",
+            "date > ultima-copia.txt"
+        ]
+    }
+}

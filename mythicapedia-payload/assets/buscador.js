@@ -1,0 +1,7 @@
+(function(){var IDX=null,R=document.documentElement.getAttribute('data-raiz')||'';
+function n(s){return (s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()}
+function carga(cb){if(IDX)return cb();var s=document.createElement('script');s.src=R+(document.documentElement.lang==='en'?'en/':'')+'assets/indice.js?v=2';s.onload=function(){IDX=window.INDICE.map(function(x){return [n(x[0]),x]});cb()};document.head.appendChild(s)}
+function busca(q,max){q=n(q).trim();if(q.length<2)return[];var a=[],b=[];for(var i=0;i<IDX.length;i++){var k=IDX[i][0];if(k.indexOf(q)===0)a.push(IDX[i][1]);else if(k.indexOf(q)>0)b.push(IDX[i][1]);if(a.length>=max)break}return a.concat(b).slice(0,max)}
+window.Busca={sugerir:function(inp,caja){inp.addEventListener('input',function(){carga(function(){var r=busca(inp.value,10);caja.innerHTML=r.map(function(x){return '<a href="'+R+x[1]+'">'+x[0]+' <small>· '+x[2]+'</small></a>'}).join('');caja.style.display=r.length?'block':'none'})});document.addEventListener('click',function(ev){if(!caja.contains(ev.target)&&ev.target!==inp)caja.style.display='none'})},
+lista:function(inp,out,vacio){carga(function(){function f(){var r=busca(inp.value,300);out.innerHTML=r.length?r.map(function(x){return '<a href="'+R+x[1]+'">'+x[0]+' <small>· '+x[2]+'</small></a>'}).join(''):(inp.value.length>1?'<p>'+vacio+'</p>':'')}inp.addEventListener('input',f);var q=new URLSearchParams(location.search).get('q');if(q){inp.value=q;f()}})}};
+document.querySelectorAll('[data-busca]').forEach(function(i){Busca.sugerir(i,i.parentNode.querySelector('.sug'))})})();
