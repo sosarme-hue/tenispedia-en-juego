@@ -1,7 +1,7 @@
 <?php
 // Copia mythicapedia-payload/ sobre public_html. Sobrescribe, no borra nada.
 header('Content-Type: text/html; charset=utf-8');
-if (($_GET['k'] ?? '') !== 'de9004251ac30b6f7cbac031') { http_response_code(403); exit('No autorizado'); }
+if (($_GET['k'] ?? '') !== 'fb55beaac45593461c168cae') { http_response_code(403); exit('No autorizado'); }
 $src = __DIR__ . '/mythicapedia-payload';
 $dst = dirname(__DIR__);
 $n = 0; $err = 0;
