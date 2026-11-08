@@ -35,11 +35,11 @@ add_action('template_redirect', function () {
 
 /* 2. Opción de baja en el desplegable «¿Qué ha cambiado?» (vale para mostrar y para validar) */
 add_filter('wpcf7_form_tag', function ($tag) {
-    if (!is_object($tag) || ($tag->name ?? '') !== 'fix-what' || empty($tag->values)) return $tag;
-    $vals = (array)$tag->values;
+    if (!is_array($tag) || ($tag['name'] ?? '') !== 'fix-what' || empty($tag['values'])) return $tag;
+    $vals = (array)$tag['values'];
     $l = in_array('Altres', $vals, true) ? 'ca' : (in_array('Other', $vals, true) ? 'en' : 'es');
     $o = ssi_bf_txt('opt', $l);
-    if (!in_array($o, $vals, true)) { $tag->values[] = $o; $tag->raw_values[] = $o; if (is_array($tag->labels)) $tag->labels[] = $o; }
+    if (!in_array($o, $vals, true)) { $tag['values'][] = $o; $tag['raw_values'][] = $o; $tag['labels'][] = $o; }
     return $tag;
 });
 
