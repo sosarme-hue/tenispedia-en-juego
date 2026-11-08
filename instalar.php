@@ -48,11 +48,11 @@ add_action('wp_footer', function () {
     if (!isset($_GET['baja'])) return;
     $ph = wp_json_encode(['es'=>ssi_bf_txt('ph','es'),'ca'=>ssi_bf_txt('ph','ca'),'en'=>ssi_bf_txt('ph','en')]);
     $op = wp_json_encode([ssi_bf_txt('opt','es'), ssi_bf_txt('opt','ca'), ssi_bf_txt('opt','en')]);
-    echo '<script>(function(){var q=new URLSearchParams(location.search),s=document.querySelector(\'select[name="fix-what"]\');if(!s)return;var f=s.form,ops='.$op.',ph='.$ph.';'
+    echo '<script>(function(){function go(){var q=new URLSearchParams(location.search),s=document.querySelector(\'select[name="fix-what"]\');if(!s)return;var f=s.form,ops='.$op.',ph='.$ph.';'
        .'for(var i=0;i<s.options.length;i++)if(ops.indexOf(s.options[i].value)>-1)s.selectedIndex=i;'
        .'["fix-business","fix-link"].forEach(function(n){var e=f.querySelector(\'[name="\'+n+\'"]\'),v=q.get(n);if(e&&v&&!e.value)e.value=v;});'
        .'var r=f.querySelectorAll(\'input[name="fix-relation"]\');if(r.length>1)r[r.length-1].checked=true;'
-       .'var b=f.querySelector(\'textarea[name="fix-body"]\'),L=(document.documentElement.lang||"es").slice(0,2);if(b)b.placeholder=ph[L]||ph.es;})();</script>';
+       .'var b=f.querySelector(\'textarea[name="fix-body"]\'),L=(document.documentElement.lang||"es").slice(0,2);if(b)b.placeholder=ph[L]||ph.es;}if(document.readyState==="complete")setTimeout(go,400);else addEventListener("load",function(){setTimeout(go,400);});})();</script>';
 }, 99);
 
 /* 3. Asunto del correo */
