@@ -1,0 +1,112 @@
+<?php
+/* Guías .si — «Solicitar baja» (8-9/11/2026). Mismo archivo en todas las guías (sitges, garraf, vilanova, santperederibes, santcugat, castelldefels, eivissa).
+ * 1) En las fichas de negocios y profesionales, debajo de «¿Algún dato incorrecto?», un enlace «Solicita la baja».
+ *    Lleva al formulario de corrección ya relleno o, si la guía no tiene formulario, abre un correo a info@ con el asunto [BAJA].
+ * 2) No sale en instituciones públicas, fundaciones, entidades, museos, monumentos, centros públicos de enseñanza y de salud (ssi_bf_regla).
+ *    Para forzarlo en una ficha concreta: campo personalizado _ssi_publico = 1 (sin enlace) o = no (con enlace).
+ * 3) El formulario de corrección gana la opción «Quiero que se borre la ficha (baja)» y el asunto del correo empieza por [BAJA].
+ * Para quitarlo basta con borrar este archivo. */
+if (!defined('ABSPATH')) exit;
+
+function ssi_bf_lang() {
+    $p = (string)parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
+    return preg_match('~^/(ca|en)(/|$)~', $p, $m) ? $m[1] : 'es';
+}
+function ssi_bf_txt($k, $l = null) {
+    $l = $l ?: ssi_bf_lang();
+    static $t = [
+        'opt'  => ['es'=>'Quiero que se borre la ficha (baja)', 'ca'=>'Vull que s’esborri la fitxa (baixa)', 'en'=>'Please remove the listing'],
+        'link' => ['es'=>'¿Es tu negocio y prefieres no aparecer? Solicita la baja →', 'ca'=>'És el teu negoci i prefereixes no sortir-hi? Demana la baixa →', 'en'=>'Is this your business and you’d rather not be listed? Ask for removal →'],
+        'ph'   => ['es'=>'Si pides la baja, cuéntanos que eres el titular. Borramos la ficha en un plazo máximo de 30 días.', 'ca'=>'Si demanes la baixa, explica’ns que n’ets el titular. Esborrem la fitxa en un termini màxim de 30 dies.', 'en'=>'If you’re asking for removal, tell us you’re the owner. We delete the listing within 30 days at most.'],
+        'subj' => ['es'=>'[BAJA] Solicitud de baja: %s', 'ca'=>'[BAJA] Sol·licitud de baixa: %s', 'en'=>'[BAJA] Removal request: %s'],
+        'body' => ['es'=>"Hola:\n\nSoy el titular de «%s» y pido que se borre su ficha: %s\n\nNombre y cargo:\nTeléfono de contacto:\n", 'ca'=>"Hola:\n\nSoc el titular de «%s» i demano que s’esborri la seva fitxa: %s\n\nNom i càrrec:\nTelèfon de contacte:\n", 'en'=>"Hello,\n\nI am the owner of “%s” and I ask you to remove its listing: %s\n\nName and position:\nContact phone:\n"],
+    ];
+    return $t[$k][$l] ?? $t[$k]['es'];
+}
+
+/* Devuelve el motivo si la ficha es de una institución pública o sin ánimo de lucro (sin enlace de baja), o '' si es un negocio o profesional. */
+function ssi_bf_regla($titulo, array $cats) {
+    $t = mb_strtolower(remove_accents(html_entity_decode($titulo, ENT_QUOTES, 'UTF-8')));
+    $t = str_replace(['’', "'", '·'], [' ', ' ', '.'], $t);
+    $no = ['administracion-publica','patrimonio-y-monumentos','museos','centros-de-salud','playas-y-calas','naturaleza-y-rutas','universidades','entidades','masias-historicas','centros-culturales','empleo-y-orientacion'];
+    if (array_intersect($cats, $no)) return 'categoría';
+    if (preg_match('~\b(ajuntament|ayuntamiento|municipal|municipals|fundacio|fundacion|biblioteca|generalitat|consorci|consorcio|diputacio|diputacion|consell insular|govern balear|mossos|policia|guardia civil|bombers|bomberos|oficina de turisme|oficina de turismo|jutjat|juzgado|correos|oac|omic|soib|soc|sepe|deixalleria|centre civic|centro civico|seguretat social|seguridad social|agencia tributaria)\b~', $t)) return 'nombre';
+    $edu = ['escuelas-de-primaria','institutos-y-fp','colegios-e-institutos','otros-centros-educativos','escuelas-infantiles','academias','refuerzo-escolar','formacion-para-el-empleo','educacion'];
+    if (array_intersect($cats, $edu) && !preg_match('~pediatric|psico|maricel|idiom|english|languag|music college|dance|ballet|yoga|international|school|waldorf|montessori|global|politecnic|gimbernat|esade|uic |negocis~', $t)) {
+        if (preg_match('~\b(ceip|ies|ins|cepa|cfa|cifp|eoi|ea|zer|cee|institut|escola oficial|conservatori|escola d art|escola d adults|centre de formacio d adults|escola d hoteleria|centro de fp|ebm|escoleta|s escoleta|centro de educacion especial|centre d educacio especial|aula de adultos|upc|uib|uab)\b~', $t)) return 'centro educativo público';
+        if (array_intersect($cats, ['escuelas-de-primaria','colegios-e-institutos','institutos-y-fp']) && preg_match('~^escola ~', $t) && !preg_match('~^escola (pia|thau|santa|sant |avenc|sefardita|edumar|superior|pins del valles)~', $t)) return 'escuela pública';
+    }
+    $san = ['centros-sanitarios','hospitales','residencias-y-centros-de-dia','atencion-domiciliaria'];
+    if (array_intersect($cats, $san) && preg_match('~\b(cap|capi|abs|centre d atencio primaria|consultori|consultorio|centro de salud|centre de salut|hospital|cuap)\b~', $t)
+        && !preg_match('~veterin|policlinica|clinica|privad|dental|quiron|asepeyo|general de catalunya|\bdr\b|medic~', $t)) return 'sanidad pública';
+    return '';
+}
+
+function ssi_bf_publica($id) {
+    $m = (string)get_post_meta($id, '_ssi_publico', true);
+    if ($m === 'no') return false;
+    if ($m !== '' && $m !== '0') return true;
+    $host = preg_replace('~^www\.~', '', (string)parse_url(home_url(), PHP_URL_HOST));
+    if ($host === 'sitges.si' && in_array((int)$id, [690,1233,1710,450,1708,448,452,692,1726,2028,2029,1298,1299,1300,1301,1302,1224,695,1227,1225,696,2202,506,1223,694,460,429], true)) return true;
+    $cats = wp_get_post_terms($id, 'at_biz_dir-category', ['fields'=>'slugs']);
+    return ssi_bf_regla(get_the_title($id), is_wp_error($cats) ? [] : (array)$cats) !== '';
+}
+/* ¿La guía tiene el formulario de corrección (Contact Form 7 con el campo fix-what)? */
+function ssi_bf_tiene_form() {
+    static $r = null; if ($r !== null) return $r;
+    global $wpdb;
+    return $r = (bool)$wpdb->get_var("SELECT COUNT(*) FROM {$wpdb->postmeta} pm JOIN {$wpdb->posts} p ON p.ID=pm.post_id WHERE p.post_type='wpcf7_contact_form' AND p.post_status='publish' AND pm.meta_key='_form' AND pm.meta_value LIKE '%fix-what%'");
+}
+
+/* 1. Enlace en la ficha */
+add_action('template_redirect', function () {
+    if (!is_singular('at_biz_dir')) return;
+    ob_start(function ($html) {
+        $id = get_queried_object_id();
+        if (!$id || ssi_bf_publica($id)) return $html;
+        $l = ssi_bf_lang(); $name = html_entity_decode(get_the_title($id), ENT_QUOTES, 'UTF-8'); $perma = get_permalink($id);
+        return preg_replace_callback('~<p class="ssi-more"><a href="([^"]*)#(ficha|fitxa|listing)">[^<]*</a></p>~', function ($m) use ($l, $name, $perma) {
+            if (ssi_bf_tiene_form()) {
+                $url = esc_url(add_query_arg(['baja'=>'1', 'fix-business'=>rawurlencode($name), 'fix-link'=>rawurlencode($perma)], html_entity_decode($m[1])).'#'.$m[2]);
+            } else {
+                $mail = 'info@'.preg_replace('~^www\.~', '', (string)parse_url(home_url(), PHP_URL_HOST));
+                $url = esc_attr('mailto:'.$mail.'?subject='.rawurlencode(sprintf(ssi_bf_txt('subj', $l), $name)).'&body='.rawurlencode(sprintf(ssi_bf_txt('body', $l), $name, $perma)));
+            }
+            return $m[0].'<p class="ssi-more ssi-baja" style="margin-top:-.6rem"><a href="'.$url.'" rel="nofollow" style="color:#5b6b75">'.esc_html(ssi_bf_txt('link', $l)).'</a></p>';
+        }, $html, 1);
+    });
+});
+
+/* 2. Opción de baja en el desplegable «¿Qué ha cambiado?» (vale para mostrar y para validar) */
+add_filter('wpcf7_form_tag', function ($tag) {
+    if (!is_array($tag) || ($tag['name'] ?? '') !== 'fix-what' || empty($tag['values'])) return $tag;
+    $vals = (array)$tag['values'];
+    $l = in_array('Altres', $vals, true) ? 'ca' : (in_array('Other', $vals, true) ? 'en' : 'es');
+    $o = ssi_bf_txt('opt', $l);
+    if (!in_array($o, $vals, true)) {
+        $pos = array_search(['es'=>'Otro','ca'=>'Altres','en'=>'Other'][$l], $vals, true);
+        foreach (['values','raw_values','labels'] as $k) { $a = (array)($tag[$k] ?? []); if ($pos === false) $a[] = $o; else array_splice($a, $pos, 0, [$o]); $tag[$k] = $a; }
+    }
+    return $tag;
+});
+
+/* Relleno automático al llegar desde «Solicita la baja» */
+add_action('wp_footer', function () {
+    if (!isset($_GET['baja'])) return;
+    $ph = wp_json_encode(['es'=>ssi_bf_txt('ph','es'),'ca'=>ssi_bf_txt('ph','ca'),'en'=>ssi_bf_txt('ph','en')]);
+    $op = wp_json_encode([ssi_bf_txt('opt','es'), ssi_bf_txt('opt','ca'), ssi_bf_txt('opt','en')]);
+    echo '<script>(function(){function go(){var q=new URLSearchParams(location.search),s=document.querySelector(\'select[name="fix-what"]\');if(!s)return;var f=s.form,ops='.$op.',ph='.$ph.';'
+       .'for(var i=0;i<s.options.length;i++)if(ops.indexOf(s.options[i].value)>-1)s.selectedIndex=i;'
+       .'["fix-business","fix-link"].forEach(function(n){var e=f.querySelector(\'[name="\'+n+\'"]\'),v=q.get(n);if(e&&v&&!e.value)e.value=v;});'
+       .'var r=f.querySelectorAll(\'input[name="fix-relation"]\');for(var j=0;j<r.length;j++)if(/propietari|owner/i.test(r[j].value))r[j].checked=true;'
+       .'var b=f.querySelector(\'textarea[name="fix-body"]\'),L=(document.documentElement.lang||"es").slice(0,2);if(b)b.placeholder=ph[L]||ph.es;}'
+       .'if(document.readyState==="complete")setTimeout(go,400);else addEventListener("load",function(){setTimeout(go,400);});})();</script>';
+}, 99);
+
+/* 3. Asunto del correo */
+add_filter('wpcf7_mail_components', function ($c, $form = null, $mail = null) {
+    if (!class_exists('WPCF7_Submission') || !($s = WPCF7_Submission::get_instance())) return $c;
+    $w = $s->get_posted_data('fix-what'); $w = is_array($w) ? reset($w) : $w;
+    if ($w && in_array($w, [ssi_bf_txt('opt','es'), ssi_bf_txt('opt','ca'), ssi_bf_txt('opt','en')], true) && strpos($c['subject'] ?? '', '[BAJA]') !== 0) $c['subject'] = '[BAJA] '.($c['subject'] ?? '');
+    return $c;
+}, 10, 3);

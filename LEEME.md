@@ -1,9 +1,8 @@
-# Baja RGPD en sitges.si (8/11/2026)
+# «Solicita la baja» en las guías .si
 
-Rama temporal. Se despliega en Hostinger en la carpeta `_baja/` de sitges.si (hosting_git_deploy-website-repository, directory `_baja`),
-se ejecuta una vez abriendo https://sitges.si/_baja/baja.php y después se vacía la rama (se quita baja.php) y se vuelve a desplegar.
+Rama temporal. Se despliega en la carpeta `_baja/` de cada guía (hosting_git_deploy-website-repository, directory `_baja`),
+se abre https://<guía>/_baja/instalar.php una vez y después se quitan los archivos de la rama y se vuelve a desplegar.
 
-Ejecutado el 8/11/2026: ficha 1921 borrada, guardia mu-plugins/ssi-bajas.php instalada. El script ya se ha quitado.
-
-8/11/2026: instalado wp-content/mu-plugins/ssi-baja-form.php (enlace «Solicita la baja» en las fichas y opción de baja en el formulario de corrección). Instalador ya quitado.
-9/11/2026: ssi-baja-form.php sin enlace en instituciones públicas, fundaciones, museos y monumentos. Instalador quitado.
+- 8/11/2026 sitges.si: baja RGPD de una ficha (guardia en mu-plugins/ssi-bajas.php) y enlace «Solicita la baja».
+- 9/11/2026: mismo mu-plugin ssi-baja-form.php en sitges, garraf, vilanova, santperederibes, santcugat, castelldefels y eivissa.
+  Sin enlace en instituciones públicas, fundaciones, entidades, museos, monumentos y centros públicos de enseñanza y salud.
