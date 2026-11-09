@@ -6,3 +6,4 @@ se ejecuta una vez abriendo https://sitges.si/_baja/baja.php y después se vací
 Ejecutado el 8/11/2026: ficha 1921 borrada, guardia mu-plugins/ssi-bajas.php instalada. El script ya se ha quitado.
 
 8/11/2026: instalado wp-content/mu-plugins/ssi-baja-form.php (enlace «Solicita la baja» en las fichas y opción de baja en el formulario de corrección). Instalador ya quitado.
+9/11/2026: ssi-baja-form.php sin enlace en instituciones públicas, fundaciones, museos y monumentos. Instalador quitado.
