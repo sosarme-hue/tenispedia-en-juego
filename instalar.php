@@ -9,6 +9,8 @@ $webs = [
   'catdogpedia.com' => "RewriteCond %{REQUEST_URI} ^/(en/)?(index\\.html)?$\n",
   // celebraciones.org: todas las páginas
   'celebraciones.org' => "RewriteCond %{REQUEST_FILENAME} -d [OR]\nRewriteCond %{REQUEST_FILENAME} \\.html?$\n",
+  // enfermeria.si: todas las páginas (saberparainvertir.com lleva el bloque en el .htaccess de su repositorio)
+  'enfermeria.si' => "RewriteCond %{REQUEST_FILENAME} -d [OR]\nRewriteCond %{REQUEST_FILENAME} \\.html?$\n",
 ];
 $dominios = dirname(__DIR__, 3);
 foreach ($webs as $w => $cond) {

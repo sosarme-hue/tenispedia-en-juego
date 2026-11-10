@@ -1,5 +1,6 @@
 <?php
-// Foto y textos al compartir (Open Graph / Twitter) para catdogpedia.com y celebraciones.org.
+// Foto y textos al compartir (Open Graph / Twitter) para catdogpedia.com, celebraciones.org,
+// saberparainvertir.com y enfermeria.si.
 // Solo lo llaman WhatsApp, Facebook, X, Telegram y otros lectores de enlaces
 // (regla «og-imagen» del .htaccess de la raíz). A las personas se les sirve la página de siempre.
 // Lee la página estática, ajusta las etiquetas y la devuelve. No escribe nada.
@@ -23,6 +24,19 @@ $webs = [
         'img' => ['es' => 'celebraciones-es.jpg', 'ca' => 'celebraciones-ca.jpg', 'en' => 'celebraciones-en.jpg'],
         'forzar' => '#.#',
         'portada' => '/es/',   // la raíz solo redirige; a los lectores se les da la portada en castellano
+    ],
+    'saberparainvertir.com' => [
+        'nombre' => 'Saber para invertir',
+        'idiomas' => ['es' => 'es_ES'], 'defecto' => 'es',
+        'img' => ['es' => 'saberparainvertir-es.jpg'],
+        'forzar' => '#.#',
+    ],
+    'enfermeria.si' => [
+        'nombre' => 'enfermeria.si',
+        'idiomas' => ['es' => 'es_ES'], 'defecto' => 'es',
+        'img' => ['es' => 'enfermeria-es.jpg'],
+        'forzar' => '#.#',
+        'titulo' => true,      // sus og:title son cortos («Inicio»): se usa el <title> completo
     ],
 ];
 $w = $webs[$host] ?? null;
@@ -58,6 +72,10 @@ function attr($s) { return htmlspecialchars(html_entity_decode($s, ENT_QUOTES | 
 // En las páginas indicadas se quita la imagen que hubiera para poner la tarjeta de la web.
 if (preg_match($w['forzar'], $ruta)) {
     $cab = preg_replace('/<meta[^>]+(?:property|name)\s*=\s*["\'](?:og:image(?::[a-z_]+)?|twitter:image(?::alt)?)["\'][^>]*>\s*/i', '', $cab);
+}
+
+if (!empty($w['titulo'])) {
+    $cab = preg_replace('/<meta[^>]+(?:property|name)\s*=\s*["\'](?:og:title|twitter:title)["\'][^>]*>\s*/i', '', $cab);
 }
 
 $url = $base . $ruta;

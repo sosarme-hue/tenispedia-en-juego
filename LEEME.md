@@ -1,4 +1,4 @@
-# Foto y textos al compartir: catdogpedia.com y celebraciones.org
+# Foto y textos al compartir: catdogpedia.com, celebraciones.org, saberparainvertir.com y enfermeria.si
 
 Esta rama se despliega en Hostinger en la carpeta `_og/` de cada web
 (hosting_git_deploy-website-repository, directory `_og`). No toca nada más.
