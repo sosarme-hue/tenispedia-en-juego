@@ -15,8 +15,8 @@ $SALTAR_FICH = '/^(404|plantilla.*|google[0-9a-f]+|default)\.html?$/i';
 // modo 'completo': escribe sitemap.xml (índice) + sitemap-auto-N.xml
 // modo 'git': la web se publica con git; sitemap.xml está en el repo y apunta a sitemap-auto-1.xml; aquí solo se escriben los hijos
 $WEBS = [
-  'enfermeria.si'         => ['modo' => 'git'],
-  'saberparainvertir.com' => ['modo' => 'git'],
+  'enfermeria.si'         => ['modo' => 'completo'],   // se publica con git: cada deploy vuelve a poner el sitemap.xml del repo y esta pasada lo rehace
+  'saberparainvertir.com' => ['modo' => 'completo'],
   'ludicopedia.com'       => ['modo' => 'completo'],
   'mythicapedia.com'      => ['modo' => 'completo'],
   'medicapedia.org'       => ['modo' => 'completo'],
