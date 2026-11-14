@@ -6,6 +6,8 @@
 // Solo escribe sitemap.xml (salvo en webs publicadas con git) y sitemap-auto-N.xml.
 if (PHP_SAPI !== 'cli') { http_response_code(404); exit; }
 @set_time_limit(0);
+$cerrojo = fopen(__DIR__ . '/.cerrojo', 'c');
+if (!flock($cerrojo, LOCK_EX | LOCK_NB)) exit; // ya hay una pasada en marcha
 $PRUEBA = in_array('prueba', $argv, true);
 $BASE = '/home/u235595016/domains';
 $MAX = 40000;                       // URL por fichero (el límite de Google es 50.000)
