@@ -1,0 +1,8 @@
+RedirectMatch 404 /\.git
+RedirectMatch 404 /README\.md$
+DirectoryIndex index.html
+<IfModule mod_headers.c>
+<FilesMatch "\.(css|js|html)$">
+Header set Cache-Control "no-cache, must-revalidate"
+</FilesMatch>
+</IfModule>
