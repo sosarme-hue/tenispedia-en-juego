@@ -1,0 +1,4 @@
+deny from all
+<Files "activar.php">
+allow from all
+</Files>
