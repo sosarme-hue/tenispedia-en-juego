@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ludicopedia · Free games and their history</title>
+<meta name="description" content="The great encyclopedia of games: the history and rules of hundreds of games, plus free chess, ludo, poker, dominoes, solitaire, trivia, crosswords and much more.">
+<link rel="canonical" href="https://ludicopedia.com/en/">
+<link rel="alternate" hreflang="es" href="https://ludicopedia.com/"><link rel="alternate" hreflang="en" href="https://ludicopedia.com/en/"><link rel="alternate" hreflang="x-default" href="https://ludicopedia.com/">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:site_name" content="Ludicopedia"><meta property="og:locale" content="en_GB"><meta property="og:locale:alternate" content="es_ES"><meta property="og:type" content="website">
+<meta property="og:title" content="Ludicopedia · Free games and their history"><meta property="og:description" content="Play chess, ludo, poker, dominoes and many more for free, and discover the history, stories and rules of hundreds of games.">
+<meta property="og:url" content="https://ludicopedia.com/en/"><meta property="og:image" content="https://ludicopedia.com/og-ludicopedia.png"><meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ludicopedia","url":"https://ludicopedia.com/en/","inLanguage":"en","description":"The great encyclopedia of games: history, rules and free games to play in your browser."}</script>
+<link rel="stylesheet" href="/css/ludicopedia.css?v=202611070954">
+<style>
+.destacados{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.destacados .tarjeta:first-child{grid-column:span 2;grid-row:span 2}
+.destacados .tarjeta:first-child .arte{height:auto;flex:1;min-height:220px;font-size:8rem}
+.destacados .tarjeta:first-child h3{font-size:1.8rem}
+@media (max-width:900px){.destacados{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.destacados{grid-template-columns:1fr}.destacados .tarjeta:first-child{grid-column:auto}}
+.sabias{display:flex;gap:18px;align-items:center;background:linear-gradient(135deg,var(--panel),var(--panel2));border-radius:var(--radio);padding:22px;border:1px solid var(--borde)}
+.sabias .ico{font-size:3rem}
+.sabias p{margin:0;font-size:1.1rem;transition:opacity .4s}
+.familias{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.familias a{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;background:var(--panel);border:1px solid var(--borde);color:var(--texto);font-weight:800;min-width:0}
+.familias a .nom{flex:1;min-width:0;line-height:1.2}
+.familias a .num{flex-shrink:0;font-weight:800;min-width:28px;text-align:center;font-size:.8rem;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.1);color:var(--suave)}
+.familias a:hover{background:var(--panel2);text-decoration:none}
+.familias a>span:first-child{font-size:1.6rem;flex-shrink:0}
+.cifras{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin-top:22px}
+.cifras div{text-align:center}.cifras b{display:block;font-family:var(--titulos);font-size:2rem;color:var(--oro)}
+.cifras small{color:var(--suave)}
+
+/* Game of the day */
+.dia{display:grid;grid-template-columns:1.1fr 1fr;gap:0;border-radius:var(--radio);overflow:hidden;background:var(--panel);border:1px solid var(--borde);box-shadow:var(--sombra)}
+.dia .foto{position:relative;min-height:280px;background:var(--panel2)}
+.dia .foto picture{display:contents}.dia .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dia .txt{padding:24px 26px;display:flex;flex-direction:column;gap:10px}
+.dia h3{font-size:1.9rem;margin:0}
+.dia p{margin:0;color:var(--suave)}
+.dia .cur{color:var(--texto);background:rgba(255,201,74,.08);border-left:3px solid var(--oro);padding:10px 14px;border-radius:0 10px 10px 0}
+.dia .botones{display:flex;gap:10px;flex-wrap:wrap;margin-top:auto}
+/* Encyclopedia mosaic */
+.mosaico{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.mosaico a{position:relative;aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:var(--panel2);color:#fff}
+.mosaico picture{display:contents}.mosaico img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.mosaico a:hover img{transform:scale(1.05)}
+.mosaico span{position:absolute;left:0;right:0;bottom:0;padding:26px 12px 10px;background:linear-gradient(transparent,rgba(0,0,0,.8));font-family:var(--titulos);font-weight:600;font-size:1.1rem}
+.mosaico a:hover{text-decoration:none}
+/* Favourites as a carousel on mobile */
+@media (max-width:760px){
+  .heroe{padding:30px 0 16px}
+  .flotan{font-size:2rem;gap:12px;overflow:hidden}
+  .cifras{flex-wrap:nowrap;gap:10px;margin-top:18px}
+  .cifras div{flex:1;min-width:0}
+  .cifras b{font-size:1.5rem}
+  .cifras small{font-size:.78rem;line-height:1.2;display:block}
+  .destacados{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -16px;padding:4px 16px 12px;scrollbar-width:none}
+  .destacados::-webkit-scrollbar{display:none}
+  .destacados .tarjeta,.destacados .tarjeta:first-child{flex:0 0 72%;scroll-snap-align:start;grid-column:auto;grid-row:auto}
+  .destacados .tarjeta:first-child .arte{flex:none;min-height:0;height:120px;font-size:3.4rem}
+  .destacados .tarjeta:first-child h3{font-size:1.25rem}
+  .destacados .tarjeta .arte{height:120px;font-size:3.4rem}
+  .destacados .tarjeta p{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #todos{grid-template-columns:1fr 1fr;gap:10px}
+  #todos .tarjeta .arte{height:86px;font-size:2.6rem}
+  #todos .tarjeta .info{padding:10px 11px 12px}
+  #todos .tarjeta h3{font-size:1.02rem}
+  #todos .tarjeta p{font-size:.82rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  #todos .tarjeta .etq{font-size:.62rem;padding:2px 7px;margin-bottom:5px}
+  .dia{grid-template-columns:1fr}
+  .dia .foto{min-height:200px}
+  .dia .txt{padding:18px}
+  .dia h3{font-size:1.5rem}
+  .mosaico{grid-template-columns:1fr 1fr}
+  .sabias{padding:16px;gap:12px}.sabias .ico{font-size:2.2rem}.sabias p{font-size:1rem}
+}
+</style>
+</head>
+<body data-raiz="" data-seccion="jugar">
+<main class="contenedor">
+  <section class="heroe">
+    <div class="flotan"><span>♟️</span><span>🎲</span><span>🃏</span><span>🧠</span><span>🁫</span><span>🎡</span></div>
+    <h1>All the world’s games,<br>their history, and free to play</h1>
+    <p class="lead">Play chess, ludo, poker or dominoes against the computer, test what you know with hundreds of questions, and discover where every game comes from.</p>
+    <a class="btn" href="#play">🎮 Play now</a> &nbsp; <a class="btn sec" href="/enciclopedia/index.html" hreflang="es">📚 Encyclopedia (Spanish)</a>
+    <div class="cifras"><div><b id="n-jugar">21</b><small>games to play</small></div><div><b>100+</b><small>games and their history</small></div><div><b>£0</b><small>free, no sign-up</small></div></div>
+  </section>
+
+  <section class="seccion" id="play">
+    <div class="seccion-tit"><h2>⭐ Favourites</h2></div>
+    <div class="destacados" id="destacados"></div>
+  </section>
+
+  <section class="seccion">
+    <div class="seccion-tit"><h2 id="tit-todos">🎮 More games</h2></div>
+    <div class="chips" id="chips"></div>
+    <div class="rejilla" id="todos"></div>
+  </section>
+
+  <section class="seccion" id="sec-dia" hidden>
+    <div class="seccion-tit"><h2>📅 Game of the day</h2></div>
+    <div class="dia" id="dia"></div>
+  </section>
+
+  <section class="seccion" id="sec-enci">
+    <div class="seccion-tit"><h2>📚 The encyclopedia of games</h2><a href="/enciclopedia/index.html" hreflang="es">Open it →</a></div>
+    <p style="color:var(--suave)">The origins, history, rules and curiosities of more than 100 games, from ancient Egypt to today. For now it is only in Spanish: the English version is on its way.</p>
+    <div class="chips" style="margin-top:12px"><a class="chip" href="/enciclopedia/index.html" hreflang="es">📚 Encyclopedia (Spanish)</a><a class="chip" href="/enciclopedia/mapa.html" hreflang="es">🗺️ Map of games (Spanish)</a><a class="chip" href="/enciclopedia/cronologia.html" hreflang="es">⏳ Timeline (Spanish)</a></div>
+  </section>
+<!--ENCI_EN
+  <section class="seccion" id="sec-dia" hidden>
+    <div class="seccion-tit"><h2>📅 Game of the day</h2></div>
+    <div class="dia" id="dia"></div>
+  </section>
+
+  <section class="seccion">
+    <div class="sabias"><div class="ico">💡</div><div><b>Did you know…?</b><p id="sabias"></p></div></div>
+  </section>
+
+  <section class="seccion">
+    <div class="seccion-tit"><h2>📚 The encyclopedia of games</h2><a href="encyclopedia/index.html">See all games →</a></div>
+    <p style="color:var(- -suave)">The origins, history, rules and curiosities of board, card, dice, word and chance games, from ancient Egypt to today.</p>
+    <div class="mosaico" id="mosaico"></div>
+    <div class="chips" style="margin-top:18px"><a class="chip" href="encyclopedia/map.html">🗺️ Map of games</a><a class="chip" href="encyclopedia/timeline.html">⏳ Timeline</a><a class="chip" href="encyclopedia/games-of-ancient-rome.html">🏛️ Games of ancient Rome</a><a class="chip" href="encyclopedia/games-in-1960s-spain.html">📻 1960s Spain</a><a class="chip" href="encyclopedia/christmas-games.html">🎄 Christmas games</a><a class="chip" href="encyclopedia/games-and-machines.html">🤖 Games and machines</a></div>
+    <h3 style="margin-top:20px">Explore by family</h3>
+    <div class="familias" id="familias"></div>
+  </section>
+ENCI_EN-->
+</main>
+<script src="js/comun.js?v=202611070954"></script>
+<script src="js/catalogo.js?v=202611070954"></script>
+<script src="/js/online-lista.js?v=202611070954"></script>
+<!-- encyclopedia/data.js goes here once the English encyclopedia is ready -->
+<script>
+const ONL = new Set(window.ONLINE||[]);
+const tarjeta = j => `<a class="tarjeta" href="games/${j.slug}.html"><div class="arte ${j.g}">${j.emoji}</div><div class="info"><span class="etq">${j.cat}</span>${ONL.has(j.id)?' <span class="etq" style="background:linear-gradient(90deg,#1d4ed8,#7209b7);color:#fff">🌐 Online</span>':""}<h3>${j.nombre}</h3><p>${j.desc}</p></div></a>`;
+J.$("#destacados").innerHTML = CATALOGO.filter(j=>j.destacado).map(tarjeta).join("");
+J.$("#n-jugar").textContent = CATALOGO.length;
+let cat = "All";
+function pinta(){ J.$("#tit-todos").textContent = cat==="All" ? "🎮 More games" : "🎮 "+cat; J.$("#todos").innerHTML = CATALOGO.filter(j=>cat==="All"?!j.destacado:(j.cat===cat||(cat==="🌐 Online"&&ONL.has(j.id)))).map(tarjeta).join(""); J.$$(".chip").forEach(c=>c.classList.toggle("activo",c.textContent===cat)); }
+J.$("#chips").innerHTML = CATEGORIAS.filter(c=>c==="All"||CATALOGO.some(j=>j.cat===c)).concat(ONL.size?["🌐 Online"]:[]).map(c=>`<button class="chip">${c}</button>`).join("");
+J.$$(".chip").forEach(c=>c.onclick=()=>{cat=c.textContent;pinta();});
+pinta();
+if(window.FICHAS){
+  J.$("#n-fichas").textContent = FICHAS.length;
+  const fams = {}; FICHAS.forEach(f=>fams[f.familia]=(fams[f.familia]||0)+1);
+  J.$("#familias").innerHTML = Object.keys(FAMILIAS).filter(k=>fams[k]).map(k=>`<a href="encyclopedia/index.html#${k}"><span>${FAMILIAS[k].emoji}</span><span class="nom">${FAMILIAS[k].nombre}</span><span class="num">${fams[k]}</span></a>`).join("");
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const conFoto = FICHAS.filter(f=>f.foto);
+  // Game of the day: changes daily, same for everyone
+  const hoy = Math.floor((Date.now() - new Date().getTimezoneOffset()*60000) / 864e5);
+  if(conFoto.length){
+    const d = conFoto[(hoy*7919) % conFoto.length];
+    const jug = d.jugable && CATALOGO.find(j=>j.id===d.jugable);
+    J.$("#dia").innerHTML = `<a class="foto" href="encyclopedia/${d.slug}.html"><picture><source type="image/webp" srcset="/enciclopedia/img/480/${d.foto.replace('.jpg','.webp')} 480w, /enciclopedia/img/${d.foto.replace('.jpg','.webp')} 900w" sizes="(max-width:760px) 100vw, 55vw"><img src="/enciclopedia/img/${d.foto}" alt="${esc(d.pie||d.nombre)}" loading="lazy"></picture></a>
+      <div class="txt"><span class="etq">${FAMILIAS[d.familia].emoji} ${esc(FAMILIAS[d.familia].nombre)} · ${esc(d.epoca)}</span><h3>${d.emoji} ${esc(d.nombre)}</h3><p>${esc(d.resumen)}</p>
+      <p class="cur">💡 ${esc(d.curiosidad)}</p>
+      <div class="botones"><a class="btn" href="encyclopedia/${d.slug}.html">📚 Read its history</a>${jug?`<a class="btn sec" href="games/${jug.slug}.html">🎮 Play</a>`:""}</div></div>`;
+    J.$("#sec-dia").hidden = false;
+    // Mosaic: six entries with photos, different every day
+    const otras = conFoto.filter(f=>f!==d), mos = [];
+    for(let k=0;k<6&&otras.length;k++) mos.push(otras.splice((hoy*31+k*97)%otras.length,1)[0]);
+    J.$("#mosaico").innerHTML = mos.map(f=>`<a href="encyclopedia/${f.slug}.html"><picture><source type="image/webp" srcset="/enciclopedia/img/480/${f.foto.replace('.jpg','.webp')}"><img src="/enciclopedia/img/mini/${f.foto}" alt="${esc(f.pie||f.nombre)}" loading="lazy"></picture><span>${f.emoji} ${esc(f.nombre)}</span></a>`).join("");
+  }
+  const datos = FICHAS.filter(f=>f.curiosidad);
+  let i = J.azar(datos.length);
+  const muestra = ()=>{ const f=datos[i%datos.length]; J.$("#sabias").innerHTML = `${f.curiosidad} <a href="encyclopedia/${f.slug}.html">More about ${f.nombre} →</a>`; i++; };
+  muestra(); setInterval(muestra, 9000);
+}
+</script>
+</body>
+</html>
