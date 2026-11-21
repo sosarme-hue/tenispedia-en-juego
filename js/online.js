@@ -67,6 +67,8 @@ function activar(op){
   b.onclick=()=>abrir(op); acc.prepend(b);
   const m=location.hash.match(/^#sala-([A-Z0-9]{4})$/i); if(m) setTimeout(()=>abrir(op,m[1].toUpperCase()),400);
 }
+/* Rooms of the English site are kept apart from the Spanish ones (different word lists, questions and texts) */
+const JUEGO_SALA=op=>op.juego+"-en";
 async function abrir(op, codigo){
   let be; try{ be=await backend(); }catch(e){ J.aviso("Couldn’t connect to the game server. Please try again later."); return; }
   const nombre=J.lee("online-nombre","");
@@ -79,15 +81,15 @@ async function abrir(op, codigo){
     </div>`,[{txt:"Cancel",cls:"sec"}]);
   const nom=()=>{ const n=(J.$("#on-nom").value||"").trim().slice(0,14); if(!n){ J.aviso("Type your name"); J.$("#on-nom").focus(); return null; } J.guarda("online-nombre",n); return n; };
   J.$("#on-crear").onclick=async()=>{ const n=nom(); if(!n) return;
-    let c, ok=false; for(let k=0;k<6&&!ok;k++){ c=nuevoCodigo(); ok=await be.crear(c,{juego:op.juego, t:Date.now(), anfitrion:miId, max:op.max, min:op.min, empezada:false, jugadores:{[miId]:{n, i:0, on:true}}}); }
+    let c, ok=false; for(let k=0;k<6&&!ok;k++){ c=nuevoCodigo(); ok=await be.crear(c,{juego:JUEGO_SALA(op), t:Date.now(), anfitrion:miId, max:op.max, min:op.min, empezada:false, jugadores:{[miId]:{n, i:0, on:true}}}); }
     if(!ok){ J.aviso("Couldn’t create the room"); return; }
     sala(be,op,c,true); };
   J.$("#on-unir").onclick=async()=>{ const n=nom(); if(!n) return; const c=(J.$("#on-cod").value||"").trim().toUpperCase();
     if(c.length!==4){ J.aviso("The code has 4 letters or numbers"); return; }
-    const r=await be.transaccion(c,s=>{ if(!s) return undefined; if(s.juego!==op.juego) return undefined;
+    const r=await be.transaccion(c,s=>{ if(!s) return undefined; if(s.juego!==JUEGO_SALA(op)) return undefined;
       const js=s.jugadores||{}; if(js[miId]){ js[miId].n=n; return s; } if(s.empezada) return undefined; if(Object.keys(js).length>=s.max) return undefined;
       js[miId]={n, i:Object.keys(js).length, on:true}; s.jugadores=js; return s; });
-    if(!r.ok){ const s=await be.leer(c); J.aviso(!s?"There’s no room with that code": s.juego!==op.juego?"That code is for a different game": s.empezada?"That game has already started":"The room is full",3000); return; }
+    if(!r.ok){ const s=await be.leer(c); J.aviso(!s?"There’s no room with that code": s.juego===op.juego?"That room was created on the Spanish site. Ask your friend for the link, or play in Spanish.": s.juego!==JUEGO_SALA(op)?"That code is for a different game": s.empezada?"That game has already started":"The room is full",3000); return; }
     sala(be,op,c,false); };
 }
 function lista(s){ return Object.entries(s.jugadores||{}).map(([id,j])=>({id,...j})).sort((a,b)=>a.i-b.i); }
