@@ -85,8 +85,8 @@
     <div class="flotan"><span>♟️</span><span>🎲</span><span>🃏</span><span>🧠</span><span>🁫</span><span>🎡</span></div>
     <h1>All the world’s games,<br>their history, and free to play</h1>
     <p class="lead">Play chess, ludo, poker or dominoes against the computer, test what you know with hundreds of questions, and discover where every game comes from.</p>
-    <a class="btn" href="#play">🎮 Play now</a> &nbsp; <a class="btn sec" href="/enciclopedia/index.html" hreflang="es">📚 Encyclopedia (Spanish)</a>
-    <div class="cifras"><div><b id="n-jugar">21</b><small>games to play</small></div><div><b>100+</b><small>games and their history</small></div><div><b>£0</b><small>free, no sign-up</small></div></div>
+    <a class="btn" href="#play">🎮 Play now</a> &nbsp; <a class="btn sec" href="encyclopedia/index.html">📚 Encyclopedia</a>
+    <div class="cifras"><div><b id="n-jugar">21</b><small>games to play</small></div><div><b id="n-fichas">111</b><small>games and their history</small></div><div><b>£0</b><small>free, no sign-up</small></div></div>
   </section>
 
   <section class="seccion" id="play">
@@ -105,35 +105,24 @@
     <div class="dia" id="dia"></div>
   </section>
 
-  <section class="seccion" id="sec-enci">
-    <div class="seccion-tit"><h2>📚 The encyclopedia of games</h2><a href="/enciclopedia/index.html" hreflang="es">Open it →</a></div>
-    <p style="color:var(--suave)">The origins, history, rules and curiosities of more than 100 games, from ancient Egypt to today. For now it is only in Spanish: the English version is on its way.</p>
-    <div class="chips" style="margin-top:12px"><a class="chip" href="/enciclopedia/index.html" hreflang="es">📚 Encyclopedia (Spanish)</a><a class="chip" href="/enciclopedia/mapa.html" hreflang="es">🗺️ Map of games (Spanish)</a><a class="chip" href="/enciclopedia/cronologia.html" hreflang="es">⏳ Timeline (Spanish)</a></div>
-  </section>
-<!--ENCI_EN
-  <section class="seccion" id="sec-dia" hidden>
-    <div class="seccion-tit"><h2>📅 Game of the day</h2></div>
-    <div class="dia" id="dia"></div>
-  </section>
-
   <section class="seccion">
     <div class="sabias"><div class="ico">💡</div><div><b>Did you know…?</b><p id="sabias"></p></div></div>
   </section>
 
   <section class="seccion">
     <div class="seccion-tit"><h2>📚 The encyclopedia of games</h2><a href="encyclopedia/index.html">See all games →</a></div>
-    <p style="color:var(- -suave)">The origins, history, rules and curiosities of board, card, dice, word and chance games, from ancient Egypt to today.</p>
+    <p style="color:var(--suave)">The origins, history, rules and curiosities of board, card, dice, word and chance games, from ancient Egypt to today.</p>
     <div class="mosaico" id="mosaico"></div>
     <div class="chips" style="margin-top:18px"><a class="chip" href="encyclopedia/map.html">🗺️ Map of games</a><a class="chip" href="encyclopedia/timeline.html">⏳ Timeline</a><a class="chip" href="encyclopedia/games-of-ancient-rome.html">🏛️ Games of ancient Rome</a><a class="chip" href="encyclopedia/games-in-1960s-spain.html">📻 1960s Spain</a><a class="chip" href="encyclopedia/christmas-games.html">🎄 Christmas games</a><a class="chip" href="encyclopedia/games-and-machines.html">🤖 Games and machines</a></div>
     <h3 style="margin-top:20px">Explore by family</h3>
     <div class="familias" id="familias"></div>
   </section>
-ENCI_EN-->
+
 </main>
 <script src="js/comun.js?v=202611070954"></script>
 <script src="js/catalogo.js?v=202611070954"></script>
 <script src="/js/online-lista.js?v=202611070954"></script>
-<!-- encyclopedia/data.js goes here once the English encyclopedia is ready -->
+<script src="encyclopedia/data.js?v=202611220100"></script>
 <script>
 const ONL = new Set(window.ONLINE||[]);
 const tarjeta = j => `<a class="tarjeta" href="games/${j.slug}.html"><div class="arte ${j.g}">${j.emoji}</div><div class="info"><span class="etq">${j.cat}</span>${ONL.has(j.id)?' <span class="etq" style="background:linear-gradient(90deg,#1d4ed8,#7209b7);color:#fff">🌐 Online</span>':""}<h3>${j.nombre}</h3><p>${j.desc}</p></div></a>`;
