@@ -1,0 +1,7 @@
+Cómo se programan las publicaciones de Tenispedia (inglés):
+- Imágenes y textos: rama claude/project-thread-akact2 del repo sosarme-hue/tenispedia-en-juego, carpeta facebook-en/ (plan.json + NNN.jpg). No toca la web (main).
+- asset_id de la página Tenispedia: 1470986026096954 (ya puesto en driver.js).
+- Desde la pestaña de Meta (Programadas de la página Tenispedia): window.__pop=window.open('https://tenispedia.com/en/sobre.html','tpimg'); en esa pestaña pegar popup.js.
+- En la pestaña de Meta: driver.js y window.__startList([lista de n]). Probar primero con un solo n.
+- 226 = bienvenida (publicar ya y fijar). 227 (17:00) y 228 (20:30) solo si la página se crea el 23/11.
+- Plan: n=1-225, 24 nov 2026 - 6 feb 2027, 10:00 / 13:30 / 20:30 hora de Madrid. Límite de Facebook: 29 días.
