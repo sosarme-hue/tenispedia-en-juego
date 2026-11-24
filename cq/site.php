@@ -348,3 +348,31 @@ add_action('wp_loaded', function () {
         'next_cron' => ($n = wp_next_scheduled('eiv_feeds_cron')) ? wp_date('c', $n) : null, 'disable_wp_cron' => defined('DISABLE_WP_CRON') && DISABLE_WP_CRON,
         'future_events' => count($fut), 'future_auto' => $auto]);
 }, 50);
+
+/* Sondeo de fuentes para la agenda (una vez por versión de la lista): qué páginas de agenda de Cadaqués responden y en qué formato */
+add_action('wp_loaded', function () {
+    $v = 'p3'; if (get_option('cqs_ag_probe') === $v || get_transient('cqs_ag_probe_lock') || !function_exists('cqs_out')) return;
+    set_transient('cqs_ag_probe_lock', 1, 600); @set_time_limit(240);
+    $U = [
+        'gencat_q' => 'https://analisi.transparenciacatalunya.cat/resource/rhpv-yr4f.json?$limit=40&$q=Cadaqu%C3%A9s',
+        'gencat_1' => 'https://analisi.transparenciacatalunya.cat/resource/rhpv-yr4f.json?$limit=1',
+        'vc_home' => 'https://www.visitcadaques.org/', 'vc_agenda' => 'https://www.visitcadaques.org/agenda/', 'vc_ca' => 'https://www.visitcadaques.org/ca/agenda/',
+        'vc_tribe' => 'https://www.visitcadaques.org/wp-json/tribe/events/v1/events?per_page=50', 'vc_ical' => 'https://www.visitcadaques.org/?ical=1',
+        'aj_home' => 'https://www.cadaques.cat/', 'aj_agenda' => 'https://www.cadaques.cat/agenda', 'aj_tribe' => 'https://www.cadaques.cat/wp-json/tribe/events/v1/events?per_page=50',
+        'fest' => 'https://www.festivalcadaques.cat/', 'fest2' => 'https://festivalcadaques.cat/',
+        'cb' => 'https://www.costabrava.org/es/que-hacer/agenda?municipio=cadaques',
+        'agendacat' => 'https://agenda.cultura.gencat.cat/content/agenda/ca/cerca.html?searchType=agenda&municipi=Cadaqu%C3%A9s',
+    ];
+    $o = ['eiv_feeds_run' => function_exists('eiv_feeds_run'), 'eiv_parse_jsonld' => function_exists('eiv_parse_jsonld'), 'tribe_create_event' => function_exists('tribe_create_event')];
+    foreach ($U as $k => $u) {
+        $r = wp_remote_get($u, ['timeout' => 20, 'redirection' => 5, 'user-agent' => 'Mozilla/5.0 (compatible; CadaquesSi/1.0; +https://cadaques.si)', 'headers' => ['Accept-Language' => 'es,ca;q=0.8']]);
+        if (is_wp_error($r)) { $o[$k] = ['err' => $r->get_error_message()]; continue; }
+        $b = wp_remote_retrieve_body($r);
+        $o[$k] = ['code' => wp_remote_retrieve_response_code($r), 'type' => wp_remote_retrieve_header($r, 'content-type'), 'len' => strlen($b),
+            'ldjson_events' => preg_match_all('/"@type"\s*:\s*"(?:\w*Event)"/', $b), 'vevent' => substr_count($b, 'BEGIN:VEVENT'),
+            'ical_links' => array_slice(array_unique(preg_match_all('#href="([^"]*(?:ical|\.ics|feed|rss)[^"]*)"#i', $b, $m) ? $m[1] : []), 0, 8),
+            'agenda_links' => array_slice(array_unique(preg_match_all('#href="([^"]*(?:agenda|event|esdeveniment|activitat)[^"]*)"#i', $b, $m) ? $m[1] : []), 0, 15),
+            'head' => mb_strcut(preg_replace('/\s+/', ' ', $b), 0, 1500)];
+    }
+    cqs_out('agenda-probe.json', $o); update_option('cqs_ag_probe', $v, false);
+}, 55);
