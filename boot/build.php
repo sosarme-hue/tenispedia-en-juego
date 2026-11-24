@@ -4,14 +4,12 @@ if (!defined('ABSPATH')) exit;
    calas y agenda. Se ejecuta al activar el plugin cuando cambia CQS_BUILD_VER. Cada paso se puede repetir sin duplicar.
    Resultado en out/build-log.json. */
 
-/* Se lanza al final de una visita a la web, una vez enviada la página (no hace esperar a nadie). */
-add_action('shutdown', function () {
-    if (get_option('cqs_build') === CQS_BUILD_VER || wp_doing_cron() || (defined('WP_CLI') && WP_CLI) || (defined('REST_REQUEST') && REST_REQUEST)) return;
-    if (!did_action('wp_loaded')) return;
-    ignore_user_abort(true);
-    if (function_exists('litespeed_finish_request')) litespeed_finish_request(); elseif (function_exists('fastcgi_finish_request')) fastcgi_finish_request();
-    cqs_build_tick();
-}, 999);
+/* Se lanza por WP-Cron (contexto de administración: Polylang crea idiomas ahí). Cada visita lo programa si falta. */
+add_action('init', function () {
+    if (get_option('cqs_build') === CQS_BUILD_VER || wp_doing_cron()) return;
+    if (!wp_next_scheduled('cqs_build_event')) wp_schedule_single_event(time() - 1, 'cqs_build_event');
+}, 99);
+add_action('cqs_build_event', function () { ignore_user_abort(true); cqs_build_tick(); });
 
 /* También lo puede lanzar boot/run.php (cron de Hostinger, WordPress completo y sin límite de tiempo). Retoma donde lo dejó. */
 function cqs_build_tick() {
