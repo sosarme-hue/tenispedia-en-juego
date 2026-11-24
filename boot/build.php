@@ -16,7 +16,7 @@ add_action('shutdown', function () {
 /* También lo puede lanzar boot/run.php (cron de Hostinger, WordPress completo y sin límite de tiempo). Retoma donde lo dejó. */
 function cqs_build_tick() {
     if (get_option('cqs_build') === CQS_BUILD_VER) return 'hecho';
-    $lock = (int)get_option('cqs_build_lock'); if ($lock && time() - $lock < 900) return 'en marcha';
+    $lock = (int)get_option('cqs_build_lock'); if ($lock && time() - $lock < 240) return 'en marcha';
     update_option('cqs_build_lock', time(), false);
     cqs_build_run();
     delete_option('cqs_build_lock');
