@@ -29,4 +29,9 @@ return [
     ['inc/shortcodes.php', "document.querySelectorAll('form.ssi-search input[name=s]')", "document.querySelectorAll('form.ssi-search input[name=s],form.gsi-search input[name=s]')"],
     // El buscador también encuentra por la descripción en francés
     ['inc/shortcodes.php', "get_post_meta($id, '_ssi_content_en', true),", "get_post_meta($id, '_ssi_content_en', true), get_post_meta($id, '_ssi_content_fr', true),"],
+    // Mapas: zona de Cadaqués en vez de la de Ibiza (las fichas fuera de esa zona no salían y el mapa se quedaba en Ibiza)
+    ['inc/listing.php', '$la > 38.62 && $la < 39.14 && $ln > 1.14 && $ln < 1.66', '$la > 42.20 && $la < 42.40 && $ln > 3.10 && $ln < 3.40'],
+    ['inc/listing.php', 'if ($la < 38.62 || $la > 39.14 || $ln < 1.14 || $ln > 1.66) continue;', 'if ($la < 42.20 || $la > 42.40 || $ln < 3.10 || $ln > 3.40) continue;'],
+    ['inc/addform.php', "'viewbox' => '1.14,39.14,1.66,38.62'", "'viewbox' => '3.10,42.40,3.40,42.20'"],
+    ['assets/cadaques-si.js', '.setView([38.8700,1.4000],10)', '.setView([42.2886,3.2776],14)'],
 ];

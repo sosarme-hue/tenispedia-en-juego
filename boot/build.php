@@ -660,7 +660,7 @@ function cqs_step_menu() {
     $menus = (array)($o['nav_menus'][$theme]['primary'] ?? []);
     if (!$menus) { $tm = (array)get_theme_mod('nav_menu_locations', []); if (!empty($tm['primary'])) $menus = ['es' => $tm['primary']]; }
     // Sin menú todavía: se crea uno por idioma con las secciones de la guía (como en las otras guías de la red)
-    if (!$menus) {
+    if (!$menus || get_option('cqs_menu_v') !== '3') {
         $T = ['visit' => ['Qué ver', 'Què veure', 'What to see', 'Que voir'], 'beaches' => ['Playas y calas', 'Platges i cales', 'Beaches and coves', 'Plages et criques'],
               'capcreus' => ['Cap de Creus', 'Cap de Creus', 'Cap de Creus', 'Cap de Creus'], 'dali' => ['Dalí y Portlligat', 'Dalí i Portlligat', 'Dalí and Portlligat', 'Dalí et Portlligat'],
               'history' => ['Historia', 'Història', 'History', 'Histoire'], 'routes' => ['Rutas y excursiones', 'Rutes i excursions', 'Walks and trips', 'Randonnées'],
@@ -669,7 +669,8 @@ function cqs_step_menu() {
               'directory' => ['Directorio', 'Directori', 'Directory', 'Annuaire'], 'map' => ['Mapa', 'Mapa', 'Map', 'Carte'], 'agenda' => ['Agenda', 'Agenda', 'What’s on', 'Agenda'],
               'live' => ['Info práctica', 'Info pràctica', 'Practical info', 'Infos pratiques'], 'transport' => ['Transporte', 'Transport', 'Getting around', 'Transports'],
               'parking' => ['Aparcar', 'Aparcar', 'Parking', 'Se garer'], 'health' => ['Salud', 'Salut', 'Health', 'Santé'], 'housing' => ['Vivienda', 'Habitatge', 'Housing', 'Logement']];
-        $tree = ['visit' => ['beaches', 'capcreus', 'dali', 'history'], 'routes' => [], 'sports' => [], 'eat' => [], 'sleep' => [], 'shop' => ['directory', 'map'], 'agenda' => [], 'live' => ['transport', 'parking', 'health', 'housing']];
+        // Menú plano, sin submenús (en el móvil los submenús abiertos lo desordenaban): como en las otras guías
+        $tree = ['visit' => [], 'beaches' => [], 'routes' => [], 'sports' => [], 'eat' => [], 'sleep' => [], 'agenda' => [], 'live' => []];
         $langs = function_exists('pll_languages_list') ? (array)pll_languages_list(['fields' => 'slug']) : ['es'];
         $li = ['es' => 0, 'ca' => 1, 'en' => 2, 'fr' => 3]; $byL = [];
         foreach ($langs as $l) {

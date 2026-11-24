@@ -61,10 +61,10 @@ add_action('wp_loaded', function () {
 
 /* Menú principal por idioma: se monta una vez sin repetir todo el montaje (boot/build.php, cqs_step_menu) */
 add_action('wp_loaded', function () {
-    if (get_option('cqs_menu_v') === '2' || !function_exists('cqs_step_menu') || get_transient('cqs_menu_lock')) return;
+    if (get_option('cqs_menu_v') === '3' || !function_exists('cqs_step_menu') || get_transient('cqs_menu_lock')) return;
     set_transient('cqs_menu_lock', 1, 120);
     if (!get_current_user_id()) wp_set_current_user(1);
-    try { $r = cqs_step_menu(); update_option('cqs_menu_v', '2', false); } catch (Throwable $e) { $r = ['error' => $e->getMessage()]; }
+    try { $r = cqs_step_menu(); update_option('cqs_menu_v', '3', false); } catch (Throwable $e) { $r = ['error' => $e->getMessage()]; }
     cqs_out('menu-run.json', $r);
     wp_set_current_user(0);
     do_action('litespeed_purge_all');
