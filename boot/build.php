@@ -4,10 +4,14 @@ if (!defined('ABSPATH')) exit;
    calas y agenda. Se ejecuta al activar el plugin cuando cambia CQS_BUILD_VER. Cada paso se puede repetir sin duplicar.
    Resultado en out/build-log.json. */
 
-register_activation_hook(CQS_FILE, 'cqs_build_maybe');
-function cqs_build_maybe() {
-    if (!CQS_CORE || get_option('cqs_build') === CQS_BUILD_VER) return;
+/* Lo lanza boot/run.php (cron de Hostinger, WordPress completo y sin límite de tiempo). Retoma donde lo dejó. */
+function cqs_build_tick() {
+    if (get_option('cqs_build') === CQS_BUILD_VER) return 'hecho';
+    $lock = (int)get_option('cqs_build_lock'); if ($lock && time() - $lock < 900) return 'en marcha';
+    update_option('cqs_build_lock', time(), false);
     cqs_build_run();
+    delete_option('cqs_build_lock');
+    return get_option('cqs_build') === CQS_BUILD_VER ? 'terminado' : 'parcial';
 }
 
 function cqs_req($data) { $r = new WP_REST_Request('POST'); $r->set_header('content-type', 'application/json'); $r->set_body(wp_json_encode($data)); return $r; }
@@ -15,16 +19,22 @@ function cqs_json($f) { return json_decode((string)file_get_contents(SSI_DIR.'da
 
 function cqs_build_run() {
     @set_time_limit(0); @ini_set('memory_limit', '512M');
-    $log = ['started' => gmdate('c'), 'ver' => CQS_BUILD_VER];
+    $done = (array)get_option('cqs_build_done', []); if (($done['_v'] ?? '') !== CQS_BUILD_VER) $done = ['_v' => CQS_BUILD_VER];
+    $log = json_decode((string)@file_get_contents(SSI_DIR.'out/build-log.json'), true); if (!is_array($log) || ($log['ver'] ?? '') !== CQS_BUILD_VER || count($done) < 2) $log = [];
+    $log['started'] = gmdate('c'); $log['ver'] = CQS_BUILD_VER;
     if (!get_current_user_id()) wp_set_current_user(1);
     $steps = ['languages', 'cats', 'owner', 'images', 'pages', 'directorist', 'events', 'fichas', 'beaches'];
+    $ok = true;
     foreach ($steps as $s) {
+        if (!empty($done[$s])) continue;
         $t = microtime(true);
-        try { $log[$s] = call_user_func('cqs_step_'.$s); }
-        catch (Throwable $e) { $log[$s] = ['error' => $e->getMessage().' @ '.basename($e->getFile()).':'.$e->getLine()]; }
+        try { $log[$s] = call_user_func('cqs_step_'.$s); $done[$s] = 1; }
+        catch (Throwable $e) { $log[$s] = ['error' => $e->getMessage().' @ '.basename($e->getFile()).':'.$e->getLine()]; $ok = false; }
         $log['t_'.$s] = round(microtime(true) - $t, 1);
+        update_option('cqs_build_done', $done, false);
         cqs_out('build-log.json', $log);
     }
+    if (!$ok) { cqs_out('build-log.json', $log); return; }
     update_option('cqs_build', CQS_BUILD_VER);
     flush_rewrite_rules(false);
     do_action('litespeed_purge_all');
@@ -34,7 +44,8 @@ function cqs_build_run() {
 
 /* 1) Idiomas (Polylang) y lugares */
 function cqs_step_languages() {
-    if (!function_exists('eiv_setup_run')) return 'sin núcleo';
+    if (!function_exists('eiv_setup_run')) throw new Exception('sin núcleo');
+    if (!function_exists('PLL')) throw new Exception('sin Polylang');
     $r = eiv_setup_run(cqs_req(['languages' => true, 'locations' => ['Cadaqués'], 'event_cats' => ['Cadaqués'], 'guest_listings' => true]));
     if (taxonomy_exists('tribe_events_cat') && !term_exists('fiestas', 'tribe_events_cat')) wp_insert_term('Fiestas', 'tribe_events_cat', ['slug' => 'fiestas']);
     return $r instanceof WP_REST_Response ? $r->get_data() : $r;
@@ -42,7 +53,7 @@ function cqs_step_languages() {
 
 /* 2) Categorías del directorio, las mismas que en el resto de la red */
 function cqs_step_cats() {
-    $tax = 'at_biz_dir-category'; if (!taxonomy_exists($tax)) return 'no existe la taxonomía';
+    $tax = 'at_biz_dir-category'; if (!taxonomy_exists($tax)) throw new Exception('no existe la taxonomía');
     $n = 0; $u = 0;
     foreach (cqs_json('cats.json') as $c) {
         $parent = 0;
@@ -112,7 +123,7 @@ function cqs_fill($html, $l) {
 
 /* 5) Páginas en castellano, catalán e inglés, enlazadas como traducciones */
 function cqs_step_pages() {
-    if (!function_exists('pll_set_post_language')) return 'sin Polylang';
+    if (!function_exists('pll_set_post_language')) throw new Exception('sin Polylang');
     $data = cqs_json('pages.json'); $ids = []; $groups = []; $n = 0;
     foreach ($data as $key => $by) {
         $g = [];
@@ -146,7 +157,7 @@ function cqs_step_pages() {
 /* 6) Directorist: la página «Añade tu negocio» es la del formulario */
 function cqs_step_directorist() {
     $ids = (array)get_option('ssi_page_ids'); $o = get_option('atbdp_option');
-    if (!is_array($o) || empty($ids['add'])) return 'sin opciones';
+    if (!is_array($o) || empty($ids['add'])) throw new Exception('sin opciones');
     $o['add_listing_page'] = (int)$ids['add']; $o['guest_listings'] = 1;
     update_option('atbdp_option', $o);
     return 'ok';
@@ -154,7 +165,7 @@ function cqs_step_directorist() {
 
 /* 7) Agenda: fiestas y fechas fijas (orientativas, a confirmar con el Ayuntamiento) */
 function cqs_step_events() {
-    if (!function_exists('tribe_create_event')) return 'sin The Events Calendar';
+    if (!function_exists('tribe_create_event')) throw new Exception('sin The Events Calendar');
     $note = ['es' => 'Fechas orientativas: confirma el programa con el Ayuntamiento de Cadaqués.', 'ca' => 'Dates orientatives: confirma el programa amb l’Ajuntament de Cadaqués.', 'en' => 'Dates are approximate: check the programme with Cadaqués Town Hall.'];
     $ev = [
       ['k' => 'fm-hivern-2026', 's' => '2026-12-18 00:00', 'e' => '2026-12-20 23:59',
@@ -228,10 +239,10 @@ function cqs_overpass($q) {
     return null;
 }
 function cqs_step_fichas() {
-    if (!function_exists('eiv_fichas_run')) return 'sin núcleo';
+    if (!function_exists('eiv_fichas_run')) throw new Exception('sin núcleo');
     $bb = '42.255,3.245,42.335,3.335'; // Cadaqués, Portlligat y el Cap de Creus
     $q = "[out:json][timeout:90];(nwr[name][amenity]($bb);nwr[name][shop]($bb);nwr[name][tourism~\"hotel|guest_house|hostel|apartment|camp_site|museum|gallery|chalet\"]($bb);nwr[name][office]($bb);nwr[name][healthcare]($bb);nwr[name][leisure~\"marina|sports_centre|fitness_centre\"]($bb);nwr[name][craft]($bb););out center tags;";
-    $els = cqs_overpass($q); if ($els === null) return 'Overpass no responde';
+    $els = cqs_overpass($q); if ($els === null) throw new Exception('Overpass no responde');
     cqs_out('osm-raw.json', $els);
     $f = []; $skip = 0;
     foreach ($els as $e) {
@@ -256,7 +267,7 @@ function cqs_step_fichas() {
 
 /* 9) Calas: fichas propias con texto en 3 idiomas (coordenadas de OpenStreetMap cuando existen) */
 function cqs_step_beaches() {
-    if (!function_exists('eiv_fichas_run')) return 'sin núcleo';
+    if (!function_exists('eiv_fichas_run')) throw new Exception('sin núcleo');
     $B = [
      ['platja-gran', 'Platja Gran', 42.2879, 3.2780, ['La playa del pueblo, de guijarros, frente al paseo marítimo.', 'La platja del poble, de còdols, davant del passeig marítim.', 'The village beach, pebbly, on the seafront.']],
      ['es-poal', 'Platja des Poal', 42.2893, 3.2797, ['Pequeña playa junto a la Platja Gran, entre casas de pescadores.', 'Petita platja al costat de la Platja Gran, entre cases de pescadors.', 'Small beach next to Platja Gran, among fishermen’s houses.']],
