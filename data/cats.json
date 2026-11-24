@@ -1,0 +1,587 @@
+[
+{
+"slug": "comer-y-beber",
+"name": "Comer y beber",
+"parent": ""
+},
+{
+"slug": "comprar",
+"name": "Comprar",
+"parent": ""
+},
+{
+"slug": "deporte-y-nautica",
+"name": "Deporte y náutica",
+"parent": ""
+},
+{
+"slug": "dormir",
+"name": "Dormir",
+"parent": ""
+},
+{
+"slug": "educacion",
+"name": "Educación",
+"parent": ""
+},
+{
+"slug": "ocio-y-cultura",
+"name": "Ocio y cultura",
+"parent": ""
+},
+{
+"slug": "salud",
+"name": "Salud",
+"parent": ""
+},
+{
+"slug": "servicios",
+"name": "Servicios",
+"parent": ""
+},
+{
+"slug": "ambiente-lgtbi",
+"name": "Ambiente LGTBI+",
+"parent": "comer-y-beber"
+},
+{
+"slug": "arroces-y-marinera",
+"name": "Cocina ampurdanesa y marinera",
+"parent": "comer-y-beber"
+},
+{
+"slug": "bares-y-cocteleria",
+"name": "Bares de copas y coctelerías",
+"parent": "comer-y-beber"
+},
+{
+"slug": "cafes-y-desayunos",
+"name": "Cafés y desayunos",
+"parent": "comer-y-beber"
+},
+{
+"slug": "copas-y-noche",
+"name": "Ocio nocturno y discotecas",
+"parent": "comer-y-beber"
+},
+{
+"slug": "heladerias",
+"name": "Heladerías",
+"parent": "comer-y-beber"
+},
+{
+"slug": "internacional",
+"name": "Internacional",
+"parent": "comer-y-beber"
+},
+{
+"slug": "pizzerias-e-italianos",
+"name": "Pizzerías e italianos",
+"parent": "comer-y-beber"
+},
+{
+"slug": "restaurantes",
+"name": "Restaurantes",
+"parent": "comer-y-beber"
+},
+{
+"slug": "tapas-y-vermut",
+"name": "Tapas y vermut",
+"parent": "comer-y-beber"
+},
+{
+"slug": "alimentacion",
+"name": "Alimentación y mercados",
+"parent": "comprar"
+},
+{
+"slug": "alimentacion-y-mercados",
+"name": "Alimentación y mercados",
+"parent": "comprar"
+},
+{
+"slug": "carnicerias-y-charcuterias",
+"name": "Carnicerías y charcuterías",
+"parent": "comprar"
+},
+{
+"slug": "deportes-y-bicicletas",
+"name": "Deportes y bicicletas",
+"parent": "comprar"
+},
+{
+"slug": "estancos-y-quioscos",
+"name": "Estancos, quioscos y loterías",
+"parent": "comprar"
+},
+{
+"slug": "floristerias",
+"name": "Floristerías",
+"parent": "comprar"
+},
+{
+"slug": "galerias-de-arte",
+"name": "Galerías de arte",
+"parent": "comprar"
+},
+{
+"slug": "hogar",
+"name": "Hogar y decoración",
+"parent": "comprar"
+},
+{
+"slug": "joyerias",
+"name": "Joyerías",
+"parent": "comprar"
+},
+{
+"slug": "jugueterias",
+"name": "Jugueterías",
+"parent": "comprar"
+},
+{
+"slug": "librerias-y-papelerias",
+"name": "Librerías y papelerías",
+"parent": "comprar"
+},
+{
+"slug": "mascotas",
+"name": "Tiendas de animales",
+"parent": "comprar"
+},
+{
+"slug": "mercadillos",
+"name": "Mercadillos",
+"parent": "comprar"
+},
+{
+"slug": "mercerias",
+"name": "Mercerías",
+"parent": "comprar"
+},
+{
+"slug": "moda-y-complementos",
+"name": "Moda y complementos",
+"parent": "comprar"
+},
+{
+"slug": "panaderias-y-pastelerias",
+"name": "Panaderías y pastelerías",
+"parent": "comprar"
+},
+{
+"slug": "perfumeria-y-cosmetica",
+"name": "Perfumería y cosmética",
+"parent": "comprar"
+},
+{
+"slug": "pescaderias",
+"name": "Pescaderías",
+"parent": "comprar"
+},
+{
+"slug": "regalos-y-artesania",
+"name": "Regalos y artesanía",
+"parent": "comprar"
+},
+{
+"slug": "vinotecas-y-gourmet",
+"name": "Vinotecas y gourmet",
+"parent": "comprar"
+},
+{
+"slug": "zapaterias",
+"name": "Zapaterías",
+"parent": "comprar"
+},
+{
+"slug": "clubes-deportivos",
+"name": "Clubes deportivos",
+"parent": "deporte-y-nautica"
+},
+{
+"slug": "gimnasios-yoga-pilates",
+"name": "Gimnasios, yoga y pilates",
+"parent": "deporte-y-nautica"
+},
+{
+"slug": "instalaciones-deportivas",
+"name": "Instalaciones deportivas",
+"parent": "deporte-y-nautica"
+},
+{
+"slug": "nautica-y-barcos",
+"name": "Barcos y actividades náuticas",
+"parent": "deporte-y-nautica"
+},
+{
+"slug": "padel-escalada-hipica",
+"name": "Pádel, escalada e hípica",
+"parent": "deporte-y-nautica"
+},
+{
+"slug": "apartamentos-turisticos",
+"name": "Apartamentos turísticos",
+"parent": "dormir"
+},
+{
+"slug": "casas-rurales",
+"name": "Casas rurales y turismo rural",
+"parent": "dormir"
+},
+{
+"slug": "hostales-y-pensiones",
+"name": "Hostales y pensiones",
+"parent": "dormir"
+},
+{
+"slug": "hoteles",
+"name": "Hoteles",
+"parent": "dormir"
+},
+{
+"slug": "otros-alojamientos",
+"name": "Campings y otros alojamientos",
+"parent": "dormir"
+},
+{
+"slug": "academias",
+"name": "Academias y autoescuelas",
+"parent": "educacion"
+},
+{
+"slug": "escuelas-de-primaria",
+"name": "Escuelas de infantil y primaria",
+"parent": "educacion"
+},
+{
+"slug": "escuelas-infantiles",
+"name": "Escuelas infantiles",
+"parent": "educacion"
+},
+{
+"slug": "institutos-y-fp",
+"name": "Institutos y FP",
+"parent": "educacion"
+},
+{
+"slug": "otros-centros-educativos",
+"name": "Otros centros educativos",
+"parent": "educacion"
+},
+{
+"slug": "refuerzo-escolar",
+"name": "Refuerzo escolar",
+"parent": "educacion"
+},
+{
+"slug": "universidades",
+"name": "Universidades",
+"parent": "educacion"
+},
+{
+"slug": "bodegas-y-enoturismo",
+"name": "Bodegas y enoturismo",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "centros-culturales",
+"name": "Centros culturales",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "cines-y-teatros",
+"name": "Cines y teatros",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "entidades",
+"name": "Entidades y asociaciones",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "excursiones-y-tours",
+"name": "Excursiones y visitas guiadas",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "museos",
+"name": "Museos",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "naturaleza-y-rutas",
+"name": "Naturaleza y rutas",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "ocio-infantil-y-escape",
+"name": "Ocio infantil y escape rooms",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "patrimonio-y-monumentos",
+"name": "Patrimonio y monumentos",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "playas-y-calas",
+"name": "Playas y calas",
+"parent": "ocio-y-cultura"
+},
+{
+"slug": "centros-de-salud",
+"name": "Centros de salud",
+"parent": "salud"
+},
+{
+"slug": "centros-sanitarios",
+"name": "Centros sanitarios",
+"parent": "salud"
+},
+{
+"slug": "dentistas",
+"name": "Clínicas dentales",
+"parent": "salud"
+},
+{
+"slug": "farmacias",
+"name": "Farmacias",
+"parent": "salud"
+},
+{
+"slug": "fisioterapia",
+"name": "Fisioterapia y rehabilitación",
+"parent": "salud"
+},
+{
+"slug": "hospitales",
+"name": "Hospitales",
+"parent": "salud"
+},
+{
+"slug": "logopedia",
+"name": "Logopedia",
+"parent": "salud"
+},
+{
+"slug": "nutricion",
+"name": "Nutrición y dietética",
+"parent": "salud"
+},
+{
+"slug": "opticas",
+"name": "Ópticas y audición",
+"parent": "salud"
+},
+{
+"slug": "podologia",
+"name": "Podología",
+"parent": "salud"
+},
+{
+"slug": "psicologia",
+"name": "Psicología",
+"parent": "salud"
+},
+{
+"slug": "psiquiatria",
+"name": "Psiquiatría",
+"parent": "salud"
+},
+{
+"slug": "residencias-y-centros-de-dia",
+"name": "Residencias y centros de día",
+"parent": "salud"
+},
+{
+"slug": "urgencias",
+"name": "Urgencias",
+"parent": "salud"
+},
+{
+"slug": "veterinarios",
+"name": "Veterinarios",
+"parent": "salud"
+},
+{
+"slug": "abogados",
+"name": "Abogados",
+"parent": "servicios"
+},
+{
+"slug": "administracion-publica",
+"name": "Administración y servicios públicos",
+"parent": "servicios"
+},
+{
+"slug": "administradores-de-fincas",
+"name": "Administradores de fincas",
+"parent": "servicios"
+},
+{
+"slug": "agencias-de-viajes",
+"name": "Agencias de viajes",
+"parent": "servicios"
+},
+{
+"slug": "alquiler-de-coches-motos-y-bicis",
+"name": "Alquiler de coches, motos y bicis",
+"parent": "servicios"
+},
+{
+"slug": "aparcamientos",
+"name": "Aparcamientos",
+"parent": "servicios"
+},
+{
+"slug": "arquitectura",
+"name": "Arquitectura e interiorismo",
+"parent": "servicios"
+},
+{
+"slug": "asesorias-y-gestorias",
+"name": "Asesorías y gestorías",
+"parent": "servicios"
+},
+{
+"slug": "atencion-domiciliaria",
+"name": "Atención domiciliaria",
+"parent": "servicios"
+},
+{
+"slug": "bancos",
+"name": "Bancos",
+"parent": "servicios"
+},
+{
+"slug": "barberias",
+"name": "Barberías",
+"parent": "servicios"
+},
+{
+"slug": "carpinteria",
+"name": "Carpintería, aluminio y cristalería",
+"parent": "servicios"
+},
+{
+"slug": "cerrajeros",
+"name": "Cerrajeros",
+"parent": "servicios"
+},
+{
+"slug": "constructoras-y-promotoras",
+"name": "Constructoras y promotoras",
+"parent": "servicios"
+},
+{
+"slug": "coworking-y-centros-de-negocio",
+"name": "Coworking y centros de negocio",
+"parent": "servicios"
+},
+{
+"slug": "electricistas",
+"name": "Electricistas",
+"parent": "servicios"
+},
+{
+"slug": "empleo-y-orientacion",
+"name": "Empleo y orientación",
+"parent": "servicios"
+},
+{
+"slug": "estetica-y-bienestar",
+"name": "Estética y bienestar",
+"parent": "servicios"
+},
+{
+"slug": "ett-y-seleccion",
+"name": "ETT y selección de personal",
+"parent": "servicios"
+},
+{
+"slug": "fontaneria-y-climatizacion",
+"name": "Fontanería y climatización",
+"parent": "servicios"
+},
+{
+"slug": "formacion-para-el-empleo",
+"name": "Formación para el empleo",
+"parent": "servicios"
+},
+{
+"slug": "fotografia",
+"name": "Fotografía",
+"parent": "servicios"
+},
+{
+"slug": "funerarias",
+"name": "Funerarias",
+"parent": "servicios"
+},
+{
+"slug": "imprentas-y-copisterias",
+"name": "Imprentas y copisterías",
+"parent": "servicios"
+},
+{
+"slug": "informatica-y-moviles",
+"name": "Informática y móviles",
+"parent": "servicios"
+},
+{
+"slug": "inmobiliarias",
+"name": "Inmobiliarias",
+"parent": "servicios"
+},
+{
+"slug": "jardineria",
+"name": "Jardinería y viveros",
+"parent": "servicios"
+},
+{
+"slug": "lavanderias-y-tintorerias",
+"name": "Lavanderías y tintorerías",
+"parent": "servicios"
+},
+{
+"slug": "limpieza-y-servicio-domestico",
+"name": "Limpieza y servicio doméstico",
+"parent": "servicios"
+},
+{
+"slug": "notarias",
+"name": "Notarías",
+"parent": "servicios"
+},
+{
+"slug": "peluquerias",
+"name": "Peluquerías",
+"parent": "servicios"
+},
+{
+"slug": "pintores",
+"name": "Pintores",
+"parent": "servicios"
+},
+{
+"slug": "reformas-y-construccion",
+"name": "Reformas y construcción",
+"parent": "servicios"
+},
+{
+"slug": "seguros",
+"name": "Seguros",
+"parent": "servicios"
+},
+{
+"slug": "talleres",
+"name": "Talleres y transporte",
+"parent": "servicios"
+},
+{
+"slug": "tatuajes",
+"name": "Tatuajes y piercings",
+"parent": "servicios"
+}
+]

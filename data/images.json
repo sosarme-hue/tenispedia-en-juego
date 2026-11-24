@@ -1,0 +1,152 @@
+{
+ "hero": {
+  "id": "FRnm7ggPjSI",
+  "by": "Lucas Gallone",
+  "alt": {
+   "es": "Cadaqués, con la iglesia de Santa Maria sobre las casas blancas",
+   "ca": "Cadaqués, amb l’església de Santa Maria sobre les cases blanques",
+   "en": "Cadaqués, with Santa Maria church above the white houses"
+  },
+  "raw": "photo-1751240261891-c0176aff0592"
+ },
+ "coast": {
+  "id": "wNJx_I-idXY",
+  "by": "Boris Hadjur",
+  "alt": {
+   "es": "Casas blancas de Cadaqués junto al mar",
+   "ca": "Cases blanques de Cadaqués arran de mar",
+   "en": "White houses of Cadaqués by the sea"
+  },
+  "raw": "photo-1761659662634-61c24d7c045b"
+ },
+ "bay": {
+  "id": "6w0eSicAcq4",
+  "by": "Boris Hadjur",
+  "alt": {
+   "es": "La bahía de Cadaqués",
+   "ca": "La badia de Cadaqués",
+   "en": "The bay of Cadaqués"
+  },
+  "raw": "photo-1739532827463-a0fd7e88861b"
+ },
+ "boats": {
+  "id": "8xDLEF1xgtM",
+  "by": "Saul Mercado",
+  "alt": {
+   "es": "Barcas de pesca en la bahía",
+   "ca": "Barques de pesca a la badia",
+   "en": "Fishing boats in the bay"
+  },
+  "raw": "photo-1576018963836-aea407b8c26b"
+ },
+ "creus": {
+  "id": "AulfHESC_IE",
+  "by": "Manuel Torres Garcia",
+  "alt": {
+   "es": "El Mediterráneo desde el Cap de Creus",
+   "ca": "El Mediterrani des del Cap de Creus",
+   "en": "The Mediterranean from Cap de Creus"
+  },
+  "raw": ""
+ },
+ "lighthouse": {
+  "id": "HfkEKMRzPRU",
+  "by": "Marc Sendra Martorell",
+  "alt": {
+   "es": "Faro sobre los acantilados del Cap de Creus",
+   "ca": "Far sobre els penya-segats del Cap de Creus",
+   "en": "Lighthouse on the Cap de Creus cliffs"
+  },
+  "raw": ""
+ },
+ "rocks": {
+  "id": "S12w8AZ1jrQ",
+  "by": "Niklas Weiss",
+  "alt": {
+   "es": "Rocas y mar en la costa del Cap de Creus",
+   "ca": "Roques i mar a la costa del Cap de Creus",
+   "en": "Rocks and sea on the Cap de Creus coast"
+  },
+  "raw": "photo-1553986186-f9226b377cfe"
+ },
+ "bikes": {
+  "id": "XjDu9EVEED0",
+  "by": "Sergey Konstantinov",
+  "alt": {
+   "es": "Bicicletas y barcas en la orilla de Cadaqués",
+   "ca": "Bicicletes i barques a la vora de Cadaqués",
+   "en": "Bicycles and boats on the Cadaqués shore"
+  },
+  "raw": ""
+ },
+ "harbour": {
+  "id": "yoYDj-SvrDk",
+  "by": "Luca Dugaro",
+  "alt": {
+   "es": "Barcas fondeadas frente al pueblo",
+   "ca": "Barques fondejades davant del poble",
+   "en": "Boats moored off the village"
+  },
+  "raw": "photo-1717756910007-5645143491ab"
+ },
+ "street": {
+  "id": "nqxzry1LaKg",
+  "by": "Alexander Vilinskyy",
+  "alt": {
+   "es": "Casa encalada con escalera en el casco antiguo",
+   "ca": "Casa emblanquinada amb escala al nucli antic",
+   "en": "Whitewashed house with steps in the old town"
+  },
+  "raw": "photo-1666424449256-acd57e6b7337"
+ },
+ "window": {
+  "id": "2bHMnv1hp1o",
+  "by": "Luca Dugaro",
+  "alt": {
+   "es": "Fachada blanca con ventanas azules",
+   "ca": "Façana blanca amb finestres blaves",
+   "en": "White façade with blue windows"
+  },
+  "raw": "photo-1695759582706-0ef136b00b5b"
+ },
+ "aerial": {
+  "id": "1aPjtHe6uJU",
+  "by": "Ferran Fusalba Roselló",
+  "alt": {
+   "es": "Cadaqués visto desde el aire",
+   "ca": "Cadaqués vist des de l’aire",
+   "en": "Cadaqués from the air"
+  },
+  "raw": "photo-1440959455942-467fe0da9d96"
+ },
+ "hills": {
+  "id": "ZOpusUhvYAE",
+  "by": "Luca Dugaro",
+  "alt": {
+   "es": "El pueblo y la montaña del Pení al fondo",
+   "ca": "El poble i la muntanya del Pení al fons",
+   "en": "The village with Pení mountain behind"
+  },
+  "raw": "photo-1717756909843-873311e81931"
+ },
+ "water": {
+  "id": "tIw9tlZRVXg",
+  "by": "Luca Dugaro",
+  "alt": {
+   "es": "La bahía rodeada de montañas",
+   "ca": "La badia envoltada de muntanyes",
+   "en": "The bay ringed by hills"
+  },
+  "raw": "photo-1717756909917-81c77cf37a9d"
+ },
+ "cove": {
+  "id": "hJbeCzP8Cb4",
+  "by": "Annika Wischnewsky",
+  "alt": {
+   "es": "Cala de rocas en el Cap de Creus",
+   "ca": "Cala de roques al Cap de Creus",
+   "en": "Rocky cove at Cap de Creus"
+  },
+  "raw": ""
+ }
+}

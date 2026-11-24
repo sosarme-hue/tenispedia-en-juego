@@ -1,0 +1,42 @@
+/* cadaques.si · estilos de las páginas (mismos que el resto de la red) */
+/* eivissa.si · portada y páginas (núcleo Eivissa Sí 0.1). Fotos: Wikimedia Commons */
+.directorist-view-count,.directorist-listing-category__popup{display:none!important}.directorist-listing-single__thumb:has(img[src*="directorist/assets/images/grid.jpg"]){display:none!important}
+.gsi-hgrid>.wp-block-group__inner-container,.gsi-hgrid:not(:has(>.wp-block-group__inner-container)){display:flex;flex-direction:column}.ssi-hero-fig{order:-1;width:100%;max-width:920px;margin:0 auto 28px!important}.ssi-hero-fig img{display:block;width:100%;height:auto;border-radius:16px;box-shadow:0 12px 34px rgba(10,60,70,.18);aspect-ratio:3/2;object-fit:cover}
+@media (max-width:860px){.ssi-hero-fig{max-width:100%;margin:0 auto 20px!important}.ssi-hero-fig img{border-radius:12px}}
+@media (min-width:1024px){.gsi-hgrid>.wp-block-group__inner-container,.gsi-hgrid:not(:has(>.wp-block-group__inner-container)){display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);column-gap:56px;align-items:center}.gsi-hgrid>*>*,.gsi-hgrid>*{grid-column:1;min-width:0}.gsi-hgrid .ssi-hero-fig{grid-column:2;grid-row:1/span 6;max-width:none;margin:0!important;align-self:center}.ssi-hero--photo .ssi-hero-fig img{aspect-ratio:4/3}.ssi-hero--photo .ssi-h1{font-size:clamp(2.4rem,3.4vw,3.4rem)}}
+.ssi-hero .ssi-h1-tag{font-weight:inherit}.ssi-hero .ssi-h1+.ssi-lead{margin-top:1.2em}
+.gsi-search{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin:22px 0 6px}.gsi-search label{display:block;font-size:13px;font-weight:600;margin:0 0 4px;opacity:.8}.gsi-search input{width:100%;box-sizing:border-box;min-height:48px;border:1px solid rgba(0,0,0,.18);border-radius:12px;padding:0 14px;font:inherit;background:#fff}.gsi-search button{align-self:end;min-height:48px;border:0;border-radius:12px;padding:0 22px;font:inherit;font-weight:700;background:#0B3A66;color:#fff;cursor:pointer}
+@media (max-width:640px){.gsi-search{grid-template-columns:1fr}.gsi-search button{width:100%}}
+.gsi-search>div{position:relative}.gsi-ac{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:60;background:#fff;border:1px solid rgba(11,58,102,.16);border-radius:14px;box-shadow:0 16px 40px rgba(11,58,102,.18);max-height:min(70vh,520px);overflow:auto;padding:6px 0;text-align:left}.gsi-ac[hidden]{display:none}.gsi-ac__g{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#4a6a86;padding:10px 16px 4px}.gsi-ac a{display:block;padding:9px 16px;color:#0B1F33;text-decoration:none;line-height:1.3}.gsi-ac a b{font-weight:600}.gsi-ac a mark{background:#cfe9fb;color:inherit;border-radius:3px;padding:0 1px}.gsi-ac a small{display:block;font-size:12.5px;color:#5b7186;margin-top:2px}.gsi-ac a.is-on,.gsi-ac a:hover{background:#eef6fd}.gsi-ac__all{border-top:1px solid rgba(11,58,102,.1);margin-top:4px;font-weight:600;color:#0B3A66!important}.gsi-ac__none{padding:12px 16px;color:#5b7186}
+.gsi-pic .ssi-card::before{height:auto!important;aspect-ratio:3/2!important;width:100%;display:block;content:"";background:#DCEFFA center/cover no-repeat!important;-webkit-mask:none!important;mask:none!important}
+.gsi-go .wp-block-button__link{font-size:14px;padding:8px 14px}
+.gsi-crumb{font-size:14px;font-weight:600;margin:0 0 10px;opacity:.8}.gsi-crumb a{color:inherit}
+.gsi-sec{scroll-margin-top:90px}
+.gsi-facts .ssi-card::before{display:none!important}.gsi-facts .ssi-card{padding-top:4px}
+.gsi-note{font-size:14px;opacity:.75;margin-top:14px}
+.gsi-bigbtn .wp-block-button__link{font-size:18px;padding:14px 26px;background:#0B3A66;color:#fff}
+.gsi-secnav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}.gsi-secnav a{display:inline-block;padding:7px 14px;border-radius:999px;border:1px solid rgba(31,120,180,.35);background:#fff;color:#0B2545;font-size:14px;font-weight:600;text-decoration:none}.gsi-secnav a:hover{background:#e0f3f4}.gsi-secnav a[aria-current]{background:#0B3A66;border-color:#0B3A66;color:#fff}
+.ssi-band{margin-bottom:0!important}.ssi-band>.wp-block-group__inner-container>.ssi-in{padding-top:44px!important;padding-bottom:44px!important}
+.ssi-credits{font-size:13px;margin-top:10px!important}
+.ssi-vcard--colabora a,.ssi-vcard--colabora p{color:#fff!important}
+/* Identidad propia de eivissa.si: azul marino y azul celeste sobre blanco, titulares con serifa */
+.gsi-herochips a[href$="/playas-y-calas/"],.gsi-herochips a[href$="/platges-i-cales/"],.gsi-herochips a[href$="/beaches-and-coves/"]{background:#E0A526!important;color:#0B2545!important;border-color:#E0A526!important;font-weight:700}.gsi-herochips a[href$="/historia/"],.gsi-herochips a[href$="/historia-d-eivissa/"],.gsi-herochips a[href$="/history/"]{background:#111!important;color:#fff!important;border-color:#111!important;font-weight:700}:root{--eiv-cal:#F5FAFE;--eiv-mar:#5BB8E8;--eiv-fons:#0B2545;--eiv-ocre:#1F78B4;--eiv-sorra:#E3F2FB}
+body{background:var(--eiv-cal)}
+.ssi-h1,.ssi-h2,.ssi-band h3,.ssi-card h3{font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif!important;letter-spacing:-.01em}
+.ssi-h1{color:var(--eiv-fons)}.ssi-h1-tag{color:var(--eiv-ocre)}
+.ssi-soft{background:var(--eiv-sorra)!important}
+.ssi-hero{border-bottom:0!important;position:relative}.ssi-hero::after{content:"";display:block;height:22px;background:var(--eiv-cal);-webkit-mask:radial-gradient(22px 14px at 50% 0,transparent 98%,#000) 0 0/44px 22px repeat-x;mask:radial-gradient(22px 14px at 50% 0,transparent 98%,#000) 0 0/44px 22px repeat-x}
+.ssi-card{background:#fff!important;border:1px solid #CFE3F2!important;border-radius:18px!important;box-shadow:0 1px 0 #CFE3F2,0 8px 24px -18px rgba(11,37,69,.35)!important;border-top:4px solid var(--eiv-ocre)!important}
+.gsi-pic .ssi-card{border-top-width:1px!important}.gsi-pic .ssi-card::before{border-radius:16px 16px 0 0}
+.ssi-chips .wp-block-button__link{border-radius:999px!important}
+.gsi-today{background:var(--eiv-fons)!important;color:#fff}.gsi-today .ssi-h2{color:#fff!important}
+.gsi-today__grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.gsi-today__grid a{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border-radius:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;text-decoration:none}
+.gsi-today__grid a:hover,.gsi-today__grid a:focus-visible{background:var(--eiv-mar);color:#0B2545}.gsi-today__grid a:hover span{opacity:1}.gsi-today__grid b{font-size:16px}.gsi-today__grid span{font-size:13px;opacity:.8}
+@media (max-width:1024px){.gsi-today__grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.gsi-today__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.gsi-cat .ssi-card{border-top-color:var(--eiv-mar)!important}
+.gsi-bigbtn .wp-block-button__link{background:var(--eiv-fons)}
+.ssi-h2::after{content:"";display:block;width:48px;height:4px;border-radius:2px;background:var(--eiv-mar);margin-top:10px}.gsi-today .ssi-h2::after{display:none}
+.gsi-gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.gsi-gal figure{margin:0}.gsi-gal img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:14px}.gsi-gal figcaption{font-size:13px;opacity:.75;margin-top:6px}
+@media (max-width:600px){.gsi-gal{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.gsi-gal img{border-radius:10px}.gsi-gal figcaption{font-size:12px;line-height:1.3}}
