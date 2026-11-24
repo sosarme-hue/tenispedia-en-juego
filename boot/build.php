@@ -42,9 +42,10 @@ function cqs_build_run() {
     $log['started'] = gmdate('c'); $log['ver'] = CQS_BUILD_VER;
     if (!get_current_user_id()) wp_set_current_user(1);
     $steps = ['languages', 'cats', 'owner', 'images', 'photos', 'forms', 'pages', 'directorist', 'events', 'fichas', 'beaches', 'listing_photos', 'verify'];
-    $ok = true;
+    $ok = true; $T0 = microtime(true);
     foreach ($steps as $s) {
         if (!empty($done[$s])) continue;
+        if (microtime(true) - $T0 > 90) { $ok = false; break; } // tandas cortas: el resto en la siguiente llamada
         $t = microtime(true);
         try { $log[$s] = call_user_func('cqs_step_'.$s); $done[$s] = 1; }
         catch (Throwable $e) { $log[$s] = ['error' => $e->getMessage().' @ '.basename($e->getFile()).':'.$e->getLine()]; $ok = false; }
@@ -523,7 +524,7 @@ function cqs_step_verify() {
     $pos = (int)get_option('cqs_verify_pos', 0); $t0 = time(); $rep = (array)(json_decode((string)@file_get_contents(SSI_DIR.'out/verify-report.json'), true) ?: []);
     if (!$pos) $rep = ['verificada' => [], 'sin web' => [], 'dudosa' => [], 'web caida quitada' => []];
     $now = time(); $yrs = function ($d) use ($now) { $t = $d ? strtotime(substr($d, 0, 10)) : 0; return $t ? ($now - $t) / 31557600 : 99; };
-    while ($pos < count($ids) && time() - $t0 < 150) {
+    while ($pos < count($ids) && time() - $t0 < 90) {
         $batch = array_slice($ids, $pos, 20); $reqs = [];
         foreach ($batch as $id) { $w = (string)get_post_meta($id, '_website', true); if ($w && !preg_match('/facebook\.com|instagram\.com/', $w)) $reqs[$id] = ['url' => $w, 'type' => 'GET', 'headers' => ['User-Agent' => 'Mozilla/5.0 (compatible; CadaquesSi/1.0; +https://cadaques.si)'], 'options' => ['timeout' => 10, 'connect_timeout' => 6, 'follow_redirects' => true, 'redirects' => 5, 'verify' => false, 'max_bytes' => 60000]]; }
         $resp = [];
