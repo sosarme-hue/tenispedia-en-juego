@@ -41,7 +41,7 @@ function cqs_build_run() {
     $log = json_decode((string)@file_get_contents(SSI_DIR.'out/build-log.json'), true); if (!is_array($log) || ($log['ver'] ?? '') !== CQS_BUILD_VER || count($done) < 2) $log = [];
     $log['started'] = gmdate('c'); $log['ver'] = CQS_BUILD_VER;
     if (!get_current_user_id()) wp_set_current_user(1);
-    $steps = ['languages', 'cats', 'owner', 'images', 'pages', 'directorist', 'events', 'fichas', 'beaches'];
+    $steps = ['languages', 'cats', 'owner', 'images', 'photos', 'forms', 'pages', 'directorist', 'events', 'fichas', 'beaches', 'listing_photos', 'verify'];
     $ok = true;
     foreach ($steps as $s) {
         if (!empty($done[$s])) continue;
@@ -126,23 +126,185 @@ function cqs_step_images() {
     return $out;
 }
 
+/* Registro de fotos y créditos: cqs_imgs[clave] = id de adjunto; cqs_credits[clave] = alt por idioma, autor, licencia, fuente */
+function cqs_credit_set($k, $id, $alt, $by, $lic, $src) {
+    $c = (array)get_option('cqs_credits', []); $c[$k] = ['id' => (int)$id, 'alt' => $alt, 'by' => $by, 'lic' => $lic, 'src' => $src];
+    update_option('cqs_credits', $c, false);
+    $i = (array)get_option('cqs_imgs', []); $i[$k] = (int)$id; update_option('cqs_imgs', $i);
+}
 function cqs_fill($html, $l) {
-    $imgs = (array)get_option('cqs_imgs', []); $meta = cqs_json('images.json');
-    $html = preg_replace_callback('/\{\{img:([a-z]+)\}\}/', function ($m) use ($imgs) {
+    $imgs = (array)get_option('cqs_imgs', []); $cr = (array)get_option('cqs_credits', []);
+    $html = preg_replace_callback('/\{\{img:([a-z0-9_]+)\}\}/', function ($m) use ($imgs) {
         $id = $imgs[$m[1]] ?? 0; $u = $id ? wp_get_attachment_image_url($id, 'large') : '';
         return $u ?: 'data:image/gif;base64,R0lGODlhAQABAAAAACw=';
     }, $html);
+    // Tarjetas cuya foto no se encontró: sin foto
+    $html = str_replace(' cq-img"', '"', preg_replace('/ cq-img([^"]*)" style="--img:url\(data:image[^)]*\)"/', '$1"', $html));
+    $html = preg_replace_callback('/\{\{cf7:([a-z]+):([a-z]+)\}\}/', function ($m) {
+        $f = (array)get_option('cqs_cf7', []); return (string)($f[$m[1]][$m[2]] ?? $f[$m[1]]['es'] ?? 0);
+    }, $html);
+    if (strpos($html, '{{hist}}') !== false) {
+        $H = ['es' => ['Cadaqués en fotos antiguas', 'Imágenes de dominio público o con licencia libre, de Wikimedia Commons.'], 'ca' => ['Cadaqués en fotos antigues', 'Imatges de domini públic o amb llicència lliure, de Wikimedia Commons.'],
+              'en' => ['Cadaqués in old photographs', 'Public-domain or freely licensed images from Wikimedia Commons.'], 'fr' => ['Cadaqués en photos anciennes', 'Images du domaine public ou sous licence libre, issues de Wikimedia Commons.']][$l];
+        $g = '';
+        foreach ($cr as $k => $c) if (strpos($k, 'hist_') === 0 && $c['id']) {
+            $g .= '<figure class="cq-fig"><img src="'.esc_url(wp_get_attachment_image_url($c['id'], 'medium_large')).'" alt="'.esc_attr($c['alt'][$l] ?? '').'" loading="lazy">'
+                .'<figcaption>'.esc_html($c['alt'][$l] ?? '').' · <a href="'.esc_url($c['src']).'" target="_blank" rel="noopener">'.esc_html($c['by']).' · '.esc_html($c['lic']).'</a></figcaption></figure>';
+        }
+        $html = str_replace('{{hist}}', $g ? '<h2 class="wp-block-heading ssi-h2">'.$H[0].'</h2><p class="ssi-lead-mute">'.$H[1].'</p><div class="cq-gallery">'.$g.'</div>' : '', $html);
+    }
     if (strpos($html, '{{credits}}') !== false) {
-        $by = ['es' => 'Foto de %s en Unsplash', 'ca' => 'Foto de %s a Unsplash', 'en' => 'Photo by %s on Unsplash'][$l];
-        $c = '<div class="ssi-grid ssi-grid--3 cq-credits">';
-        foreach ($meta as $k => $im) {
-            $id = $imgs[$k] ?? 0; if (!$id) continue;
-            $c .= '<figure class="ssi-card"><img src="'.esc_url(wp_get_attachment_image_url($id, 'medium_large')).'" alt="'.esc_attr($im['alt'][$l]).'" loading="lazy" style="width:100%;height:auto;border-radius:10px">'
-                .'<figcaption>'.esc_html($im['alt'][$l]).'<br><a href="https://unsplash.com/photos/'.esc_attr($im['id']).'" target="_blank" rel="noopener">'.esc_html(sprintf($by, $im['by'])).'</a></figcaption></figure>';
+        $c = '<div class="cq-gallery cq-credits">';
+        foreach ($cr as $k => $x) {
+            if (!$x['id'] || !get_post($x['id'])) continue;
+            $c .= '<figure class="cq-fig"><img src="'.esc_url(wp_get_attachment_image_url($x['id'], 'medium_large')).'" alt="'.esc_attr($x['alt'][$l] ?? '').'" loading="lazy">'
+                .'<figcaption>'.esc_html($x['alt'][$l] ?? '').'<br><a href="'.esc_url($x['src']).'" target="_blank" rel="noopener">'.esc_html($x['by']).'</a> · '.esc_html($x['lic']).'</figcaption></figure>';
         }
         $html = str_replace('{{credits}}', $c.'</div>', $html);
     }
     return $html;
+}
+
+/* 4b) Más fotos: Wikimedia Commons (artículos de Viquipèdia o búsqueda, solo licencias libres) y Unsplash */
+function cqs_wm_get($url) {
+    $r = wp_remote_get($url, ['timeout' => 25, 'user-agent' => 'CadaquesSi/1.0 (https://cadaques.si; info@cadaques.si) WordPress']);
+    if (is_wp_error($r) || wp_remote_retrieve_response_code($r) !== 200) return null;
+    usleep(400000);
+    return json_decode(wp_remote_retrieve_body($r), true);
+}
+function cqs_wm_info($titles) { // imageinfo de varios archivos File:...
+    $q = 'https://commons.wikimedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url|mime|size|extmetadata&iiurlwidth=1600&titles='.rawurlencode(implode('|', $titles));
+    $j = cqs_wm_get($q); $out = [];
+    foreach ((array)($j['query']['pages'] ?? []) as $p) if (!empty($p['imageinfo'][0])) $out[$p['title']] = $p['imageinfo'][0];
+    return $out;
+}
+function cqs_wm_ok($ii, $hist = false) {
+    if (($ii['mime'] ?? '') !== 'image/jpeg' || ($ii['width'] ?? 0) < ($hist ? 600 : 1000)) return false;
+    $m = $ii['extmetadata'] ?? []; $lic = (string)($m['LicenseShortName']['value'] ?? '');
+    if (!preg_match('/^(CC BY|CC-BY|CC0|Public domain|PD)/i', $lic) || preg_match('/NC|ND/', $lic)) return false;
+    if ($hist) { $d = strip_tags((string)($m['DateTimeOriginal']['value'] ?? '')); if (!preg_match('/\b(18[5-9]\d|19[0-5]\d)\b/', $d)) return false; }
+    return true;
+}
+function cqs_wm_candidates($try) {
+    if (strpos($try, 'wiki:') === 0) {
+        [, $lang, $title] = explode(':', $try, 3);
+        $j = cqs_wm_get("https://$lang.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name&redirects=1&titles=".rawurlencode($title));
+        foreach ((array)($j['query']['pages'] ?? []) as $p) if (!empty($p['pageimage'])) return ['File:'.$p['pageimage']];
+        return [];
+    }
+    $q = substr($try, 7);
+    $j = cqs_wm_get('https://commons.wikimedia.org/w/api.php?action=query&format=json&list=search&srnamespace=6&srlimit=20&srsearch='.rawurlencode($q.' filetype:bitmap'));
+    return array_map(fn($x) => $x['title'], (array)($j['query']['search'] ?? []));
+}
+function cqs_wm_sideload($key, $title, $ii, $alt) {
+    $m = $ii['extmetadata'] ?? [];
+    $by = trim(wp_strip_all_tags(html_entity_decode((string)($m['Artist']['value'] ?? ''), ENT_QUOTES))) ?: 'Wikimedia Commons';
+    $by = mb_substr(preg_replace('/\s+/', ' ', $by), 0, 80);
+    $lic = trim((string)($m['LicenseShortName']['value'] ?? ''));
+    $tmp = download_url($ii['thumburl'] ?? $ii['url'], 60); if (is_wp_error($tmp)) return null;
+    $id = media_handle_sideload(['name' => 'cadaques-'.str_replace('_', '-', $key).'.jpg', 'tmp_name' => $tmp], 0, $alt['es']);
+    if (is_wp_error($id)) { @unlink($tmp); return null; }
+    update_post_meta($id, '_wp_attachment_image_alt', $alt['es']); update_post_meta($id, '_cqs_credit', $by.' · '.$lic);
+    cqs_credit_set($key, $id, $alt, $by.' (Wikimedia Commons)', $lic, $ii['descriptionurl'] ?? 'https://commons.wikimedia.org/wiki/'.rawurlencode($title));
+    return ['title' => $title, 'by' => $by, 'lic' => $lic, 'id' => $id];
+}
+function cqs_step_photos() {
+    require_once ABSPATH.'wp-admin/includes/media.php'; require_once ABSPATH.'wp-admin/includes/file.php'; require_once ABSPATH.'wp-admin/includes/image.php';
+    $P = cqs_json('photos.json'); $cr = (array)get_option('cqs_credits', []); $rep = []; $used = [];
+    foreach ($cr as $c) if (!empty($c['src'])) $used[$c['src']] = 1;
+    // Fotos de Unsplash de la primera tanda: también al registro de créditos
+    foreach (cqs_json('images.json') as $k => $im) { $id = ((array)get_option('cqs_imgs', []))[$k] ?? 0; if ($id && empty($cr[$k])) cqs_credit_set($k, $id, $im['alt'], $im['by'].' (Unsplash)', 'Unsplash', 'https://unsplash.com/photos/'.$im['id']); }
+    foreach ($P['unsplash'] as $k => $u) {
+        if (!empty($cr[$k]['id']) && get_post($cr[$k]['id'])) { $rep[$k] = 'ya estaba'; continue; }
+        $tmp = download_url('https://images.unsplash.com/'.$u['raw'].'?w=1600&q=78&fm=jpg&fit=max', 60);
+        if (is_wp_error($tmp)) { $rep[$k] = 'error descarga'; continue; }
+        $id = media_handle_sideload(['name' => 'cadaques-'.str_replace('_', '-', $k).'.jpg', 'tmp_name' => $tmp], 0, $u['alt']['es']);
+        if (is_wp_error($id)) { @unlink($tmp); $rep[$k] = 'error'; continue; }
+        update_post_meta($id, '_wp_attachment_image_alt', $u['alt']['es']);
+        cqs_credit_set($k, $id, $u['alt'], $u['by'].' (Unsplash)', 'Unsplash', 'https://unsplash.com/photos/'.$u['id']); $rep[$k] = $id;
+    }
+    foreach ($P['commons'] as $k => $c) {
+        if (!empty($cr[$k]['id']) && get_post($cr[$k]['id'])) { $rep[$k] = 'ya estaba'; continue; }
+        $done = null;
+        foreach ($c['try'] as $try) {
+            $cands = array_slice(cqs_wm_candidates($try), 0, 12); if (!$cands) continue;
+            $info = cqs_wm_info($cands);
+            foreach ($cands as $t) { $ii = $info[$t] ?? null; if (!$ii || !cqs_wm_ok($ii) || isset($used[$ii['descriptionurl'] ?? ''])) continue;
+                $done = cqs_wm_sideload($k, $t, $ii, $c['alt']); if ($done) { $done['via'] = $try; $used[$ii['descriptionurl'] ?? ''] = 1; break 2; } }
+        }
+        $rep[$k] = $done ?: 'no encontrada';
+    }
+    // Fotos antiguas para Historia
+    $have = count(array_filter(array_keys($cr), fn($k) => strpos($k, 'hist_') === 0)); $n = $have;
+    foreach ($P['hist']['try'] as $try) {
+        if ($n >= $P['hist']['n']) break;
+        $cands = array_slice(cqs_wm_candidates($try), 0, 20); if (!$cands) continue;
+        $info = cqs_wm_info($cands);
+        foreach ($cands as $t) { if ($n >= $P['hist']['n']) break; $ii = $info[$t] ?? null; if (!$ii || !cqs_wm_ok($ii, true) || isset($used[$ii['descriptionurl'] ?? ''])) continue;
+            $d = strip_tags((string)($ii['extmetadata']['DateTimeOriginal']['value'] ?? '')); preg_match('/\b(1[89]\d\d)\b/', $d, $y);
+            $alt = $P['hist']['alt']; if (!empty($y[1])) foreach ($alt as $L => $a) $alt[$L] = $a.' ('.$y[1].')';
+            $r = cqs_wm_sideload('hist_'.($n + 1), $t, $ii, $alt); if ($r) { $used[$ii['descriptionurl'] ?? ''] = 1; $n++; $rep['hist_'.$n] = $r; } }
+    }
+    cqs_out('photos-report.json', $rep);
+    return ['fotos' => count(array_filter($rep, 'is_array')) + count(array_filter($rep, 'is_int')), 'sin_foto' => array_keys(array_filter($rep, fn($x) => $x === 'no encontrada')), 'antiguas' => $n];
+}
+
+/* 4c) Formularios de «Tu opinión» (Contact Form 7), uno por idioma, como en castelldefels.si */
+function cqs_step_forms() {
+    if (!class_exists('WPCF7_ContactForm')) throw new Exception('sin Contact Form 7');
+    $to = get_option('cqs_forms_to') ?: 'info@cadaques.si';
+    $L = [
+     'es' => ['name' => 'Tu nombre (opcional)', 'email' => 'Tu correo *', 'about' => '¿Sobre qué?', 'opts' => '"Idea o sugerencia" "Corrección de un dato" "Un negocio o entidad" "Otro"', 'msg' => 'Mensaje *', 'ok' => 'He leído la <a href="/politica-de-privacidad/" target="_blank">política de privacidad</a>.', 'send' => 'Enviar',
+              'biz' => 'Nombre del establecimiento *', 'link' => 'Enlace a la ficha (opcional)', 'what' => '¿Qué ha cambiado?', 'wopts' => '"Horario" "Teléfono, web o correo" "Dirección" "Ha cerrado" "Quiero verificar la ficha a mi nombre" "Quiero que se borre la ficha (baja)" "Otro"', 'right' => 'Dato correcto *', 'rel' => 'Tu relación con el sitio', 'ropts' => '"Soy cliente o vecino" "Soy el propietario o trabajo allí"',
+              'ev' => 'Nombre del evento *', 'date' => 'Fecha y hora *', 'dph' => 'Ej.: sábado 25 de enero, 18 h', 'place' => 'Lugar *', 'org' => 'Organiza', 'desc' => 'Descripción y enlace', 'evsend' => 'Enviar el evento', 't' => ['idea' => 'Propón una idea', 'ficha' => 'Corrige una ficha', 'evento' => 'Envía tu evento']],
+     'ca' => ['name' => 'El teu nom (opcional)', 'email' => 'El teu correu *', 'about' => 'Sobre què?', 'opts' => '"Idea o suggeriment" "Correcció d’una dada" "Un negoci o entitat" "Altres"', 'msg' => 'Missatge *', 'ok' => 'He llegit la <a href="/ca/politica-de-privacitat/" target="_blank">política de privacitat</a>.', 'send' => 'Envia',
+              'biz' => 'Nom de l’establiment *', 'link' => 'Enllaç a la fitxa (opcional)', 'what' => 'Què ha canviat?', 'wopts' => '"Horari" "Telèfon, web o correu" "Adreça" "Ha tancat" "Vull verificar la fitxa al meu nom" "Vull que s’esborri la fitxa (baixa)" "Altres"', 'right' => 'Dada correcta *', 'rel' => 'La teva relació amb el lloc', 'ropts' => '"Soc client o veí" "Soc el propietari o hi treballo"',
+              'ev' => 'Nom de l’esdeveniment *', 'date' => 'Data i hora *', 'dph' => 'Ex.: dissabte 25 de gener, 18 h', 'place' => 'Lloc *', 'org' => 'Organitza', 'desc' => 'Descripció i enllaç', 'evsend' => 'Envia l’esdeveniment', 't' => ['idea' => 'Proposa una idea', 'ficha' => 'Corregeix una fitxa', 'evento' => 'Envia el teu esdeveniment']],
+     'en' => ['name' => 'Your name (optional)', 'email' => 'Your email *', 'about' => 'What about?', 'opts' => '"Idea or suggestion" "Correcting a detail" "A business or organisation" "Other"', 'msg' => 'Message *', 'ok' => 'I have read the <a href="/en/privacy-policy/" target="_blank">privacy policy</a>.', 'send' => 'Send',
+              'biz' => 'Business name *', 'link' => 'Link to the listing (optional)', 'what' => 'What has changed?', 'wopts' => '"Opening hours" "Phone, website or email" "Address" "It has closed" "I want to verify the listing in my name" "I want the listing removed" "Other"', 'right' => 'Correct details *', 'rel' => 'Your connection to the place', 'ropts' => '"I’m a customer or local" "I’m the owner or work there"',
+              'ev' => 'Event name *', 'date' => 'Date and time *', 'dph' => 'E.g. Saturday 25 January, 6 pm', 'place' => 'Venue *', 'org' => 'Organiser', 'desc' => 'Description and link', 'evsend' => 'Send the event', 't' => ['idea' => 'Suggest an idea', 'ficha' => 'Fix a listing', 'evento' => 'Send your event']],
+     'fr' => ['name' => 'Votre nom (facultatif)', 'email' => 'Votre e-mail *', 'about' => 'À quel sujet ?', 'opts' => '"Idée ou suggestion" "Correction d’une information" "Un commerce ou une association" "Autre"', 'msg' => 'Message *', 'ok' => 'J’ai lu la <a href="/fr/politique-de-confidentialite/" target="_blank">politique de confidentialité</a>.', 'send' => 'Envoyer',
+              'biz' => 'Nom de l’établissement *', 'link' => 'Lien vers la fiche (facultatif)', 'what' => 'Qu’est-ce qui a changé ?', 'wopts' => '"Horaires" "Téléphone, site ou e-mail" "Adresse" "Il a fermé" "Je veux vérifier la fiche à mon nom" "Je veux que la fiche soit supprimée" "Autre"', 'right' => 'Information correcte *', 'rel' => 'Votre lien avec l’établissement', 'ropts' => '"Je suis client ou habitant" "Je suis le propriétaire ou j’y travaille"',
+              'ev' => 'Nom de l’événement *', 'date' => 'Date et heure *', 'dph' => 'Ex. : samedi 25 janvier, 18 h', 'place' => 'Lieu *', 'org' => 'Organisateur', 'desc' => 'Description et lien', 'evsend' => 'Envoyer l’événement', 't' => ['idea' => 'Proposez une idée', 'ficha' => 'Corrigez une fiche', 'evento' => 'Envoyez votre événement']],
+    ];
+    $ids = (array)get_option('cqs_cf7', []);
+    foreach ($L as $l => $x) {
+        $acc = '[acceptance acepto] '.$x['ok'].' [/acceptance]';
+        $F = [
+         'idea' => "<label>{$x['name']} [text your-name]</label>\n<label>{$x['email']} [email* your-email]</label>\n<label>{$x['about']} [select tema {$x['opts']}]</label>\n<label>{$x['msg']} [textarea* your-message maxlength:2000]</label>\n$acc\n[submit \"{$x['send']}\"]",
+         'ficha' => "<label>{$x['biz']} [text* fix-business]</label>\n<label>{$x['link']} [url fix-link placeholder \"https://cadaques.si/…\"]</label>\n<label>{$x['what']} [select fix-what {$x['wopts']}]</label>\n<label>{$x['right']} [textarea* fix-body maxlength:2000]</label>\n<label>{$x['rel']} [radio fix-relation default:1 {$x['ropts']}]</label>\n<label>{$x['name']} [text your-name]</label>\n<label>{$x['email']} [email* your-email]</label>\n$acc\n[submit \"{$x['send']}\"]",
+         'evento' => "<label>{$x['ev']} [text* evento]</label>\n<label>{$x['date']} [text* fecha placeholder \"{$x['dph']}\"]</label>\n<label>{$x['place']} [text* lugar]</label>\n<label>{$x['org']} [text organiza]</label>\n<label>{$x['desc']} [textarea descripcion maxlength:2000]</label>\n<label>{$x['email']} [email* your-email]</label>\n$acc\n[submit \"{$x['evsend']}\"]",
+        ];
+        foreach ($F as $k => $form) {
+            $cf = !empty($ids[$k][$l]) ? WPCF7_ContactForm::get_instance($ids[$k][$l]) : null;
+            if (!$cf) $cf = WPCF7_ContactForm::get_template(['locale' => ['es' => 'es_ES', 'ca' => 'ca', 'en' => 'en_GB', 'fr' => 'fr_FR'][$l]]);
+            $cf->set_title('Cadaqués Sí · '.$x['t'][$k].' ('.$l.')');
+            $body = "[_site_title] · {$x['t'][$k]} ($l)\n\n[_raw_*]\n\n--\n[_url]";
+            $cf->set_properties(['form' => $form, 'mail' => ['active' => true, 'subject' => '[_site_title] · '.$x['t'][$k], 'sender' => '[_site_title] <wordpress@cadaques.si>',
+                'recipient' => $to, 'body' => $body, 'additional_headers' => 'Reply-To: [your-email]', 'attachments' => '', 'use_html' => false, 'exclude_blank' => true],
+                'additional_settings' => "acceptance_as_validation: on"]);
+            $id = $cf->save(); $ids[$k][$l] = (int)$id;
+        }
+    }
+    update_option('cqs_cf7', $ids);
+    return $ids;
+}
+
+/* 10) Fotos en las fichas: calas y lugares con foto propia */
+function cqs_step_listing_photos() {
+    $cr = (array)get_option('cqs_credits', []); $out = [];
+    $map = ['cqs:platja:platja-gran' => 'cm_platjagran', 'cqs:platja:es-poal' => 'cm_poal', 'cqs:platja:es-llane' => 'cm_llane', 'cqs:platja:sa-conca' => 'cm_conca',
+            'cqs:platja:portlligat' => 'cm_portlligat', 'cqs:platja:cala-nans' => 'cm_calanans', 'cqs:platja:cala-guillola' => 'cm_guillola', 'cqs:platja:cala-culip' => 'cm_culip'];
+    $byname = ['/casa.?museu.*dal[ií]|dal[ií].*house|portlligat.*museu/i' => 'cm_dalihouse', '/museu de cadaqu/i' => 'cm_museu', '/santa maria/i' => 'cm_church', '/far.*cap de creus|cap de creus.*far/i' => 'cm_capfar', '/cala nans/i' => 'cm_calanans'];
+    foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => -1, 'lang' => '', 'suppress_filters' => true]) as $p) {
+        $src = (string)get_post_meta($p->ID, '_ssi_source', true); $k = $map[$src] ?? null;
+        if (!$k) foreach ($byname as $re => $kk) if (preg_match($re, $p->post_title)) { $k = $kk; break; }
+        if (!$k || empty($cr[$k]['id'])) continue;
+        $id = (int)$cr[$k]['id'];
+        update_post_meta($p->ID, '_listing_prv_img', $id); update_post_meta($p->ID, '_listing_img', [$id]); set_post_thumbnail($p->ID, $id);
+        $out[$p->post_title] = $k;
+    }
+    return $out;
 }
 
 /* 5) Páginas en castellano, catalán e inglés, enlazadas como traducciones */
@@ -262,31 +424,133 @@ function cqs_overpass($q) {
     }
     return null;
 }
+/* Nombre normalizado para detectar duplicados (sin acentos, sin palabras genéricas) */
+function cqs_norm_name($s) {
+    $s = remove_accents(mb_strtolower(html_entity_decode($s, ENT_QUOTES)));
+    $s = preg_replace("/[^a-z0-9 ]+/", ' ', str_replace(["'", '’'], ' ', $s));
+    $s = preg_replace('/\b(restaurant|restaurante|bar|hotel|hostal|cafe|cafeteria|apartaments|apartamentos|apartments|botiga|tienda|shop|galeria|gallery|el|la|les|los|las|es|sa|ses|s|l|d|de|del|i|y|and|the|cadaques)\b/', ' ', $s);
+    return trim(preg_replace('/\s+/', ' ', $s));
+}
+function cqs_dist($a, $b, $c, $d) { $r = 6371000; $x = deg2rad($d - $b) * cos(deg2rad(($a + $c) / 2)); $y = deg2rad($c - $a); return sqrt($x * $x + $y * $y) * $r; }
+/* ¿Consta como cerrado en OpenStreetMap? */
+function cqs_osm_closed($t) {
+    foreach ($t as $k => $v) if (preg_match('/^(disused|was|abandoned|demolished|removed|destroyed|razed):/', $k)) return 'marcado como cerrado ('.$k.')';
+    if (preg_match('/^(off|closed)$/i', trim($t['opening_hours'] ?? ''))) return 'horario: cerrado';
+    if (($t['closed'] ?? '') === 'yes' || ($t['disused'] ?? '') === 'yes' || ($t['abandoned'] ?? '') === 'yes') return 'marcado como cerrado';
+    if (!empty($t['end_date']) && strtotime($t['end_date']) && strtotime($t['end_date']) < time()) return 'fecha de cierre '.$t['end_date'];
+    if (preg_match('/\b(cerrado|tancat|closed|ferm[ée])\b/i', $t['name'] ?? '')) return 'nombre indica cierre';
+    return '';
+}
 function cqs_step_fichas() {
     if (!function_exists('eiv_fichas_run')) throw new Exception('sin núcleo');
     $bb = '42.255,3.245,42.335,3.335'; // Cadaqués, Portlligat y el Cap de Creus
-    $q = "[out:json][timeout:60];(nwr[name][amenity]($bb);nwr[name][shop]($bb);nwr[name][tourism~\"hotel|guest_house|hostel|apartment|camp_site|museum|gallery|chalet\"]($bb);nwr[name][office]($bb);nwr[name][healthcare]($bb);nwr[name][leisure~\"marina|sports_centre|fitness_centre\"]($bb);nwr[name][craft]($bb););out center tags;";
+    $q = "[out:json][timeout:60];(nwr[name][amenity]($bb);nwr[name][shop]($bb);nwr[name][tourism~\"hotel|guest_house|hostel|apartment|camp_site|museum|gallery|chalet|motel\"]($bb);nwr[name][office]($bb);nwr[name][healthcare]($bb);nwr[name][leisure~\"marina|sports_centre|fitness_centre|sailing_club\"]($bb);nwr[name][craft]($bb);nwr[name][club]($bb);nwr[name][sport~\"diving|scuba_diving|sailing|kayak\"]($bb););out center tags meta;";
     $els = cqs_overpass($q); if ($els === null) throw new Exception('Overpass no responde');
     cqs_out('osm-raw.json', $els);
-    $f = []; $skip = 0;
+    $f = []; $skip = 0; $closed = [];
     foreach ($els as $e) {
         $t = $e['tags'] ?? []; $name = trim($t['name'] ?? ''); if ($name === '') continue;
-        if (in_array($t['amenity'] ?? '', ['bench', 'waste_basket', 'toilets', 'drinking_water', 'recycling', 'parking_space', 'vending_machine', 'telephone', 'shelter', 'fountain', 'atm', 'bicycle_parking', 'motorcycle_parking', 'charging_station', 'bus_station'], true)) { $skip++; continue; }
+        if (in_array($t['amenity'] ?? '', ['bench', 'waste_basket', 'toilets', 'drinking_water', 'recycling', 'parking_space', 'vending_machine', 'telephone', 'shelter', 'fountain', 'atm', 'bicycle_parking', 'motorcycle_parking', 'charging_station', 'bus_station', 'parking_entrance', 'grave_yard'], true)) { $skip++; continue; }
+        if ($why = cqs_osm_closed($t)) { $closed[] = $name.' · '.$why; continue; }
         $cats = cqs_osm_cats($t); if (!$cats) { $skip++; continue; }
         $lat = $e['lat'] ?? ($e['center']['lat'] ?? ''); $lng = $e['lon'] ?? ($e['center']['lon'] ?? '');
         $street = trim(($t['addr:street'] ?? '').(isset($t['addr:housenumber']) ? ', '.$t['addr:housenumber'] : ''));
         $addr = ($street ? $street.', ' : '').($t['addr:postcode'] ?? '17488').' '.($t['addr:city'] ?? 'Cadaqués');
         $web = $t['website'] ?? ($t['contact:website'] ?? ($t['url'] ?? ''));
+        if ($web && !preg_match('#^https?://#i', $web)) $web = 'https://'.$web;
+        $chk = $t['check_date'] ?? ($t['survey:date'] ?? '');
         $f[] = ['key' => 'osm:'.$e['type'].'/'.$e['id'], 'title' => $name, 'title_ca' => $t['name:ca'] ?? $name, 'title_en' => $t['name:en'] ?? $name,
             'content' => '', 'cats' => $cats, 'location' => 'Cadaqués', 'address' => $addr,
             'phone' => $t['phone'] ?? ($t['contact:phone'] ?? ''), 'website' => $web, 'email' => $t['email'] ?? ($t['contact:email'] ?? ''),
-            'hours' => $t['opening_hours'] ?? '', 'lat' => $lat, 'lng' => $lng];
+            'hours' => $t['opening_hours'] ?? '', 'lat' => $lat, 'lng' => $lng,
+            '_n' => cqs_norm_name($name), '_tags' => count($t), '_edit' => substr((string)($e['timestamp'] ?? ''), 0, 10), '_check' => $chk];
     }
+    // Duplicados: mismo nombre normalizado (o uno contenido en el otro) a menos de 200 m, o misma web o mismo teléfono a menos de 200 m.
+    // Se queda la ficha con más datos y se le pasan los que le falten.
+    usort($f, fn($a, $b) => $b['_tags'] <=> $a['_tags']);
+    $keep = []; $dups = [];
+    foreach ($f as $x) {
+        $hit = null;
+        foreach ($keep as $i => $k) {
+            if ($x['lat'] === '' || $k['lat'] === '' || cqs_dist($x['lat'], $x['lng'], $k['lat'], $k['lng']) > 200) continue;
+            $sameName = $x['_n'] !== '' && $k['_n'] !== '' && ($x['_n'] === $k['_n'] || (mb_strlen($x['_n']) > 4 && mb_strlen($k['_n']) > 4 && (strpos($x['_n'], $k['_n']) !== false || strpos($k['_n'], $x['_n']) !== false)));
+            $host = fn($u) => preg_replace('/^www\./', '', (string)parse_url($u, PHP_URL_HOST));
+            $sameWeb = $x['website'] && $k['website'] && $host($x['website']) === $host($k['website']) && !preg_match('/facebook|instagram|booking|tripadvisor/', $host($x['website']));
+            $digits = fn($p) => substr(preg_replace('/\D/', '', $p), -9);
+            $samePhone = $x['phone'] && $k['phone'] && $digits($x['phone']) === $digits($k['phone']);
+            if ($sameName || $sameWeb || $samePhone) { $hit = $i; break; }
+        }
+        if ($hit === null) { $keep[] = $x; continue; }
+        foreach (['phone', 'website', 'email', 'hours'] as $m) if (empty($keep[$hit][$m]) && !empty($x[$m])) $keep[$hit][$m] = $x[$m];
+        if ($x['_edit'] > $keep[$hit]['_edit']) $keep[$hit]['_edit'] = $x['_edit'];
+        $dups[] = $x['title'].' = '.$keep[$hit]['title'];
+    }
+    // Fichas OSM publicadas antes que ya no están (duplicadas o cerradas): a la papelera (se pueden recuperar)
+    $live = array_flip(array_column($keep, 'key')); $trashed = [];
+    foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => ['publish', 'draft', 'pending'], 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_key' => '_ssi_source', 'meta_compare' => 'LIKE', 'meta_value' => 'osm:']) as $id) {
+        $src = (string)get_post_meta($id, '_ssi_source', true);
+        if (strpos($src, 'osm:') === 0 && !isset($live[$src])) { $trashed[] = get_the_title($id); wp_trash_post($id); }
+    }
+    // Las que se pasaron a borrador en una revisión anterior se quedan en borrador
+    $drafts = []; foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'draft', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_key' => '_cqs_verif_estado', 'meta_value' => 'dudosa']) as $id) $drafts[(string)get_post_meta($id, '_ssi_source', true)] = $id;
+    $send = array_map(fn($x) => array_diff_key($x, array_flip(['_n', '_tags', '_edit', '_check'])), $keep);
     $res = [];
-    foreach (array_chunk($f, 40) as $ch) { $r = eiv_fichas_run(cqs_req(['fichas' => $ch])); $res = array_merge($res, (array)($r['fichas'] ?? [])); }
+    foreach (array_chunk($send, 40) as $ch) { $r = eiv_fichas_run(cqs_req(['fichas' => $ch])); $res = array_merge($res, (array)($r['fichas'] ?? [])); }
+    foreach ($keep as $x) { $id = $drafts[$x['key']] ?? 0;
+        foreach ($res as $y) if (($y['key'] ?? '') === $x['key'] && !empty($y['id'])) { $id = $id ?: 0; update_post_meta($y['id'], '_cqs_osm_edit', $x['_edit']); update_post_meta($y['id'], '_cqs_osm_check', $x['_check']); }
+        if ($id) wp_update_post(['ID' => $id, 'post_status' => 'draft']); }
     $err = array_values(array_filter($res, fn($x) => isset($x['error'])));
-    $byc = []; foreach ($f as $x) { $byc[$x['cats'][1]] = ($byc[$x['cats'][1]] ?? 0) + 1; } arsort($byc);
-    return ['osm' => count($els), 'fichas' => count($f), 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
+    $byc = []; foreach ($keep as $x) { $byc[$x['cats'][1]] = ($byc[$x['cats'][1]] ?? 0) + 1; } arsort($byc);
+    delete_option('cqs_verify_pos');
+    $rep = ['osm' => count($els), 'fichas' => count($keep), 'duplicados' => $dups, 'cerrados_en_osm' => $closed, 'a_la_papelera' => $trashed, 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
+    cqs_out('fichas-report.json', $rep);
+    return array_merge($rep, ['duplicados' => count($dups), 'cerrados_en_osm' => count($closed), 'a_la_papelera' => count($trashed)]);
+}
+
+/* 11) Verificación de cada ficha: ¿responde su web?, ¿cuándo se comprobó en OpenStreetMap?
+   - verificada: la web responde, o alguien la comprobó en OSM (check_date o edición) en los últimos 2 años
+   - sin web: no tiene web y el último dato de OSM tiene más de 2 años (se publica, con aviso para revisar)
+   - dudosa: la web no existe o está caída Y el último dato de OSM tiene más de 3 años -> pasa a borrador (no se borra)
+   La web caída se quita de la ficha para no enlazar a una página rota. Se reparte en tandas (20 webs a la vez). */
+function cqs_step_verify() {
+    $ids = get_posts(['post_type' => 'at_biz_dir', 'post_status' => ['publish', 'draft'], 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'orderby' => 'ID', 'order' => 'ASC', 'meta_key' => '_ssi_source', 'meta_compare' => 'LIKE', 'meta_value' => 'osm:']);
+    $pos = (int)get_option('cqs_verify_pos', 0); $t0 = time(); $rep = (array)(json_decode((string)@file_get_contents(SSI_DIR.'out/verify-report.json'), true) ?: []);
+    if (!$pos) $rep = ['verificada' => [], 'sin web' => [], 'dudosa' => [], 'web caida quitada' => []];
+    $now = time(); $yrs = function ($d) use ($now) { $t = $d ? strtotime(substr($d, 0, 10)) : 0; return $t ? ($now - $t) / 31557600 : 99; };
+    while ($pos < count($ids) && time() - $t0 < 150) {
+        $batch = array_slice($ids, $pos, 20); $reqs = [];
+        foreach ($batch as $id) { $w = (string)get_post_meta($id, '_website', true); if ($w && !preg_match('/facebook\.com|instagram\.com/', $w)) $reqs[$id] = ['url' => $w, 'type' => 'GET', 'headers' => ['User-Agent' => 'Mozilla/5.0 (compatible; CadaquesSi/1.0; +https://cadaques.si)'], 'options' => ['timeout' => 10, 'connect_timeout' => 6, 'follow_redirects' => true, 'redirects' => 5, 'verify' => false, 'max_bytes' => 60000]]; }
+        $resp = [];
+        if ($reqs) { try { $cls = class_exists('\WpOrg\Requests\Requests') ? '\WpOrg\Requests\Requests' : 'Requests'; $resp = $cls::request_multiple($reqs, ['timeout' => 10]); } catch (Throwable $e) { $resp = []; } }
+        foreach ($batch as $id) {
+            $title = get_the_title($id); $w = (string)get_post_meta($id, '_website', true);
+            $age = min($yrs((string)get_post_meta($id, '_cqs_osm_check', true)), $yrs((string)get_post_meta($id, '_cqs_osm_edit', true)));
+            $web = 'sin web';
+            if (isset($reqs[$id])) {
+                $r = $resp[$id] ?? null; $code = (is_object($r) && !($r instanceof Throwable) && isset($r->status_code)) ? (int)$r->status_code : 0;
+                $body = is_object($r) && isset($r->body) ? mb_strtolower(substr((string)$r->body, 0, 60000)) : '';
+                $parked = preg_match('/domain (is )?for sale|dominio (está )?en venta|this domain (has expired|is parked)|parkingcrew|sedoparking|hugedomains|buy this domain/', $body);
+                $gone = preg_match('/(cerrado|cerramos) definitivamente|tancat definitivament|permanently closed|d[ée]finitivement ferm[ée]/', $body);
+                $web = ($code >= 200 && $code < 400 && !$parked) ? ($gone ? 'cerrado' : 'ok') : (in_array($code, [401, 403, 429, 503], true) ? 'protegida' : 'caida');
+            } elseif ($w) $web = 'redes';
+            if ($web === 'cerrado') $estado = 'dudosa';
+            elseif ($web === 'ok' || $web === 'protegida' || $web === 'redes' || $age <= 2) $estado = 'verificada';
+            elseif ($web === 'caida' && $age > 3) $estado = 'dudosa';
+            else $estado = 'sin web';
+            if ($web === 'caida') { delete_post_meta($id, '_website'); $rep['web caida quitada'][] = $title.' · '.$w; }
+            update_post_meta($id, '_cqs_verif_estado', $estado);
+            update_post_meta($id, '_cqs_verif', ['fecha' => gmdate('Y-m-d'), 'web' => $web, 'osm_anos' => round($age, 1)]);
+            if ($estado === 'dudosa') wp_update_post(['ID' => $id, 'post_status' => 'draft']);
+            elseif (get_post_status($id) === 'draft') wp_update_post(['ID' => $id, 'post_status' => 'publish']);
+            $rep[$estado][] = $title.' · web '.$web.' · OSM hace '.($age >= 99 ? '?' : round($age, 1)).' años';
+        }
+        $pos += count($batch); update_option('cqs_verify_pos', $pos, false);
+    }
+    $rep['_progreso'] = $pos.' de '.count($ids);
+    cqs_out('verify-report.json', $rep);
+    if ($pos < count($ids)) throw new Exception('sigue en la próxima tanda ('.$pos.' de '.count($ids).')');
+    delete_option('cqs_verify_pos');
+    return ['revisadas' => count($ids), 'verificadas' => count($rep['verificada']), 'sin_web' => count($rep['sin web']), 'dudosas_a_borrador' => count($rep['dudosa']), 'webs_caidas_quitadas' => count($rep['web caida quitada'])];
 }
 
 /* 9) Calas: fichas propias con texto en 3 idiomas (coordenadas de OpenStreetMap cuando existen) */

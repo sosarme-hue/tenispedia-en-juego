@@ -40,3 +40,13 @@ body{background:var(--eiv-cal)}
 .ssi-h2::after{content:"";display:block;width:48px;height:4px;border-radius:2px;background:var(--eiv-mar);margin-top:10px}.gsi-today .ssi-h2::after{display:none}
 .gsi-gal{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}.gsi-gal figure{margin:0}.gsi-gal img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:14px}.gsi-gal figcaption{font-size:13px;opacity:.75;margin-top:6px}
 @media (max-width:600px){.gsi-gal{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.gsi-gal img{border-radius:10px}.gsi-gal figcaption{font-size:12px;line-height:1.3}}
+
+/* Cadaqués Sí: tarjetas con foto, galerías y créditos */
+.ssi-card.cq-img{padding-top:0;overflow:hidden}
+.ssi-card.cq-img::before{content:"";display:block;width:calc(100% + 48px);margin:0 -24px 14px;aspect-ratio:3/2;height:auto;background:#DCEFFA var(--img) center/cover no-repeat;border-radius:0;-webkit-mask:none;mask:none}
+.cq-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:18px;margin:18px 0 28px}
+.cq-fig{margin:0;background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.cq-fig img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.cq-fig figcaption{padding:10px 12px;font-size:.82rem;line-height:1.35;color:#555}
+.cq-fig figcaption a{color:inherit}
+.cq-credits .cq-fig img{aspect-ratio:3/2}

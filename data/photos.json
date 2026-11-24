@@ -1,0 +1,482 @@
+{
+ "commons": {
+  "cm_church": {
+   "try": [
+    "wiki:ca:Església de Santa Maria de Cadaqués",
+    "search:Església Santa Maria Cadaqués",
+    "search:Santa Maria Cadaqués church"
+   ],
+   "alt": {
+    "es": "Iglesia de Santa Maria de Cadaqués",
+    "ca": "Església de Santa Maria de Cadaqués",
+    "en": "Santa Maria church, Cadaqués",
+    "fr": "Église Santa Maria de Cadaqués"
+   }
+  },
+  "cm_altar": {
+   "try": [
+    "search:retaule Santa Maria Cadaqués",
+    "search:Cadaqués altarpiece church interior"
+   ],
+   "alt": {
+    "es": "Retablo barroco de Santa Maria",
+    "ca": "Retaule barroc de Santa Maria",
+    "en": "Baroque altarpiece of Santa Maria",
+    "fr": "Retable baroque de Santa Maria"
+   }
+  },
+  "cm_dalihouse": {
+   "try": [
+    "wiki:ca:Casa-Museu Salvador Dalí",
+    "wiki:ca:Casa Museu Salvador Dalí de Portlligat",
+    "search:Casa Museu Dalí Portlligat",
+    "search:Dalí house Portlligat"
+   ],
+   "alt": {
+    "es": "Casa-Museo Salvador Dalí en Portlligat",
+    "ca": "Casa-Museu Salvador Dalí a Portlligat",
+    "en": "Salvador Dalí House-Museum in Portlligat",
+    "fr": "Maison-musée Salvador Dalí à Portlligat"
+   }
+  },
+  "cm_museu": {
+   "try": [
+    "search:Museu de Cadaqués",
+    "search:Museu Cadaqués"
+   ],
+   "alt": {
+    "es": "Museu de Cadaqués",
+    "ca": "Museu de Cadaqués",
+    "en": "Museu de Cadaqués",
+    "fr": "Museu de Cadaqués"
+   }
+  },
+  "cm_statue": {
+   "try": [
+    "search:Estàtua Salvador Dalí Cadaqués",
+    "search:Dalí statue Cadaqués"
+   ],
+   "alt": {
+    "es": "Estatua de Dalí en el paseo de Cadaqués",
+    "ca": "Estàtua de Dalí al passeig de Cadaqués",
+    "en": "Statue of Dalí on the Cadaqués seafront",
+    "fr": "Statue de Dalí sur le front de mer de Cadaqués"
+   }
+  },
+  "cm_portlligat": {
+   "try": [
+    "wiki:ca:Portlligat",
+    "search:Portlligat"
+   ],
+   "alt": {
+    "es": "La bahía de Portlligat",
+    "ca": "La badia de Portlligat",
+    "en": "Portlligat bay",
+    "fr": "La baie de Portlligat"
+   }
+  },
+  "cm_capfar": {
+   "try": [
+    "wiki:ca:Far del Cap de Creus",
+    "search:Far del Cap de Creus",
+    "search:Cap de Creus lighthouse"
+   ],
+   "alt": {
+    "es": "El faro del Cap de Creus",
+    "ca": "El far del Cap de Creus",
+    "en": "Cap de Creus lighthouse",
+    "fr": "Le phare du cap de Creus"
+   }
+  },
+  "cm_park": {
+   "try": [
+    "wiki:ca:Parc Natural del Cap de Creus",
+    "search:Parc Natural Cap de Creus"
+   ],
+   "alt": {
+    "es": "Paisaje del Parque Natural del Cap de Creus",
+    "ca": "Paisatge del Parc Natural del Cap de Creus",
+    "en": "Cap de Creus Natural Park landscape",
+    "fr": "Paysage du parc naturel du cap de Creus"
+   }
+  },
+  "cm_tudela": {
+   "try": [
+    "search:Paratge de Tudela",
+    "search:Tudela Cap de Creus rocks"
+   ],
+   "alt": {
+    "es": "Rocas del Paratge de Tudela",
+    "ca": "Roques del Paratge de Tudela",
+    "en": "Rocks at Paratge de Tudela",
+    "fr": "Rochers du Paratge de Tudela"
+   }
+  },
+  "cm_calanans": {
+   "try": [
+    "search:Far de Cala Nans",
+    "search:Cala Nans Cadaqués"
+   ],
+   "alt": {
+    "es": "El faro de Cala Nans",
+    "ca": "El far de Cala Nans",
+    "en": "Cala Nans lighthouse",
+    "fr": "Le phare de Cala Nans"
+   }
+  },
+  "cm_peni": {
+   "try": [
+    "search:Puig de Paní Cadaqués",
+    "search:Pení Cadaqués",
+    "search:Pení Cap de Creus mountain"
+   ],
+   "alt": {
+    "es": "El Pení sobre Cadaqués",
+    "ca": "El Pení sobre Cadaqués",
+    "en": "Pení mountain above Cadaqués",
+    "fr": "Le Pení au-dessus de Cadaqués"
+   }
+  },
+  "cm_santpere": {
+   "try": [
+    "wiki:ca:Sant Pere de Rodes",
+    "search:Sant Pere de Rodes"
+   ],
+   "alt": {
+    "es": "Monasterio de Sant Pere de Rodes",
+    "ca": "Monestir de Sant Pere de Rodes",
+    "en": "Sant Pere de Rodes monastery",
+    "fr": "Monastère de Sant Pere de Rodes"
+   }
+  },
+  "cm_figueres": {
+   "try": [
+    "wiki:ca:Teatre-Museu Dalí",
+    "search:Teatre-Museu Dalí Figueres"
+   ],
+   "alt": {
+    "es": "Teatre-Museu Dalí de Figueres",
+    "ca": "Teatre-Museu Dalí de Figueres",
+    "en": "Dalí Theatre-Museum, Figueres",
+    "fr": "Théâtre-musée Dalí de Figueres"
+   }
+  },
+  "cm_platjagran": {
+   "try": [
+    "search:Platja Gran Cadaqués",
+    "search:Cadaqués beach Platja Gran"
+   ],
+   "alt": {
+    "es": "La Platja Gran de Cadaqués",
+    "ca": "La Platja Gran de Cadaqués",
+    "en": "Platja Gran, Cadaqués",
+    "fr": "La Platja Gran de Cadaqués"
+   }
+  },
+  "cm_poal": {
+   "try": [
+    "search:Es Poal Cadaqués",
+    "search:Platja des Poal Cadaqués"
+   ],
+   "alt": {
+    "es": "Playa des Poal",
+    "ca": "Platja des Poal",
+    "en": "Es Poal beach",
+    "fr": "Plage des Poal"
+   }
+  },
+  "cm_llane": {
+   "try": [
+    "search:Llaner Cadaqués",
+    "search:Es Llané Cadaqués",
+    "search:Platja del Llaner Cadaqués"
+   ],
+   "alt": {
+    "es": "Es Llané, al sur del pueblo",
+    "ca": "Es Llané, al sud del poble",
+    "en": "Es Llané, south of the village",
+    "fr": "Es Llané, au sud du village"
+   }
+  },
+  "cm_conca": {
+   "try": [
+    "search:Sa Conca Cadaqués",
+    "search:Platja de sa Conca"
+   ],
+   "alt": {
+    "es": "Cala de Sa Conca",
+    "ca": "Cala de Sa Conca",
+    "en": "Sa Conca cove",
+    "fr": "Crique de Sa Conca"
+   }
+  },
+  "cm_guillola": {
+   "try": [
+    "search:Cala Guillola",
+    "search:Guillola Cap de Creus"
+   ],
+   "alt": {
+    "es": "Cala Guillola",
+    "ca": "Cala Guillola",
+    "en": "Cala Guillola",
+    "fr": "Cala Guillola"
+   }
+  },
+  "cm_culip": {
+   "try": [
+    "search:Cala Culip",
+    "search:Culip Cap de Creus"
+   ],
+   "alt": {
+    "es": "Cala Culip",
+    "ca": "Cala Culip",
+    "en": "Cala Culip",
+    "fr": "Cala Culip"
+   }
+  },
+  "cm_village": {
+   "try": [
+    "wiki:ca:Cadaqués",
+    "search:Cadaqués vista general"
+   ],
+   "alt": {
+    "es": "Vista de Cadaqués",
+    "ca": "Vista de Cadaqués",
+    "en": "View of Cadaqués",
+    "fr": "Vue de Cadaqués"
+   }
+  }
+ },
+ "hist": {
+  "try": [
+   "search:Cadaqués postal",
+   "search:Cadaqués fotografia antiga",
+   "search:Cadaqués 1900",
+   "search:Cadaqués 1910",
+   "search:Cadaqués 1920",
+   "search:Cadaqués 1930",
+   "search:Cadaqués Arxiu",
+   "search:Cadaqués Josep Salvany",
+   "search:Cadaqués Mas",
+   "search:Cadaqués antic"
+  ],
+  "n": 6,
+  "alt": {
+   "es": "Cadaqués en una fotografía antigua",
+   "ca": "Cadaqués en una fotografia antiga",
+   "en": "Cadaqués in an old photograph",
+   "fr": "Cadaqués sur une photographie ancienne"
+  }
+ },
+ "unsplash": {
+  "un_alley": {
+   "id": "ibTJ2CIY0KA",
+   "raw": "photo-1622765269656-9438a581be96",
+   "by": "CATALINA TAMMONE",
+   "alt": {
+    "es": "Callejón blanco con flores en Cadaqués",
+    "ca": "Carreró blanc amb flors a Cadaqués",
+    "en": "White alley with flowers in Cadaqués",
+    "fr": "Ruelle blanche fleurie à Cadaqués"
+   }
+  },
+  "un_alley2": {
+   "id": "iXQHvQKA3Vk",
+   "raw": "photo-1685896442102-00d57b77b47f",
+   "by": "D T",
+   "alt": {
+    "es": "Calle estrecha con farola y flores",
+    "ca": "Carrer estret amb fanal i flors",
+    "en": "Narrow street with a lamp and flowers",
+    "fr": "Rue étroite avec lanterne et fleurs"
+   }
+  },
+  "un_path": {
+   "id": "LOcQZl9nHtc",
+   "raw": "photo-1622765178170-5d65d2a9cb81",
+   "by": "CATALINA TAMMONE",
+   "alt": {
+    "es": "Calle empedrada entre casas blancas",
+    "ca": "Carrer empedrat entre cases blanques",
+    "en": "Cobbled street between white houses",
+    "fr": "Rue pavée entre maisons blanches"
+   }
+  },
+  "un_door": {
+   "id": "2l8Yt7e6qiw",
+   "raw": "photo-1586326115140-4bf6151df5c6",
+   "by": "Isaac Quesada",
+   "alt": {
+    "es": "Puerta de madera azul",
+    "ca": "Porta de fusta blava",
+    "en": "Blue wooden door",
+    "fr": "Porte en bois bleue"
+   }
+  },
+  "un_boat": {
+   "id": "N5KW_9-IatY",
+   "raw": "photo-1599897656216-821908f2e861",
+   "by": "Marc de jaime",
+   "alt": {
+    "es": "Barca blanca y azul frente al pueblo",
+    "ca": "Barca blanca i blava davant del poble",
+    "en": "White and blue boat off the village",
+    "fr": "Barque blanche et bleue devant le village"
+   }
+  },
+  "un_harbour2": {
+   "id": "a_uFoVxON1k",
+   "raw": "photo-1717756909824-df8ae15b69e0",
+   "by": "Luca Dugaro",
+   "alt": {
+    "es": "Barcas en la bahía de Cadaqués",
+    "ca": "Barques a la badia de Cadaqués",
+    "en": "Boats in the bay of Cadaqués",
+    "fr": "Barques dans la baie de Cadaqués"
+   }
+  },
+  "un_boats3": {
+   "id": "RuSEnfz2dZE",
+   "raw": "photo-1709483069664-f14f3e93ed83",
+   "by": "Mateo Krossler",
+   "alt": {
+    "es": "Barcas de pesca fondeadas",
+    "ca": "Barques de pesca fondejades",
+    "en": "Fishing boats at anchor",
+    "fr": "Barques de pêche au mouillage"
+   }
+  },
+  "un_town": {
+   "id": "y4JlheFtbmo",
+   "raw": "photo-1660765825065-08018a690ddb",
+   "by": "Renato",
+   "alt": {
+    "es": "El pueblo y sus barcas",
+    "ca": "El poble i les seves barques",
+    "en": "The village and its boats",
+    "fr": "Le village et ses barques"
+   }
+  },
+  "un_aerial2": {
+   "id": "G6hcatWpCkc",
+   "raw": "photo-1628527499051-ac91c26f1a1c",
+   "by": "Guzmán Barquín",
+   "alt": {
+    "es": "Cadaqués visto desde el aire",
+    "ca": "Cadaqués vist des de l’aire",
+    "en": "Cadaqués from the air",
+    "fr": "Cadaqués vu du ciel"
+   }
+  },
+  "un_hilltown": {
+   "id": "FL-L0wWEMO4",
+   "raw": "photo-1654375942956-e631cecfe79b",
+   "by": "Maciej Jasiński",
+   "alt": {
+    "es": "El pueblo desde la colina",
+    "ca": "El poble des del turó",
+    "en": "The village from the hill",
+    "fr": "Le village depuis la colline"
+   }
+  },
+  "un_lighthouse2": {
+   "id": "uGvC9LbedLE",
+   "raw": "photo-1660778958218-a630c1c2c4a0",
+   "by": "Lavinia C",
+   "alt": {
+    "es": "Faro sobre un acantilado",
+    "ca": "Far sobre un penya-segat",
+    "en": "Lighthouse on a cliff",
+    "fr": "Phare sur une falaise"
+   }
+  },
+  "un_rocks2": {
+   "id": "Wu8dvs8V3Kc",
+   "raw": "photo-1609000341212-f1fbc76cd4f5",
+   "by": "Simon Delalande",
+   "alt": {
+    "es": "Rocas del Cap de Creus junto al mar",
+    "ca": "Roques del Cap de Creus arran de mar",
+    "en": "Cap de Creus rocks by the sea",
+    "fr": "Rochers du cap de Creus au bord de la mer"
+   }
+  },
+  "un_creusview": {
+   "id": "9yhdzO_L0xM",
+   "raw": "photo-1681403454545-66c23525194e",
+   "by": "Jordi Orts Segalés",
+   "alt": {
+    "es": "Montañas y mar en el Cap de Creus",
+    "ca": "Muntanyes i mar al Cap de Creus",
+    "en": "Hills and sea at Cap de Creus",
+    "fr": "Collines et mer au cap de Creus"
+   }
+  },
+  "un_creustrees": {
+   "id": "bmBY929PPRE",
+   "raw": "photo-1662467016430-fdb691319bd9",
+   "by": "Annika Wischnewsky",
+   "alt": {
+    "es": "Paisaje de matorral junto al agua",
+    "ca": "Paisatge de brolla arran d’aigua",
+    "en": "Scrubland by the water",
+    "fr": "Maquis au bord de l’eau"
+   }
+  },
+  "un_hiker": {
+   "id": "cKrRs14k2DM",
+   "raw": "photo-1662467016843-728e44ccb6d2",
+   "by": "Annika Wischnewsky",
+   "alt": {
+    "es": "Excursionista sobre las rocas frente al mar",
+    "ca": "Excursionista sobre les roques davant del mar",
+    "en": "Hiker on the rocks above the sea",
+    "fr": "Randonneur sur les rochers face à la mer"
+   }
+  },
+  "un_clear": {
+   "id": "E6hgEKwKhbc",
+   "raw": "photo-1701007589808-4ec564647f4e",
+   "by": "Simon Wiedensohler",
+   "alt": {
+    "es": "Orilla rocosa de agua transparente",
+    "ca": "Vora rocosa d’aigua transparent",
+    "en": "Rocky shore with clear water",
+    "fr": "Rivage rocheux à l’eau claire"
+   }
+  },
+  "un_sail": {
+   "id": "4Y5GHr485Iw",
+   "raw": "photo-1662467017728-e65617cac709",
+   "by": "Annika Wischnewsky",
+   "alt": {
+    "es": "Velero frente a una cala de roca",
+    "ca": "Veler davant d’una cala de roca",
+    "en": "Sailing boat off a rocky cove",
+    "fr": "Voilier devant une crique rocheuse"
+   }
+  },
+  "un_boatcove": {
+   "id": "JUfq7KmIMiY",
+   "raw": "photo-1662467017694-8c5fb3099bf2",
+   "by": "Annika Wischnewsky",
+   "alt": {
+    "es": "Barca en una cala",
+    "ca": "Barca en una cala",
+    "en": "Boat in a cove",
+    "fr": "Barque dans une crique"
+   }
+  },
+  "un_sunset": {
+   "id": "cRPX3aULBFU",
+   "raw": "photo-1702299033447-f27aea8433d1",
+   "by": "Laura Agustí",
+   "alt": {
+    "es": "Atardecer sobre las montañas del Empordà",
+    "ca": "Posta de sol sobre les muntanyes de l’Empordà",
+    "en": "Sunset over the Empordà hills",
+    "fr": "Coucher de soleil sur les collines de l’Empordà"
+   }
+  }
+ }
+}
