@@ -65,3 +65,10 @@ body{background:var(--eiv-cal)}
 @media (max-width:700px){.ssi-grid--2{grid-template-columns:1fr}}
 .ssi-formcard fieldset{border:0;padding:0;margin:0 0 1em}
 .ssi-formcard fieldset .wpcf7-list-item{display:block;margin:.3em 0}
+/* Mapas de las rutas */
+.cq-route{margin:12px 0 28px}
+.cq-route__map{height:320px;border-radius:12px;overflow:hidden;background:#e8eef0;border:1px solid rgba(0,0,0,.08)}
+.cq-route__meta{font-size:.9rem;margin:8px 2px 0;color:#4a5a60}
+.cq-route-facts{display:inline-block;background:#eef5f7;color:#0b5d7a;border-radius:999px;padding:4px 12px;font-size:.88rem;font-weight:600;margin:0 0 8px}
+.ssi-prose h3{margin-top:1.6em}
+@media (max-width:640px){.cq-route__map{height:260px}}

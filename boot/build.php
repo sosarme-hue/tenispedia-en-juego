@@ -41,7 +41,7 @@ function cqs_build_run() {
     $log = json_decode((string)@file_get_contents(SSI_DIR.'out/build-log.json'), true); if (!is_array($log) || ($log['ver'] ?? '') !== CQS_BUILD_VER || count($done) < 2) $log = [];
     $log['started'] = gmdate('c'); $log['ver'] = CQS_BUILD_VER;
     if (!get_current_user_id()) wp_set_current_user(1);
-    $steps = ['languages', 'cats', 'owner', 'images', 'photos', 'forms', 'pages', 'directorist', 'events', 'fichas', 'beaches', 'listing_photos', 'verify', 'public', 'menu'];
+    $steps = ['languages', 'cats', 'owner', 'images', 'photos', 'forms', 'pages', 'directorist', 'events', 'fichas', 'beaches', 'listing_photos', 'verify', 'public', 'menu', 'routes_geo'];
     $ok = true; $T0 = microtime(true);
     foreach ($steps as $s) {
         if (!empty($done[$s])) continue;
@@ -691,10 +691,11 @@ function cqs_step_menu() {
         $menus = $byL; $created = true;
     }
     $rep = ['theme' => $theme, 'menus' => $menus];
-    $want = [['routes', 'visit'], ['sports', 'routes'], ['transport', 'live']];
+    $want = [['routes', 'visit'], ['sports', 'routes'], ['transport', 'live'], ['culture', 'agenda']];
     $lbl = ['routes' => ['es' => 'Rutas y excursiones', 'ca' => 'Rutes i excursions', 'en' => 'Walks and day trips', 'fr' => 'Randonnées'],
             'sports' => ['es' => 'Deportes', 'ca' => 'Esports', 'en' => 'Sports', 'fr' => 'Sports'],
-            'transport' => ['es' => 'Transporte', 'ca' => 'Transport', 'en' => 'Getting around', 'fr' => 'Transports']];
+            'transport' => ['es' => 'Transporte', 'ca' => 'Transport', 'en' => 'Getting around', 'fr' => 'Transports'],
+            'culture' => ['es' => 'Cultura', 'ca' => 'Cultura', 'en' => 'Culture', 'fr' => 'Culture']];
     foreach ($menus as $l => $mid) {
         $items = (array)wp_get_nav_menu_items($mid);
         $byObj = []; foreach ($items as $it) if ($it->object === 'page') $byObj[(int)$it->object_id] = $it;
@@ -711,4 +712,30 @@ function cqs_step_menu() {
     }
     cqs_out('menu-report.json', $rep);
     return ['menus' => $menus, 'creados' => !empty($created), 'added' => $rep['added'] ?? [], 'items_es' => $rep['items']['es'] ?? []];
+}
+
+/* Trazado de las rutas a pie: OSRM (perfil a pie, datos de OpenStreetMap) por los puntos de paso de data/routes.json.
+   Si el servicio falla o el trazado se desvía mucho, queda la línea por los puntos de paso. */
+function cqs_step_routes_geo() {
+    $R = cqs_json('routes.json'); $geo = []; $rep = [];
+    foreach ((array)$R as $id => $wp) {
+        $straight = 0; for ($i = 1; $i < count($wp); $i++) $straight += cqs_dist($wp[$i-1][0], $wp[$i-1][1], $wp[$i][0], $wp[$i][1]);
+        $c = implode(';', array_map(function ($p) { return $p[1].','.$p[0]; }, $wp));
+        $r = wp_remote_get('https://routing.openstreetmap.de/routed-foot/route/v1/driving/'.$c.'?overview=full&geometries=geojson',
+            ['timeout' => 25, 'user-agent' => 'CadaquesSi/1.0 (https://cadaques.si)']);
+        $j = is_wp_error($r) ? null : json_decode(wp_remote_retrieve_body($r), true);
+        $rt = $j['routes'][0] ?? null;
+        if ($rt && !empty($rt['geometry']['coordinates']) && $rt['distance'] < max(3.2 * $straight, $straight + 1500)) {
+            $pts = array_map(function ($p) { return [round($p[1], 5), round($p[0], 5)]; }, $rt['geometry']['coordinates']);
+            $geo[$id] = ['c' => $pts, 'd' => (int)$rt['distance'], 'osm' => 1];
+            $rep[$id] = ['osrm', (int)$rt['distance'], (int)$straight, count($pts)];
+        } else {
+            $geo[$id] = ['c' => $wp, 'd' => (int)round($straight * 1.25), 'osm' => 0];
+            $rep[$id] = ['linea', is_wp_error($r) ? $r->get_error_message() : ($rt ? (int)$rt['distance'] : wp_remote_retrieve_response_code($r)), (int)$straight];
+        }
+        usleep(400000);
+    }
+    update_option('cqs_routes_geo', $geo, false);
+    cqs_out('routes-geo.json', $rep);
+    return $rep;
 }
