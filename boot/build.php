@@ -305,6 +305,11 @@ function cqs_step_listing_photos() {
     $byname = ['/casa.?museu.*dal[ií]|dal[ií].*house|portlligat.*museu/i' => 'cm_dalihouse', '/museu de cadaqu/i' => 'cm_museu', '/santa maria/i' => 'cm_church', '/far.*cap de creus|cap de creus.*far/i' => 'cm_capfar', '/cala nans/i' => 'cm_calanans'];
     foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => -1, 'lang' => '', 'suppress_filters' => true]) as $p) {
         $src = (string)get_post_meta($p->ID, '_ssi_source', true); $k = $map[$src] ?? null;
+        if (!$k && preg_match('/\b(not|no)\b/i', $p->post_title)) { // p. ej. "This is not Dalí's House": no es el museo, se le quita la foto si se le puso
+            $dh = (int)($cr['cm_dalihouse']['id'] ?? 0);
+            if ($dh && (int)get_post_meta($p->ID, '_listing_prv_img', true) === $dh) { delete_post_meta($p->ID, '_listing_prv_img'); delete_post_meta($p->ID, '_listing_img'); delete_post_thumbnail($p->ID); }
+            continue;
+        }
         if (!$k) foreach ($byname as $re => $kk) if (preg_match($re, $p->post_title)) { $k = $kk; break; }
         if (!$k || empty($cr[$k]['id'])) continue;
         $id = (int)$cr[$k]['id'];
@@ -491,12 +496,16 @@ function cqs_step_fichas() {
             $d = cqs_dist($x['lat'], $x['lng'], $k['lat'], $k['lng']); if ($d > 200) continue;
             if (($x['cats'][0] ?? '') !== ($k['cats'][0] ?? '') && !($x['_n'] !== '' && $x['_n'] === $k['_n'] && $d < 80)) continue; // solo dentro del mismo tipo de negocio (salvo mismo nombre en el mismo sitio)
             if (preg_match('/^(aparcament|parking|aparcamiento|pagament|farmacia|bus|parada)/', $x['_n']) && $d > 40) continue; // nombres genéricos: solo si están en el mismo punto
-            $sameName = $x['_n'] !== '' && $k['_n'] !== '' && ($x['_n'] === $k['_n'] || (mb_strlen($x['_n']) > 4 && mb_strlen($k['_n']) > 4 && (strpos($x['_n'], $k['_n']) !== false || strpos($k['_n'], $x['_n']) !== false)));
+            $sameSub = ($x['cats'][1] ?? '') === ($k['cats'][1] ?? '') || ($x['cats'][0] === 'comer-y-beber' && $k['cats'][0] === 'comer-y-beber');
+            $sameName = $x['_n'] !== '' && $k['_n'] !== '' && ($x['_n'] === $k['_n'] || ($sameSub && mb_strlen($x['_n']) > 4 && mb_strlen($k['_n']) > 4 && (strpos($x['_n'], $k['_n']) !== false || strpos($k['_n'], $x['_n']) !== false)));
+            // misma web o teléfono pero nombres distintos (p. ej. dos locales del mismo dueño): solo es la misma ficha si comparten alguna palabra o es la razón social (S.L.)
+            $tok = fn($n) => array_filter(explode(' ', $n), fn($w) => mb_strlen($w) >= 4);
+            $nameLink = (bool)array_intersect($tok($x['_n']), $tok($k['_n'])) || preg_match('/\bs\.? ?[lac]\.?\s*$/i', trim($x['title'])) || $x['_n'] === '' || $k['_n'] === '';
             $host = fn($u) => preg_replace('/^www\./', '', (string)parse_url($u, PHP_URL_HOST));
             $sameWeb = $x['website'] && $k['website'] && $host($x['website']) === $host($k['website']) && !preg_match('/facebook|instagram|booking|tripadvisor/', $host($x['website']));
             $digits = fn($p) => substr(preg_replace('/\D/', '', $p), -9);
             $samePhone = $x['phone'] && $k['phone'] && $digits($x['phone']) === $digits($k['phone']);
-            if ($sameName || $sameWeb || $samePhone) { $hit = $i; break; }
+            if ($sameName || (($sameWeb || $samePhone) && $nameLink)) { $hit = $i; break; }
         }
         if ($hit === null) { $keep[] = $x; continue; }
         foreach (['phone', 'website', 'email', 'hours'] as $m) if (empty($keep[$hit][$m]) && !empty($x[$m])) $keep[$hit][$m] = $x[$m];
