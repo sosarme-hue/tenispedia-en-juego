@@ -141,3 +141,43 @@ add_action('wp_footer', function () { ?>
 })();
 </script>
 <?php }, 60);
+
+/* Títulos largos de fichas (más de 60 caracteres con « – Cadaqués Sí»): sin el nombre de la web */
+add_filter('document_title_parts', function ($p) {
+    if (!empty($p['title']) && is_singular('at_biz_dir') && mb_strlen(wp_strip_all_tags($p['title'])) > 44) unset($p['site']);
+    return $p;
+}, 120);
+
+/* Índice A–Z de todas las fichas (página Directorio): cada ficha queda a dos clics de la portada */
+add_shortcode('cqs_indice', function () {
+    $l = cqs_cur_lang(); $k = 'cqs_idx_'.$l.'_'.CQS_BUILD_VER;
+    if (($h = get_transient($k)) !== false) return $h;
+    $ids = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids', 'orderby' => 'title', 'order' => 'ASC', 'lang' => '', 'suppress_filters' => true]);
+    $T = ['es' => 'Todas las fichas de la A a la Z', 'ca' => 'Totes les fitxes de la A a la Z', 'en' => 'All listings from A to Z', 'fr' => 'Toutes les fiches de A à Z'][$l];
+    $by = [];
+    foreach ($ids as $id) {
+        $t = trim(wp_strip_all_tags(get_the_title($id))); if ($t === '') continue;
+        $c = strtoupper(remove_accents(mb_substr($t, 0, 1))); if (!preg_match('/[A-Z]/', $c)) $c = '#';
+        $by[$c][] = '<a href="'.esc_url(get_permalink($id)).'">'.esc_html($t).'</a>';
+    }
+    ksort($by);
+    $h = '<section class="cq-az"><h2 class="wp-block-heading ssi-h2">'.esc_html($T).' <small>('.count($ids).')</small></h2><nav class="cq-az__letters">';
+    foreach (array_keys($by) as $c) $h .= '<a href="#az-'.($c === '#' ? '0' : $c).'">'.$c.'</a>';
+    $h .= '</nav>';
+    foreach ($by as $c => $links) $h .= '<h3 id="az-'.($c === '#' ? '0' : $c).'">'.$c.'</h3><p class="cq-az__list">'.implode(' · ', $links).'</p>';
+    $h .= '</section>';
+    set_transient($k, $h, 12 * HOUR_IN_SECONDS);
+    return $h;
+});
+
+/* Listados pesados (mapa con todas las fichas, Comercios): se guardan 6 h para visitantes sin sesión */
+add_filter('pre_do_shortcode_tag', function ($out, $tag, $attr) {
+    if ($out !== false || $tag !== 'cdf_listado' || is_user_logged_in() || !empty($_GET)) return $out;
+    $k = 'cqs_ls_'.md5(cqs_cur_lang().wp_json_encode($attr).CQS_BUILD_VER.get_option('cqs_build'));
+    $c = get_transient($k); return $c !== false ? $c : $out;
+}, 10, 3);
+add_filter('do_shortcode_tag', function ($out, $tag, $attr) {
+    if ($tag !== 'cdf_listado' || is_user_logged_in() || !empty($_GET) || strlen($out) < 200) return $out;
+    set_transient('cqs_ls_'.md5(cqs_cur_lang().wp_json_encode($attr).CQS_BUILD_VER.get_option('cqs_build')), $out, 6 * HOUR_IN_SECONDS);
+    return $out;
+}, 10, 3);

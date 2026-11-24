@@ -72,3 +72,9 @@ body{background:var(--eiv-cal)}
 .cq-route-facts{display:inline-block;background:#eef5f7;color:#0b5d7a;border-radius:999px;padding:4px 12px;font-size:.88rem;font-weight:600;margin:0 0 8px}
 .ssi-prose h3{margin-top:1.6em}
 @media (max-width:640px){.cq-route__map{height:260px}}
+/* Índice A–Z del directorio */
+.cq-az{margin:8px 0 24px}.cq-az h2 small{font-weight:400;color:#6b7a80;font-size:.7em}
+.cq-az__letters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 18px}
+.cq-az__letters a{display:inline-block;min-width:34px;text-align:center;padding:6px 8px;border-radius:8px;background:#eef5f7;color:#0b5d7a;font-weight:600;text-decoration:none}
+.cq-az h3{margin:18px 0 6px;font-size:1.1rem;color:#0b5d7a}
+.cq-az__list{line-height:1.9;font-size:.95rem}
