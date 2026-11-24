@@ -15,7 +15,7 @@ add_action('wp_head', function () {
 add_filter('the_content', function ($html) {
 	if (!is_page() || !in_the_loop() || !is_main_query()) return $html;
 	$slug = get_post_field('post_name', get_the_ID());
-	$priv = array('es' => array('politica-de-privacidad', 'privacidad'), 'ca' => array('politica-de-privacitat', 'privacitat'), 'en' => array('privacy-policy'));
+	$priv = array('es' => array('politica-de-privacidad', 'privacidad'), 'ca' => array('politica-de-privacitat', 'privacitat'), 'en' => array('privacy-policy', 'privacy-policy-2'));
 	$cook = array('es' => array('politica-de-cookies', 'cookies'), 'ca' => array('politica-de-galetes', 'galetes'), 'en' => array('cookie-policy'));
 	$lang = null; $kind = null;
 	foreach (array('priv' => $priv, 'cook' => $cook) as $k => $set) {
