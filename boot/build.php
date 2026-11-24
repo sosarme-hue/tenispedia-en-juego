@@ -234,16 +234,22 @@ function cqs_step_photos() {
         }
         $rep[$k] = $done ?: 'no encontrada';
     }
-    // Fotos antiguas para Historia
-    $have = count(array_filter(array_keys($cr), fn($k) => strpos($k, 'hist_') === 0)); $n = $have;
+    // Fotos antiguas para Historia: solo si el archivo es de Cadaqués (quita las de otros pueblos de tandas anteriores)
+    $isCq = fn($t) => (bool)preg_match('/cadaqu/i', remove_accents(rawurldecode((string)$t)));
+    $cr = (array)get_option('cqs_credits', []); $imgs = (array)get_option('cqs_imgs', []);
+    foreach ($cr as $k => $c) if (strpos($k, 'hist_') === 0 && !$isCq($c['src'] ?? '')) { if (!empty($c['id'])) wp_delete_attachment($c['id'], true); unset($cr[$k], $imgs[$k]); $rep[$k] = 'quitada (no es de Cadaqués)'; }
+    update_option('cqs_credits', $cr, false); update_option('cqs_imgs', $imgs);
+    foreach ($cr as $c) if (!empty($c['src'])) $used[$c['src']] = 1;
+    $n = count(array_filter(array_keys($cr), fn($k) => strpos($k, 'hist_') === 0));
+    $free = function () use (&$cr) { $i = 1; while (isset($cr['hist_'.$i])) $i++; return 'hist_'.$i; };
     foreach ($P['hist']['try'] as $try) {
         if ($n >= $P['hist']['n']) break;
         $cands = array_slice(cqs_wm_candidates($try), 0, 20); if (!$cands) continue;
         $info = cqs_wm_info($cands);
-        foreach ($cands as $t) { if ($n >= $P['hist']['n']) break; $ii = $info[$t] ?? null; if (!$ii || !cqs_wm_ok($ii, true) || isset($used[$ii['descriptionurl'] ?? ''])) continue;
+        foreach ($cands as $t) { if ($n >= $P['hist']['n']) break; $ii = $info[$t] ?? null; if (!$ii || !$isCq($t) || !cqs_wm_ok($ii, true) || isset($used[$ii['descriptionurl'] ?? ''])) continue;
             $d = strip_tags((string)($ii['extmetadata']['DateTimeOriginal']['value'] ?? '')); preg_match('/\b(1[89]\d\d)\b/', $d, $y);
             $alt = $P['hist']['alt']; if (!empty($y[1])) foreach ($alt as $L => $a) $alt[$L] = $a.' ('.$y[1].')';
-            $r = cqs_wm_sideload('hist_'.($n + 1), $t, $ii, $alt); if ($r) { $used[$ii['descriptionurl'] ?? ''] = 1; $n++; $rep['hist_'.$n] = $r; } }
+            $hk = $free(); $r = cqs_wm_sideload($hk, $t, $ii, $alt); if ($r) { $cr = (array)get_option('cqs_credits', []); $used[$ii['descriptionurl'] ?? ''] = 1; $n++; $rep[$hk] = $r; } }
     }
     cqs_out('photos-report.json', $rep);
     return ['fotos' => count(array_filter($rep, 'is_array')) + count(array_filter($rep, 'is_int')), 'sin_foto' => array_keys(array_filter($rep, fn($x) => $x === 'no encontrada')), 'antiguas' => $n];
