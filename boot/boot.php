@@ -67,6 +67,7 @@ function cqs_copy_core() {
     cqs_out('report-core.txt', $report);
     cqs_out('report-patches.txt', $pr);
     cqs_out('report-symbols.txt', cqs_symbols());
+    cqs_out('report-langs.txt', cqs_lang_report());
     return $n.' archivos';
 }
 
@@ -114,4 +115,16 @@ function cqs_global_replacements() {
         'de Eivissa y Formentera' => 'de Cadaqués', 'd’Eivissa i Formentera' => 'de Cadaqués', 'Ibiza and Formentera shops' => 'Cadaqués shops',
         'Illes Balears' => 'Girona',
     ];
+}
+
+/* Dónde fija el núcleo la lista de idiomas (para añadir el francés) */
+function cqs_lang_report() {
+    $out = '';
+    foreach (new RecursiveIteratorIterator(new RecursiveDirectoryIterator(SSI_DIR, FilesystemIterator::SKIP_DOTS)) as $f) {
+        if (!preg_match('/\.(php|js)$/', $f->getFilename()) || strpos($f->getPathname(), '/boot/') !== false || strpos($f->getPathname(), '/cq/') !== false) continue;
+        $rel = substr($f->getPathname(), strlen(SSI_DIR));
+        foreach (explode("\n", file_get_contents($f->getPathname())) as $i => $line)
+            if (preg_match("/'ca'\s*,\s*'en'|\"ca\"\s*,\s*\"en\"|pll_the_languages|pll_languages_list|\['es'\s*=>\s*0|hreflang/", $line)) $out .= $rel.':'.($i+1).': '.mb_substr(trim($line), 0, 260)."\n";
+    }
+    return $out;
 }

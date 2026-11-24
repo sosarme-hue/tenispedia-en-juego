@@ -37,7 +37,7 @@ function cqs_json($f) { return json_decode((string)file_get_contents(SSI_DIR.'da
 
 function cqs_build_run() {
     @set_time_limit(0); @ini_set('memory_limit', '512M');
-    $done = (array)get_option('cqs_build_done', []); if (($done['_v'] ?? '') !== CQS_BUILD_VER) $done = ['_v' => CQS_BUILD_VER];
+    $done = (array)get_option('cqs_build_done', []); if (($done['_v'] ?? '') !== CQS_BUILD_VER) { $done = ['_v' => CQS_BUILD_VER]; update_option('cqs_build_chain', 0, false); }
     $log = json_decode((string)@file_get_contents(SSI_DIR.'out/build-log.json'), true); if (!is_array($log) || ($log['ver'] ?? '') !== CQS_BUILD_VER || count($done) < 2) $log = [];
     $log['started'] = gmdate('c'); $log['ver'] = CQS_BUILD_VER;
     if (!get_current_user_id()) wp_set_current_user(1);
@@ -65,6 +65,12 @@ function cqs_step_languages() {
     if (!function_exists('eiv_setup_run')) throw new Exception('sin núcleo');
     if (!function_exists('PLL')) throw new Exception('sin Polylang');
     $r = eiv_setup_run(cqs_req(['languages' => true, 'locations' => ['Cadaqués'], 'event_cats' => ['Cadaqués'], 'guest_listings' => true]));
+    $have = function_exists('pll_languages_list') ? (array)pll_languages_list(['fields' => 'slug']) : [];
+    if (!in_array('fr', $have, true) && function_exists('PLL') && isset(PLL()->model)) {
+        $res = PLL()->model->add_language(['name' => 'Français', 'slug' => 'fr', 'locale' => 'fr_FR', 'rtl' => 0, 'term_group' => 3, 'flag' => 'fr']);
+        if (method_exists(PLL()->model, 'clean_languages_cache')) PLL()->model->clean_languages_cache();
+        flush_rewrite_rules(false);
+    }
     if (taxonomy_exists('tribe_events_cat') && !term_exists('fiestas', 'tribe_events_cat')) wp_insert_term('Fiestas', 'tribe_events_cat', ['slug' => 'fiestas']);
     return $r instanceof WP_REST_Response ? $r->get_data() : $r;
 }

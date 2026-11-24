@@ -18,4 +18,9 @@ return [
     ['templates/404.php', 'sigue por uno de los municipios.', 'sigue por una de estas secciones.'],
     ['templates/404.php', 'continua per un dels municipis.', 'continua per una d’aquestes seccions.'],
     ['templates/404.php', 'carry on through one of the towns.', 'carry on through one of these sections.'],
+    // Francés: la interfaz del núcleo usa el inglés como base y los textos propios en francés (cq/site.php)
+    ['inc/i18n.php', "return in_array(\$l, ['es','ca','en'], true) ? \$l : 'es';", "if (\$l === 'fr') return 'en'; return in_array(\$l, ['es','ca','en'], true) ? \$l : 'es';"],
+    ['inc/i18n.php', "\$lang = \$lang ?: ssi_lang();", "\$lang = \$lang ?: (function_exists('cqs_cur_lang') ? cqs_cur_lang() : ssi_lang());"],
+    ['inc/i18n.php', "foreach (['ca','en'] as \$l) { \$t = pll_get_post(\$ids[\$key], \$l);", "foreach (['ca','en','fr'] as \$l) { \$t = pll_get_post(\$ids[\$key], \$l);"],
+    ['inc/i18n.php', "return \$s[\$key][\$l] ?? (\$s[\$key]['es'] ?? \$key);", "if (function_exists('cqs_fr_t') && (\$f = cqs_fr_t(\$key)) !== null) return \$f; return \$s[\$key][\$l] ?? (\$s[\$key]['es'] ?? \$key);"],
 ];
