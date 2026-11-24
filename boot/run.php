@@ -7,7 +7,7 @@ $_SERVER['HTTP_HOST'] = 'cadaques.si'; $_SERVER['HTTPS'] = 'on'; $_SERVER['REQUE
 define('WP_USE_THEMES', false);
 require dirname(__DIR__, 4).'/wp-load.php';
 $plugin = 'cadaques-si/cadaques-si.php';
-if (!is_plugin_active($plugin) && !function_exists('cqs_build_tick')) {
+if (!function_exists('cqs_build_tick')) {
     require_once ABSPATH.'wp-admin/includes/plugin.php';
     wp_set_current_user(1);
     $r = activate_plugin($plugin);
