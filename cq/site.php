@@ -439,16 +439,50 @@ add_action('wp_loaded', function () {
 
 /* Copia del HTML de algunas páginas (out/snap-*.html) para revisarlas desde fuera; una vez por versión */
 add_action('wp_loaded', function () {
-    $v = 's1'; if (get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
+    $v = 's2'; if (get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
     set_transient('cqs_snap_lock', 1, 600);
     $P = ['home' => home_url('/'), 'visit' => function_exists('cqs_voice_url') ? '' : ''];
     $x = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'visit:es']]]);
     if ($x) $P['visit'] = get_permalink($x[0]);
     $y = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'dali:es']]]);
     if ($y) $P['dali'] = get_permalink($y[0]);
+    foreach (['es', 'ca', 'en', 'fr'] as $l) { $z = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'voice:'.$l]]]); if ($z) $P['voice-'.$l] = get_permalink($z[0]); }
     foreach (array_filter($P) as $k => $u) {
         $r = wp_remote_get(add_query_arg('nocache', time(), $u), ['timeout' => 30, 'sslverify' => false]);
         if (!is_wp_error($r)) @file_put_contents(SSI_DIR.'out/snap-'.$k.'.html', wp_remote_retrieve_body($r));
     }
     update_option('cqs_snap', $v, false);
 }, 65);
+
+/* Mensajes de los formularios (enviado, error, campo obligatorio…) en el idioma de cada formulario (24/11/2026).
+   Contact Form 7 los ponía en el idioma de la instalación. Se aplica una vez por versión de textos. */
+function cqs_cf7_messages() {
+    return [
+     'es' => ['mail_sent_ok' => 'Gracias. Hemos recibido tu mensaje y lo revisaremos pronto.', 'mail_sent_ng' => 'No se ha podido enviar. Inténtalo de nuevo más tarde o escríbenos a info@cadaques.si.',
+              'validation_error' => 'Revisa los campos marcados.', 'spam' => 'No se ha podido enviar el mensaje.', 'accept_terms' => 'Para enviar, acepta la política de privacidad.',
+              'invalid_required' => 'Rellena este campo.', 'invalid_too_long' => 'El texto es demasiado largo.', 'invalid_too_short' => 'El texto es demasiado corto.',
+              'invalid_email' => 'Escribe un correo válido.', 'invalid_url' => 'Escribe un enlace válido (https://…).', 'invalid_tel' => 'Escribe un teléfono válido.', 'invalid_date' => 'Escribe una fecha válida.'],
+     'ca' => ['mail_sent_ok' => 'Gràcies. Hem rebut el teu missatge i el revisarem aviat.', 'mail_sent_ng' => 'No s’ha pogut enviar. Torna-ho a provar més tard o escriu-nos a info@cadaques.si.',
+              'validation_error' => 'Revisa els camps marcats.', 'spam' => 'No s’ha pogut enviar el missatge.', 'accept_terms' => 'Per enviar, accepta la política de privacitat.',
+              'invalid_required' => 'Omple aquest camp.', 'invalid_too_long' => 'El text és massa llarg.', 'invalid_too_short' => 'El text és massa curt.',
+              'invalid_email' => 'Escriu un correu vàlid.', 'invalid_url' => 'Escriu un enllaç vàlid (https://…).', 'invalid_tel' => 'Escriu un telèfon vàlid.', 'invalid_date' => 'Escriu una data vàlida.'],
+     'en' => ['mail_sent_ok' => 'Thank you. We have received your message and will review it soon.', 'mail_sent_ng' => 'Your message could not be sent. Please try again later or email info@cadaques.si.',
+              'validation_error' => 'Please check the highlighted fields.', 'spam' => 'Your message could not be sent.', 'accept_terms' => 'To send, please accept the privacy policy.',
+              'invalid_required' => 'Please fill in this field.', 'invalid_too_long' => 'This text is too long.', 'invalid_too_short' => 'This text is too short.',
+              'invalid_email' => 'Please enter a valid email address.', 'invalid_url' => 'Please enter a valid link (https://…).', 'invalid_tel' => 'Please enter a valid phone number.', 'invalid_date' => 'Please enter a valid date.'],
+     'fr' => ['mail_sent_ok' => 'Merci. Nous avons bien reçu votre message et l’examinerons rapidement.', 'mail_sent_ng' => 'L’envoi a échoué. Réessayez plus tard ou écrivez-nous à info@cadaques.si.',
+              'validation_error' => 'Vérifiez les champs signalés.', 'spam' => 'Le message n’a pas pu être envoyé.', 'accept_terms' => 'Pour envoyer, acceptez la politique de confidentialité.',
+              'invalid_required' => 'Veuillez remplir ce champ.', 'invalid_too_long' => 'Le texte est trop long.', 'invalid_too_short' => 'Le texte est trop court.',
+              'invalid_email' => 'Saisissez une adresse e-mail valide.', 'invalid_url' => 'Saisissez un lien valide (https://…).', 'invalid_tel' => 'Saisissez un numéro de téléphone valide.', 'invalid_date' => 'Saisissez une date valide.'],
+    ];
+}
+add_action('wp_loaded', function () {
+    $v = 'm1'; if (get_option('cqs_cf7_msgs') === $v || !class_exists('WPCF7_ContactForm')) return;
+    $M = cqs_cf7_messages(); $rep = [];
+    foreach ((array)get_option('cqs_cf7', []) as $kind => $byL) foreach ((array)$byL as $l => $id) {
+        $cf = WPCF7_ContactForm::get_instance((int)$id); if (!$cf || empty($M[$l])) continue;
+        $cf->set_properties(['messages' => array_merge((array)$cf->prop('messages'), $M[$l])]); $cf->save(); $rep[$kind][$l] = (int)$id;
+    }
+    update_option('cqs_cf7_msgs', $v, false);
+    if (function_exists('cqs_out')) cqs_out('cf7-messages.json', $rep);
+}, 45);
