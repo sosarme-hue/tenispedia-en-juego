@@ -558,3 +558,10 @@ add_action('wp_loaded', function () {
     if ($n * $per >= count($c)) update_option('cqs_sheets_done', '1', false);
     delete_transient('cqs_sheets_lock');
 }, 75);
+
+/* Site Reviews en francés (el núcleo solo traduce es/ca/en y en las páginas FR salía en inglés) */
+add_filter('gettext', function ($tr, $text, $domain) {
+    if ($domain !== 'site-reviews' || cqs_cur_lang() !== 'fr') return $tr;
+    static $fr = ['There are no reviews yet. Be the first one to write one.' => 'Pas encore d’avis. Les premiers arriveront avec les fiches de l’annuaire.', 'Select a Rating' => 'Choisissez une note'];
+    return $fr[$text] ?? $tr;
+}, 20, 3);
