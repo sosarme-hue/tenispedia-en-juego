@@ -479,7 +479,9 @@ function cqs_step_fichas() {
     foreach ($f as $x) {
         $hit = null;
         foreach ($keep as $i => $k) {
-            if ($x['lat'] === '' || $k['lat'] === '' || cqs_dist($x['lat'], $x['lng'], $k['lat'], $k['lng']) > 200) continue;
+            if ($x['lat'] === '' || $k['lat'] === '' || ($x['cats'][0] ?? '') !== ($k['cats'][0] ?? '')) continue; // solo dentro del mismo tipo de negocio
+            $d = cqs_dist($x['lat'], $x['lng'], $k['lat'], $k['lng']); if ($d > 200) continue;
+            if (preg_match('/^(aparcament|parking|aparcamiento|pagament|farmacia|bus|parada)/', $x['_n']) && $d > 40) continue; // nombres genéricos: solo si están en el mismo punto
             $sameName = $x['_n'] !== '' && $k['_n'] !== '' && ($x['_n'] === $k['_n'] || (mb_strlen($x['_n']) > 4 && mb_strlen($k['_n']) > 4 && (strpos($x['_n'], $k['_n']) !== false || strpos($k['_n'], $x['_n']) !== false)));
             $host = fn($u) => preg_replace('/^www\./', '', (string)parse_url($u, PHP_URL_HOST));
             $sameWeb = $x['website'] && $k['website'] && $host($x['website']) === $host($k['website']) && !preg_match('/facebook|instagram|booking|tripadvisor/', $host($x['website']));
