@@ -78,3 +78,16 @@ body{background:var(--eiv-cal)}
 .cq-az__letters a{display:inline-block;min-width:34px;text-align:center;padding:6px 8px;border-radius:8px;background:#eef5f7;color:#0b5d7a;font-weight:600;text-decoration:none}
 .cq-az h3{margin:18px 0 6px;font-size:1.1rem;color:#0b5d7a}
 .cq-az__list{line-height:1.9;font-size:.95rem}
+
+/* Menú de secciones siempre entero en escritorio (v22): con 11 secciones ya no cabía en una línea
+   junto al logotipo y se cortaba. Ahora: fila 1 logotipo + idiomas + botón; fila 2 todas las secciones. */
+@media (min-width:1100px){
+  .ssi-header__in{flex-wrap:wrap;row-gap:0}
+  .ssi-header__panel{display:contents}
+  .ssi-brand{order:1}
+  .ssi-header__tools{order:2;margin-left:auto}
+  .ssi-nav{order:3;flex:1 1 100%;border-top:1px solid var(--ssi-line);margin-top:12px}
+  .ssi-nav__list{flex-wrap:wrap!important;justify-content:center;gap:2px 22px!important}
+  .ssi-nav__list a{font-size:15px!important;padding:12px 0 10px}
+  .ssi-brand__tag{display:block}
+}
