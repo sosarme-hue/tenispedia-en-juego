@@ -109,3 +109,15 @@ add_action('wp_footer', function () {
 })();
 </script>
 <?php }, 50);
+
+/* Comprobación de los mapas de rutas (out/routes-check.json): una vez por montaje */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_build') !== CQS_BUILD_VER || get_option('cqs_routes_check') === CQS_BUILD_VER) return;
+    update_option('cqs_routes_check', CQS_BUILD_VER, false);
+    $out = []; $g = (array)get_option('cqs_routes_geo', []);
+    foreach (['es', 'fr'] as $l) $out['sc_'.$l] = substr(strip_tags(do_shortcode('[cqs_ruta id="calanans" lang="'.$l.'"]')), 0, 200);
+    $p = get_posts(['post_type' => 'page', 'numberposts' => 1, 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'routes:es']]]);
+    $out['routes_page'] = $p ? [get_permalink($p[0]), substr_count($p[0]->post_content, '[cqs_ruta')] : null;
+    $out['geo'] = array_map(fn($r) => [count($r['c']), $r['d'], $r['osm']], $g);
+    cqs_out('routes-check.json', $out);
+}, 30);
