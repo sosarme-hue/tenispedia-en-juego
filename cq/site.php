@@ -217,7 +217,7 @@ add_action('wp_loaded', function () {
 }, 40);
 
 /* Fotos ampliables (v22): al pulsar una foto se abre en grande, con flechas para pasar a las demás de la página.
-   Las fotos que ya son un enlace (tarjetas que llevan a otra sección) no se tocan. */
+   También las fotos de las tarjetas: la foto se amplía y el título de la tarjeta sigue llevando a su sección (petición de Alex). */
 add_action('wp_footer', function () {
     if (is_admin()) return;
     $L = cqs_cur_lang();
@@ -252,7 +252,7 @@ body.cq-lb-on{overflow:hidden}
     return (c&&c.textContent.trim())||img.getAttribute('alt')||'';
   }
   function ok(img){
-    if(img.closest('a,button,.cq-lb,header,footer,.leaflet-container,.ssi-map,.directorist-listing-single,.ssi-card')) return false;
+    if(img.closest('button,.cq-lb,header,footer,.leaflet-container,.ssi-map,.ssi-logo')) return false;
     var src=img.currentSrc||img.src||''; if(!src||/^data:|\.svg(\?|$)/i.test(src)) return false;
     var r=img.getBoundingClientRect(); return (img.naturalWidth||r.width)>=160 && r.width>=100;
   }
@@ -275,7 +275,7 @@ body.cq-lb-on{overflow:hidden}
   function mark(img){if(img.classList.contains('cq-zoomable')||!ok(img))return;img.classList.add('cq-zoomable');img.setAttribute('tabindex','0');img.setAttribute('role','button');
     img.setAttribute('aria-label',T[0]+(img.alt?': '+img.alt:''));}
   function scan(){[].forEach.call(document.querySelectorAll('main img, #main img, .entry-content img, .site-main img, #primary img'),function(img){if(img.complete)mark(img);else img.addEventListener('load',function(){mark(img)},{once:true});});}
-  document.addEventListener('click',function(e){var img=e.target.closest&&e.target.closest('img.cq-zoomable');if(img){e.preventDefault();open(img);}});
+  document.addEventListener('click',function(e){var img=e.target.closest&&e.target.closest('img.cq-zoomable');if(img){e.preventDefault();e.stopPropagation();open(img);}},true);
   document.addEventListener('keydown',function(e){var img=e.target;if((e.key==='Enter'||e.key===' ')&&img.classList&&img.classList.contains('cq-zoomable')){e.preventDefault();open(img);}});
   if(document.readyState!=='loading')scan();else document.addEventListener('DOMContentLoaded',scan);
   window.addEventListener('load',scan);setTimeout(scan,2500);
