@@ -1292,6 +1292,539 @@
     "en": "Villa Gloria",
     "fr": "La Villa Gloria"
    }
+  },
+  "g_120": {
+   "try": [
+    "file:096-Parc Cap de Creus.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Roca erosionada por el viento en el Cap de Creus",
+    "ca": "Roca erosionada pel vent al Cap de Creus",
+    "en": "Wind-eroded rock at Cap de Creus",
+    "fr": "Rocher érodé par le vent au cap de Creus"
+   }
+  },
+  "g_130": {
+   "try": [
+    "file:Cadaqués,Santa Maria03.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria-int",
+   "alt": {
+    "es": "Retablo barroco de Santa Maria y el órgano",
+    "ca": "Retaule barroc de Santa Maria i l’orgue",
+    "en": "Santa Maria’s Baroque altarpiece and organ",
+    "fr": "Le retable baroque de Santa Maria et l’orgue"
+   }
+  },
+  "g_131": {
+   "try": [
+    "file:Cadaqués. Parish Church. Altarpiece dedicated to the Virgin Mary. Carved 1723-1729. Gilded 1770-1788. Joan Torras and Pau Costa, sculptors (36603953644).jpg"
+   ],
+   "once": true,
+   "grp": "santamaria-int",
+   "alt": {
+    "es": "Retablo de la Virgen en la iglesia de Santa Maria",
+    "ca": "Retaule de la Mare de Déu a l’església de Santa Maria",
+    "en": "Altarpiece of the Virgin in Santa Maria church",
+    "fr": "Retable de la Vierge dans l’église Santa Maria"
+   }
+  },
+  "g_132": {
+   "try": [
+    "file:Cadaqués (27150519172).jpg"
+   ],
+   "once": true,
+   "grp": "riba",
+   "alt": {
+    "es": "Terrazas del paseo frente a la bahía",
+    "ca": "Terrasses del passeig davant de la badia",
+    "en": "Seafront terraces facing the bay",
+    "fr": "Terrasses du front de mer face à la baie"
+   }
+  },
+  "g_133": {
+   "try": [
+    "file:Cadaqués (Gerona) - panoramio (4).jpg"
+   ],
+   "once": true,
+   "grp": "calas",
+   "alt": {
+    "es": "Una cala de guijarros cerca del pueblo",
+    "ca": "Una cala de còdols a prop del poble",
+    "en": "A pebble cove near the village",
+    "fr": "Une crique de galets près du village"
+   }
+  },
+  "g_134": {
+   "try": [
+    "file:Cadaqués - panoramio (1).jpg"
+   ],
+   "once": true,
+   "grp": "riba",
+   "alt": {
+    "es": "El paseo junto al mar con Santa Maria al fondo",
+    "ca": "El passeig arran de mar amb Santa Maria al fons",
+    "en": "The seafront walk with Santa Maria behind",
+    "fr": "La promenade au bord de l’eau avec Santa Maria au fond"
+   }
+  },
+  "g_136": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-08-56.jpg"
+   ],
+   "once": true,
+   "grp": "casco",
+   "alt": {
+    "es": "Buganvilla en el Carrer de sa Bretxa",
+    "ca": "Buguenvíl·lea al Carrer de sa Bretxa",
+    "en": "Bougainvillea on Carrer de sa Bretxa",
+    "fr": "Bougainvillier dans le Carrer de sa Bretxa"
+   }
+  },
+  "g_137": {
+   "try": [
+    "file:Cadaqués Santa Maria altarpiece.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria-int",
+   "alt": {
+    "es": "El gran retablo dorado del altar mayor de Santa Maria",
+    "ca": "El gran retaule daurat de l’altar major de Santa Maria",
+    "en": "The great gilded high altarpiece of Santa Maria",
+    "fr": "Le grand retable doré du maître-autel de Santa Maria"
+   }
+  },
+  "g_139": {
+   "try": [
+    "file:Cap de Creus landscape.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Paisaje de matorral y mar en el Cap de Creus",
+    "ca": "Paisatge de matoll i mar al Cap de Creus",
+    "en": "Scrub and sea at Cap de Creus",
+    "fr": "Garrigue et mer au cap de Creus"
+   }
+  },
+  "g_140": {
+   "try": [
+    "file:Catalonia Cadaques HotelMiramar.JPG"
+   ],
+   "once": true,
+   "grp": "modernista",
+   "alt": {
+    "es": "El antiguo Hotel Miramar, en el paseo",
+    "ca": "L’antic Hotel Miramar, al passeig",
+    "en": "The old Hotel Miramar on the seafront",
+    "fr": "L’ancien Hôtel Miramar, sur le front de mer"
+   }
+  },
+  "g_142": {
+   "try": [
+    "file:Cormoran 01.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Cormorán sobre las rocas del Cap de Creus",
+    "ca": "Corb marí sobre les roques del Cap de Creus",
+    "en": "A cormorant on the rocks of Cap de Creus",
+    "fr": "Cormoran sur les rochers du cap de Creus"
+   }
+  },
+  "g_143": {
+   "try": [
+    "file:El Corral d'en Morell 2019 03.jpg"
+   ],
+   "once": true,
+   "grp": "piedraseca",
+   "alt": {
+    "es": "Muros de piedra seca del Corral d’en Morell",
+    "ca": "Murs de pedra seca del Corral d’en Morell",
+    "en": "Dry-stone walls of the Corral d’en Morell",
+    "fr": "Murs en pierre sèche du Corral d’en Morell"
+   }
+  },
+  "g_144": {
+   "try": [
+    "file:Esglesi Cadaqués i Port Dogué.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria",
+   "alt": {
+    "es": "Santa Maria y la playa de Port Doguer",
+    "ca": "Santa Maria i la platja de Port Doguer",
+    "en": "Santa Maria and Port Doguer beach",
+    "fr": "Santa Maria et la plage de Port Doguer"
+   }
+  },
+  "g_145": {
+   "try": [
+    "file:Far cap de Creus.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus-far",
+   "alt": {
+    "es": "El faro del Cap de Creus sobre los acantilados",
+    "ca": "El far del Cap de Creus sobre els penya-segats",
+    "en": "Cap de Creus lighthouse on the cliffs",
+    "fr": "Le phare du cap de Creus sur les falaises"
+   }
+  },
+  "g_147": {
+   "try": [
+    "file:La Roca Cavallera, El Gran Maturbador.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "La Roca Cavallera, la roca que inspiró a Dalí",
+    "ca": "La Roca Cavallera, la roca que va inspirar Dalí",
+    "en": "La Roca Cavallera, the rock that inspired Dalí",
+    "fr": "La Roca Cavallera, le rocher qui inspira Dalí"
+   }
+  },
+  "g_149": {
+   "try": [
+    "file:Mas de la Sala.jpg"
+   ],
+   "once": true,
+   "grp": "piedraseca",
+   "alt": {
+    "es": "Mas de la Sala, entre terrazas y olivos",
+    "ca": "Mas de la Sala, entre feixes i oliveres",
+    "en": "Mas de la Sala among terraces and olive trees",
+    "fr": "Le Mas de la Sala, entre terrasses et oliviers"
+   }
+  },
+  "g_151": {
+   "try": [
+    "file:Paratge de Tudela Cala Culip.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Cala Culip, en el paraje de Tudela",
+    "ca": "Cala Culip, al paratge de Tudela",
+    "en": "Cala Culip, in the Tudela area",
+    "fr": "Cala Culip, dans le site de Tudela"
+   }
+  },
+  "g_152": {
+   "try": [
+    "file:Platja de Cadaqués - panoramio.jpg"
+   ],
+   "once": true,
+   "grp": "bahia",
+   "alt": {
+    "es": "Barcas varadas en la playa de Cadaqués",
+    "ca": "Barques varades a la platja de Cadaqués",
+    "en": "Boats pulled up on the beach in Cadaqués",
+    "fr": "Barques tirées sur la plage de Cadaqués"
+   }
+  },
+  "g_153": {
+   "try": [
+    "file:Port Lligat, Cadaqués (Gerona) - panoramio.jpg"
+   ],
+   "once": true,
+   "grp": "dalihouse",
+   "alt": {
+    "es": "La bahía de Portlligat vista desde una ventana ovalada de la casa de Dalí",
+    "ca": "La badia de Portlligat vista des d’una finestra ovalada de la casa de Dalí",
+    "en": "Portlligat bay through an oval window in Dalí’s house",
+    "fr": "La baie de Portlligat vue d’une fenêtre ovale de la maison de Dalí"
+   }
+  },
+  "g_155": {
+   "try": [
+    "file:Una mirada al Cap de Creus 5.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Islotes y costa del Cap de Creus",
+    "ca": "Illots i costa del Cap de Creus",
+    "en": "Islets and coast of Cap de Creus",
+    "fr": "Îlots et côte du cap de Creus"
+   }
+  },
+  "g_159": {
+   "try": [
+    "file:Wohnhaus Dalís in Port Lligat 2jpg.jpg"
+   ],
+   "once": true,
+   "grp": "portlligat",
+   "alt": {
+    "es": "Portlligat y la casa de Dalí entre olivos",
+    "ca": "Portlligat i la casa de Dalí entre oliveres",
+    "en": "Portlligat and Dalí’s house among olive trees",
+    "fr": "Portlligat et la maison de Dalí parmi les oliviers"
+   }
+  },
+  "g_160": {
+   "try": [
+    "file:017 Cadaqués, amb l'església de Santa Maria.JPG"
+   ],
+   "once": true,
+   "grp": "vistas",
+   "alt": {
+    "es": "Cadaqués y Santa Maria desde el camino de la costa",
+    "ca": "Cadaqués i Santa Maria des del camí de la costa",
+    "en": "Cadaqués and Santa Maria from the coastal path",
+    "fr": "Cadaqués et Santa Maria depuis le sentier côtier"
+   }
+  },
+  "g_161": {
+   "try": [
+    "file:080-Parc Cap de Creus-El camell de Tudela.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "El Camell, roca con forma de camello en Tudela",
+    "ca": "El Camell, roca en forma de camell a Tudela",
+    "en": "El Camell, the camel-shaped rock at Tudela",
+    "fr": "El Camell, le rocher en forme de chameau à Tudela"
+   }
+  },
+  "g_169": {
+   "try": [
+    "file:CADAQUÉS.JPG"
+   ],
+   "once": true,
+   "grp": "vistas",
+   "alt": {
+    "es": "Tejados de Cadaqués y la bahía hacia el sur",
+    "ca": "Teulades de Cadaqués i la badia cap al sud",
+    "en": "Cadaqués rooftops and the bay looking south",
+    "fr": "Toits de Cadaqués et la baie vers le sud"
+   }
+  },
+  "g_170": {
+   "try": [
+    "file:Cadaques - 12204793636.jpg"
+   ],
+   "once": true,
+   "grp": "bahia",
+   "alt": {
+    "es": "Barcas varadas frente a las casas blancas",
+    "ca": "Barques varades davant de les cases blanques",
+    "en": "Boats pulled up in front of the white houses",
+    "fr": "Barques tirées devant les maisons blanches"
+   }
+  },
+  "g_171": {
+   "try": [
+    "file:Cadaques casa dali 03.jpg"
+   ],
+   "once": true,
+   "grp": "dalihouse",
+   "alt": {
+    "es": "Portlligat visto desde una ventana de la casa de Dalí",
+    "ca": "Portlligat vist des d’una finestra de la casa de Dalí",
+    "en": "Portlligat seen from a window of Dalí’s house",
+    "fr": "Portlligat vu d’une fenêtre de la maison de Dalí"
+   }
+  },
+  "g_172": {
+   "try": [
+    "file:Cadaqués - CS 14072008 185425 29173.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria",
+   "alt": {
+    "es": "Santa Maria sobre la Platja Gran",
+    "ca": "Santa Maria sobre la Platja Gran",
+    "en": "Santa Maria above Platja Gran",
+    "fr": "Santa Maria au-dessus de la Platja Gran"
+   }
+  },
+  "g_173": {
+   "try": [
+    "file:Cadaqués - CS 14072008 191004 29196.jpg"
+   ],
+   "once": true,
+   "grp": "modernista",
+   "alt": {
+    "es": "Balcón de hierro y cerámica en una fachada modernista",
+    "ca": "Balcó de ferro i ceràmica en una façana modernista",
+    "en": "Iron and tile balcony on a Modernista façade",
+    "fr": "Balcon en fer et céramique sur une façade moderniste"
+   }
+  },
+  "g_174": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-40-02.jpg"
+   ],
+   "once": true,
+   "grp": "casco",
+   "alt": {
+    "es": "Una tienda en el Carrer d’en Silvi Rahola",
+    "ca": "Una botiga al Carrer d’en Silvi Rahola",
+    "en": "A shop on Carrer d’en Silvi Rahola",
+    "fr": "Une boutique du Carrer d’en Silvi Rahola"
+   }
+  },
+  "g_176": {
+   "try": [
+    "file:Can Zendrera (Cadaqués) 03.jpg"
+   ],
+   "once": true,
+   "grp": "patrimonio",
+   "alt": {
+    "es": "Can Zendrera, casa señorial del pueblo",
+    "ca": "Can Zendrera, casa senyorial del poble",
+    "en": "Can Zendrera, one of the village’s grand houses",
+    "fr": "Can Zendrera, une maison de maître du village"
+   }
+  },
+  "g_177": {
+   "try": [
+    "file:Casa del Dr. Escofet (Cadaqués) 02.jpg"
+   ],
+   "once": true,
+   "grp": "patrimonio",
+   "alt": {
+    "es": "Portal de la Casa del Dr. Escofet",
+    "ca": "Portal de la Casa del Dr. Escofet",
+    "en": "Doorway of the Casa del Dr. Escofet",
+    "fr": "Le portail de la Casa del Dr. Escofet"
+   }
+  },
+  "g_178": {
+   "try": [
+    "file:Casino l'Amistat P1130411.JPG"
+   ],
+   "once": true,
+   "grp": "centro",
+   "alt": {
+    "es": "El Casino L’Amistat y la plaza junto al mar",
+    "ca": "El Casino L’Amistat i la plaça arran de mar",
+    "en": "The Casino L’Amistat and the square by the sea",
+    "fr": "Le Casino L’Amistat et la place au bord de la mer"
+   }
+  },
+  "g_183": {
+   "try": [
+    "file:Eduard Marquina 25 P1130264.JPG"
+   ],
+   "once": true,
+   "grp": "casco",
+   "alt": {
+    "es": "Carrer Eduard Marquina, con Santa Maria al fondo",
+    "ca": "Carrer Eduard Marquina, amb Santa Maria al fons",
+    "en": "Carrer Eduard Marquina with Santa Maria behind",
+    "fr": "Le Carrer Eduard Marquina avec Santa Maria au fond"
+   }
+  },
+  "g_184": {
+   "try": [
+    "file:El golfet from cap gros.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "El Golfet desde el Cap Gros",
+    "ca": "El Golfet des del Cap Gros",
+    "en": "El Golfet seen from Cap Gros",
+    "fr": "El Golfet vu du Cap Gros"
+   }
+  },
+  "g_187": {
+   "try": [
+    "file:Maison-musée Dali à Port Lligat (4).jpg"
+   ],
+   "once": true,
+   "grp": "dalihouse",
+   "alt": {
+    "es": "Las cabezas de la casa de Dalí sobre el tejado",
+    "ca": "Els caps de la casa de Dalí sobre la teulada",
+    "en": "The heads on the roof of Dalí’s house",
+    "fr": "Les têtes sur le toit de la maison de Dalí"
+   }
+  },
+  "g_188": {
+   "try": [
+    "file:Oratori de Sant Pius V 02.jpg"
+   ],
+   "once": true,
+   "grp": "patrimonio",
+   "alt": {
+    "es": "El pequeño oratorio de Sant Pius V",
+    "ca": "El petit oratori de Sant Pius V",
+    "en": "The small oratory of Sant Pius V",
+    "fr": "Le petit oratoire de Sant Pius V"
+   }
+  },
+  "g_190": {
+   "try": [
+    "file:Palau del Governador (Cadaqués) 01.jpg"
+   ],
+   "once": true,
+   "grp": "patrimonio",
+   "alt": {
+    "es": "El Palau del Governador, en el casco antiguo",
+    "ca": "El Palau del Governador, al nucli antic",
+    "en": "The Palau del Governador in the old town",
+    "fr": "Le Palau del Governador, dans la vieille ville"
+   }
+  },
+  "g_191": {
+   "try": [
+    "file:Sa Barraca d'en Duran.jpg"
+   ],
+   "once": true,
+   "grp": "piedraseca",
+   "alt": {
+    "es": "Sa Barraca d’en Duran, cabaña de piedra junto al mar",
+    "ca": "Sa Barraca d’en Duran, barraca de pedra arran de mar",
+    "en": "Sa Barraca d’en Duran, a stone hut by the sea",
+    "fr": "Sa Barraca d’en Duran, cabane de pierre au bord de la mer"
+   }
+  },
+  "g_195": {
+   "try": [
+    "file:005 Casa Serinyana (Casa Blaua), Cadaqués.JPG"
+   ],
+   "once": true,
+   "grp": "modernista",
+   "alt": {
+    "es": "Casa Serinyana, la «Casa Blaua», en el paseo",
+    "ca": "Casa Serinyana, la «Casa Blaua», al passeig",
+    "en": "Casa Serinyana, the «Casa Blaua», on the seafront",
+    "fr": "La Casa Serinyana, la « Casa Blaua », sur le front de mer"
+   }
+  },
+  "g_196": {
+   "try": [
+    "file:009 Cadaqués, amb l'església de Santa Maria.JPG"
+   ],
+   "once": true,
+   "grp": "vistas",
+   "alt": {
+    "es": "El pueblo blanco bajo la montaña del Pení",
+    "ca": "El poble blanc sota la muntanya del Pení",
+    "en": "The white village below Pení mountain",
+    "fr": "Le village blanc au pied du mont Pení"
+   }
+  },
+  "g_197": {
+   "try": [
+    "file:Antiga farmacia Cadaqués 2017.jpg"
+   ],
+   "once": true,
+   "grp": "patrimonio",
+   "alt": {
+    "es": "La antigua farmacia y la plaza",
+    "ca": "L’antiga farmàcia i la plaça",
+    "en": "The old pharmacy and the square",
+    "fr": "L’ancienne pharmacie et la place"
+   }
   }
  },
  "hist": {
