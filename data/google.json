@@ -5134,23 +5134,6 @@
 "claimed": true
 },
 {
-"cid": "3260278683549064510",
-"title": "Centre médical de première nécessité",
-"cats": [
-"salud",
-"centros-de-salud"
-],
-"gcat": "Medical Center",
-"address": "Carrer Nou, 6, 17488 Cadaqués, Girona",
-"phone": "+34972258807",
-"website": "",
-"lat": 42.2875,
-"lng": 3.27519,
-"rating": null,
-"votes": 0,
-"claimed": false
-},
-{
 "cid": "3279973528554450315",
 "title": "Bebere",
 "cats": [
@@ -7804,7 +7787,7 @@
 },
 {
 "cid": "9013509441813567676",
-"title": "Centre d’Atenció Primària Cadaqués",
+"title": "Consultori local de Cadaqués (CAP)",
 "cats": [
 "salud",
 "centros-de-salud"
