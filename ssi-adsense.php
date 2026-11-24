@@ -42,3 +42,10 @@ add_filter('the_content', function ($html) {
 	$x = $t[$lang];
 	return $html . "\n<section class=\"ssi-adsense-info\" id=\"publicidad\"><h2>" . esc_html($x['h']) . "</h2><p>" . esc_html($x['p']) . "</p><p>" . $x['l'] . "</p></section>\n";
 }, 20);
+
+// Contacto público de la guía: en vez de una dirección personal de Gmail, info@<dominio>.
+add_filter('the_content', function ($html) {
+	$host = preg_replace('/^www\./', '', strtolower(parse_url(home_url(), PHP_URL_HOST)));
+	if ($host !== 'castelldefels.si') return $html;
+	return preg_replace('/(mailto:)?\b[A-Za-z0-9._%+-]+@gmail\.com\b/', '$1info@' . $host, $html);
+}, 30);
