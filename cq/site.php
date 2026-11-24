@@ -526,3 +526,35 @@ add_action('wp_loaded', function () {
     $rep['wp_mail_failed'] = $fail;
     cqs_out('forms-test.json', $rep);
 }, 70);
+
+/* Hojas de contacto de las fotos candidatas de Commons (out/sheets/sheet-NN.b64.txt, JPEG en base64): 40 miniaturas numeradas por hoja,
+   para elegirlas a ojo. Se hacen por tandas en visitas sucesivas. Solo lectura de Commons. */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_sheets_done') === '1' || get_transient('cqs_sheets_lock') || !function_exists('imagecreatefromstring')) return;
+    $f = SSI_DIR.'out/gallery-cands.json'; if (!file_exists($f)) return;
+    set_transient('cqs_sheets_lock', 1, 240); @set_time_limit(200);
+    $c = (array)(json_decode((string)file_get_contents($f), true)['c'] ?? []);
+    $per = 40; $cols = 8; $cw = 240; $ch = 170; $n = (int)get_option('cqs_sheets_n', 0); $t0 = time();
+    if (!is_dir(SSI_DIR.'out/sheets')) wp_mkdir_p(SSI_DIR.'out/sheets');
+    while ($n * $per < count($c) && time() - $t0 < 150) {
+        $im = imagecreatetruecolor($cols * $cw, (int)ceil($per / $cols) * $ch); $bg = imagecolorallocate($im, 30, 30, 30); imagefill($im, 0, 0, $bg);
+        $w = imagecolorallocate($im, 255, 255, 0); $blk = imagecolorallocate($im, 0, 0, 0);
+        for ($k = 0; $k < $per; $k++) {
+            $i = $n * $per + $k; if ($i >= count($c)) break;
+            $u = str_replace('/500px-', '/330px-', preg_replace('/\?.*$/', '', (string)$c[$i]['th']));
+            $r = wp_remote_get($u, ['timeout' => 20, 'user-agent' => 'CadaquesSi/1.0 (https://cadaques.si; photo selection)']);
+            if (is_wp_error($r) || wp_remote_retrieve_response_code($r) !== 200) { $r = wp_remote_get(preg_replace('/\?.*$/', '', (string)$c[$i]['th']), ['timeout' => 20, 'user-agent' => 'CadaquesSi/1.0 (https://cadaques.si; photo selection)']); }
+            $src = is_wp_error($r) ? false : @imagecreatefromstring(wp_remote_retrieve_body($r));
+            $x = ($k % $cols) * $cw; $y = intdiv($k, $cols) * $ch;
+            if ($src) { $sw = imagesx($src); $sh = imagesy($src); $s = min(($cw - 4) / $sw, ($ch - 4) / $sh);
+                imagecopyresampled($im, $src, $x + 2 + (int)((($cw - 4) - $sw * $s) / 2), $y + 2 + (int)((($ch - 4) - $sh * $s) / 2), 0, 0, (int)($sw * $s), (int)($sh * $s), $sw, $sh); imagedestroy($src); }
+            imagefilledrectangle($im, $x + 2, $y + 2, $x + 44, $y + 18, $blk); imagestring($im, 5, $x + 5, $y + 3, (string)$i, $w);
+            usleep(150000);
+        }
+        ob_start(); imagejpeg($im, null, 62); $jpg = ob_get_clean(); imagedestroy($im);
+        file_put_contents(SSI_DIR.sprintf('out/sheets/sheet-%02d.b64.txt', $n), base64_encode($jpg));
+        $n++; update_option('cqs_sheets_n', $n, false);
+    }
+    if ($n * $per >= count($c)) update_option('cqs_sheets_done', '1', false);
+    delete_transient('cqs_sheets_lock');
+}, 75);
