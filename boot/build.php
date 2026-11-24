@@ -659,6 +659,36 @@ function cqs_step_menu() {
     $o = get_option('polylang'); $theme = get_stylesheet();
     $menus = (array)($o['nav_menus'][$theme]['primary'] ?? []);
     if (!$menus) { $tm = (array)get_theme_mod('nav_menu_locations', []); if (!empty($tm['primary'])) $menus = ['es' => $tm['primary']]; }
+    // Sin menú todavía: se crea uno por idioma con las secciones de la guía (como en las otras guías de la red)
+    if (!$menus) {
+        $T = ['visit' => ['Qué ver', 'Què veure', 'What to see', 'Que voir'], 'beaches' => ['Playas y calas', 'Platges i cales', 'Beaches and coves', 'Plages et criques'],
+              'capcreus' => ['Cap de Creus', 'Cap de Creus', 'Cap de Creus', 'Cap de Creus'], 'dali' => ['Dalí y Portlligat', 'Dalí i Portlligat', 'Dalí and Portlligat', 'Dalí et Portlligat'],
+              'history' => ['Historia', 'Història', 'History', 'Histoire'], 'routes' => ['Rutas y excursiones', 'Rutes i excursions', 'Walks and trips', 'Randonnées'],
+              'sports' => ['Deportes', 'Esports', 'Sports', 'Sports'], 'eat' => ['Comer y beber', 'Menjar i beure', 'Eat and drink', 'Manger et boire'],
+              'sleep' => ['Dormir', 'Dormir', 'Stay', 'Dormir'], 'shop' => ['Comprar y servicios', 'Comprar i serveis', 'Shops and services', 'Commerces et services'],
+              'directory' => ['Directorio', 'Directori', 'Directory', 'Annuaire'], 'map' => ['Mapa', 'Mapa', 'Map', 'Carte'], 'agenda' => ['Agenda', 'Agenda', 'What’s on', 'Agenda'],
+              'live' => ['Info práctica', 'Info pràctica', 'Practical info', 'Infos pratiques'], 'transport' => ['Transporte', 'Transport', 'Getting around', 'Transports'],
+              'parking' => ['Aparcar', 'Aparcar', 'Parking', 'Se garer'], 'health' => ['Salud', 'Salut', 'Health', 'Santé'], 'housing' => ['Vivienda', 'Habitatge', 'Housing', 'Logement']];
+        $tree = ['visit' => ['beaches', 'capcreus', 'dali', 'history'], 'routes' => [], 'sports' => [], 'eat' => [], 'sleep' => [], 'shop' => ['directory', 'map'], 'agenda' => [], 'live' => ['transport', 'parking', 'health', 'housing']];
+        $langs = function_exists('pll_languages_list') ? (array)pll_languages_list(['fields' => 'slug']) : ['es'];
+        $li = ['es' => 0, 'ca' => 1, 'en' => 2, 'fr' => 3]; $byL = [];
+        foreach ($langs as $l) {
+            if (!isset($li[$l])) continue;
+            $name = 'Principal '.strtoupper($l); $m = wp_get_nav_menu_object($name); $mid = $m ? (int)$m->term_id : (int)wp_create_nav_menu($name);
+            if (!$mid || is_wp_error($mid)) continue;
+            foreach ((array)wp_get_nav_menu_items($mid) as $it) wp_delete_post($it->ID, true); // se rehace entero
+            $pos = 0;
+            foreach ($tree as $k => $kids) {
+                $p = $pid($k, $l); if (!$p) continue;
+                $top = wp_update_nav_menu_item($mid, 0, ['menu-item-object' => 'page', 'menu-item-object-id' => $p, 'menu-item-type' => 'post_type', 'menu-item-status' => 'publish', 'menu-item-title' => $T[$k][$li[$l]], 'menu-item-position' => ++$pos]);
+                foreach ($kids as $c) { $cp = $pid($c, $l); if (!$cp || is_wp_error($top)) continue;
+                    wp_update_nav_menu_item($mid, 0, ['menu-item-object' => 'page', 'menu-item-object-id' => $cp, 'menu-item-type' => 'post_type', 'menu-item-status' => 'publish', 'menu-item-title' => $T[$c][$li[$l]], 'menu-item-parent-id' => (int)$top, 'menu-item-position' => ++$pos]); }
+            }
+            $byL[$l] = $mid;
+        }
+        if ($byL && function_exists('eiv_setup_run')) eiv_setup_run(cqs_req(['menus' => ['primary' => $byL, 'mobile' => $byL]]));
+        $menus = $byL; $created = true;
+    }
     $rep = ['theme' => $theme, 'menus' => $menus];
     $want = [['routes', 'visit'], ['sports', 'routes'], ['transport', 'live']];
     $lbl = ['routes' => ['es' => 'Rutas y excursiones', 'ca' => 'Rutes i excursions', 'en' => 'Walks and day trips', 'fr' => 'Randonnées'],
@@ -679,5 +709,5 @@ function cqs_step_menu() {
         $rep['added'][$l] = $added;
     }
     cqs_out('menu-report.json', $rep);
-    return ['menus' => count($menus), 'added' => $rep['added'] ?? []];
+    return ['menus' => $menus, 'creados' => !empty($created), 'added' => $rep['added'] ?? [], 'items_es' => $rep['items']['es'] ?? []];
 }
