@@ -41,7 +41,7 @@ function cqs_build_run() {
     $log = json_decode((string)@file_get_contents(SSI_DIR.'out/build-log.json'), true); if (!is_array($log) || ($log['ver'] ?? '') !== CQS_BUILD_VER || count($done) < 2) $log = [];
     $log['started'] = gmdate('c'); $log['ver'] = CQS_BUILD_VER;
     if (!get_current_user_id()) wp_set_current_user(1);
-    $steps = ['languages', 'cats', 'owner', 'images', 'photos', 'forms', 'pages', 'directorist', 'events', 'fichas', 'beaches', 'listing_photos', 'verify'];
+    $steps = ['languages', 'cats', 'owner', 'images', 'photos', 'forms', 'pages', 'directorist', 'events', 'fichas', 'beaches', 'listing_photos', 'verify', 'public'];
     $ok = true; $T0 = microtime(true);
     foreach ($steps as $s) {
         if (!empty($done[$s])) continue;
@@ -618,4 +618,11 @@ function cqs_step_beaches() {
     foreach ($r['fichas'] ?? [] as $x) if (!empty($x['id'])) $pub[] = get_post_field('post_name', $x['id']);
     update_option('ssi_public_listings', array_values(array_unique($pub)));
     return ['calas' => count($f), 'coordenadas_osm' => $found];
+}
+
+/* 12) Web abierta a buscadores: visto bueno de Alex el 24-11-2026 ("publicar lo que hay") */
+function cqs_step_public() {
+    update_option('blog_public', 1);
+    $p = get_post(1); if ($p && $p->post_status === 'publish' && preg_match('/hello world|hola mundo|hola món/i', $p->post_title)) wp_trash_post(1);
+    return ['blog_public' => (int)get_option('blog_public'), 'post_1' => get_post_status(1)];
 }
