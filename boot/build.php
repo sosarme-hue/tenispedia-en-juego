@@ -4,7 +4,16 @@ if (!defined('ABSPATH')) exit;
    calas y agenda. Se ejecuta al activar el plugin cuando cambia CQS_BUILD_VER. Cada paso se puede repetir sin duplicar.
    Resultado en out/build-log.json. */
 
-/* Lo lanza boot/run.php (cron de Hostinger, WordPress completo y sin límite de tiempo). Retoma donde lo dejó. */
+/* Se lanza al final de una visita a la web, una vez enviada la página (no hace esperar a nadie). */
+add_action('shutdown', function () {
+    if (get_option('cqs_build') === CQS_BUILD_VER || wp_doing_cron() || (defined('WP_CLI') && WP_CLI) || (defined('REST_REQUEST') && REST_REQUEST)) return;
+    if (!did_action('wp_loaded')) return;
+    ignore_user_abort(true);
+    if (function_exists('litespeed_finish_request')) litespeed_finish_request(); elseif (function_exists('fastcgi_finish_request')) fastcgi_finish_request();
+    cqs_build_tick();
+}, 999);
+
+/* También lo puede lanzar boot/run.php (cron de Hostinger, WordPress completo y sin límite de tiempo). Retoma donde lo dejó. */
 function cqs_build_tick() {
     if (get_option('cqs_build') === CQS_BUILD_VER) return 'hecho';
     $lock = (int)get_option('cqs_build_lock'); if ($lock && time() - $lock < 900) return 'en marcha';
