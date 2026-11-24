@@ -134,7 +134,10 @@ add_action('wp_footer', function () { ?>
 <script>
 (function(){
   var Q='a[href*="openstreetmap.org/directions"],a[href*="openstreetmap.org/search"],.ssi-social--fb,.ssi-social--ig,a[href*="facebook.com/profile.php?id=61595591297270"],a[href*="instagram.com/cadaques.si"]';
-  function all(){ [].forEach.call(document.querySelectorAll(Q),function(a){a.parentNode&&a.parentNode.removeChild(a);}); }
+  // También los botones «Cómo llegar» que van a cualquier mapa externo (farmacia de guardia, «Útil ahora», playas, rutas); «Google Maps ↗» se queda
+  var TX=/^\s*(c[óo]mo llegar|com arribar|directions|get directions|itin[ée]raire|comment y aller|s'y rendre)/i, MAP=/openstreetmap\.org|google\.[a-z.]+\/maps|maps\.google|maps\.apple|^geo:/i;
+  function all(){ [].forEach.call(document.querySelectorAll(Q),function(a){a.parentNode&&a.parentNode.removeChild(a);});
+    [].forEach.call(document.querySelectorAll('a[href]'),function(a){ if(TX.test(a.textContent||'')&&MAP.test(a.getAttribute('href')||'')&&a.parentNode) a.parentNode.removeChild(a); }); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',all); else all();
   if(window.MutationObserver) new MutationObserver(all).observe(document.body,{childList:true,subtree:true});
 })();
