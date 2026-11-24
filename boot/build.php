@@ -497,7 +497,7 @@ function cqs_step_fichas() {
             if (($x['cats'][0] ?? '') !== ($k['cats'][0] ?? '') && !($x['_n'] !== '' && $x['_n'] === $k['_n'] && $d < 80)) continue; // solo dentro del mismo tipo de negocio (salvo mismo nombre en el mismo sitio)
             if (preg_match('/^(aparcament|parking|aparcamiento|pagament|farmacia|bus|parada)/', $x['_n']) && $d > 40) continue; // nombres genéricos: solo si están en el mismo punto
             $sameSub = ($x['cats'][1] ?? '') === ($k['cats'][1] ?? '') || ($x['cats'][0] === 'comer-y-beber' && $k['cats'][0] === 'comer-y-beber');
-            $sameName = $x['_n'] !== '' && $k['_n'] !== '' && ($x['_n'] === $k['_n'] || ($sameSub && mb_strlen($x['_n']) > 4 && mb_strlen($k['_n']) > 4 && (strpos($x['_n'], $k['_n']) !== false || strpos($k['_n'], $x['_n']) !== false)));
+            $sameName = $x['_n'] !== '' && $k['_n'] !== '' && ($x['_n'] === $k['_n'] || ($sameSub && mb_strlen($x['_n']) > 4 && mb_strlen($k['_n']) > 4 && (strpos(' '.$x['_n'].' ', ' '.$k['_n'].' ') !== false || strpos(' '.$k['_n'].' ', ' '.$x['_n'].' ') !== false)));
             // misma web o teléfono pero nombres distintos (p. ej. dos locales del mismo dueño): solo es la misma ficha si comparten alguna palabra o es la razón social (S.L.)
             $tok = fn($n) => array_filter(explode(' ', $n), fn($w) => mb_strlen($w) >= 4);
             $nameLink = (bool)array_intersect($tok($x['_n']), $tok($k['_n'])) || preg_match('/\bs\.? ?[lac]\.?\s*$/i', trim($x['title'])) || $x['_n'] === '' || $k['_n'] === '';
