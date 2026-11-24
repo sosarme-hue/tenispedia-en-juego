@@ -41,7 +41,7 @@ function cqs_build_run() {
     $log = json_decode((string)@file_get_contents(SSI_DIR.'out/build-log.json'), true); if (!is_array($log) || ($log['ver'] ?? '') !== CQS_BUILD_VER || count($done) < 2) $log = [];
     $log['started'] = gmdate('c'); $log['ver'] = CQS_BUILD_VER;
     if (!get_current_user_id()) wp_set_current_user(1);
-    $steps = ['languages', 'cats', 'owner', 'images', 'photos', 'forms', 'pages', 'directorist', 'events', 'fichas', 'beaches', 'listing_photos', 'verify', 'public'];
+    $steps = ['languages', 'cats', 'owner', 'images', 'photos', 'forms', 'pages', 'directorist', 'events', 'fichas', 'beaches', 'listing_photos', 'verify', 'public', 'menu'];
     $ok = true; $T0 = microtime(true);
     foreach ($steps as $s) {
         if (!empty($done[$s])) continue;
@@ -632,4 +632,34 @@ function cqs_step_public() {
     update_option('blog_public', 1);
     $p = get_post(1); if ($p && $p->post_status === 'publish' && preg_match('/hello world|hola mundo|hola món/i', $p->post_title)) wp_trash_post(1);
     return ['blog_public' => (int)get_option('blog_public'), 'post_1' => get_post_status(1)];
+}
+
+/* 13) Menú principal: Rutas, Deportes y Cómo llegar y moverse a la vista en cada idioma (petición de Alex 24-11-2026).
+   Si la página no está en el menú, se añade junto a su hermana (Deportes tras Rutas; Cómo llegar tras Información práctica). */
+function cqs_step_menu() {
+    $pid = function ($key, $l) { $x = get_posts(['post_type' => 'page', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => $key.':'.$l]]]); return $x ? (int)$x[0] : 0; };
+    $o = get_option('polylang'); $theme = get_stylesheet();
+    $menus = (array)($o['nav_menus'][$theme]['primary'] ?? []);
+    if (!$menus) { $tm = (array)get_theme_mod('nav_menu_locations', []); if (!empty($tm['primary'])) $menus = ['es' => $tm['primary']]; }
+    $rep = ['theme' => $theme, 'menus' => $menus];
+    $want = [['routes', 'visit'], ['sports', 'routes'], ['transport', 'live']];
+    $lbl = ['routes' => ['es' => 'Rutas y excursiones', 'ca' => 'Rutes i excursions', 'en' => 'Walks and day trips', 'fr' => 'Randonnées'],
+            'sports' => ['es' => 'Deportes', 'ca' => 'Esports', 'en' => 'Sports', 'fr' => 'Sports'],
+            'transport' => ['es' => 'Transporte', 'ca' => 'Transport', 'en' => 'Getting around', 'fr' => 'Transports']];
+    foreach ($menus as $l => $mid) {
+        $items = (array)wp_get_nav_menu_items($mid);
+        $byObj = []; foreach ($items as $it) if ($it->object === 'page') $byObj[(int)$it->object_id] = $it;
+        $added = [];
+        foreach ($want as [$k, $after]) {
+            $p = $pid($k, $l); if (!$p || isset($byObj[$p])) continue;
+            $sib = $byObj[$pid($after, $l)] ?? null;
+            $r = wp_update_nav_menu_item($mid, 0, ['menu-item-object' => 'page', 'menu-item-object-id' => $p, 'menu-item-type' => 'post_type', 'menu-item-status' => 'publish', 'menu-item-title' => $lbl[$k][$l] ?? '',
+                'menu-item-parent-id' => $sib ? (int)$sib->menu_item_parent : 0, 'menu-item-position' => $sib ? (int)$sib->menu_order + 1 : count($items) + 1]);
+            if (!is_wp_error($r)) { $added[] = $k; $byObj[$p] = (object)['menu_item_parent' => $sib ? (int)$sib->menu_item_parent : 0, 'menu_order' => $sib ? (int)$sib->menu_order + 1 : 0]; }
+        }
+        $rep['items'][$l] = array_map(fn($it) => ($it->menu_item_parent ? '  - ' : '').$it->title, (array)wp_get_nav_menu_items($mid));
+        $rep['added'][$l] = $added;
+    }
+    cqs_out('menu-report.json', $rep);
+    return ['menus' => count($menus), 'added' => $rep['added'] ?? []];
 }
