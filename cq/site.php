@@ -486,3 +486,35 @@ add_action('wp_loaded', function () {
     update_option('cqs_cf7_msgs', $v, false);
     if (function_exists('cqs_out')) cqs_out('cf7-messages.json', $rep);
 }, 45);
+
+/* Prueba real de los 16 formularios (24/11/2026, pedida por Alex): envía cada uno por la misma vía que un visitante
+   (API de Contact Form 7) con datos marcados «PRUEBA» y anota el resultado en out/forms-test.json. Una sola vez por versión. */
+add_action('wp_loaded', function () {
+    $v = 't1'; if (get_option('cqs_formtest') === $v || get_transient('cqs_formtest_lock') || !class_exists('WPCF7_ContactForm') || !function_exists('cqs_out')) return;
+    set_transient('cqs_formtest_lock', 1, 900); update_option('cqs_formtest', $v, false); @set_time_limit(300);
+    $fail = []; add_action('wp_mail_failed', function ($e) use (&$fail) { $fail[] = $e->get_error_message(); });
+    $rep = ['ts' => wp_date('c')];
+    foreach ((array)get_option('cqs_cf7', []) as $kind => $byL) foreach ((array)$byL as $l => $id) {
+        $cf = WPCF7_ContactForm::get_instance((int)$id); if (!$cf) { $rep[$kind][$l] = 'no existe'; continue; }
+        $ts = time() - 30;
+        $data = ['_wpcf7' => $id, '_wpcf7_version' => defined('WPCF7_VERSION') ? WPCF7_VERSION : '', '_wpcf7_locale' => '', '_wpcf7_unit_tag' => 'wpcf7-f'.$id.'-test-o1', '_wpcf7_container_post' => 0,
+                 'ssi_hp' => '', 'ssi_ts' => $ts.'.'.substr(hash_hmac('sha256', (string)$ts, wp_salt('nonce')), 0, 16)];
+        foreach ($cf->scan_form_tags() as $t) {
+            if (!$t->name) continue; $b = $t->basetype;
+            if ($b === 'email') $data[$t->name] = 'info@cadaques.si';
+            elseif ($b === 'url') $data[$t->name] = home_url('/');
+            elseif ($b === 'tel') $data[$t->name] = '972000000';
+            elseif ($b === 'acceptance') $data[$t->name] = '1';
+            elseif (in_array($b, ['select', 'radio', 'checkbox'], true)) { $vals = $t->values ?: $t->labels; $data[$t->name] = $b === 'checkbox' ? [$vals[0] ?? ''] : ($vals[0] ?? ''); }
+            else $data[$t->name] = 'PRUEBA automática del formulario «'.$kind.'» ('.$l.'). Se puede borrar.';
+        }
+        $r = wp_remote_post(rest_url('contact-form-7/v1/contact-forms/'.$id.'/feedback'), ['timeout' => 40, 'sslverify' => false, 'body' => $data]);
+        $j = is_wp_error($r) ? ['error' => $r->get_error_message()] : json_decode(wp_remote_retrieve_body($r), true);
+        $p = $cf->prop('mail');
+        $rep[$kind][$l] = ['status' => $j['status'] ?? ($j['error'] ?? wp_remote_retrieve_response_code($r)), 'msg' => $j['message'] ?? '', 'invalid' => array_map(fn($x) => ($x['field'] ?? '').': '.($x['message'] ?? ''), (array)($j['invalid_fields'] ?? [])),
+            'to' => $p['recipient'] ?? '', 'active' => !empty($p['active'])];
+        usleep(300000);
+    }
+    $rep['wp_mail_failed'] = $fail;
+    cqs_out('forms-test.json', $rep);
+}, 70);
