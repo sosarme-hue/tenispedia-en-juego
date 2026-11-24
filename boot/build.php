@@ -514,6 +514,12 @@ function cqs_step_fichas() {
         if ($x['_edit'] > $keep[$hit]['_edit']) $keep[$hit]['_edit'] = $x['_edit'];
         $dups[] = $x['title'].' = '.$keep[$hit]['title'];
     }
+    // Sin dirección (solo código postal y pueblo): fuera de la guía, decisión de Alex 24-11-2026. Van a la papelera (recuperables).
+    $noaddr = [];
+    $keep = array_values(array_filter($keep, function ($x) use (&$noaddr) {
+        $first = trim(explode(',', (string)$x['address'])[0]);
+        if ($first === '' || preg_match('/^\d{5}\b|^(Cadaqu|Girona|Spain|España)/iu', $first)) { $noaddr[] = $x['title']; return false; }
+        return true; }));
     // Fichas OSM publicadas antes que ya no están (duplicadas o cerradas): a la papelera (se pueden recuperar)
     $live = array_flip(array_column($keep, 'key')); $trashed = [];
     foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => ['publish', 'draft', 'pending'], 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => [['key' => '_ssi_source', 'compare' => 'REGEXP', 'value' => '^(osm|g):']]]) as $id) {
@@ -534,9 +540,9 @@ function cqs_step_fichas() {
     $byc = []; foreach ($keep as $x) { $byc[$x['cats'][1]] = ($byc[$x['cats'][1]] ?? 0) + 1; } arsort($byc);
     delete_option('cqs_verify_pos');
     $gk = count(array_filter($keep, fn($x) => strpos($x['key'], 'g:') === 0)); $gm = count(array_filter($keep, fn($x) => strpos($x['key'], 'osm:') === 0 && !empty($x['_g'])));
-    $rep = ['osm' => count($els), 'google' => $gn, 'google_nuevas' => $gk, 'osm_confirmadas_en_google' => $gm, 'fichas' => count($keep), 'duplicados' => $dups, 'cerrados_en_osm' => $closed, 'a_la_papelera' => $trashed, 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
+    $rep = ['osm' => count($els), 'google' => $gn, 'google_nuevas' => $gk, 'osm_confirmadas_en_google' => $gm, 'fichas' => count($keep), 'duplicados' => $dups, 'cerrados_en_osm' => $closed, 'a_la_papelera' => $trashed, 'sin_direccion' => $noaddr, 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
     cqs_out('fichas-report.json', $rep);
-    return array_merge($rep, ['duplicados' => count($dups), 'cerrados_en_osm' => count($closed), 'a_la_papelera' => count($trashed)]);
+    return array_merge($rep, ['duplicados' => count($dups), 'cerrados_en_osm' => count($closed), 'a_la_papelera' => count($trashed), 'sin_direccion' => count($noaddr)]);
 }
 
 /* 11) Verificación de cada ficha: ¿responde su web?, ¿cuándo se comprobó en OpenStreetMap?
