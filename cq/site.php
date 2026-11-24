@@ -126,12 +126,14 @@ add_action('wp_loaded', function () {
    Se quitan los enlaces de ruta/búsqueda de OpenStreetMap en fichas y tarjetas (también las creadas por JavaScript).
    El mapa de la ficha y el botón «Google Maps ↗» se quedan. */
 add_action('wp_head', function () {
-    echo '<style>a[href*="openstreetmap.org/directions"],a[href*="openstreetmap.org/search"]{display:none!important}</style>'."\n";
+    echo '<style>a[href*="openstreetmap.org/directions"],a[href*="openstreetmap.org/search"]{display:none!important}'
+        // Sin enlaces a Facebook e Instagram de momento (petición de Alex, 24/11/2026: apuntaban a otras guías)
+        .'.ssi-social--fb,.ssi-social--ig,a[href*="facebook.com/profile.php?id=61595591297270"],a[href*="instagram.com/cadaques.si"]{display:none!important}</style>'."\n";
 }, 1);
 add_action('wp_footer', function () { ?>
 <script>
 (function(){
-  var Q='a[href*="openstreetmap.org/directions"],a[href*="openstreetmap.org/search"]';
+  var Q='a[href*="openstreetmap.org/directions"],a[href*="openstreetmap.org/search"],.ssi-social--fb,.ssi-social--ig,a[href*="facebook.com/profile.php?id=61595591297270"],a[href*="instagram.com/cadaques.si"]';
   function all(){ [].forEach.call(document.querySelectorAll(Q),function(a){a.parentNode&&a.parentNode.removeChild(a);}); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',all); else all();
   if(window.MutationObserver) new MutationObserver(all).observe(document.body,{childList:true,subtree:true});
@@ -490,7 +492,7 @@ add_action('wp_loaded', function () {
 /* Prueba real de los 16 formularios (24/11/2026, pedida por Alex): envía cada uno por la misma vía que un visitante
    (API de Contact Form 7) con datos marcados «PRUEBA» y anota el resultado en out/forms-test.json. Una sola vez por versión. */
 add_action('wp_loaded', function () {
-    $v = 't1'; if (get_option('cqs_formtest') === $v || get_transient('cqs_formtest_lock') || !class_exists('WPCF7_ContactForm') || !function_exists('cqs_out')) return;
+    $v = 't2'; if (get_option('cqs_formtest') === $v || get_transient('cqs_formtest_lock') || !class_exists('WPCF7_ContactForm') || !function_exists('cqs_out')) return;
     set_transient('cqs_formtest_lock', 1, 900); update_option('cqs_formtest', $v, false); @set_time_limit(300);
     $fail = []; add_action('wp_mail_failed', function ($e) use (&$fail) { $fail[] = $e->get_error_message(); });
     $rep = ['ts' => wp_date('c')];
@@ -508,7 +510,10 @@ add_action('wp_loaded', function () {
             elseif (in_array($b, ['select', 'radio', 'checkbox'], true)) { $vals = $t->values ?: $t->labels; $data[$t->name] = $b === 'checkbox' ? [$vals[0] ?? ''] : ($vals[0] ?? ''); }
             else $data[$t->name] = 'PRUEBA automática del formulario «'.$kind.'» ('.$l.'). Se puede borrar.';
         }
-        $r = wp_remote_post(rest_url('contact-form-7/v1/contact-forms/'.$id.'/feedback'), ['timeout' => 40, 'sslverify' => false, 'body' => $data]);
+        $bd = wp_generate_password(24, false); $body = '';
+        foreach ($data as $k => $val) foreach ((array)$val as $vv) $body .= "--$bd\r\nContent-Disposition: form-data; name=\"".(is_array($val) ? $k.'[]' : $k)."\"\r\n\r\n".$vv."\r\n";
+        $body .= "--$bd--\r\n";
+        $r = wp_remote_post(rest_url('contact-form-7/v1/contact-forms/'.$id.'/feedback'), ['timeout' => 40, 'sslverify' => false, 'headers' => ['Content-Type' => 'multipart/form-data; boundary='.$bd], 'body' => $body]);
         $j = is_wp_error($r) ? ['error' => $r->get_error_message()] : json_decode(wp_remote_retrieve_body($r), true);
         $p = $cf->prop('mail');
         $rep[$kind][$l] = ['status' => $j['status'] ?? ($j['error'] ?? wp_remote_retrieve_response_code($r)), 'msg' => $j['message'] ?? '', 'invalid' => array_map(fn($x) => ($x['field'] ?? '').': '.($x['message'] ?? ''), (array)($j['invalid_fields'] ?? [])),
