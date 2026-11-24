@@ -50,3 +50,11 @@ add_action('wp_loaded', function () {
         'hello' => get_post_status(1), 'blog_public' => get_option('blog_public'), 'pages' => (int)wp_count_posts('page')->publish];
     cqs_out('diag.json', $d);
 });
+
+/* Índice del buscador: se rehace cuando cambian las fichas o sus descripciones (versión del montaje) */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_s2_flushed') === CQS_BUILD_VER.'-'.get_option('cqs_build')) return;
+    if (get_option('cqs_build') !== CQS_BUILD_VER) return; // espera a que termine el montaje
+    foreach (['es', 'ca', 'en'] as $l) delete_transient('ssi_s2_idx_'.$l);
+    update_option('cqs_s2_flushed', CQS_BUILD_VER.'-'.get_option('cqs_build'), false);
+});

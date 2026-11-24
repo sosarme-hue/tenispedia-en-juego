@@ -3,7 +3,7 @@ if (!defined('ABSPATH')) exit;
 /* Puesta en marcha de cadaques.si a partir de las guías de la red (mismo servidor).
    CQS_BOOT_VER: al cambiarlo se repite la copia del núcleo y el informe (boot/boot.php).
    CQS_CORE: false mientras el núcleo copiado no esté revisado para Cadaqués. */
-define('CQS_BOOT_VER', '4');
+define('CQS_BOOT_VER', '5');
 define('CQS_CORE', true);
 define('CQS_BUILD_VER', '13');   // al cambiarlo se repite el montaje (boot/build.php)
 define('CQS_SRC_CORE', 'eivissa.si');      // núcleo más reciente de la red

@@ -25,4 +25,8 @@ return [
     ['inc/i18n.php', "return \$s[\$key][\$l] ?? (\$s[\$key]['es'] ?? \$key);", "if (function_exists('cqs_fr_t') && (\$f = cqs_fr_t(\$key)) !== null) return \$f; return \$s[\$key][\$l] ?? (\$s[\$key]['es'] ?? \$key);"],
     // Fichas en francés: _ssi_title_fr / _ssi_content_fr; si faltan, el inglés
     ['inc/listing-i18n.php', 'return trim((string)get_post_meta($id, "_ssi_{$field}_{$l}", true));', 'if (function_exists(\'cqs_cur_lang\') && cqs_cur_lang() === \'fr\' && ($fr = trim((string)get_post_meta($id, "_ssi_{$field}_fr", true))) !== \'\') return $fr; return trim((string)get_post_meta($id, "_ssi_{$field}_{$l}", true));'],
+    // Buscador de la portada (form.gsi-search): mismo desplegable de sugerencias que el del núcleo
+    ['inc/shortcodes.php', "document.querySelectorAll('form.ssi-search input[name=s]')", "document.querySelectorAll('form.ssi-search input[name=s],form.gsi-search input[name=s]')"],
+    // El buscador también encuentra por la descripción en francés
+    ['inc/shortcodes.php', "get_post_meta($id, '_ssi_content_en', true),", "get_post_meta($id, '_ssi_content_en', true), get_post_meta($id, '_ssi_content_fr', true),"],
 ];
