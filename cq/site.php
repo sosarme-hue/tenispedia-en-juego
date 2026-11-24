@@ -335,3 +335,16 @@ add_action('wp_footer', function () {
 </script>
 <?php
 }, 70);
+
+/* Estado de la agenda automática (out/agenda-status.json), como mucho una vez cada 30 min: fuentes, última importación, próximo cron y eventos futuros */
+add_action('wp_loaded', function () {
+    if (get_transient('cqs_ag_stat') || !function_exists('cqs_out')) return;
+    set_transient('cqs_ag_stat', 1, 1800);
+    $log = (array)get_option('eiv_feeds_log', []);
+    $fut = get_posts(['post_type' => 'tribe_events', 'post_status' => 'publish', 'numberposts' => -1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true,
+        'meta_query' => [['key' => '_EventEndDate', 'value' => current_time('mysql'), 'compare' => '>=', 'type' => 'DATETIME']]]);
+    $auto = 0; foreach ($fut as $id) if (get_post_meta($id, '_eiv_feed', true)) $auto++;
+    cqs_out('agenda-status.json', ['now' => wp_date('c'), 'feeds' => get_option('eiv_feeds', []), 'last_run' => !empty($log['ts']) ? wp_date('c', $log['ts']) : null, 'log' => $log['log'] ?? null,
+        'next_cron' => ($n = wp_next_scheduled('eiv_feeds_cron')) ? wp_date('c', $n) : null, 'disable_wp_cron' => defined('DISABLE_WP_CRON') && DISABLE_WP_CRON,
+        'future_events' => count($fut), 'future_auto' => $auto]);
+}, 50);
