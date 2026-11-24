@@ -37,3 +37,16 @@ function cqs_fr_t($key) {
     ];
     return $t[$key] ?? null;
 }
+
+/* Diagnóstico (out/diag.json, cerrado al público): portada, idiomas y páginas */
+add_action('wp_loaded', function () {
+    if (get_transient('cqs_diag')) return; set_transient('cqs_diag', 1, 20);
+    $f = (int)get_option('page_on_front');
+    $d = ['t' => gmdate('c'), 'sapi' => PHP_SAPI, 'show_on_front' => get_option('show_on_front'), 'page_on_front' => $f,
+        'front' => $f ? [get_post_status($f), get_post_field('post_name', $f), function_exists('pll_get_post_language') ? pll_get_post_language($f) : '?',
+                        function_exists('pll_get_post_translations') ? pll_get_post_translations($f) : '?'] : null,
+        'langs' => function_exists('pll_languages_list') ? pll_languages_list(['fields' => 'slug']) : '?', 'permalink' => get_option('permalink_structure'),
+        'pll' => array_intersect_key((array)get_option('polylang'), array_flip(['default_lang', 'hide_default', 'force_lang', 'rewrite', 'redirect_lang'])),
+        'hello' => get_post_status(1), 'blog_public' => get_option('blog_public'), 'pages' => (int)wp_count_posts('page')->publish];
+    cqs_out('diag.json', $d);
+});
