@@ -139,7 +139,7 @@ add_action('wp_footer', function () { ?>
   function all(){ [].forEach.call(document.querySelectorAll(Q),function(a){a.parentNode&&a.parentNode.removeChild(a);});
     [].forEach.call(document.querySelectorAll('a[href]'),function(a){ if(TX.test(a.textContent||'')&&MAP.test(a.getAttribute('href')||'')&&a.parentNode) a.parentNode.removeChild(a); }); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',all); else all();
-  if(window.MutationObserver) new MutationObserver(all).observe(document.body,{childList:true,subtree:true});
+  var tq=0; if(window.MutationObserver) new MutationObserver(function(){ if(!tq) tq=setTimeout(function(){tq=0;all();},120); }).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 <?php }, 60);
