@@ -283,3 +283,55 @@ body.cq-lb-on{overflow:hidden}
 </script>
 <?php
 }, 60);
+
+/* «Verificar la ficha» y «Propón una corrección» (24/11/2026): el núcleo enlazaba a #fitxa / #listing, que no existen,
+   y sin decir de qué ficha se trataba. Ahora llevan al formulario «Corrige una ficha» de «Tu opinión» en el idioma de la ficha,
+   con el nombre y el enlace ya puestos y, al verificar, «Quiero verificar la ficha a mi nombre» y «Soy el propietario» marcados (como en sitges.si). */
+function cqs_voice_url($l) {
+    $x = get_posts(['post_type' => 'page', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'voice:'.$l]]]);
+    return $x ? get_permalink($x[0]) : '';
+}
+add_action('wp_footer', function () {
+    if (!is_singular('at_biz_dir')) return;
+    $l = function_exists('ssi_lang') ? ssi_lang() : cqs_cur_lang(); if (!in_array($l, ['es', 'ca', 'en', 'fr'], true)) $l = cqs_cur_lang();
+    $voice = cqs_voice_url($l) ?: cqs_voice_url('es'); if (!$voice) return;
+    $id = get_queried_object_id();
+    $link = function_exists('ssi_xl_permalink') ? ssi_xl_permalink($id, $l) : get_permalink($id);
+    $base = add_query_arg(['fix-business' => rawurlencode(html_entity_decode(get_the_title($id), ENT_QUOTES)), 'fix-link' => rawurlencode($link)], $voice);
+    $all = array_filter(array_map('cqs_voice_url', ['es', 'ca', 'en', 'fr']));
+    ?>
+<script>
+(function(){
+  var B=<?php echo wp_json_encode($base); ?>, V=<?php echo wp_json_encode(array_values(array_map(fn($u) => untrailingslashit(wp_parse_url($u, PHP_URL_PATH)), $all))); ?>;
+  [].forEach.call(document.querySelectorAll('a[href*="#ficha"],a[href*="#fitxa"],a[href*="#listing"]'),function(a){
+    var u; try{u=new URL(a.href,location.href);}catch(e){return;}
+    if(u.host!==location.host||(V.indexOf(u.pathname.replace(/\/+$/,''))<0&&!a.closest('.ssi-listing__aside'))) return;
+    var claim=a.closest('.ssi-claim')&&!a.closest('.ssi-claim__more');
+    a.href=B+(claim?'&verificar=1':'')+'#ficha';
+  });
+})();
+</script>
+<?php
+}, 70);
+/* En «Tu opinión»: rellena el formulario de la ficha con lo que llega en el enlace */
+add_action('wp_footer', function () {
+    if (!is_page()) return;
+    $c = (string)get_post_field('post_content', get_queried_object_id());
+    if (strpos($c, 'id="ficha"') === false) return; ?>
+<script>
+(function(){
+  var q=new URLSearchParams(location.search); if(!q.get('fix-business')&&!q.get('verificar')&&!q.get('baja')) return;
+  function go(){
+    var f=(document.querySelector('[name="fix-business"]')||{}).form; if(!f) return;
+    var b=f.querySelector('[name="fix-business"]'),k=f.querySelector('[name="fix-link"]'),w=f.querySelector('[name="fix-what"]');
+    if(b&&q.get('fix-business')) b.value=q.get('fix-business');
+    if(k&&q.get('fix-link')) k.value=q.get('fix-link');
+    if(w&&(q.get('verificar')||q.get('baja'))){ var i=q.get('baja')?5:4; if(w.options[i]) w.selectedIndex=i; }
+    if(q.get('verificar')||q.get('baja')){ var r=f.querySelectorAll('[name="fix-relation"]'); if(r[1]) r[1].checked=true; }
+    var t=f.querySelector('[name="fix-body"]'); var s=document.getElementById('ficha')||f; s.scrollIntoView({block:'start'}); if(t) t.focus({preventScroll:true});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',go); else go();
+})();
+</script>
+<?php
+}, 70);
