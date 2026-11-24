@@ -146,7 +146,7 @@ add_action('wp_footer', function () { ?>
 add_filter('document_title_parts', function ($p) {
     if (is_front_page() || (function_exists('ssi_is_home_page') && ssi_is_home_page())) return $p;
     // Cada idioma con su propio título (la auditoría veía títulos repetidos entre ES/CA/EN/FR: fichas, Agenda, Mapa…)
-    $l = cqs_cur_lang();
+    $l = function_exists('ssi_lang') ? ssi_lang() : cqs_cur_lang(); if (!in_array($l, ['es', 'ca', 'en', 'fr'], true)) $l = cqs_cur_lang();
     $site = ['es' => 'Cadaqués Sí', 'ca' => 'Guia Cadaqués Sí', 'en' => 'Cadaqués Sí guide', 'fr' => 'Guide Cadaqués Sí'][$l];
     if (!empty($p['title'])) {
         if ($l === 'es' && is_singular('at_biz_dir') && mb_strlen(wp_strip_all_tags($p['title'])) > 44) unset($p['site']);
