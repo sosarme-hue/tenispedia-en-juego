@@ -144,7 +144,14 @@ add_action('wp_footer', function () { ?>
 
 /* Títulos largos de fichas (más de 60 caracteres con « – Cadaqués Sí»): sin el nombre de la web */
 add_filter('document_title_parts', function ($p) {
-    if (!empty($p['title']) && is_singular('at_biz_dir') && mb_strlen(wp_strip_all_tags($p['title'])) > 44) unset($p['site']);
+    if (is_front_page() || (function_exists('ssi_is_home_page') && ssi_is_home_page())) return $p;
+    // Cada idioma con su propio título (la auditoría veía títulos repetidos entre ES/CA/EN/FR: fichas, Agenda, Mapa…)
+    $l = cqs_cur_lang();
+    $site = ['es' => 'Cadaqués Sí', 'ca' => 'Guia Cadaqués Sí', 'en' => 'Cadaqués Sí guide', 'fr' => 'Guide Cadaqués Sí'][$l];
+    if (!empty($p['title'])) {
+        if ($l === 'es' && is_singular('at_biz_dir') && mb_strlen(wp_strip_all_tags($p['title'])) > 44) unset($p['site']);
+        else $p['site'] = $site;
+    }
     return $p;
 }, 120);
 
