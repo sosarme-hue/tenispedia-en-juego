@@ -9,7 +9,18 @@ add_action('init', function () {
     if (get_option('cqs_build') === CQS_BUILD_VER || wp_doing_cron()) return;
     if (!wp_next_scheduled('cqs_build_event')) wp_schedule_single_event(time() - 1, 'cqs_build_event');
 }, 99);
-add_action('cqs_build_event', function () { ignore_user_abort(true); cqs_build_tick(); });
+add_action('cqs_build_event', function () {
+    ignore_user_abort(true);
+    $r = cqs_build_tick();
+    // Si queda algo, vuelve a lanzarse solo (hasta 12 veces), llamando a wp-cron.php desde el propio servidor
+    $n = (int)get_option('cqs_build_chain', 0);
+    if ($r === 'parcial' && $n < 12) {
+        update_option('cqs_build_chain', $n + 1, false);
+        wp_schedule_single_event(time() - 1, 'cqs_build_event');
+        delete_transient('doing_cron');
+        wp_remote_post(site_url('wp-cron.php?doing_wp_cron='.sprintf('%.22F', microtime(true))), ['timeout' => 0.01, 'blocking' => false, 'sslverify' => false]);
+    }
+});
 
 /* También lo puede lanzar boot/run.php (cron de Hostinger, WordPress completo y sin límite de tiempo). Retoma donde lo dejó. */
 function cqs_build_tick() {
@@ -240,7 +251,7 @@ function cqs_osm_cats($t) {
 }
 function cqs_overpass($q) {
     foreach (['https://overpass-api.de/api/interpreter', 'https://overpass.kumi.systems/api/interpreter', 'https://maps.mail.ru/osm/tools/overpass/api/interpreter'] as $ep) {
-        $r = wp_remote_post($ep, ['timeout' => 120, 'body' => ['data' => $q], 'user-agent' => 'CadaquesSi/1.0 (+https://cadaques.si)']);
+        $r = wp_remote_post($ep, ['timeout' => 70, 'body' => ['data' => $q], 'user-agent' => 'CadaquesSi/1.0 (+https://cadaques.si)']);
         if (!is_wp_error($r) && wp_remote_retrieve_response_code($r) === 200) { $j = json_decode(wp_remote_retrieve_body($r), true); if (isset($j['elements'])) return $j['elements']; }
     }
     return null;
@@ -248,7 +259,7 @@ function cqs_overpass($q) {
 function cqs_step_fichas() {
     if (!function_exists('eiv_fichas_run')) throw new Exception('sin núcleo');
     $bb = '42.255,3.245,42.335,3.335'; // Cadaqués, Portlligat y el Cap de Creus
-    $q = "[out:json][timeout:90];(nwr[name][amenity]($bb);nwr[name][shop]($bb);nwr[name][tourism~\"hotel|guest_house|hostel|apartment|camp_site|museum|gallery|chalet\"]($bb);nwr[name][office]($bb);nwr[name][healthcare]($bb);nwr[name][leisure~\"marina|sports_centre|fitness_centre\"]($bb);nwr[name][craft]($bb););out center tags;";
+    $q = "[out:json][timeout:60];(nwr[name][amenity]($bb);nwr[name][shop]($bb);nwr[name][tourism~\"hotel|guest_house|hostel|apartment|camp_site|museum|gallery|chalet\"]($bb);nwr[name][office]($bb);nwr[name][healthcare]($bb);nwr[name][leisure~\"marina|sports_centre|fitness_centre\"]($bb);nwr[name][craft]($bb););out center tags;";
     $els = cqs_overpass($q); if ($els === null) throw new Exception('Overpass no responde');
     cqs_out('osm-raw.json', $els);
     $f = []; $skip = 0;
