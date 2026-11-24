@@ -378,3 +378,61 @@ add_action('wp_loaded', function () {
     }
     cqs_out('agenda-probe.json', $o); update_option('cqs_ag_probe', $v, false);
 }, 55);
+
+/* Agenda automática (24/11/2026): cada 3 días se importan los actos de Cadaqués de la Agenda Cultural de Catalunya
+   (datos abiertos de la Generalitat, analisi.transparenciacatalunya.cat, conjunto rhpv-yr4f) como eventos de The Events Calendar,
+   sin duplicar (usa el importador eiv_import_event del núcleo). Informe en out/agenda-auto.json. */
+function cqs_gencat_events() {
+    $base = 'https://analisi.transparenciacatalunya.cat/resource/rhpv-yr4f.json';
+    $today = wp_date('Y-m-d').'T00:00:00.000';
+    $tries = [
+        'municipi' => $base.'?$limit=500&$where='.rawurlencode("data_fi >= '$today' AND upper(comarca_i_municipi) like '%CADAQUES%'"),
+        'text' => $base.'?$limit=500&$q='.rawurlencode('Cadaqués').'&$where='.rawurlencode("data_fi >= '$today'"),
+    ];
+    $rows = []; $rep = [];
+    foreach ($tries as $k => $u) {
+        $r = wp_remote_get($u, ['timeout' => 40, 'user-agent' => 'CadaquesSi/1.0 (+https://cadaques.si)']);
+        $code = is_wp_error($r) ? $r->get_error_message() : wp_remote_retrieve_response_code($r);
+        $j = is_wp_error($r) ? null : json_decode(wp_remote_retrieve_body($r), true);
+        $rep[$k] = ['code' => $code, 'n' => is_array($j) && !isset($j['error']) ? count($j) : ($j['message'] ?? null)];
+        if (is_array($j) && !isset($j['error'])) foreach ($j as $x) if (!empty($x['codi'])) $rows[$x['codi']] = $x;
+    }
+    return [$rows, $rep];
+}
+function cqs_agenda_run() {
+    if (!function_exists('eiv_import_event')) return ['error' => 'sin importador'];
+    [$rows, $rep] = cqs_gencat_events(); $tz = wp_timezone(); $evs = []; $skip = 0; $keys = [];
+    foreach ($rows as $x) {
+        if (!$keys) $keys = array_keys($x);
+        // Solo actos que se celebran en Cadaqués (no los que solo lo mencionan)
+        $where = remove_accents(mb_strtolower(implode(' ', array_map(fn($k) => is_string($x[$k] ?? null) ? $x[$k] : '', ['comarca_i_municipi', 'adre_a', 'espai', 'localitat', 'municipi']))));
+        if (strpos($where, 'cadaques') === false) { $skip++; continue; }
+        $hh = preg_match('/\b([01]?\d|2[0-3])(?:[:.]([0-5]\d))?\s*h/u', (string)($x['horari'] ?? ''), $h) ? sprintf('%02d:%02d', $h[1], $h[2] ?? 0) : '';
+        $d0 = substr((string)$x['data_inici'], 0, 10); $d1 = substr((string)($x['data_fi'] ?? $x['data_inici']), 0, 10);
+        try { $s = new DateTimeImmutable($d0.($hh ? ' '.$hh : ''), $tz); $e = $d1 && $d1 !== $d0 ? new DateTimeImmutable($d1, $tz) : null; } catch (Exception $ex) { continue; }
+        $link = '';
+        foreach (['enlla_os', 'url', 'linkbotoentrades'] as $k) { $v = $x[$k] ?? ''; if (is_array($v)) $v = $v['url'] ?? ''; if (preg_match('#https?://[^\s,]+#', (string)$v, $m)) { $link = $m[0]; break; } }
+        $place = trim(implode(', ', array_filter([is_string($x['espai'] ?? null) ? $x['espai'] : '', is_string($x['adre_a'] ?? null) ? $x['adre_a'] : ''])));
+        $desc = trim((string)($x['subt_tol'] ?? '')."\n\n".(string)($x['descripcio'] ?? ''));
+        if (!empty($x['horari'])) $desc = trim((string)$x['horari'])."\n\n".$desc;
+        $evs[] = ['uid' => 'gencat'.$x['codi'], 'title' => html_entity_decode((string)($x['denominaci'] ?? ''), ENT_QUOTES), 'start' => $s, 'end' => $e, 'allday' => !$hh || $e,
+                  'place' => $place, 'desc' => $desc, 'url' => $link ?: 'https://agenda.cultura.gencat.cat/'];
+    }
+    $f = ['id' => 'gencat', 'url' => 'https://analisi.transparenciacatalunya.cat/', 'link' => 'https://agenda.cultura.gencat.cat/', 'lang' => 'es', 'cat' => 'Cadaqués'];
+    $new = 0; $max = (new DateTimeImmutable('today', $tz))->modify('+180 days'); $list = [];
+    foreach ($evs as $ev) { if (empty($ev['title']) || $ev['start'] > $max) continue; $list[] = $ev['start']->format('Y-m-d').' · '.$ev['title']; if (eiv_import_event('gencat', $ev, $f)) $new++; }
+    $out = ['ts' => wp_date('c'), 'fuente' => $rep, 'filas' => count($rows), 'fuera_de_cadaques' => $skip, 'actos' => count($evs), 'nuevos' => $new, 'lista' => array_slice($list, 0, 40), 'campos' => $keys];
+    update_option('cqs_agenda_last', time(), false);
+    if ($new && function_exists('cqs_purge_all')) cqs_purge_all(); elseif ($new) do_action('litespeed_purge_all');
+    if (function_exists('cqs_out')) cqs_out('agenda-auto.json', $out);
+    return $out;
+}
+add_filter('cron_schedules', function ($s) { $s['cqs_3days'] = ['interval' => 3 * DAY_IN_SECONDS, 'display' => 'Cada 3 días']; return $s; });
+add_action('init', function () { if (!wp_next_scheduled('cqs_agenda_cron')) wp_schedule_event(time() + 600, 'cqs_3days', 'cqs_agenda_cron'); });
+add_action('cqs_agenda_cron', 'cqs_agenda_run');
+// Respaldo por si el cron de WordPress se retrasa: si han pasado más de 3 días (o nunca se ha hecho), se lanza con la siguiente visita
+add_action('wp_loaded', function () {
+    if (time() - (int)get_option('cqs_agenda_last', 0) < 3 * DAY_IN_SECONDS || get_transient('cqs_agenda_lock')) return;
+    set_transient('cqs_agenda_lock', 1, 900); @set_time_limit(180);
+    cqs_agenda_run();
+}, 60);
