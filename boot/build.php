@@ -510,7 +510,8 @@ function cqs_step_fichas() {
         }
         if ($hit === null) { $keep[] = $x; continue; }
         foreach (['phone', 'website', 'email', 'hours'] as $m) if (empty($keep[$hit][$m]) && !empty($x[$m])) $keep[$hit][$m] = $x[$m];
-        if (!empty($x['_g']) && empty($keep[$hit]['_g'])) { $keep[$hit]['_g'] = $x['_g']; $keep[$hit]['_gv'] = $x['_gv']; $keep[$hit]['_gc'] = $x['_gc'] ?? ''; if (!preg_match('/\d/', explode(',', $keep[$hit]['address'])[0]) && preg_match('/\d/', $x['address'])) $keep[$hit]['address'] = $x['address']; }
+        if (!empty($x['_g']) && empty($keep[$hit]['_g'])) { $keep[$hit]['_g'] = $x['_g']; $keep[$hit]['_gv'] = $x['_gv']; $keep[$hit]['_gc'] = $x['_gc'] ?? ''; $k0 = trim(explode(',', $keep[$hit]['address'])[0]); $x0 = trim(explode(',', $x['address'])[0]); $nost = fn($a) => $a === '' || preg_match('/^\d{5}\b|^(Cadaqu|Girona|Spain|España)/iu', $a);
+            if (($nost($k0) && !$nost($x0)) || (!preg_match('/\d/', $k0) && preg_match('/\d/', $x0) && !$nost($x0))) $keep[$hit]['address'] = $x['address']; }
         if ($x['_edit'] > $keep[$hit]['_edit']) $keep[$hit]['_edit'] = $x['_edit'];
         $dups[] = $x['title'].' = '.$keep[$hit]['title'];
     }
@@ -520,6 +521,10 @@ function cqs_step_fichas() {
         $first = trim(explode(',', (string)$x['address'])[0]);
         if ($first === '' || preg_match('/^\d{5}\b|^(Cadaqu|Girona|Spain|España)/iu', $first)) { $noaddr[] = $x['title']; return false; }
         return true; }));
+    // Las que se enviaron a la papelera y vuelven a estar en la guía (p. ej. ahora con dirección): se recuperan en vez de duplicarlas
+    $want = array_flip(array_column($keep, 'key')); $restored = 0;
+    foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'trash', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => [['key' => '_ssi_source', 'compare' => 'REGEXP', 'value' => '^(osm|g):']]]) as $id)
+        if (isset($want[(string)get_post_meta($id, '_ssi_source', true)])) { wp_untrash_post($id); $restored++; }
     // Fichas OSM publicadas antes que ya no están (duplicadas o cerradas): a la papelera (se pueden recuperar)
     $live = array_flip(array_column($keep, 'key')); $trashed = [];
     foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => ['publish', 'draft', 'pending'], 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => [['key' => '_ssi_source', 'compare' => 'REGEXP', 'value' => '^(osm|g):']]]) as $id) {
@@ -553,7 +558,7 @@ function cqs_step_fichas() {
     $byc = []; foreach ($keep as $x) { $byc[$x['cats'][1]] = ($byc[$x['cats'][1]] ?? 0) + 1; } arsort($byc);
     delete_option('cqs_verify_pos');
     $gk = count(array_filter($keep, fn($x) => strpos($x['key'], 'g:') === 0)); $gm = count(array_filter($keep, fn($x) => strpos($x['key'], 'osm:') === 0 && !empty($x['_g'])));
-    $rep = ['osm' => count($els), 'google' => $gn, 'google_nuevas' => $gk, 'osm_confirmadas_en_google' => $gm, 'fichas' => count($keep), 'descripciones_4_idiomas' => $ndesc, 'duplicados' => $dups, 'cerrados_en_osm' => $closed, 'a_la_papelera' => $trashed, 'sin_direccion' => $noaddr, 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
+    $rep = ['osm' => count($els), 'google' => $gn, 'google_nuevas' => $gk, 'osm_confirmadas_en_google' => $gm, 'fichas' => count($keep), 'recuperadas_de_la_papelera' => $restored, 'descripciones_4_idiomas' => $ndesc, 'duplicados' => $dups, 'cerrados_en_osm' => $closed, 'a_la_papelera' => $trashed, 'sin_direccion' => $noaddr, 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
     cqs_out('fichas-report.json', $rep);
     return array_merge($rep, ['duplicados' => count($dups), 'cerrados_en_osm' => count($closed), 'a_la_papelera' => count($trashed), 'sin_direccion' => count($noaddr)]);
 }
