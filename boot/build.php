@@ -141,6 +141,8 @@ function cqs_fill($html, $l) {
     }, $html);
     // Tarjetas cuya foto no se encontró: sin foto
     $html = str_replace(' cq-img"', '"', preg_replace('/ cq-img([^"]*)" style="--img:url\(data:image[^)]*\)"/', '$1"', $html));
+    // Fotos de sección sin archivo: fuera
+    $html = preg_replace('#<figure class="cq-fig"><img src="data:image[^"]*"[^>]*><figcaption>[^<]*</figcaption></figure>#', '', $html);
     $html = preg_replace_callback('/\{\{cf7:([a-z]+):([a-z]+)\}\}/', function ($m) {
         $f = (array)get_option('cqs_cf7', []); return (string)($f[$m[1]][$m[2]] ?? $f[$m[1]]['es'] ?? 0);
     }, $html);
@@ -231,6 +233,7 @@ function cqs_step_photos() {
             $cands = array_slice(cqs_wm_candidates($try), 0, 12); if (!$cands) continue;
             $info = cqs_wm_info($cands);
             foreach ($cands as $t) { $ii = $info[$t] ?? null; if (!$ii || !cqs_wm_ok($ii) || isset($used[$ii['descriptionurl'] ?? ''])) continue;
+                if (!empty($c['must']) && !preg_match('/'.$c['must'].'/i', remove_accents(rawurldecode($t)))) continue; // solo fotos de ese lugar
                 $done = cqs_wm_sideload($k, $t, $ii, $c['alt']); if ($done) { $done['via'] = $try; $used[$ii['descriptionurl'] ?? ''] = 1; break 2; } }
         }
         $rep[$k] = $done ?: 'no encontrada';
@@ -665,7 +668,7 @@ function cqs_step_menu() {
               'capcreus' => ['Cap de Creus', 'Cap de Creus', 'Cap de Creus', 'Cap de Creus'], 'dali' => ['Dalí y Portlligat', 'Dalí i Portlligat', 'Dalí and Portlligat', 'Dalí et Portlligat'],
               'history' => ['Historia', 'Història', 'History', 'Histoire'], 'routes' => ['Rutas y excursiones', 'Rutes i excursions', 'Walks and trips', 'Randonnées'],
               'sports' => ['Deportes', 'Esports', 'Sports', 'Sports'], 'eat' => ['Comer y beber', 'Menjar i beure', 'Eat and drink', 'Manger et boire'],
-              'sleep' => ['Dormir', 'Dormir', 'Stay', 'Dormir'], 'shop' => ['Comprar y servicios', 'Comprar i serveis', 'Shops and services', 'Commerces et services'],
+              'sleep' => ['Dormir', 'Dormir', 'Stay', 'Dormir'], 'shop' => ['Comercios y servicios', 'Comerços i serveis', 'Shops and services', 'Commerces et services'],
               'directory' => ['Directorio', 'Directori', 'Directory', 'Annuaire'], 'map' => ['Mapa', 'Mapa', 'Map', 'Carte'], 'agenda' => ['Agenda', 'Agenda', 'What’s on', 'Agenda'],
               'live' => ['Info práctica', 'Info pràctica', 'Practical info', 'Infos pratiques'], 'transport' => ['Transporte', 'Transport', 'Getting around', 'Transports'],
               'parking' => ['Aparcar', 'Aparcar', 'Parking', 'Se garer'], 'health' => ['Salud', 'Salut', 'Health', 'Santé'], 'housing' => ['Vivienda', 'Habitatge', 'Housing', 'Logement']];
@@ -691,10 +694,11 @@ function cqs_step_menu() {
         $menus = $byL; $created = true;
     }
     $rep = ['theme' => $theme, 'menus' => $menus];
-    $want = [['routes', 'visit'], ['sports', 'routes'], ['transport', 'live'], ['culture', 'agenda']];
+    $want = [['routes', 'visit'], ['sports', 'routes'], ['transport', 'live'], ['culture', 'agenda'], ['shop', 'sleep']];
     $lbl = ['routes' => ['es' => 'Rutas y excursiones', 'ca' => 'Rutes i excursions', 'en' => 'Walks and day trips', 'fr' => 'Randonnées'],
             'sports' => ['es' => 'Deportes', 'ca' => 'Esports', 'en' => 'Sports', 'fr' => 'Sports'],
             'transport' => ['es' => 'Transporte', 'ca' => 'Transport', 'en' => 'Getting around', 'fr' => 'Transports'],
+            'shop' => ['es' => 'Comercios y servicios', 'ca' => 'Comerços i serveis', 'en' => 'Shops and services', 'fr' => 'Commerces et services'],
             'culture' => ['es' => 'Cultura', 'ca' => 'Cultura', 'en' => 'Culture', 'fr' => 'Culture']];
     foreach ($menus as $l => $mid) {
         $items = (array)wp_get_nav_menu_items($mid);

@@ -121,3 +121,23 @@ add_action('wp_loaded', function () {
     $out['geo'] = array_map(fn($r) => [count($r['c']), $r['d'], $r['osm']], $g);
     cqs_out('routes-check.json', $out);
 }, 30);
+
+/* «Cómo llegar» de las fichas: abre la ruta en Google Maps desde donde estés (en el móvil, en la app de mapas),
+   en vez del formulario vacío de OpenStreetMap del núcleo. Vale para las tarjetas creadas por JavaScript. */
+add_action('wp_footer', function () { ?>
+<script>
+(function(){
+  function fix(a){
+    var h=a.getAttribute('href')||'',m;
+    if((m=h.match(/openstreetmap\.org\/directions\?to=([-\d.]+)(?:%2C|,)([-\d.]+)/i))) a.href='https://www.google.com/maps/dir/?api=1&travelmode=walking&destination='+m[1]+','+m[2];
+    else if((m=h.match(/openstreetmap\.org\/search\?query=([^&#]+)/i))) a.href='https://www.google.com/maps/search/?api=1&query='+m[1];
+    else return;
+    a.target='_blank'; a.rel='noopener';
+  }
+  function all(){ [].forEach.call(document.querySelectorAll('a[href*="openstreetmap.org/directions"],a[href*="openstreetmap.org/search"]'),fix); }
+  document.addEventListener('click',function(e){ var a=e.target.closest&&e.target.closest('a'); if(a) fix(a); },true);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',all); else all();
+  if(window.MutationObserver) new MutationObserver(all).observe(document.body,{childList:true,subtree:true});
+})();
+</script>
+<?php }, 60);

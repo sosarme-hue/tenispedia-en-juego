@@ -245,6 +245,91 @@
     "en": "View of Cadaqués",
     "fr": "Vue de Cadaqués"
    }
+  },
+  "cm_pl_bay": {
+   "try": [
+    "search:Portlligat badia",
+    "search:Portlligat bay",
+    "search:Portlligat"
+   ],
+   "must": "portlligat|port lligat|port-lligat",
+   "alt": {
+    "es": "La bahía cerrada de Portlligat",
+    "ca": "La badia tancada de Portlligat",
+    "en": "The enclosed bay of Portlligat",
+    "fr": "La baie fermée de Portlligat"
+   }
+  },
+  "cm_pl_boats": {
+   "try": [
+    "search:Portlligat barques",
+    "search:Portlligat boats",
+    "search:Portlligat"
+   ],
+   "must": "portlligat|port lligat|port-lligat",
+   "alt": {
+    "es": "Barcas de pesca en Portlligat",
+    "ca": "Barques de pesca a Portlligat",
+    "en": "Fishing boats in Portlligat",
+    "fr": "Barques de pêche à Portlligat"
+   }
+  },
+  "cm_pl_island": {
+   "try": [
+    "search:Illa de Portlligat",
+    "search:Portlligat island",
+    "search:Portlligat"
+   ],
+   "must": "portlligat|port lligat|port-lligat",
+   "alt": {
+    "es": "La isla de Portlligat frente a la cala",
+    "ca": "L’illa de Portlligat davant de la cala",
+    "en": "Portlligat island off the cove",
+    "fr": "L’île de Portlligat face à la crique"
+   }
+  },
+  "cm_pl_eggs": {
+   "try": [
+    "search:Portlligat Dalí ous",
+    "search:Portlligat Dalí eggs",
+    "search:Casa Dalí Portlligat",
+    "search:Portlligat Dalí"
+   ],
+   "must": "portlligat|port lligat|port-lligat",
+   "alt": {
+    "es": "Los huevos sobre la casa de Dalí en Portlligat",
+    "ca": "Els ous sobre la casa de Dalí a Portlligat",
+    "en": "The eggs on Dalí’s house in Portlligat",
+    "fr": "Les œufs sur la maison de Dalí à Portlligat"
+   }
+  },
+  "cm_pl_house2": {
+   "try": [
+    "search:Casa-Museu Salvador Dalí Portlligat",
+    "search:Dalí house Portlligat",
+    "search:Portlligat Dalí"
+   ],
+   "must": "portlligat|port lligat|port-lligat",
+   "alt": {
+    "es": "Las barracas blancas de la casa de Dalí, en Portlligat",
+    "ca": "Les barraques blanques de la casa de Dalí, a Portlligat",
+    "en": "The white huts of Dalí’s house in Portlligat",
+    "fr": "Les cabanes blanches de la maison de Dalí à Portlligat"
+   }
+  },
+  "cm_pubol": {
+   "try": [
+    "wiki:ca:Castell de Púbol",
+    "search:Castell Gala Dalí Púbol",
+    "search:Púbol castell"
+   ],
+   "must": "pubol",
+   "alt": {
+    "es": "Castillo Gala Dalí de Púbol",
+    "ca": "Castell Gala Dalí de Púbol",
+    "en": "Gala Dalí Castle, Púbol",
+    "fr": "Château Gala Dalí de Púbol"
+   }
   }
  },
  "hist": {
