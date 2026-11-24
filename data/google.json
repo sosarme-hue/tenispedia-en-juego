@@ -8379,5 +8379,73 @@
 "rating": 5,
 "votes": 22,
 "claimed": true
+},
+{
+"cid": "959193708189264862",
+"title": "Celler Martín Faixó",
+"cats": [
+"ocio-y-cultura",
+"bodegas-y-enoturismo"
+],
+"gcat": "Winery",
+"address": "Carr. de Cadaqués, s/n, 17488 Cadaqués, Girona",
+"phone": "+34682107142",
+"website": "http://www.martinfaixo.com/",
+"lat": 42.2946664,
+"lng": 3.2359183999999996,
+"rating": 4.6,
+"votes": 693,
+"claimed": true
+},
+{
+"cid": "9816969933536733015",
+"title": "Paratge de Tudela",
+"cats": [
+"ocio-y-cultura",
+"naturaleza-y-rutas"
+],
+"gcat": "Hiking area",
+"address": "Carretera del Far de Cap de Creus, 17488, Girona",
+"phone": "+34972193191",
+"website": "http://parcsnaturals.gencat.cat/ca/cap-creus",
+"lat": 42.321324,
+"lng": 3.2977187999999997,
+"rating": 4.7,
+"votes": 577,
+"claimed": true
+},
+{
+"cid": "6377836922493080308",
+"title": "Aparcament de Ses Portes",
+"cats": [
+"servicios",
+"aparcamientos"
+],
+"gcat": "Parking lot",
+"address": "Diseminado Afores, 4, 17488 Cadaqués, Girona, Spain",
+"phone": "+34972193191",
+"website": "http://parcsnaturals.gencat.cat/ca/xarxa-de-parcs/cap-creus/inici/",
+"lat": 42.3203539,
+"lng": 3.2947911,
+"rating": 4,
+"votes": 29,
+"claimed": false
+},
+{
+"cid": "3004429020392276329",
+"title": "Sa Perafita - MF",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carr. de Cadaqués, s/n, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.294480799999995,
+"lng": 3.2356133999999996,
+"rating": 4.2,
+"votes": 21,
+"claimed": false
 }
 ]
