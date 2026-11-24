@@ -526,6 +526,7 @@ function cqs_step_fichas() {
     foreach (array_chunk($send, 40) as $ch) { $r = eiv_fichas_run(cqs_req(['fichas' => $ch])); $res = array_merge($res, (array)($r['fichas'] ?? [])); }
     foreach ($keep as $x) { $id = $drafts[$x['key']] ?? 0;
         foreach ($res as $y) if (($y['key'] ?? '') === $x['key'] && !empty($y['id'])) { $id = $id ?: 0; update_post_meta($y['id'], '_cqs_osm_edit', $x['_edit']); update_post_meta($y['id'], '_cqs_osm_check', $x['_check']);
+            if ($x['website'] !== '' && (string)get_post_meta($y['id'], '_website', true) === '') update_post_meta($y['id'], '_website', $x['website']); // recupera webs quitadas por error
             if (!empty($x['_g'])) { update_post_meta($y['id'], '_cqs_google', $x['_g']); update_post_meta($y['id'], '_cqs_google_votes', $x['_gv']); } else delete_post_meta($y['id'], '_cqs_google'); }
         if ($id) wp_update_post(['ID' => $id, 'post_status' => 'draft']); }
     $err = array_values(array_filter($res, fn($x) => isset($x['error'])));
@@ -561,7 +562,12 @@ function cqs_step_verify() {
                 $body = is_object($r) && isset($r->body) ? mb_strtolower(substr((string)$r->body, 0, 60000)) : '';
                 $parked = preg_match('/domain (is )?for sale|dominio (está )?en venta|this domain (has expired|is parked)|parkingcrew|sedoparking|hugedomains|buy this domain/', $body);
                 $gone = preg_match('/(cerrado|cerramos) definitivamente|tancat definitivament|permanently closed|d[ée]finitivement ferm[ée]/', $body);
-                $web = ($code >= 200 && $code < 400 && !$parked) ? ($gone ? 'cerrado' : 'ok') : (in_array($code, [401, 403, 429, 503], true) ? 'protegida' : 'caida');
+                // Sin respuesta (tiempo agotado, fallo de conexión): no se da por caída salvo que el dominio ya no exista
+                $host = (string)parse_url($w, PHP_URL_HOST);
+                if ($code === 0) $web = ($host && gethostbyname($host) === $host && !checkdnsrr($host, 'A') && !checkdnsrr($host, 'AAAA')) ? 'caida' : 'sin respuesta';
+                elseif ($code >= 200 && $code < 400) $web = $parked ? 'caida' : ($gone ? 'cerrado' : 'ok');
+                elseif (in_array($code, [404, 410], true) || ($code >= 500 && $code !== 503)) $web = 'caida';
+                else $web = 'protegida';
             } elseif ($w) $web = 'redes';
             $goo = (string)get_post_meta($id, '_cqs_google', true) !== '';
             if ($web === 'cerrado') $estado = 'dudosa';
