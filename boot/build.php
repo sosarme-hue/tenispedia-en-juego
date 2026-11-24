@@ -458,7 +458,7 @@ function cqs_step_fichas() {
     if (!function_exists('eiv_fichas_run')) throw new Exception('sin núcleo');
     $bb = '42.255,3.245,42.335,3.335'; // Cadaqués, Portlligat y el Cap de Creus
     $q = "[out:json][timeout:60];(nwr[name][amenity]($bb);nwr[name][shop]($bb);nwr[name][tourism~\"hotel|guest_house|hostel|apartment|camp_site|museum|gallery|chalet|motel\"]($bb);nwr[name][office]($bb);nwr[name][healthcare]($bb);nwr[name][leisure~\"marina|sports_centre|fitness_centre|sailing_club\"]($bb);nwr[name][craft]($bb);nwr[name][club]($bb);nwr[name][sport~\"diving|scuba_diving|sailing|kayak\"]($bb););out center tags meta;";
-    $els = cqs_overpass($q); if ($els === null) throw new Exception('Overpass no responde');
+    $els = cqs_overpass($q); if ($els === null) { $els = json_decode((string)@file_get_contents(SSI_DIR.'out/osm-raw.json'), true); if (!is_array($els) || !$els) throw new Exception('Overpass no responde'); } // si Overpass falla, la última copia buena
     cqs_out('osm-raw.json', $els);
     $f = []; $skip = 0; $closed = [];
     foreach ($els as $e) {
