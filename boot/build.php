@@ -472,6 +472,14 @@ function cqs_step_fichas() {
             'hours' => $t['opening_hours'] ?? '', 'lat' => $lat, 'lng' => $lng,
             '_n' => cqs_norm_name($name), '_tags' => count($t), '_edit' => substr((string)($e['timestamp'] ?? ''), 0, 10), '_check' => $chk];
     }
+    // Negocios y profesionales de Google (Business Profile, recogidos con OpenSEO): data/google.json
+    $gn = 0;
+    foreach ((array)cqs_json('google.json') as $g) {
+        $gn++;
+        $f[] = ['key' => 'g:'.$g['cid'], 'title' => $g['title'], 'title_ca' => $g['title'], 'title_en' => $g['title'], 'content' => '', 'cats' => $g['cats'], 'location' => 'Cadaqués',
+            'address' => $g['address'], 'phone' => $g['phone'], 'website' => $g['website'], 'email' => '', 'hours' => '', 'lat' => $g['lat'], 'lng' => $g['lng'],
+            '_n' => cqs_norm_name($g['title']), '_tags' => -1, '_edit' => '', '_check' => '', '_g' => $g['cid'], '_gv' => (int)$g['votes']];
+    }
     // Duplicados: mismo nombre normalizado (o uno contenido en el otro) a menos de 200 m, o misma web o mismo teléfono a menos de 200 m.
     // Se queda la ficha con más datos y se le pasan los que le falten.
     usort($f, fn($a, $b) => $b['_tags'] <=> $a['_tags']);
@@ -479,8 +487,9 @@ function cqs_step_fichas() {
     foreach ($f as $x) {
         $hit = null;
         foreach ($keep as $i => $k) {
-            if ($x['lat'] === '' || $k['lat'] === '' || ($x['cats'][0] ?? '') !== ($k['cats'][0] ?? '')) continue; // solo dentro del mismo tipo de negocio
+            if ($x['lat'] === '' || $k['lat'] === '') continue;
             $d = cqs_dist($x['lat'], $x['lng'], $k['lat'], $k['lng']); if ($d > 200) continue;
+            if (($x['cats'][0] ?? '') !== ($k['cats'][0] ?? '') && !($x['_n'] !== '' && $x['_n'] === $k['_n'] && $d < 80)) continue; // solo dentro del mismo tipo de negocio (salvo mismo nombre en el mismo sitio)
             if (preg_match('/^(aparcament|parking|aparcamiento|pagament|farmacia|bus|parada)/', $x['_n']) && $d > 40) continue; // nombres genéricos: solo si están en el mismo punto
             $sameName = $x['_n'] !== '' && $k['_n'] !== '' && ($x['_n'] === $k['_n'] || (mb_strlen($x['_n']) > 4 && mb_strlen($k['_n']) > 4 && (strpos($x['_n'], $k['_n']) !== false || strpos($k['_n'], $x['_n']) !== false)));
             $host = fn($u) => preg_replace('/^www\./', '', (string)parse_url($u, PHP_URL_HOST));
@@ -491,27 +500,30 @@ function cqs_step_fichas() {
         }
         if ($hit === null) { $keep[] = $x; continue; }
         foreach (['phone', 'website', 'email', 'hours'] as $m) if (empty($keep[$hit][$m]) && !empty($x[$m])) $keep[$hit][$m] = $x[$m];
+        if (!empty($x['_g']) && empty($keep[$hit]['_g'])) { $keep[$hit]['_g'] = $x['_g']; $keep[$hit]['_gv'] = $x['_gv']; if (!preg_match('/\d/', explode(',', $keep[$hit]['address'])[0]) && preg_match('/\d/', $x['address'])) $keep[$hit]['address'] = $x['address']; }
         if ($x['_edit'] > $keep[$hit]['_edit']) $keep[$hit]['_edit'] = $x['_edit'];
         $dups[] = $x['title'].' = '.$keep[$hit]['title'];
     }
     // Fichas OSM publicadas antes que ya no están (duplicadas o cerradas): a la papelera (se pueden recuperar)
     $live = array_flip(array_column($keep, 'key')); $trashed = [];
-    foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => ['publish', 'draft', 'pending'], 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_key' => '_ssi_source', 'meta_compare' => 'LIKE', 'meta_value' => 'osm:']) as $id) {
+    foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => ['publish', 'draft', 'pending'], 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => [['key' => '_ssi_source', 'compare' => 'REGEXP', 'value' => '^(osm|g):']]]) as $id) {
         $src = (string)get_post_meta($id, '_ssi_source', true);
-        if (strpos($src, 'osm:') === 0 && !isset($live[$src])) { $trashed[] = get_the_title($id); wp_trash_post($id); }
+        if (preg_match('/^(osm|g):/', $src) && !isset($live[$src])) { $trashed[] = get_the_title($id); wp_trash_post($id); }
     }
     // Las que se pasaron a borrador en una revisión anterior se quedan en borrador
     $drafts = []; foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'draft', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_key' => '_cqs_verif_estado', 'meta_value' => 'dudosa']) as $id) $drafts[(string)get_post_meta($id, '_ssi_source', true)] = $id;
-    $send = array_map(fn($x) => array_diff_key($x, array_flip(['_n', '_tags', '_edit', '_check'])), $keep);
+    $send = array_map(fn($x) => array_diff_key($x, array_flip(['_n', '_tags', '_edit', '_check', '_g', '_gv'])), $keep);
     $res = [];
     foreach (array_chunk($send, 40) as $ch) { $r = eiv_fichas_run(cqs_req(['fichas' => $ch])); $res = array_merge($res, (array)($r['fichas'] ?? [])); }
     foreach ($keep as $x) { $id = $drafts[$x['key']] ?? 0;
-        foreach ($res as $y) if (($y['key'] ?? '') === $x['key'] && !empty($y['id'])) { $id = $id ?: 0; update_post_meta($y['id'], '_cqs_osm_edit', $x['_edit']); update_post_meta($y['id'], '_cqs_osm_check', $x['_check']); }
+        foreach ($res as $y) if (($y['key'] ?? '') === $x['key'] && !empty($y['id'])) { $id = $id ?: 0; update_post_meta($y['id'], '_cqs_osm_edit', $x['_edit']); update_post_meta($y['id'], '_cqs_osm_check', $x['_check']);
+            if (!empty($x['_g'])) { update_post_meta($y['id'], '_cqs_google', $x['_g']); update_post_meta($y['id'], '_cqs_google_votes', $x['_gv']); } else delete_post_meta($y['id'], '_cqs_google'); }
         if ($id) wp_update_post(['ID' => $id, 'post_status' => 'draft']); }
     $err = array_values(array_filter($res, fn($x) => isset($x['error'])));
     $byc = []; foreach ($keep as $x) { $byc[$x['cats'][1]] = ($byc[$x['cats'][1]] ?? 0) + 1; } arsort($byc);
     delete_option('cqs_verify_pos');
-    $rep = ['osm' => count($els), 'fichas' => count($keep), 'duplicados' => $dups, 'cerrados_en_osm' => $closed, 'a_la_papelera' => $trashed, 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
+    $gk = count(array_filter($keep, fn($x) => strpos($x['key'], 'g:') === 0)); $gm = count(array_filter($keep, fn($x) => strpos($x['key'], 'osm:') === 0 && !empty($x['_g'])));
+    $rep = ['osm' => count($els), 'google' => $gn, 'google_nuevas' => $gk, 'osm_confirmadas_en_google' => $gm, 'fichas' => count($keep), 'duplicados' => $dups, 'cerrados_en_osm' => $closed, 'a_la_papelera' => $trashed, 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
     cqs_out('fichas-report.json', $rep);
     return array_merge($rep, ['duplicados' => count($dups), 'cerrados_en_osm' => count($closed), 'a_la_papelera' => count($trashed)]);
 }
@@ -522,7 +534,7 @@ function cqs_step_fichas() {
    - dudosa: la web no existe o está caída Y el último dato de OSM tiene más de 3 años -> pasa a borrador (no se borra)
    La web caída se quita de la ficha para no enlazar a una página rota. Se reparte en tandas (20 webs a la vez). */
 function cqs_step_verify() {
-    $ids = get_posts(['post_type' => 'at_biz_dir', 'post_status' => ['publish', 'draft'], 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'orderby' => 'ID', 'order' => 'ASC', 'meta_key' => '_ssi_source', 'meta_compare' => 'LIKE', 'meta_value' => 'osm:']);
+    $ids = get_posts(['post_type' => 'at_biz_dir', 'post_status' => ['publish', 'draft'], 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'orderby' => 'ID', 'order' => 'ASC', 'meta_query' => [['key' => '_ssi_source', 'compare' => 'REGEXP', 'value' => '^(osm|g):']]]);
     $pos = (int)get_option('cqs_verify_pos', 0); $t0 = time(); $rep = (array)(json_decode((string)@file_get_contents(SSI_DIR.'out/verify-report.json'), true) ?: []);
     if (!$pos) $rep = ['verificada' => [], 'sin web' => [], 'dudosa' => [], 'web caida quitada' => []];
     $now = time(); $yrs = function ($d) use ($now) { $t = $d ? strtotime(substr($d, 0, 10)) : 0; return $t ? ($now - $t) / 31557600 : 99; };
@@ -542,16 +554,18 @@ function cqs_step_verify() {
                 $gone = preg_match('/(cerrado|cerramos) definitivamente|tancat definitivament|permanently closed|d[ée]finitivement ferm[ée]/', $body);
                 $web = ($code >= 200 && $code < 400 && !$parked) ? ($gone ? 'cerrado' : 'ok') : (in_array($code, [401, 403, 429, 503], true) ? 'protegida' : 'caida');
             } elseif ($w) $web = 'redes';
+            $goo = (string)get_post_meta($id, '_cqs_google', true) !== '';
             if ($web === 'cerrado') $estado = 'dudosa';
+            elseif ($goo) $estado = 'verificada';
             elseif ($web === 'ok' || $web === 'protegida' || $web === 'redes' || $age <= 2) $estado = 'verificada';
             elseif ($web === 'caida' && $age > 3) $estado = 'dudosa';
             else $estado = 'sin web';
             if ($web === 'caida') { delete_post_meta($id, '_website'); $rep['web caida quitada'][] = $title.' · '.$w; }
             update_post_meta($id, '_cqs_verif_estado', $estado);
-            update_post_meta($id, '_cqs_verif', ['fecha' => gmdate('Y-m-d'), 'web' => $web, 'osm_anos' => round($age, 1)]);
+            update_post_meta($id, '_cqs_verif', ['fecha' => gmdate('Y-m-d'), 'web' => $web, 'osm_anos' => round($age, 1), 'google' => $goo]);
             if ($estado === 'dudosa') wp_update_post(['ID' => $id, 'post_status' => 'draft']);
             elseif (get_post_status($id) === 'draft') wp_update_post(['ID' => $id, 'post_status' => 'publish']);
-            $rep[$estado][] = $title.' · web '.$web.' · OSM hace '.($age >= 99 ? '?' : round($age, 1)).' años';
+            $rep[$estado][] = $title.' · web '.$web.($goo ? ' · en Google' : '').' · OSM hace '.($age >= 99 ? '?' : round($age, 1)).' años';
         }
         $pos += count($batch); update_option('cqs_verify_pos', $pos, false);
     }

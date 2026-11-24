@@ -1,0 +1,8400 @@
+[
+{
+"cid": "10045168821978661099",
+"title": "Maginesa",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Carrer Gargal, 5, 17488 Cadaqués, Girona",
+"phone": "+34972258805",
+"website": "",
+"lat": 42.2850725,
+"lng": 3.2885915,
+"rating": 5,
+"votes": 2,
+"claimed": false
+},
+{
+"cid": "10110029124018551310",
+"title": "Cadaqués Taxi",
+"cats": [
+"servicios",
+"alquiler-de-coches-motos-y-bicis"
+],
+"gcat": "Taxi service",
+"address": "17488 Cadaqués",
+"phone": "+34621146378",
+"website": "http://cadaquestaxi.com/",
+"lat": 42.287071999999995,
+"lng": 3.281341,
+"rating": 4,
+"votes": 12,
+"claimed": true
+},
+{
+"cid": "1011137941309742580",
+"title": "Apt Es Poal",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer des Puig, 17488 Cadaqués, Girona",
+"phone": "+34650686174",
+"website": "https://www.aptespoal.com/",
+"lat": 42.288585999999995,
+"lng": 3.2813599,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "10160471165487426351",
+"title": "Engel & Völkers Cadaqués",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Carrer Miquel Rosset, 3, 17488 Cadaqués, Girona",
+"phone": "+34972111266",
+"website": "https://www.engelvoelkers.com/es/es/shops/cadaques",
+"lat": 42.2895287,
+"lng": 3.2778357999999996,
+"rating": 5,
+"votes": 4,
+"claimed": true
+},
+{
+"cid": "10164868882378173715",
+"title": "A. Es Doll",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Antique store",
+"address": "Avinguda Caritat Serinyana, 3, 17488 Cadaqués, Girona",
+"phone": "+34972159011",
+"website": "",
+"lat": 42.2894201,
+"lng": 3.2773545,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "10196829804774301874",
+"title": "Villa es Ros",
+"cats": [
+"dormir",
+"casas-rurales"
+],
+"gcat": "Holiday home",
+"address": "Camí Rda. Ros Pere Fet, 16, 17488 Cadaqués, Girona",
+"phone": "+34686964877",
+"website": "http://esros.es/",
+"lat": 42.2839068,
+"lng": 3.2873452999999997,
+"rating": 5,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "10199421067057884429",
+"title": "Catalina Iturria Botiga",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Carrer Unió, 14, 17488 Cadaqués, Girona",
+"phone": "+34667029981",
+"website": "",
+"lat": 42.2891269,
+"lng": 3.2759411,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "10237659035849104609",
+"title": "Visitas Guiadas y Tours Cadaqués",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Tour agency",
+"address": "Plaça frederic rahola, 17488 Cadaqués, Girona",
+"phone": "+34747485191",
+"website": "https://gironatour.com/cadaques",
+"lat": 42.288971599999996,
+"lng": 3.2776840999999997,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "10288122309999807252",
+"title": "Set Cadaqués",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Pl. des Portitxó, 8, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.setcadaques.com/",
+"lat": 42.289200799999996,
+"lng": 3.2796089999999998,
+"rating": 4.5,
+"votes": 544,
+"claimed": true
+},
+{
+"cid": "10290178248129012973",
+"title": "Casa Latina",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Souvenir store",
+"address": "Carrer de la Caseta, N2, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2888665,
+"lng": 3.2800989,
+"rating": 5,
+"votes": 8,
+"claimed": false
+},
+{
+"cid": "10314434400407890360",
+"title": "Hotel Llane Petit",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer del Doctor Bartomeus, 37, 17488 Cadaqués, Girona",
+"phone": "+34972251020",
+"website": "http://www.llanepetit.com/",
+"lat": 42.2830047,
+"lng": 3.2759408999999997,
+"rating": 4.5,
+"votes": 433,
+"claimed": true
+},
+{
+"cid": "10323424410833185786",
+"title": "El Trastocat",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Av. de Salvador Dalí, 17488 Cadaqués, Girona",
+"phone": "+34972159361",
+"website": "https://wecamp.net/destinos/cadaques",
+"lat": 42.2928402,
+"lng": 3.2831430999999998,
+"rating": 4,
+"votes": 97,
+"claimed": true
+},
+{
+"cid": "1032963299611604585",
+"title": "Cadaquésrent | Boats and Motobikes | Tienda",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "Avinguda Caritat Serinyana, 6, 17488 Cadaqués, Girona",
+"phone": "+34678431722",
+"website": "https://www.cadaquesrent.es/",
+"lat": 42.289612,
+"lng": 3.277406,
+"rating": 4.7,
+"votes": 74,
+"claimed": true
+},
+{
+"cid": "10369915482484418346",
+"title": "Lets Holidays rooms Cadaqués",
+"cats": [
+"dormir",
+"hostales-y-pensiones"
+],
+"gcat": "Hostel",
+"address": "Carrer de la Pruna, 10, 17488 Cadaqués, Girona",
+"phone": "+34656323605",
+"website": "",
+"lat": 42.2884033,
+"lng": 3.2741765999999997,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "10430118735365134660",
+"title": "Hostal El Ranxo",
+"cats": [
+"dormir",
+"hostales-y-pensiones"
+],
+"gcat": "Guest house",
+"address": "Avinguda Caritat Serinyana, 15, 17488 Cadaqués, Girona",
+"phone": "+34608273324",
+"website": "https://hostalelranxo.top/",
+"lat": 42.2898403,
+"lng": 3.2762572999999997,
+"rating": 4.5,
+"votes": 461,
+"claimed": true
+},
+{
+"cid": "10472547392575503967",
+"title": "Es Racó",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Carrer del Dr. Callís, 3, 17488 Cadaqués, Girona",
+"phone": "+34972159480",
+"website": "",
+"lat": 42.2884052,
+"lng": 3.2768273,
+"rating": 4.5,
+"votes": 558,
+"claimed": true
+},
+{
+"cid": "10610204519314715061",
+"title": "Tienda de ropa Oktop Cadaqués",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Carrer Curós, 6, 17488 Cadaqués, Girona",
+"phone": "+34872205209",
+"website": "https://oktop.cat/",
+"lat": 42.2880769,
+"lng": 3.2764583,
+"rating": 5,
+"votes": 24,
+"claimed": true
+},
+{
+"cid": "10635483052485789605",
+"title": "Pesca Salada Olga",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Convenience store",
+"address": "Carrer del Dr. Callís, 6, 17488 Cadaqués, Girona",
+"phone": "+34972258238",
+"website": "",
+"lat": 42.288449299999996,
+"lng": 3.2767347,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "10694848142974217654",
+"title": "Mil Nou Cents Boutique",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Women's clothing store",
+"address": "Plaça Frederic Rahola, 9, 17488 Cadaqués, Girona",
+"phone": "+34677059635",
+"website": "",
+"lat": 42.2890917,
+"lng": 3.2778859999999996,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "10758985807573198371",
+"title": "Bar La Catalana",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Plaça del Passeig, 14, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.289130199999995,
+"lng": 3.2788825,
+"rating": 3.1,
+"votes": 204,
+"claimed": false
+},
+{
+"cid": "10768368679557396062",
+"title": "SPAR CADAQUÉS",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Supermarket",
+"address": "Riera de Sant Vicenç, 8, 17488 Cadaqués, Girona",
+"phone": "+34972258633",
+"website": "http://www.valvi.com/",
+"lat": 42.2897624,
+"lng": 3.2765435999999997,
+"rating": 3.8,
+"votes": 275,
+"claimed": true
+},
+{
+"cid": "10905200276709090850",
+"title": "Mediterrania Artesans del Benestar Cadaqués",
+"cats": [
+"servicios",
+"estetica-y-bienestar"
+],
+"gcat": "Facial spa",
+"address": "Carrer de ses Hortes, 3, 17488 Cadaqués, Girona",
+"phone": "+34600997817",
+"website": "http://mediterraniacadaques.koibox.site/",
+"lat": 42.2889245,
+"lng": 3.2748676999999997,
+"rating": 5,
+"votes": 18,
+"claimed": true
+},
+{
+"cid": "10990905383599398448",
+"title": "Hostal Marina Cadaqués",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Riera de Sant Vicenç, 3, 17488 Cadaqués, Girona",
+"phone": "+34972159091",
+"website": "http://www.hostalmarinacadaques.com/",
+"lat": 42.288911999999996,
+"lng": 3.2772759999999996,
+"rating": 4.4,
+"votes": 514,
+"claimed": true
+},
+{
+"cid": "11240778562069774617",
+"title": "Museu de Cadaqués",
+"cats": [
+"ocio-y-cultura",
+"museos"
+],
+"gcat": "Art museum",
+"address": "Carrer d'en Narcís Monturiol, 15, 17488 Cadaqués, Girona",
+"phone": "+34972258877",
+"website": "http://www.fundaciojoanvehi.cat/",
+"lat": 42.2888626,
+"lng": 3.2749721999999997,
+"rating": 4,
+"votes": 152,
+"claimed": true
+},
+{
+"cid": "11257042788605577296",
+"title": "La Gritta CADAQUÉS Passeig",
+"cats": [
+"comer-y-beber",
+"pizzerias-e-italianos"
+],
+"gcat": "Pizza restaurant",
+"address": "Passeig, 11, 17488 Cadaqués, Girona",
+"phone": "+34972159471",
+"website": "http://www.pizzerialagritta.com/",
+"lat": 42.289276,
+"lng": 3.2786066,
+"rating": 4.2,
+"votes": 708,
+"claimed": true
+},
+{
+"cid": "11315963136911402114",
+"title": "Parada de Bus Cap de Creus",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Bus company",
+"address": "Carr. de Cadaqués al Cap de Creus, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2989137,
+"lng": 3.2850932,
+"rating": 1.3,
+"votes": 6,
+"claimed": false
+},
+{
+"cid": "1135630304713746182",
+"title": "Tienda SEUR Pickup",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Shipping service",
+"address": "Camí Port Lligat, 28, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.seur.com/",
+"lat": 42.293011899999996,
+"lng": 3.2784912999999998,
+"rating": 3,
+"votes": 2,
+"claimed": true
+},
+{
+"cid": "11520634954973948603",
+"title": "Restaurant La Sal Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Pl. des Portitxó, s/n, 17488 Cadaqués, Girona",
+"phone": "+34633578055",
+"website": "",
+"lat": 42.2890947,
+"lng": 3.2794718,
+"rating": 3.4,
+"votes": 2111,
+"claimed": true
+},
+{
+"cid": "11552431781545485265",
+"title": "Massatges Cadaqués Neil",
+"cats": [
+"servicios",
+"estetica-y-bienestar"
+],
+"gcat": "Massage therapist",
+"address": "Carrer de ses Hortes, 3, 17488 Cadaqués, Girona",
+"phone": "+34608557500",
+"website": "",
+"lat": 42.288962,
+"lng": 3.2747411,
+"rating": 4.9,
+"votes": 60,
+"claimed": true
+},
+{
+"cid": "1157662481093959796",
+"title": "CondisLife",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Supermarket",
+"address": "Avinguda Caritat Serinyana, 12, 17488 Cadaqués, Girona",
+"phone": "+34972159324",
+"website": "http://www.condis.es/",
+"lat": 42.2898019,
+"lng": 3.2771291,
+"rating": 4,
+"votes": 313,
+"claimed": true
+},
+{
+"cid": "11584264910241368908",
+"title": "BISTRÓ NERETA",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Pintor Joan Ponç, 1, 1, 17488 Cadaqués, Girona",
+"phone": "+34872221374",
+"website": "https://bistronereta.com/",
+"lat": 42.2904412,
+"lng": 3.2804732,
+"rating": 4.2,
+"votes": 25,
+"claimed": true
+},
+{
+"cid": "11620834082264274976",
+"title": "Cadaqués Divers",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Diving center",
+"address": "Plaça del Dr. Pont, 6, 17488 Cadaqués, Girona",
+"phone": "+34605336158",
+"website": "https://cadaquesdivers.com/",
+"lat": 42.2874487,
+"lng": 3.2757167,
+"rating": 4.8,
+"votes": 136,
+"claimed": true
+},
+{
+"cid": "11649685984562773624",
+"title": "Fustería Nicolau Corominas",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Cabinet store",
+"address": "Plaza Del Sa Llorenc, 105, 17488 Cadaqués, Girona",
+"phone": "+34972159487",
+"website": "",
+"lat": 42.289045099999996,
+"lng": 3.2779027,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "11657527796580783797",
+"title": "Hotel Rec de Palau",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Rec de Palau, 15, 17488 Cadaqués, Girona",
+"phone": "+34972159233",
+"website": "https://hotelrecdepalau.com/",
+"lat": 42.283275599999996,
+"lng": 3.2724737999999998,
+"rating": 4.2,
+"votes": 471,
+"claimed": true
+},
+{
+"cid": "11675652788859289913",
+"title": "La Gritta Cadaqués PIANC",
+"cats": [
+"comer-y-beber",
+"pizzerias-e-italianos"
+],
+"gcat": "Pizza restaurant",
+"address": "c/ Pianc, 9, 17488 Cadaqués, Girona",
+"phone": "+34872209473",
+"website": "http://www.pizzerialagritta.com/",
+"lat": 42.287538999999995,
+"lng": 3.2819963999999997,
+"rating": 4.2,
+"votes": 1992,
+"claimed": true
+},
+{
+"cid": "11725905761698063644",
+"title": "Restaurant Can Rafa",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Plaça del Passeig, 7, 17488 Cadaqués, Girona",
+"phone": "+34972159401",
+"website": "https://www.martinfaixo.com/ca/restaurants/",
+"lat": 42.2892308,
+"lng": 3.2785042,
+"rating": 4.5,
+"votes": 1790,
+"claimed": true
+},
+{
+"cid": "11818977284514962224",
+"title": "ONES CADAQUÉS, Platja Gran",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Adventure sports center",
+"address": "Platja Gran y Esportal, 17488 Cadaqués, Girona",
+"phone": "+34635229022",
+"website": "https://onesclubcadaques.com/",
+"lat": 42.2884184,
+"lng": 3.2776809,
+"rating": 4.7,
+"votes": 3,
+"claimed": false
+},
+{
+"cid": "11861316237038553197",
+"title": "Mut",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Plaça del Dr. Pont, 12, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.287633299999996,
+"lng": 3.276011,
+"rating": 4,
+"votes": 812,
+"claimed": false
+},
+{
+"cid": "11884966613689651418",
+"title": "Societat l'Amistat Cadaqués",
+"cats": [
+"ocio-y-cultura",
+"entidades"
+],
+"gcat": "Cultural association",
+"address": "Plaça Doctor Trèmols, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258800",
+"website": "http://societatlamistatcadaques.cat/",
+"lat": 42.2887007,
+"lng": 3.2775124,
+"rating": 4,
+"votes": 8,
+"claimed": true
+},
+{
+"cid": "11907378621207637054",
+"title": "BIOSANA ALIMENTACIÓ ECOLÓGICA HERBODIETETICA",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Organic shop",
+"address": "Avinguda Caritat Serinyana, 27, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.290025,
+"lng": 3.2748901999999998,
+"rating": 4.7,
+"votes": 23,
+"claimed": true
+},
+{
+"cid": "11937082579796965675",
+"title": "Platja des Llané Petit",
+"cats": [
+"servicios",
+"jardineria"
+],
+"gcat": "Landscaper",
+"address": "Carrer de Sa Jorneta, 1, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2832145,
+"lng": 3.2760423999999997,
+"rating": 4.6,
+"votes": 5,
+"claimed": false
+},
+{
+"cid": "11941890968671080362",
+"title": "Sa Riera",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Handbags shop",
+"address": "Plaça Frederic Rahola, 2, 17488 Cadaqués, Girona",
+"phone": "+34690647482",
+"website": "",
+"lat": 42.289079699999995,
+"lng": 3.2773695,
+"rating": 4,
+"votes": 16,
+"claimed": false
+},
+{
+"cid": "11963240959792348518",
+"title": "bazar casa de cadaques",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Store",
+"address": "Camí Port Lligat, 117, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.290487,
+"lng": 3.2740082999999998,
+"rating": 4.2,
+"votes": 10,
+"claimed": true
+},
+{
+"cid": "11995005827387189832",
+"title": "Unió Esportiva Cadaqués",
+"cats": [
+"deporte-y-nautica",
+"clubes-deportivos"
+],
+"gcat": "Sports club",
+"address": "Carrer Lluís Aznarez, s/n, 17488 Cadaqués, Girona",
+"phone": "+34972159035",
+"website": "http://www.unioesportivacadaques.com/",
+"lat": 42.2920063,
+"lng": 3.2796255,
+"rating": 4.1,
+"votes": 38,
+"claimed": false
+},
+{
+"cid": "12009312728880836760",
+"title": "Color",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Furniture store",
+"address": "Carrer Unió, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258656",
+"website": "",
+"lat": 42.28881,
+"lng": 3.2763299999999997,
+"rating": 2.7,
+"votes": 7,
+"claimed": false
+},
+{
+"cid": "12097871337414686866",
+"title": "Assessoria Cap de Creus",
+"cats": [
+"servicios",
+"asesorias-y-gestorias"
+],
+"gcat": "Tax assessor",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "+34972159170",
+"website": "http://www.acapdecreus.cat/",
+"lat": 42.2896643,
+"lng": 3.2773315,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "12100554896510766763",
+"title": "fish & fish gallery",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer Curós, 4, 17488 Cadaqués, Girona",
+"phone": "+34647131225",
+"website": "http://nataliavillanueva-art.com/",
+"lat": 42.2880214,
+"lng": 3.2765003,
+"rating": 5,
+"votes": 4,
+"claimed": false
+},
+{
+"cid": "12115610837501884920",
+"title": "Gin Cadaqués S.L.",
+"cats": [
+"comprar",
+"vinotecas-y-gourmet"
+],
+"gcat": "Distillery",
+"address": "Carrer del Duc, 17488 Cadaqués, Girona",
+"phone": "+34618262355",
+"website": "",
+"lat": 42.2889737,
+"lng": 3.2817507,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "12153231412740044579",
+"title": "Es Portal",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Beach clothing store",
+"address": "Plaça Doctor Trèmols, 8, 17488 Cadaqués, Girona",
+"phone": "+34972159247",
+"website": "",
+"lat": 42.288556899999996,
+"lng": 3.2772829999999997,
+"rating": 4.3,
+"votes": 4,
+"claimed": false
+},
+{
+"cid": "12191623802105629514",
+"title": "La Fonda Restaurant",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer de sa Tórtora, 64, 17488 Cadaqués, Girona",
+"phone": "+34621492587",
+"website": "https://fondadecadaques.com/",
+"lat": 42.2908888,
+"lng": 3.279252,
+"rating": 5,
+"votes": 18,
+"claimed": true
+},
+{
+"cid": "12254296473230746270",
+"title": "Cadaques Cuina",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Takeout restaurant",
+"address": "Avinguda Caritat Serinyana, 15, 17488 Cadaqués, Girona",
+"phone": "+34676203270",
+"website": "",
+"lat": 42.2898698,
+"lng": 3.2762073,
+"rating": 4.5,
+"votes": 69,
+"claimed": true
+},
+{
+"cid": "1231498600443035870",
+"title": "El xiri d'en Dani",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Playa de, 17488 Port Lligat, Girona",
+"phone": "",
+"website": "",
+"lat": 42.294635899999996,
+"lng": 3.2871679,
+"rating": 4.4,
+"votes": 888,
+"claimed": true
+},
+{
+"cid": "12340880680431537546",
+"title": "Kayaking Costa Brava Portlligat",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Canoe & kayak rental service",
+"address": "Cala de, 17488 Port Lligat, Girona",
+"phone": "+34646901588",
+"website": "http://www.kayakingcostabrava.com/",
+"lat": 42.2944866,
+"lng": 3.2874250999999997,
+"rating": 4.9,
+"votes": 288,
+"claimed": true
+},
+{
+"cid": "12362660665779663546",
+"title": "Arrossos i brasa \"Mos\"",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Paseo, 6, 17488 Cadaqués, Girona",
+"phone": "+34972258309",
+"website": "",
+"lat": 42.289133199999995,
+"lng": 3.2783419,
+"rating": 3.1,
+"votes": 990,
+"claimed": true
+},
+{
+"cid": "12382851875535062667",
+"title": "Restaurant S'Entina",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Plaça Doctor Trèmols, 6, 17488 Cadaqués, Girona",
+"phone": "+34621493011",
+"website": "",
+"lat": 42.2885067,
+"lng": 3.2774015999999997,
+"rating": 4,
+"votes": 749,
+"claimed": true
+},
+{
+"cid": "12432234271085410022",
+"title": "Dofines",
+"cats": [
+"comprar",
+"floristerias"
+],
+"gcat": "Florist",
+"address": "Carrer des Call, 6, 17488 Cadaqués, Girona",
+"phone": "+34689389805",
+"website": "",
+"lat": 42.288443,
+"lng": 3.2765404,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "12440174397341965224",
+"title": "Fam crew SL",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Boutique",
+"address": "Carrer del Dr. Callís, 18, 17488 Cadaqués, Girona",
+"phone": "+34674064834",
+"website": "",
+"lat": 42.288109999999996,
+"lng": 3.2766927999999997,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "12479260161664583363",
+"title": "ES BAR DE DALT",
+"cats": [
+"comer-y-beber",
+"tapas-y-vermut"
+],
+"gcat": "Bar & grill",
+"address": "Carr. de Cap de Creus, 2, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.instagram.com/esbardedalt_",
+"lat": 42.2927622,
+"lng": 3.2807153,
+"rating": 4.6,
+"votes": 1292,
+"claimed": true
+},
+{
+"cid": "12559597376012517607",
+"title": "Perruqueria Nouestil",
+"cats": [
+"servicios",
+"peluquerias"
+],
+"gcat": "Hair salon",
+"address": "Carrer de la Font Vella, 3, 17488 Cadaqués, Girona",
+"phone": "+34622741984",
+"website": "",
+"lat": 42.2902002,
+"lng": 3.2783149,
+"rating": 4.7,
+"votes": 103,
+"claimed": true
+},
+{
+"cid": "12634300744158878441",
+"title": "Merder",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Trilla, 7, 17488 Cadaqués, Girona",
+"phone": "+34872205220",
+"website": "",
+"lat": 42.2887434,
+"lng": 3.2741643999999996,
+"rating": 4.8,
+"votes": 522,
+"claimed": true
+},
+{
+"cid": "12643029187350450846",
+"title": "Fruites Mediterrània",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Fruit and vegetable store",
+"address": "Avinguda Caritat Serinyana, 7, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.289521199999996,
+"lng": 3.2772395999999997,
+"rating": 5,
+"votes": 5,
+"claimed": true
+},
+{
+"cid": "12652613692515644656",
+"title": "Casa Isabelle Caials",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer de Ses Boquelles, 3, 17488 Cadaqués, Girona",
+"phone": "+33663265733",
+"website": "",
+"lat": 42.2876159,
+"lng": 3.2964088,
+"rating": 5,
+"votes": 2,
+"claimed": false
+},
+{
+"cid": "12671259949042044410",
+"title": "Hotel Rocamar",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer del Doctor Bartomeus, 17488, 17488 Cadaqués, Girona",
+"phone": "+34972258150",
+"website": "http://www.rocamar.com/",
+"lat": 42.281951299999996,
+"lng": 3.2761636,
+"rating": 4,
+"votes": 7,
+"claimed": false
+},
+{
+"cid": "12711964042932998944",
+"title": "Compartir",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Riera de Sant Vicenç, s/n, 17488 Cadaqués, Girona",
+"phone": "+34972258482",
+"website": "http://www.compartircadaques.com/",
+"lat": 42.289307699999995,
+"lng": 3.2759068,
+"rating": 4.6,
+"votes": 3010,
+"claimed": true
+},
+{
+"cid": "12742398613704048251",
+"title": "Novavenda - Supermercat Cadaqués",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Supermarket",
+"address": "Avinguda Caritat Serinyana, 20, 17488 Cadaqués, Girona",
+"phone": "+34972159263",
+"website": "https://novavenda.com/establiments/",
+"lat": 42.2900813,
+"lng": 3.2744114,
+"rating": 4.1,
+"votes": 74,
+"claimed": true
+},
+{
+"cid": "12770050827554135151",
+"title": "Àmfora",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Riba Pitxot, 12, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.286209199999995,
+"lng": 3.2764143,
+"rating": 3.9,
+"votes": 156,
+"claimed": false
+},
+{
+"cid": "12794154432092379021",
+"title": "Portlligat car parking",
+"cats": [
+"servicios",
+"aparcamientos"
+],
+"gcat": "Parking lot",
+"address": "Carrer Riera de Portlligat, 2, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://cadaques.cat/ca/area/mobilitat/parquings.html",
+"lat": 42.2954052,
+"lng": 3.2868565999999997,
+"rating": 3.3,
+"votes": 276,
+"claimed": false
+},
+{
+"cid": "1279976909858711937",
+"title": "Restaurant Salvador",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Camí de s'Arenella, 3, 17488 Cadaqués, Girona",
+"phone": "+34872208262",
+"website": "https://hotelvillasalvador.com/",
+"lat": 42.2842274,
+"lng": 3.2886718999999998,
+"rating": 4.8,
+"votes": 48,
+"claimed": true
+},
+{
+"cid": "12860019827150204207",
+"title": "Notaría de Cadaqués: Maria del Carmen Rusiñol Riba",
+"cats": [
+"servicios",
+"notarias"
+],
+"gcat": "Notary public",
+"address": "Carrer del Teatre, 4, Piso 1º, 17488 Cadaqués, Girona",
+"phone": "+34972259066",
+"website": "https://www.notariadecadaques.com/",
+"lat": 42.290264799999996,
+"lng": 3.2747827999999997,
+"rating": 5,
+"votes": 6,
+"claimed": true
+},
+{
+"cid": "12883685572507821750",
+"title": "Boutique Blaumarí",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Carrer Hort d'en Sanés, 1, 17488 Cadaqués, Girona",
+"phone": "+34972159118",
+"website": "https://www.boutiqueblaumari.com/",
+"lat": 42.288959299999995,
+"lng": 3.2808517,
+"rating": 5,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "12909359614219595647",
+"title": "MAR ACÚSTIC",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Boat tour agency",
+"address": "17488 Port Lligat, Girona",
+"phone": "+34646242523",
+"website": "http://maracustic.com/",
+"lat": 42.2931448,
+"lng": 3.2864272,
+"rating": 5,
+"votes": 8,
+"claimed": true
+},
+{
+"cid": "12949039581717594871",
+"title": "Som8 Cafeteria fleca",
+"cats": [
+"comer-y-beber",
+"cafes-y-desayunos"
+],
+"gcat": "Cafe",
+"address": "17488 Cadaqués, Girona",
+"phone": "+34609322853",
+"website": "",
+"lat": 42.289845,
+"lng": 3.2762319,
+"rating": 4.6,
+"votes": 162,
+"claimed": false
+},
+{
+"cid": "12964360235452443566",
+"title": "Akira Flats Cadaqués Apartments",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Carrer Puig Gentil, 12, 17488 Cadaqués, Girona",
+"phone": "+34699957412",
+"website": "http://www.akiraflats.com/",
+"lat": 42.2888586,
+"lng": 3.2733141999999997,
+"rating": 3,
+"votes": 6,
+"claimed": false
+},
+{
+"cid": "12967648596274290621",
+"title": "Dalí Boat Tour Cadaques",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Boat tour agency",
+"address": "Riba de, 17488 Port Lligat, Girona",
+"phone": "+34617465757",
+"website": "http://www.daliboattour.com/",
+"lat": 42.2932013,
+"lng": 3.286321,
+"rating": 5,
+"votes": 184,
+"claimed": true
+},
+{
+"cid": "12968306593555711466",
+"title": "Llibreria Ses Minves",
+"cats": [
+"comprar",
+"librerias-y-papelerias"
+],
+"gcat": "Book store",
+"address": "Carrer de la Miranda, s/n, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.289127199999996,
+"lng": 3.2816107,
+"rating": 4.8,
+"votes": 45,
+"claimed": true
+},
+{
+"cid": "12987333417016244764",
+"title": "Amorós Photo",
+"cats": [
+"servicios",
+"fotografia"
+],
+"gcat": "Photographer",
+"address": "Carrer Pablo Ruiz Picasso, 19, 17488 Cadaqués, Girona",
+"phone": "+34680454009",
+"website": "http://www.oamoros.com/",
+"lat": 42.2908724,
+"lng": 3.2795433999999997,
+"rating": 5,
+"votes": 4,
+"claimed": true
+},
+{
+"cid": "13010162418363097264",
+"title": "Restaurant Marina Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Riera de Sant Vicenç, 3, 17488 Cadaqués, Girona",
+"phone": "+34972159091",
+"website": "",
+"lat": 42.289043299999996,
+"lng": 3.2770751,
+"rating": 4.7,
+"votes": 205,
+"claimed": true
+},
+{
+"cid": "13040461295837480807",
+"title": "Fase Wind",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "General store",
+"address": "Plaça des Poal, 2, 17488 Cadaqués, Girona",
+"phone": "+34621014083",
+"website": "https://fasewind.com/",
+"lat": 42.2889007,
+"lng": 3.2810371,
+"rating": 4.2,
+"votes": 10,
+"claimed": true
+},
+{
+"cid": "13092261596064653084",
+"title": "CAN MIRANDA",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Carrer de la Miranda, 6, 17488 Cadaqués, Girona",
+"phone": "+34635220571",
+"website": "http://www.immocdq.com/",
+"lat": 42.2889134,
+"lng": 3.28125,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "13101478817115698940",
+"title": "Galeria de Arte Anne G",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer Curós, 8, 17488 Cadaqués, Girona",
+"phone": "+33628433835",
+"website": "https://www.instagram.com/galeria_anne_g?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+"lat": 42.2880884,
+"lng": 3.2763895,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "13113926110662418711",
+"title": "Suite Valentine",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Plaça del Passeig, 11, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://www.thinkcadaques.com/suite_valentine/",
+"lat": 42.2892909,
+"lng": 3.2786511,
+"rating": 3.8,
+"votes": 5,
+"claimed": false
+},
+{
+"cid": "13128442624028481005",
+"title": "Restaurant Casa Pilar",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer de la Miranda, 4, 17488 Cadaqués, Girona",
+"phone": "+34972258701",
+"website": "",
+"lat": 42.2888241,
+"lng": 3.2812316999999998,
+"rating": 4.4,
+"votes": 736,
+"claimed": true
+},
+{
+"cid": "13156745869754163795",
+"title": "Restaurant Bar L'Estable",
+"cats": [
+"comer-y-beber",
+"tapas-y-vermut"
+],
+"gcat": "Gastropub",
+"address": "Riba Pitxot, s/n, 17488 Cadaqués, Girona",
+"phone": "+34679551302",
+"website": "",
+"lat": 42.2868012,
+"lng": 3.2762295,
+"rating": 3.7,
+"votes": 612,
+"claimed": true
+},
+{
+"cid": "13162716514208521239",
+"title": "DE TOT I MÉS",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Gift shop",
+"address": "Plaça, Av. de Salvador Dalí, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258669",
+"website": "",
+"lat": 42.2897471,
+"lng": 3.2743938,
+"rating": 4.2,
+"votes": 16,
+"claimed": true
+},
+{
+"cid": "13164703962415017410",
+"title": "Instal·lacions Elecalaigües SL",
+"cats": [
+"servicios",
+"electricistas"
+],
+"gcat": "Electrician",
+"address": "Carrer Miquel Rosset, 35, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.291171,
+"lng": 3.2799126999999997,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "13208544638471313024",
+"title": "Aqualia",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Water utility company",
+"address": "Carrer Unió, 7, 17488 Cadaqués, Girona",
+"phone": "+34900814081",
+"website": "http://www.aqualia.com/",
+"lat": 42.2889585,
+"lng": 3.2760675,
+"rating": 2,
+"votes": 4,
+"claimed": true
+},
+{
+"cid": "13213927390079880769",
+"title": "Ses Hortes",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Carrer de ses Hortes, 6, 17488 Cadaqués, Girona",
+"phone": "+34972259046",
+"website": "https://m.facebook.com/restaurantSesHortes/",
+"lat": 42.2891761,
+"lng": 3.2747474,
+"rating": 4,
+"votes": 810,
+"claimed": false
+},
+{
+"cid": "13248595930035176216",
+"title": "La Fonda",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer de sa Tórtora, 64, 17488 Cadaqués, Girona",
+"phone": "+34972258019",
+"website": "https://www.fondadecadaques.com/es/",
+"lat": 42.29087,
+"lng": 3.2792461999999998,
+"rating": 4.2,
+"votes": 249,
+"claimed": true
+},
+{
+"cid": "13319549918567180941",
+"title": "Can Shelabi Restaurant",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Riera de San Vicent, 9, 17488 Cadaqués, Girona",
+"phone": "+34972258900",
+"website": "http://www.canshelabi.com/",
+"lat": 42.2892728,
+"lng": 3.2767337,
+"rating": 4.4,
+"votes": 993,
+"claimed": true
+},
+{
+"cid": "13331750925792027105",
+"title": "Guingueta",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Miquel Rosset, 8, 17488 Cadaqués, Girona",
+"phone": "+34662213183",
+"website": "",
+"lat": 42.289666499999996,
+"lng": 3.2780917,
+"rating": 4.6,
+"votes": 92,
+"claimed": true
+},
+{
+"cid": "13405388287214594523",
+"title": "Cadaqués Tours - Excursiones en barco",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Boat tour agency",
+"address": "Camí Port Lligat, 17488 Cadaqués, Girona",
+"phone": "+34618612283",
+"website": "http://www.cadaquestours.es/",
+"lat": 42.293163899999996,
+"lng": 3.286361,
+"rating": 5,
+"votes": 47,
+"claimed": true
+},
+{
+"cid": "1341154174643274186",
+"title": "Casa Colomer",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Carrer Figueres, 7, 17488 Cadaqués, Girona",
+"phone": "+33648835747",
+"website": "",
+"lat": 42.2911388,
+"lng": 3.2808986,
+"rating": 4.5,
+"votes": 10,
+"claimed": true
+},
+{
+"cid": "13415769614342074918",
+"title": "Núria Riberas Albert",
+"cats": [
+"comprar",
+"pescaderias"
+],
+"gcat": "Fish store",
+"address": "Carrer d'en Narcís Monturiol, 9, 17488 Cadaqués, Girona",
+"phone": "+34972258187",
+"website": "",
+"lat": 42.291732499999995,
+"lng": 3.2797402,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "13459270334873349958",
+"title": "Patricia Sicardi",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carr. de Roses, 12, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://patriciasicardi.es/",
+"lat": 42.2894866,
+"lng": 3.2715235,
+"rating": 4.9,
+"votes": 7,
+"claimed": false
+},
+{
+"cid": "13470923180300416546",
+"title": "Centre Veterinari - Es cau d'en Pinxo #Cadaqués",
+"cats": [
+"salud",
+"veterinarios"
+],
+"gcat": "Veterinarian",
+"address": "Carrer Miquel Rosset, 39, 17488 Cadaqués, Girona",
+"phone": "+34653904187",
+"website": "http://www.escaudenpinxo.com/",
+"lat": 42.2910203,
+"lng": 3.2803202999999996,
+"rating": 4.7,
+"votes": 23,
+"claimed": true
+},
+{
+"cid": "135165291776940282",
+"title": "Cadaq’s",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Plaça del Passeig, 3, 17488 Cadaqués, Girona",
+"phone": "+34628066439",
+"website": "",
+"lat": 42.2891002,
+"lng": 3.2781428999999997,
+"rating": 4.8,
+"votes": 1282,
+"claimed": true
+},
+{
+"cid": "13556094220407740573",
+"title": "Gelateria Es Cucurutxo",
+"cats": [
+"comer-y-beber",
+"heladerias"
+],
+"gcat": "Ice cream shop",
+"address": "Riba Nemesi Llorens, 2 42, 288032,3.27739, 17488 Cadaqués, Girona",
+"phone": "+34620080508",
+"website": "https://www.instagram.com/es.cucurutxo?igsh=bzVib3I0NGw1OTh5",
+"lat": 42.288075,
+"lng": 3.2770848,
+"rating": 4.6,
+"votes": 264,
+"claimed": true
+},
+{
+"cid": "13561408603121736796",
+"title": "Atzur",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Gift shop",
+"address": "Carrer des Call, 14, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.288421,
+"lng": 3.2763378999999997,
+"rating": 5,
+"votes": 7,
+"claimed": false
+},
+{
+"cid": "13573098762868608226",
+"title": "Cadaqués Rent a Boat",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "17488 Port Lligat, Girona",
+"phone": "+34620288126",
+"website": "https://cadaquesrentaboat.com/",
+"lat": 42.2945023,
+"lng": 3.2874599,
+"rating": 5,
+"votes": 16,
+"claimed": true
+},
+{
+"cid": "13615836090424056154",
+"title": "Joaquím Vila Torrens",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Cabinet store",
+"address": "Carrer d'en Narcís Monturiol, 17, B, 17488 Cadaqués, Girona",
+"phone": "+34972258007",
+"website": "",
+"lat": 42.2886886,
+"lng": 3.2748961,
+"rating": 5,
+"votes": 2,
+"claimed": false
+},
+{
+"cid": "13707681533629930014",
+"title": "Lloga'm Cadaqués",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Carrer Nou, 11, 2º pis, 17488 Cadaqués, Girona",
+"phone": "+34639009154",
+"website": "",
+"lat": 42.2880513,
+"lng": 3.2745868999999996,
+"rating": 2,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "13728754331091995554",
+"title": "Rastell",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Plaça Doctor Trèmols, 3, 17488 Cadaqués, Girona",
+"phone": "+34972258325",
+"website": "",
+"lat": 42.2883551,
+"lng": 3.276948,
+"rating": 2.8,
+"votes": 9,
+"claimed": false
+},
+{
+"cid": "13739512045424964879",
+"title": "Serveis Immobiliaris Soms - Granados",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Avinguda Caritat Serinyana, 26 - 28, Loc, 17488 Cadaqués, Girona",
+"phone": "+34972251006",
+"website": "http://www.somsgranados.com/",
+"lat": 42.2901459,
+"lng": 3.2745306,
+"rating": 4.3,
+"votes": 78,
+"claimed": true
+},
+{
+"cid": "13765284581074645553",
+"title": "Bar de la Societat l'Amistat",
+"cats": [
+"comer-y-beber",
+"cafes-y-desayunos"
+],
+"gcat": "Cafe",
+"address": "Plaça Doctor Trèmols, 7, 17488 Cadaqués, Girona",
+"phone": "+34972258800",
+"website": "http://www.societatlamistatcdq.blogspot.com/",
+"lat": 42.2886068,
+"lng": 3.2775961,
+"rating": 4,
+"votes": 62,
+"claimed": true
+},
+{
+"cid": "13778943520301142585",
+"title": "Forn de pa Sanés",
+"cats": [
+"comprar",
+"panaderias-y-pastelerias"
+],
+"gcat": "Bakery",
+"address": "Riba Nemesi Llorens, 2, 17488 Cadaqués, Girona",
+"phone": "+34972258810",
+"website": "",
+"lat": 42.2880786,
+"lng": 3.2770870999999997,
+"rating": 4.2,
+"votes": 45,
+"claimed": true
+},
+{
+"cid": "13852261180498854308",
+"title": "POLONIO Cadaqués",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Riba Pitxot, 8, 17488 Cadaqués, Girona",
+"phone": "+34697377886",
+"website": "https://thepolonio.com/",
+"lat": 42.2865819,
+"lng": 3.2762579,
+"rating": 4.9,
+"votes": 56,
+"claimed": true
+},
+{
+"cid": "13863610871595716963",
+"title": "Mentha | Passió per la jardineria",
+"cats": [
+"servicios",
+"jardineria"
+],
+"gcat": "Garden center",
+"address": "Carrer de Santa Barbara, 29, 17488 Cadaqués, Girona",
+"phone": "+34610303699",
+"website": "http://www.menthagarden.com/",
+"lat": 42.288624999999996,
+"lng": 3.273738,
+"rating": 4.2,
+"votes": 5,
+"claimed": true
+},
+{
+"cid": "13886682583462719063",
+"title": "Apartaments S'Arenella",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Serviced apartment",
+"address": "Avinguda Caritat Serinyana, 12, 17488 Cadaqués, Girona",
+"phone": "+34685830863",
+"website": "https://linda-recommends.com/apartaments-s-39-arenella-spain",
+"lat": 42.2898019,
+"lng": 3.2771291,
+"rating": 3,
+"votes": 3,
+"claimed": false
+},
+{
+"cid": "13895466138503792038",
+"title": "Carpe Diem Cadaqués",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Serviced accommodation",
+"address": "Carr. de Cap de Creus, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258131",
+"website": "http://www.carpediemcadaques.com/",
+"lat": 42.293414999999996,
+"lng": 3.2800103999999997,
+"rating": 4.7,
+"votes": 500,
+"claimed": true
+},
+{
+"cid": "13945498294249326784",
+"title": "Inmobiliaria Pianc, Cadaqués",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "RIBA DES PIANC, 9, 17488 Cadaqués, Girona",
+"phone": "+34972258006",
+"website": "https://inmobiliariapianc.com/",
+"lat": 42.2875053,
+"lng": 3.2819855,
+"rating": 4.4,
+"votes": 52,
+"claimed": true
+},
+{
+"cid": "13962682852853324438",
+"title": "Ohana",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Home goods store",
+"address": "Carrer Bellaire, 1, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://es-es.facebook.com/ohanacadaques/",
+"lat": 42.288584,
+"lng": 3.2766735,
+"rating": 4.7,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "13970570182260503704",
+"title": "Restaurante Tra di noi Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Miquel Rosset, 23, 17488 Cadaqués, Girona",
+"phone": "+34613344326",
+"website": "",
+"lat": 42.29058,
+"lng": 3.2782299999999998,
+"rating": 4.9,
+"votes": 104,
+"claimed": true
+},
+{
+"cid": "1398435819449731765",
+"title": "Es Cantó",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Plaça Frederic Rahola, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258630",
+"website": "",
+"lat": 42.289100999999995,
+"lng": 3.2773399999999997,
+"rating": 2.9,
+"votes": 112,
+"claimed": false
+},
+{
+"cid": "14072853668878710173",
+"title": "Salvador Dalí House Museum",
+"cats": [
+"ocio-y-cultura",
+"museos"
+],
+"gcat": "Museum",
+"address": "Platja de, 17488 Port Lligat, Girona",
+"phone": "+34972251015",
+"website": "http://www.salvador-dali.org/museus/portlligat/index.html",
+"lat": 42.2931078,
+"lng": 3.2861689,
+"rating": 4.5,
+"votes": 16024,
+"claimed": true
+},
+{
+"cid": "14085965769412639259",
+"title": "Gemma Ridameya Angulo",
+"cats": [
+"comprar",
+"joyerias"
+],
+"gcat": "Jewelry store",
+"address": "Carrer Vigilant, 17488 Cadaqués, Girona",
+"phone": "+34972159441",
+"website": "",
+"lat": 42.2886843,
+"lng": 3.2767334999999997,
+"rating": 4,
+"votes": 69,
+"claimed": false
+},
+{
+"cid": "14125026674629492879",
+"title": "MuditaHerbals",
+"cats": [
+"comprar",
+"perfumeria-y-cosmetica"
+],
+"gcat": "Health and beauty shop",
+"address": "Plaça del Dr. Pont, 7, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://muditaherbals.com/",
+"lat": 42.2874128,
+"lng": 3.2756447,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "14125322373391111379",
+"title": "La Frontera music bar",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Piano bar",
+"address": "Carrer Miquel Rosset, 22, 17488 Cadaqués, Girona",
+"phone": "+34630850304",
+"website": "",
+"lat": 42.290493,
+"lng": 3.2783588,
+"rating": 4.4,
+"votes": 184,
+"claimed": true
+},
+{
+"cid": "1417148866485326638",
+"title": "Gala acústic",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Ferry service",
+"address": "Carrer Carles Riba, 17488 Port Lligat, Girona",
+"phone": "+34616434242",
+"website": "",
+"lat": 42.293157,
+"lng": 3.2864155,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "14224816254879386539",
+"title": "STEFES. Cadaqués - Inmobiliaria International",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agent",
+"address": "Avinguda Victor Rahola, 3, 17488 Cadaqués, Girona",
+"phone": "+34972251025",
+"website": "https://www.stefes.immo/",
+"lat": 42.2871382,
+"lng": 3.2817893999999996,
+"rating": 4.5,
+"votes": 11,
+"claimed": true
+},
+{
+"cid": "1425514426847421128",
+"title": "LINCKIA Cadaqués",
+"cats": [
+"comprar",
+"perfumeria-y-cosmetica"
+],
+"gcat": "Cosmetics store",
+"address": "Carrer de Santa Margarida, 1, 17488 Cadaqués, Girona",
+"phone": "+34692181874",
+"website": "http://linckiacadaques.com/",
+"lat": 42.288767299999996,
+"lng": 3.2765123999999997,
+"rating": 4.9,
+"votes": 21,
+"claimed": true
+},
+{
+"cid": "14255772568031823163",
+"title": "Kinemoa",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Government office",
+"address": "Carrer Nou, 1, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://kinemoa.shop/",
+"lat": 42.2873356,
+"lng": 3.2755891,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "14269939613082837849",
+"title": "Cadaques Dron Film",
+"cats": [
+"servicios",
+"fotografia"
+],
+"gcat": "Aerial photographer",
+"address": "Carrer Rierassa, 16, 2- 3, 17488 Cadaqués, Girona",
+"phone": "+34661526601",
+"website": "https://cadaquesdron.es/",
+"lat": 42.2911272,
+"lng": 3.2748401,
+"rating": 5,
+"votes": 2,
+"claimed": false
+},
+{
+"cid": "14427164981720874323",
+"title": "Perruqueria de Ruth",
+"cats": [
+"servicios",
+"peluquerias"
+],
+"gcat": "Hairdresser",
+"address": "Carrer de la Font Vella, 3, 17488 Cadaqués, Girona",
+"phone": "+34695315295",
+"website": "",
+"lat": 42.289484099999996,
+"lng": 3.2752078,
+"rating": 5,
+"votes": 11,
+"claimed": true
+},
+{
+"cid": "14457237480308926646",
+"title": "Xiringuito Can Juli",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Parking La Casa de Dalí, Avinguda Paratge S'Alqueria, SN, 17488 Cadaqués, Girona",
+"phone": "+34609763477",
+"website": "https://www.facebook.com/xiringuitocanjuli/?locale=es_es",
+"lat": 42.2952583,
+"lng": 3.2871698,
+"rating": 4,
+"votes": 757,
+"claimed": true
+},
+{
+"cid": "14516366634325051576",
+"title": "Generalidad de Cataluña-Bomberos",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Fire station",
+"address": "Carrer de les Creus, 17488 Cadaqués, Girona",
+"phone": "+34972258008",
+"website": "",
+"lat": 42.291732499999995,
+"lng": 3.2797402,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "1457320912912597162",
+"title": "Octavia Hotel",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Riera de Sant Vicenç, s/ n, 17488 Cadaqués, Girona",
+"phone": "+34972159225",
+"website": "https://hoteloctaviacadaques.com/",
+"lat": 42.2894253,
+"lng": 3.2763983,
+"rating": 4.2,
+"votes": 791,
+"claimed": true
+},
+{
+"cid": "14606865969143994576",
+"title": "Es Balconet",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Carrer de Sant Antoni, 2, 17488 Cadaqués, Girona",
+"phone": "+34972258814",
+"website": "https://mirestaurante.app/es-balconet",
+"lat": 42.2895077,
+"lng": 3.2796436,
+"rating": 4.6,
+"votes": 2730,
+"claimed": true
+},
+{
+"cid": "14643546115612810697",
+"title": "Nàutica Viñas",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat dealer",
+"address": "Sr. Llorenç, Polígon Industrial Pla, Carrer Josep Pla, naus 412-416, 17488 Cadaqués, Girona",
+"phone": "+34616843553",
+"website": "",
+"lat": 42.2920771,
+"lng": 3.2690516,
+"rating": 2.8,
+"votes": 13,
+"claimed": true
+},
+{
+"cid": "14707698523362366981",
+"title": "Tancat",
+"cats": [
+"comer-y-beber",
+"heladerias"
+],
+"gcat": "Ice cream shop",
+"address": "Avinguda Caritat Serinyana, 13, 17488 Cadaqués, Girona",
+"phone": "+34972159472",
+"website": "http://www.sagelateria.blogspot.com/",
+"lat": 42.289715699999995,
+"lng": 3.27685,
+"rating": 3.5,
+"votes": 6,
+"claimed": true
+},
+{
+"cid": "14712909134449464628",
+"title": "Manuel Segura. Guitarra Flamenca",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Artist",
+"address": "Carrer de l'Església, 17488 Cadaqués, Girona",
+"phone": "+34642170217",
+"website": "",
+"lat": 42.2880466,
+"lng": 3.2758184999999997,
+"rating": 5,
+"votes": 9,
+"claimed": true
+},
+{
+"cid": "14731563750405802113",
+"title": "IMMOCDQ",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Carrer del Duc, 1, 17488 Cadaqués, Girona",
+"phone": "+34635220571",
+"website": "http://www.immocdq.com/",
+"lat": 42.289074,
+"lng": 3.2817257,
+"rating": 5,
+"votes": 23,
+"claimed": true
+},
+{
+"cid": "14767072761029215302",
+"title": "Casa Valentine",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer es Caials, 13, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://www.thinkcadaques.com/valentine/",
+"lat": 42.2847618,
+"lng": 3.2952000999999997,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "14813279282054727155",
+"title": "Institut Escola Caritat Serinyana Cap de Creus",
+"cats": [
+"educacion",
+"otros-centros-educativos"
+],
+"gcat": "Education center",
+"address": "Carrer de Teresa Miramont, s/n, 17488 Cadaqués, Girona",
+"phone": "+34972251111",
+"website": "https://agora.xtec.cat/iecadaques/",
+"lat": 42.291277,
+"lng": 3.2755867,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "14815083605698856003",
+"title": "CadaquésIntim Local Shop",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Avinguda Caritat Serinyana, 17, 17488 Cadaqués, Girona",
+"phone": "+34972258780",
+"website": "",
+"lat": 42.2899355,
+"lng": 3.2756483999999997,
+"rating": 4.1,
+"votes": 9,
+"claimed": true
+},
+{
+"cid": "14872087769635564218",
+"title": "Gala Cadaqués Boutique",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Dress store",
+"address": "Avinguda Caritat Serinyana, 27, 17488 Cadaqués, Girona",
+"phone": "+34651688869",
+"website": "https://www.instagram.com/gala_cadaques/",
+"lat": 42.289899999999996,
+"lng": 3.27486,
+"rating": 4.8,
+"votes": 20,
+"claimed": true
+},
+{
+"cid": "1488045857192612007",
+"title": "Centre de Salut Cadaqués",
+"cats": [
+"servicios",
+"estetica-y-bienestar"
+],
+"gcat": "Wellness center",
+"address": "Camí Port Lligat, 48, 17488 Cadaqués, Girona",
+"phone": "+34616437753",
+"website": "",
+"lat": 42.2923951,
+"lng": 3.276942,
+"rating": 5,
+"votes": 21,
+"claimed": true
+},
+{
+"cid": "14890405262129093220",
+"title": "White Rabbit",
+"cats": [
+"servicios",
+"agencias-de-viajes"
+],
+"gcat": "Event management company",
+"address": "Plaça del Dr. Pont, 7, x, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://whiterabbituc.wixsite.com",
+"lat": 42.2872801,
+"lng": 3.2757411999999997,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "14899905232695357918",
+"title": "restaurant terra nostra",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Plaça Doctor Trèmols, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.288541099999996,
+"lng": 3.2771505999999997,
+"rating": 3.6,
+"votes": 198,
+"claimed": false
+},
+{
+"cid": "14915717691117651276",
+"title": "Antonio Ramírez Cuenca",
+"cats": [
+"servicios",
+"jardineria"
+],
+"gcat": "Garden center",
+"address": "Carrer es Caials, 25, 17488 Cadaqués, Girona",
+"phone": "+34972258763",
+"website": "",
+"lat": 42.2848416,
+"lng": 3.2956398,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "14919909273973830506",
+"title": "Eva Moradell Llobet",
+"cats": [
+"salud",
+"farmacias"
+],
+"gcat": "Pharmacy",
+"address": "Plaça Frederic Rahola, 9, 17488 Cadaqués, Girona",
+"phone": "+34972258751",
+"website": "",
+"lat": 42.2891659,
+"lng": 3.2778441999999997,
+"rating": 2.3,
+"votes": 70,
+"claimed": false
+},
+{
+"cid": "14922914209091509181",
+"title": "Colmado Cadaqués",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Gift shop",
+"address": "Carrer del Dr. Callís, 12, 17488 Cadaqués, Girona",
+"phone": "+34616003805",
+"website": "",
+"lat": 42.2882903,
+"lng": 3.2767599,
+"rating": 4.5,
+"votes": 55,
+"claimed": true
+},
+{
+"cid": "14929068705249101583",
+"title": "Cadaqués bluexperience",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "Carrer de la Caseta, N2, 17488 Cadaqués, Girona",
+"phone": "+34682072576",
+"website": "http://www.cadaquesbluexperience.com/",
+"lat": 42.288917,
+"lng": 3.2800686,
+"rating": 5,
+"votes": 77,
+"claimed": true
+},
+{
+"cid": "15027249702817969607",
+"title": "Bar Casino",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Plaça Doctor Trèmols, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258137",
+"website": "http://societatlamistatcadaques.cat/instal-lacions/el-casino/",
+"lat": 42.288655399999996,
+"lng": 3.2775768,
+"rating": 4.1,
+"votes": 1273,
+"claimed": false
+},
+{
+"cid": "15040968429788808531",
+"title": "Be On Blue Cadaqués",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Women's clothing store",
+"address": "Plaça del Dr. Pont, 6, 17488 Cadaqués, Girona",
+"phone": "+34629330222",
+"website": "https://www.beonblue.com/",
+"lat": 42.28754,
+"lng": 3.2756,
+"rating": 5,
+"votes": 6,
+"claimed": true
+},
+{
+"cid": "15054039977889384497",
+"title": "TALLER CGA",
+"cats": [
+"servicios",
+"talleres"
+],
+"gcat": "Auto repair shop",
+"address": "Carrer Senyor Llorenç, nº 204, 17488 Cadaqués, Girona",
+"phone": "+34972258040",
+"website": "",
+"lat": 42.291475899999995,
+"lng": 3.2692638,
+"rating": 4.9,
+"votes": 11,
+"claimed": true
+},
+{
+"cid": "1505452756473009111",
+"title": "K",
+"cats": [
+"comprar",
+"estancos-y-quioscos"
+],
+"gcat": "Tobacco shop",
+"address": "Avinguda Caritat Serinyana, 3, 17488 Cadaqués, Girona",
+"phone": "+34972251003",
+"website": "",
+"lat": 42.2893991,
+"lng": 3.2773187999999998,
+"rating": 3.8,
+"votes": 27,
+"claimed": true
+},
+{
+"cid": "15142943090106570242",
+"title": "L'Alba Bar Restaurant",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Avinguda Caritat Serinyana, 23, 17488 Cadaqués, Girona",
+"phone": "+34972259136",
+"website": "",
+"lat": 42.28993,
+"lng": 3.2753899,
+"rating": 3.9,
+"votes": 278,
+"claimed": false
+},
+{
+"cid": "15194101450016630988",
+"title": "Hair Extensions Extensy",
+"cats": [
+"servicios",
+"peluquerias"
+],
+"gcat": "Hairdresser",
+"address": "Carrer de sa Tórtora, 17488 Cadaqués, Girona",
+"phone": "+4917684791201",
+"website": "https://www.beautyextensy.de/",
+"lat": 42.289856799999995,
+"lng": 3.2796999,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "15263558870310486250",
+"title": "Gispert",
+"cats": [
+"comer-y-beber",
+"heladerias"
+],
+"gcat": "Ice cream shop",
+"address": "Plaça del Passeig, 5, 17488 Cadaqués, Girona",
+"phone": "+34653895530",
+"website": "https://gispertcadaques.es/",
+"lat": 42.2891842,
+"lng": 3.2782608,
+"rating": 4.3,
+"votes": 413,
+"claimed": true
+},
+{
+"cid": "15435242629588922808",
+"title": "Casa Nou 1935 De Cadaques",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Carrer Nou, 11, 17488 Cadaqués, Girona",
+"phone": "+34660519762",
+"website": "http://apartament-cadaques-casa-nou.com.es/",
+"lat": 42.2880434,
+"lng": 3.2745279,
+"rating": 3.9,
+"votes": 36,
+"claimed": true
+},
+{
+"cid": "15443117589910118873",
+"title": "BLAU BAR",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Plaça del Dr. Pont, 7, 17488 Cadaqués, Girona",
+"phone": "+34872204020",
+"website": "https://blaubar.shop/",
+"lat": 42.287285399999995,
+"lng": 3.2758259,
+"rating": 3.6,
+"votes": 817,
+"claimed": true
+},
+{
+"cid": "15486493329527827060",
+"title": "Les Arrels Hotel Cadaqués",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Arrels Hotel, Carretera Roses a Cadaqués, 4, 17488 Cadaqués, Girona",
+"phone": "+34972258860",
+"website": "http://www.arrelshotelcadaques.com/",
+"lat": 42.291388399999995,
+"lng": 3.2703566,
+"rating": 4.9,
+"votes": 324,
+"claimed": true
+},
+{
+"cid": "15488932180329103344",
+"title": "Shelltone Whale Project - Whales Watching Cadaquès",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Whale watching tour agency",
+"address": "Riba Nemesi Llorens, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.shelltonewhaleproject.org/en/observe-dolphins-cadaques/",
+"lat": 42.287449699999996,
+"lng": 3.2770249,
+"rating": 3.6,
+"votes": 5,
+"claimed": true
+},
+{
+"cid": "15541152184760571555",
+"title": "Restaurant Es Baluard",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Riba Nemesi Llorens, 2, 17488 Cadaqués, Girona",
+"phone": "+34972258183",
+"website": "http://www.esbaluard-cadaques.net/",
+"lat": 42.288094199999996,
+"lng": 3.2770354999999998,
+"rating": 4.6,
+"votes": 981,
+"claimed": true
+},
+{
+"cid": "15564540326118803380",
+"title": "Apartamento Poal Cadaques",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer des Poal, 4, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://apartamento-poal-cadaques.webnode.es/",
+"lat": 42.2889556,
+"lng": 3.2807032,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "15579403404010786136",
+"title": "LE PRINTEMPS",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Dress store",
+"address": "Plaça Doctor Trèmols, 7, 17488 Cadaqués, Girona",
+"phone": "+34972258256",
+"website": "",
+"lat": 42.2885968,
+"lng": 3.2771991,
+"rating": 4.7,
+"votes": 9,
+"claimed": true
+},
+{
+"cid": "15588179559073303799",
+"title": "Agència Immobiliària Cadaqués (AIC)",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Avinguda Caritat Serinyana, 14, Baixos, 17488 Cadaqués, Girona",
+"phone": "+34972258266",
+"website": "http://www.inmobiliariacadaques.com/",
+"lat": 42.2900691,
+"lng": 3.2756056,
+"rating": 3.8,
+"votes": 32,
+"claimed": true
+},
+{
+"cid": "15595623559843356254",
+"title": "S'Espardenya de Cadaqués",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Store",
+"address": "Carrer del Dr. Callís, 16, 17488 Cadaqués, Girona",
+"phone": "+34608556987",
+"website": "http://sespardenyadecadaques.cat/",
+"lat": 42.288262599999996,
+"lng": 3.2767397999999996,
+"rating": 4.4,
+"votes": 28,
+"claimed": true
+},
+{
+"cid": "15618747122523313902",
+"title": "La NOTTA Restaurant cocina catalana",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Family restaurant",
+"address": "Carrer Miquel Rosset, 12, 17488 Cadaqués, Girona",
+"phone": "+34637057844",
+"website": "",
+"lat": 42.2899002,
+"lng": 3.2782565,
+"rating": 4.1,
+"votes": 319,
+"claimed": true
+},
+{
+"cid": "15623343471218198717",
+"title": "Pizzeria Cesar",
+"cats": [
+"comer-y-beber",
+"pizzerias-e-italianos"
+],
+"gcat": "Pizza restaurant",
+"address": "Carrer Curós, 13, 17488 Cadaqués, Girona",
+"phone": "+34972258806",
+"website": "",
+"lat": 42.2880556,
+"lng": 3.2761111,
+"rating": 4,
+"votes": 213,
+"claimed": true
+},
+{
+"cid": "15712776221986184860",
+"title": "Vinya Ivo Sl",
+"cats": [
+"ocio-y-cultura",
+"bodegas-y-enoturismo"
+],
+"gcat": "Winery",
+"address": "S'alqueria, 17488, Girona",
+"phone": "+33632148491",
+"website": "https://www.vinya-ivo.com/",
+"lat": 42.2987184,
+"lng": 3.2877842999999998,
+"rating": 5,
+"votes": 2,
+"claimed": true
+},
+{
+"cid": "15726874520416997296",
+"title": "Falck Cadaqués",
+"cats": [
+"salud",
+"urgencias"
+],
+"gcat": "Ambulance service",
+"address": "Urbanitzacio Industrial Sr. Llorenç, 103, 17488 Cadaqués, Girona",
+"phone": "+34938468080",
+"website": "http://www.falck.es/",
+"lat": 42.2917966,
+"lng": 3.2688794999999997,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "15729721226929076824",
+"title": "Oli Bar",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer d'en Guillem de Bruguera, 10, 17488 Cadaqués, Girona",
+"phone": "+34872205206",
+"website": "https://olibarcadaques.com/",
+"lat": 42.2878329,
+"lng": 3.275893,
+"rating": 4.8,
+"votes": 679,
+"claimed": true
+},
+{
+"cid": "15757011987868125113",
+"title": "Fibra Cadaqués",
+"cats": [
+"servicios",
+"informatica-y-moviles"
+],
+"gcat": "Fiber optic products supplier",
+"address": "Carrer de la Font Vella, 7, 17488 Cadaqués, Girona",
+"phone": "+34689017074",
+"website": "https://fibracadaques.com/",
+"lat": 42.2896514,
+"lng": 3.2749487999999998,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "15780166312543051577",
+"title": "Restaurant Losai",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Plaça Doctor Trèmols, 3, 17488 Cadaqués, Girona",
+"phone": "+34972159298",
+"website": "http://www.losaicadaques.com/",
+"lat": 42.2883971,
+"lng": 3.2769497,
+"rating": 4.3,
+"votes": 909,
+"claimed": true
+},
+{
+"cid": "15819049985504432632",
+"title": "Mediterrani",
+"cats": [
+"comprar",
+"mercerias"
+],
+"gcat": "Notions store",
+"address": "Avinguda Caritat Serinyana, 17, 17488 Cadaqués, Girona",
+"phone": "+34972258780",
+"website": "",
+"lat": 42.291732499999995,
+"lng": 3.2797402,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "15832808641067043949",
+"title": "Cadaques, Trendy Apartment And Sea Views",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Camí Port Lligat, 16, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2923842,
+"lng": 3.2788489,
+"rating": 4,
+"votes": 7,
+"claimed": false
+},
+{
+"cid": "1585862315685172892",
+"title": "Maria Àngels Carreras Jordà",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Home goods store",
+"address": "Plaça Salvador Dalí, 0, 17488 Cadaqués, Girona",
+"phone": "+34972259919",
+"website": "",
+"lat": 42.289045099999996,
+"lng": 3.2779027,
+"rating": 4,
+"votes": 3,
+"claimed": false
+},
+{
+"cid": "15862528292348082838",
+"title": "Royal Cadaqués S.L.",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate",
+"address": "Plaça Federic Rahola, 7, 17488 Cadaqués, Girona",
+"phone": "+34615624685",
+"website": "",
+"lat": 42.289476099999995,
+"lng": 3.2772885,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "15866544110793784464",
+"title": "Finques Corcoll & Mora",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Riera de Sant Vicenç, 4, 17488 Cadaqués, Girona",
+"phone": "+34972159057",
+"website": "http://www.corcoll-mora.com/",
+"lat": 42.2892393,
+"lng": 3.2770596999999997,
+"rating": 5,
+"votes": 29,
+"claimed": true
+},
+{
+"cid": "15905650302220964773",
+"title": "Centre de busseig SOTAMAR",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Diving center",
+"address": "Avinguda Caritat Serinyana, 17, 17488 Cadaqués, Girona",
+"phone": "+34972258876",
+"website": "https://www.sotamar.com/",
+"lat": 42.2899179,
+"lng": 3.2757353,
+"rating": 4.5,
+"votes": 78,
+"claimed": true
+},
+{
+"cid": "16071680816682884845",
+"title": "Mariona Yoga Cadaqués- Clases y Eventos de Yoga en Cadaqués",
+"cats": [
+"deporte-y-nautica",
+"gimnasios-yoga-pilates"
+],
+"gcat": "Yoga studio",
+"address": "77VJ+CG8, 17488 Cadaqués, Girona",
+"phone": "+34638576134",
+"website": "http://www.cadaquesyoga.com/",
+"lat": 42.2935625,
+"lng": 3.2813125,
+"rating": 5,
+"votes": 129,
+"claimed": true
+},
+{
+"cid": "16129418011944399747",
+"title": "Brown Sugar",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Carrer Vigilant, S/N, 17488 Cadaqués, Girona",
+"phone": "+34659381154",
+"website": "https://www.instagram.com/brownsugar.bar/",
+"lat": 42.2888984,
+"lng": 3.2764797,
+"rating": 4.7,
+"votes": 683,
+"claimed": true
+},
+{
+"cid": "16144550618028960592",
+"title": "La Petite Zoé",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Children's clothing store",
+"address": "Pl. des Portitxó, 3, 17488 Cadaqués, Girona",
+"phone": "+34608888308",
+"website": "https://www.lapetitezoecdq.com/",
+"lat": 42.289148399999995,
+"lng": 3.2790922,
+"rating": 5,
+"votes": 2,
+"claimed": true
+},
+{
+"cid": "16186763179988782821",
+"title": "Les Creus",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Carrer des Traire, 1, 17488 Cadaqués, Girona",
+"phone": "+34972154380",
+"website": "",
+"lat": 42.2906541,
+"lng": 3.2796681999999997,
+"rating": 4.2,
+"votes": 11,
+"claimed": true
+},
+{
+"cid": "16195437978744423251",
+"title": "Tipic Cadaqués",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Store",
+"address": "Riba Nemesi Llorens, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.288117299999996,
+"lng": 3.2770745,
+"rating": 4.3,
+"votes": 52,
+"claimed": true
+},
+{
+"cid": "16236173155167723818",
+"title": "Riba Pitxot Habitatges Turístics",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Riba Pitxot, 2, 17488 Cadaqués, Girona",
+"phone": "+34621193660",
+"website": "https://ribapitxot.com/",
+"lat": 42.28612,
+"lng": 3.2764789999999997,
+"rating": 4.6,
+"votes": 15,
+"claimed": true
+},
+{
+"cid": "16246438488433407767",
+"title": "Ràdio Cap de Creus",
+"cats": [
+"ocio-y-cultura",
+"entidades"
+],
+"gcat": "Radio broadcaster",
+"address": "Carrer de Carles Rahola, 11, 17488 Cadaqués, Girona",
+"phone": "+34972159200",
+"website": "",
+"lat": 42.2920727,
+"lng": 3.2817681,
+"rating": 4.6,
+"votes": 9,
+"claimed": true
+},
+{
+"cid": "16280217432716667967",
+"title": "Hotel Ubaldo",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer Unió, 13, 17488 Cadaqués, Girona",
+"phone": "+34972258125",
+"website": "http://www.hotelubaldo.com/",
+"lat": 42.289111999999996,
+"lng": 3.275766,
+"rating": 4.3,
+"votes": 354,
+"claimed": false
+},
+{
+"cid": "16286515456603118717",
+"title": "Diving Center Cadaqués",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Diving center",
+"address": "Carrer de la Miranda, 6, 17488 Cadaqués, Girona",
+"phone": "+34631604649",
+"website": "http://www.divingcentercadaques.es/",
+"lat": 42.2889765,
+"lng": 3.2813755,
+"rating": 4.8,
+"votes": 114,
+"claimed": true
+},
+{
+"cid": "16321011089258867850",
+"title": "Miles Sampson, English-speaking architect in Cadaques",
+"cats": [
+"servicios",
+"arquitectura"
+],
+"gcat": "Architect",
+"address": "Plaça del Passeig, 6, 17488 Cadaqués, Girona",
+"phone": "+34655813287",
+"website": "https://milessampson.com/",
+"lat": 42.2893141,
+"lng": 3.2782853999999997,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "16422047133745368770",
+"title": "Cal Montaner",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Carrer des Maltret, 46, 17488 Cadaqués, Girona",
+"phone": "+34689044700",
+"website": "",
+"lat": 42.291308099999995,
+"lng": 3.28078,
+"rating": 4.8,
+"votes": 11,
+"claimed": true
+},
+{
+"cid": "16423435879247943604",
+"title": "Talla Restaurant",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Riba Pitxot, 18, 17488 Cadaqués, Girona",
+"phone": "+34972258739",
+"website": "http://www.tallabatalla.com/",
+"lat": 42.2862052,
+"lng": 3.2763502,
+"rating": 4.6,
+"votes": 2350,
+"claimed": true
+},
+{
+"cid": "16428494102503060259",
+"title": "Restaurant Es Grec",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Unió, 11, 17488 Cadaqués, Girona",
+"phone": "+34972251071",
+"website": "https://instagram.com/esgreccadaques?utm_medium=copy_link",
+"lat": 42.2890248,
+"lng": 3.2758449,
+"rating": 4.7,
+"votes": 640,
+"claimed": true
+},
+{
+"cid": "16438323801584296669",
+"title": "Bellamar Cadaqués Boat Tour",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Boat tour agency",
+"address": "Port Lligat Beach, 17488 Cadaqués, Girona",
+"phone": "+34659696088",
+"website": "http://www.bellamarcadaques.com/",
+"lat": 42.2932333,
+"lng": 3.2862354999999996,
+"rating": 4.9,
+"votes": 75,
+"claimed": true
+},
+{
+"cid": "16468802428642418049",
+"title": "Bar 'Es Torradet' Xen S.C.",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Lounge bar",
+"address": "Avinguda Caritat Serinyana, 13, 17488 Cadaqués, Girona",
+"phone": "+34972159049",
+"website": "",
+"lat": 42.291732499999995,
+"lng": 3.2797402,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "16512858913358752561",
+"title": "Els Millasson",
+"cats": [
+"comprar",
+"panaderias-y-pastelerias"
+],
+"gcat": "Pastry shop",
+"address": "Carrer Miquel Rosset, 23, 17488 Cadaqués, Girona",
+"phone": "+33673751610",
+"website": "",
+"lat": 42.29058,
+"lng": 3.2782299999999998,
+"rating": 4.9,
+"votes": 206,
+"claimed": true
+},
+{
+"cid": "16583716003612357117",
+"title": "Oh' Boutique",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Sin número, Riba des Poal, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2889023,
+"lng": 3.2799839,
+"rating": 4.3,
+"votes": 11,
+"claimed": true
+},
+{
+"cid": "16606385082942976393",
+"title": "Pino de Norfolk S.L.",
+"cats": [
+"comprar",
+"floristerias"
+],
+"gcat": "Florist",
+"address": "Carrer de Sant Pere, 2, 17488 Cadaqués, Girona",
+"phone": "+34972258053",
+"website": "",
+"lat": 42.291732499999995,
+"lng": 3.2797402,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "16638093732973739611",
+"title": "Botique 1900",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Women's clothing store",
+"address": "plaça federic rahola n⁰5, Avinguda Caritat Serinyana, 1, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.instagram.com/1900_cadaques?igsh=MTRjeDVtaTdrNXM5Yg==&utm_-source=qr",
+"lat": 42.2892837,
+"lng": 3.2776460999999997,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "16649145716573370857",
+"title": "Hotel Cadaqués1962",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Camí Port Lligat, 30, 17488 Cadaqués, Girona",
+"phone": "+34972259015",
+"website": "https://www.hotelcadaques1962.com/",
+"lat": 42.293187499999995,
+"lng": 3.2782022,
+"rating": 4.4,
+"votes": 42,
+"claimed": true
+},
+{
+"cid": "16700047207306407299",
+"title": "Ajuntament de Cadaqués",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "City or town hall",
+"address": "Carrer d'en Silvi Rahola, 2, 17488 Cadaqués, Girona",
+"phone": "+34972258200",
+"website": "http://www.cadaques.cat/",
+"lat": 42.2875365,
+"lng": 3.2772322999999997,
+"rating": 2.8,
+"votes": 78,
+"claimed": true
+},
+{
+"cid": "16708880092700419978",
+"title": "Ses Flors de Cadaqués",
+"cats": [
+"comprar",
+"floristerias"
+],
+"gcat": "Florist",
+"address": "galeries) sesflorsdecadaques@gmail.com, Avinguda Caritat Serinyana, 10 botiga 20, 17488 Cadaqués, Girona",
+"phone": "+34669140331",
+"website": "",
+"lat": 42.2896885,
+"lng": 3.2772772999999997,
+"rating": 5,
+"votes": 49,
+"claimed": true
+},
+{
+"cid": "16755305141827669831",
+"title": "Cadaqués Boats",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "Carrer des Pianc, 25, 17488 Cadaqués, Girona",
+"phone": "+34637874741",
+"website": "http://www.cadaquesboats.com/",
+"lat": 42.2876135,
+"lng": 3.2816764,
+"rating": 4.3,
+"votes": 116,
+"claimed": true
+},
+{
+"cid": "16775672499064566461",
+"title": "Apartaments compartir",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer Unió, 14, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.compartircadaques.com/apartaments/",
+"lat": 42.2892325,
+"lng": 3.2759796999999997,
+"rating": 4,
+"votes": 11,
+"claimed": false
+},
+{
+"cid": "16782528109881964456",
+"title": "Masajes Ayurveda para Mujeres",
+"cats": [
+"servicios",
+"estetica-y-bienestar"
+],
+"gcat": "Massage therapist",
+"address": "Carrer Bellaire, 7, 17488 Cadaqués, Girona",
+"phone": "+34657358401",
+"website": "https://www.instagram.com/masaje.ayurveda.cadaques?igsh=MWt3bW5kcGx5aTd5OQ==",
+"lat": 42.28857,
+"lng": 3.2765299999999997,
+"rating": 5,
+"votes": 7,
+"claimed": true
+},
+{
+"cid": "16788776532833236153",
+"title": "Hotel S'Aguarda",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Camí Port Lligat, 30, 17488 Cadaqués, Girona",
+"phone": "+34972259015",
+"website": "http://www.hotelsaguarda.com/",
+"lat": 42.2932736,
+"lng": 3.278286,
+"rating": 4.3,
+"votes": 435,
+"claimed": true
+},
+{
+"cid": "16804979090284148336",
+"title": "Restaurant Els Pescadors",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Riba Nemesi Llorens, s/n, 17488 Cadaqués, Girona",
+"phone": "+34972258859",
+"website": "",
+"lat": 42.2882306,
+"lng": 3.2770395,
+"rating": 4.2,
+"votes": 772,
+"claimed": true
+},
+{
+"cid": "16805367018259416218",
+"title": "Restaurant El Viatge",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Plaça del Dr. Pont, 5, 17488 Cadaqués, Girona",
+"phone": "+34872206830",
+"website": "https://elviatgecadaques.com/",
+"lat": 42.287582,
+"lng": 3.2758233999999997,
+"rating": 4.7,
+"votes": 1075,
+"claimed": true
+},
+{
+"cid": "1680910968412417198",
+"title": "Coctelería Boia Nit, Cadaqués",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Pl. des Portitxó, 4, 17488 Cadaqués, Girona",
+"phone": "+34633578055",
+"website": "http://www.boianit.com/",
+"lat": 42.289122299999995,
+"lng": 3.2794282,
+"rating": 4.1,
+"votes": 1716,
+"claimed": true
+},
+{
+"cid": "16810830696812392422",
+"title": "Sa Bodega Cadaqués",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Supermarket",
+"address": "Carrer Nou, 29, 17488 Cadaqués, Girona",
+"phone": "+34972259208",
+"website": "http://valvi.com/",
+"lat": 42.2886714,
+"lng": 3.2740275,
+"rating": 4.1,
+"votes": 16,
+"claimed": true
+},
+{
+"cid": "16815410569242711451",
+"title": "BBVA",
+"cats": [
+"servicios",
+"bancos"
+],
+"gcat": "Bank",
+"address": "Avinguda Caritat Serinyana, 4, 17488 Cadaqués, Girona",
+"phone": "+34972258012",
+"website": "https://www.bbva.es/",
+"lat": 42.289484099999996,
+"lng": 3.2775502999999997,
+"rating": 4,
+"votes": 4,
+"claimed": true
+},
+{
+"cid": "16830788231950586510",
+"title": "Charter Sant Isidre",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Sightseeing tour agency",
+"address": "Riba Nemesi Llorens, 17488 Cadaqués, Girona",
+"phone": "+34626960298",
+"website": "https://www.chartersantisidre.com/",
+"lat": 42.2882715,
+"lng": 3.2772842,
+"rating": 4.5,
+"votes": 165,
+"claimed": true
+},
+{
+"cid": "16843810336675651030",
+"title": "Punta sa Costa (Embarcador)",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Marina",
+"address": "17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.285171399999996,
+"lng": 3.2851277,
+"rating": 4.8,
+"votes": 6,
+"claimed": false
+},
+{
+"cid": "16844676294517584974",
+"title": "Rourou et Luli",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Women's clothing store",
+"address": "Carrer de Sant Pere, 1, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://rouroululi.com/",
+"lat": 42.2887117,
+"lng": 3.2812357999999997,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "16847202943212864439",
+"title": "Oracle Cadaques",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Women's clothing store",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2898013,
+"lng": 3.2776959999999997,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "16856815792337530981",
+"title": "MADEMOISELLE IN CADAQUÉS",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Boutique",
+"address": "Calle Poal n 4, 17488 Cadaqués, Girona",
+"phone": "+34972258014",
+"website": "http://mywaymonstyle.com/",
+"lat": 42.288927799999996,
+"lng": 3.2805793,
+"rating": 4.8,
+"votes": 15,
+"claimed": true
+},
+{
+"cid": "16926072281807850996",
+"title": "MÉSDEMAR",
+"cats": [
+"servicios",
+"reformas-y-construccion"
+],
+"gcat": "Building firm",
+"address": "Avinguda Caritat Serinyana, 14, 17488 Cadaqués, Girona",
+"phone": "+34665993748",
+"website": "http://www.mesdemar.cat/",
+"lat": 42.2902723,
+"lng": 3.2755494,
+"rating": 5,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "1693992184523419411",
+"title": "Vivarium Gerisena",
+"cats": [
+"ocio-y-cultura",
+"entidades"
+],
+"gcat": "Religious organization",
+"address": "Carrer del Dr. Callís, 15, 17488 Cadaqués, Girona",
+"phone": "+34972258084",
+"website": "http://vivariumgerisena.cat/",
+"lat": 42.2880219,
+"lng": 3.2767448,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "16944991936508182386",
+"title": "Restaurante NARITA Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Plaça del Passeig, 13, 17488 Cadaqués, Girona",
+"phone": "+34689104721",
+"website": "http://www.naritacadaques.com/",
+"lat": 42.28917,
+"lng": 3.27888,
+"rating": 4.6,
+"votes": 370,
+"claimed": true
+},
+{
+"cid": "16963572988874750524",
+"title": "LLUMFORN",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Artist",
+"address": "Carrer Puig Vidal, 1 bis, baix, 17488 Cadaqués, Girona",
+"phone": "+34647240652",
+"website": "",
+"lat": 42.2894249,
+"lng": 3.2794249,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "16991730244464985461",
+"title": "Nord Est",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Pujada des Pianc, 5, 17488 Cadaqués, Girona",
+"phone": "+34972258461",
+"website": "http://nordestcadaques.es/",
+"lat": 42.288216999999996,
+"lng": 3.2810118,
+"rating": 4.5,
+"votes": 5494,
+"claimed": true
+},
+{
+"cid": "16996711714371034697",
+"title": "Oficina de Turisme de Cadaqués",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Tourist information center",
+"address": "Carrer d'es Cotxe, 2, 17488 Cadaqués, Girona",
+"phone": "+34972258315",
+"website": "http://www.visitcadaques.org/",
+"lat": 42.2887248,
+"lng": 3.2775087,
+"rating": 4.2,
+"votes": 262,
+"claimed": false
+},
+{
+"cid": "16998786823586803323",
+"title": "Aparthotel L'Heretat",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer Miquel Rosset, 29, 17488 Cadaqués, Girona",
+"phone": "+34972258486",
+"website": "http://www.apartamentoscadaques.com/",
+"lat": 42.291442499999995,
+"lng": 3.2795242,
+"rating": 4.6,
+"votes": 78,
+"claimed": true
+},
+{
+"cid": "17042854583981234249",
+"title": "Casa del Pi",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Serviced apartment",
+"address": "Carrer Ramon Muntaner, 15, 17488 Cadaqués, Girona",
+"phone": "+34639009154",
+"website": "",
+"lat": 42.28577,
+"lng": 3.2724387999999998,
+"rating": 4,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "1704664976922236131",
+"title": "El Rebost de Cadaqués",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Catalonian restaurant",
+"address": "Carrer Miquel Rosset, 13, 17488 Cadaqués, Girona",
+"phone": "+34630502335",
+"website": "https://elrebostdecadaques.com//",
+"lat": 42.290124999999996,
+"lng": 3.2781287,
+"rating": 4.7,
+"votes": 598,
+"claimed": true
+},
+{
+"cid": "17063605330843166203",
+"title": "Sa Creperia Cadaqués",
+"cats": [
+"comer-y-beber",
+"cafes-y-desayunos"
+],
+"gcat": "Creperie",
+"address": "Avinguda Caritat Serinyana, 16, 17488 Cadaqués, Girona",
+"phone": "+34661730006",
+"website": "",
+"lat": 42.2899405,
+"lng": 3.2766305,
+"rating": 4.5,
+"votes": 41,
+"claimed": true
+},
+{
+"cid": "17066925675134176099",
+"title": "Cadaqués Arts",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art studio",
+"address": "Carrer de Santa Margarida, 0 S N, 17488 Cadaqués, Girona",
+"phone": "+34972159900",
+"website": "",
+"lat": 42.289407499999996,
+"lng": 3.2752985,
+"rating": 4.8,
+"votes": 5,
+"claimed": false
+},
+{
+"cid": "17103015888894988",
+"title": "Hotel Calina",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Av. de Salvador Dalí, 33, 17488 Cadaqués, Girona",
+"phone": "+34972258851",
+"website": "https://www.hotelcalina.com/",
+"lat": 42.2946618,
+"lng": 3.2857711,
+"rating": 4.6,
+"votes": 879,
+"claimed": true
+},
+{
+"cid": "17149278233427854031",
+"title": "Sabotigueta",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Novelty store",
+"address": "Avinguda Victor Rahola, 3, 17488 Cadaqués, Girona",
+"phone": "+34972258111",
+"website": "http://www.sabotigueta.cat/",
+"lat": 42.287158999999996,
+"lng": 3.281768,
+"rating": 4.6,
+"votes": 254,
+"claimed": true
+},
+{
+"cid": "17175293935132311844",
+"title": "Ca la Nuri - Cadaqués. Casa de Lloguer",
+"cats": [
+"dormir",
+"casas-rurales"
+],
+"gcat": "Villa",
+"address": "Carrer del Doctor Bartomeus, 28, 17488 Cadaqués, Girona",
+"phone": "+34647892264",
+"website": "http://www.calanuricadaques.com/",
+"lat": 42.2841193,
+"lng": 3.2749957999999997,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "17180853420947512721",
+"title": "Casa Guillola",
+"cats": [
+"dormir",
+"casas-rurales"
+],
+"gcat": "Holiday home",
+"address": "Paraje de Guillola Carretera Cap de Creus S/N, 17488 Cadaqués, Girona",
+"phone": "+33666386453",
+"website": "https://casaguillola.com/",
+"lat": 42.30758,
+"lng": 3.2954219,
+"rating": 5,
+"votes": 12,
+"claimed": true
+},
+{
+"cid": "17230324226690024418",
+"title": "Gats de Cadaqués",
+"cats": [
+"comprar",
+"mascotas"
+],
+"gcat": "Cattery",
+"address": "Carrer Curós, 18, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.288196899999996,
+"lng": 3.2760461,
+"rating": 4.5,
+"votes": 26,
+"claimed": false
+},
+{
+"cid": "17231746341711953986",
+"title": "Restaurant Casa Nun",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Pl. des Portitxó, 6, 17488 Cadaqués, Girona",
+"phone": "+34676312300",
+"website": "http://www.casanun.com/",
+"lat": 42.289259699999995,
+"lng": 3.2796629,
+"rating": 4,
+"votes": 786,
+"claimed": true
+},
+{
+"cid": "17249109619643940691",
+"title": "Yogaret",
+"cats": [
+"dormir",
+"otros-alojamientos"
+],
+"gcat": "Yoga retreat center",
+"address": "Camí de s'Arenella, 6-8, 17488 Cadaqués, Girona",
+"phone": "+34693028844",
+"website": "http://www.yogaret.com/",
+"lat": 42.2838457,
+"lng": 3.2890462,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "17340884618531180950",
+"title": "Oficina de Recaptació de Cadaqués",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Municipal administration office",
+"address": "Carrer d'es Cotxe, 2, 17488 Cadaqués, Girona",
+"phone": "+34972258194",
+"website": "http://www.cadaques.cat/",
+"lat": 42.2887045,
+"lng": 3.2773322,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "17357082807110101386",
+"title": "Centro Ananda",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Shopping mall",
+"address": "Carrer Bellaire, N°7, 17488 Cadaqués, Girona",
+"phone": "+34638560050",
+"website": "http://www.anandacadaques.com/",
+"lat": 42.28857,
+"lng": 3.2765299999999997,
+"rating": 5,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "17379880658859286383",
+"title": "Motorgasdonkey taller de motos y vehículos / servicio oficial honda motos",
+"cats": [
+"servicios",
+"talleres"
+],
+"gcat": "Motorcycle repair shop",
+"address": "sr dels Llorens, Polígono placita d'en llorens Pla, n 201, 17488 Cadaqués, Girona",
+"phone": "+34671444799",
+"website": "http://www.motorgasdonkey.com/",
+"lat": 42.2915091,
+"lng": 3.2688997,
+"rating": 4.2,
+"votes": 71,
+"claimed": true
+},
+{
+"cid": "1745986021261185339",
+"title": "Es Botànic Restaurant | Desayuno, Menú y Cocktail en Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Avinguda Caritat Serinyana, 23, 17488 Cadaqués, Girona",
+"phone": "+34972259136",
+"website": "http://esbotanic.com/",
+"lat": 42.2900044,
+"lng": 3.2750928,
+"rating": 4.7,
+"votes": 421,
+"claimed": true
+},
+{
+"cid": "1748338754851640885",
+"title": "Drassanes Tradicionals",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat repair shop",
+"address": "Polígon Industrial Plà del Sr. Llorenç, s/n, 17488 Cadaqués, Girona",
+"phone": "+34637085035",
+"website": "",
+"lat": 42.291741099999996,
+"lng": 3.2680661,
+"rating": 4.4,
+"votes": 5,
+"claimed": true
+},
+{
+"cid": "17491086449416600312",
+"title": "La Residencia",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Avinguda Caritat Serinyana, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258312",
+"website": "http://www.laresidencia.net/",
+"lat": 42.289274899999995,
+"lng": 3.2775981,
+"rating": 4.4,
+"votes": 381,
+"claimed": true
+},
+{
+"cid": "17507643425984911212",
+"title": "El Sueño, Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Avinguda Caritat Serinyana, 13, Baixos, Local 4, 17488 Cadaqués, Girona",
+"phone": "+34972012544",
+"website": "http://www.elsueno-cadaques.com/",
+"lat": 42.2897786,
+"lng": 3.2766902,
+"rating": 4.7,
+"votes": 244,
+"claimed": true
+},
+{
+"cid": "17522723221996602104",
+"title": "NetCadaqués",
+"cats": [
+"servicios",
+"reformas-y-construccion"
+],
+"gcat": "General contractor",
+"address": "Avinguda Caritat Serinyana, 20, 17488 Cadaqués, Girona",
+"phone": "+34972251006",
+"website": "http://netcadaques.com/",
+"lat": 42.290208199999995,
+"lng": 3.2743034,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "17552589083284056649",
+"title": "Café Tropical",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Piano bar",
+"address": "Carrer Miquel Rosset, 19, 17488 Cadaqués, Girona",
+"phone": "+34972258801",
+"website": "http://cafetropicalcadaques.com/",
+"lat": 42.290266599999995,
+"lng": 3.2781814999999996,
+"rating": 4.2,
+"votes": 381,
+"claimed": true
+},
+{
+"cid": "17701705830569385821",
+"title": "homevacation rentals cadaques",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Carrer del Dr. Callís, 12, 17488 Cadaqués, Girona",
+"phone": "+34972258340",
+"website": "http://www.thinkcadaques.com/all-villas/groceries-food-shopping/",
+"lat": 42.2882262,
+"lng": 3.2767033,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "17729186178866046256",
+"title": "Mercat setmanal de Cadaqués",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Market",
+"address": "Carrer de ses Hortes, 12, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.instagram.com/ajuntamentcadaques/",
+"lat": 42.2893656,
+"lng": 3.2734316,
+"rating": 3.7,
+"votes": 24,
+"claimed": false
+},
+{
+"cid": "1777800630981407916",
+"title": "Hotel Port Lligat",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Av Salvador Dalí, s/n, Av. de Salvador Dalí, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258162",
+"website": "http://www.hotel-port-lligat-cadaques.vivehotels.com/",
+"lat": 42.293833,
+"lng": 3.285313,
+"rating": 3.6,
+"votes": 377,
+"claimed": true
+},
+{
+"cid": "17815050909294896439",
+"title": "Orsapop Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Hort d'en Sanés, 1, 17488 Cadaqués, Girona",
+"phone": "+34872204143",
+"website": "http://orsapop.com/",
+"lat": 42.288988599999996,
+"lng": 3.2809918,
+"rating": 4.6,
+"votes": 1239,
+"claimed": true
+},
+{
+"cid": "17911974309849415156",
+"title": "Banco Santander",
+"cats": [
+"servicios",
+"bancos"
+],
+"gcat": "Bank",
+"address": "Avinguda Caritat Serinyana, 4, 17488 Cadaqués, Girona",
+"phone": "+34972258275",
+"website": "http://www.bancosantander.es/",
+"lat": 42.2895074,
+"lng": 3.2775702,
+"rating": 3.7,
+"votes": 9,
+"claimed": true
+},
+{
+"cid": "1791396349459032206",
+"title": "Brava Experience",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Vacation home rental agency",
+"address": "Carrer de Sa Tarongeta, 11, 17488 Cadaqués, Girona",
+"phone": "+34695703663",
+"website": "https://bravaexperience.es/",
+"lat": 42.290241699999996,
+"lng": 3.2729459,
+"rating": 4.7,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "17984882259738617821",
+"title": "Apartment Boutique hort",
+"cats": [
+"dormir",
+"otros-alojamientos"
+],
+"gcat": "Lodging",
+"address": "Carrer Lluís Tassis, 1, 17488 Cadaqués, Girona",
+"phone": "+34677450093",
+"website": "",
+"lat": 42.289715199999996,
+"lng": 3.2752385999999998,
+"rating": 1,
+"votes": 2,
+"claimed": false
+},
+{
+"cid": "17998779262311037834",
+"title": "Oficina Rural Correos",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Post office",
+"address": "Carrer Rierassa, S/N, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2906189,
+"lng": 3.2750086,
+"rating": 2.9,
+"votes": 14,
+"claimed": true
+},
+{
+"cid": "18005392299314311255",
+"title": "Restaurant La Roca",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer miguel rosset, 7, 17488 Cadaqués, Girona",
+"phone": "+34660921401",
+"website": "",
+"lat": 42.289629999999995,
+"lng": 3.27797,
+"rating": 4.4,
+"votes": 528,
+"claimed": true
+},
+{
+"cid": "18067764314902451165",
+"title": "La Casa Verda",
+"cats": [
+"dormir",
+"hostales-y-pensiones"
+],
+"gcat": "Guest house",
+"address": "Plaça del Passeig, 10, 17488 Cadaqués, Girona",
+"phone": "+33687194865",
+"website": "https://www.casaverdacadaques.com/",
+"lat": 42.289395,
+"lng": 3.2787555999999998,
+"rating": 5,
+"votes": 76,
+"claimed": true
+},
+{
+"cid": "18096057522475857628",
+"title": "Assistència Social",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Local government office",
+"address": "Carrer Solitari, 23, 17488 Cadaqués, Girona",
+"phone": "+34632500567",
+"website": "",
+"lat": 42.288489999999996,
+"lng": 3.27372,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "18117058844544007670",
+"title": "Casa Port Dalguer",
+"cats": [
+"dormir",
+"otros-alojamientos"
+],
+"gcat": "Lodging",
+"address": "Carrer d'en Guillem de Bruguera, 1, 17488 Cadaqués, Girona",
+"phone": "+34677519888",
+"website": "",
+"lat": 42.2876699,
+"lng": 3.2758699,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "18148283290953408762",
+"title": "Before Cocktail Bar",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Carrer Miquel Rosset, 6, 17488 Cadaqués, Girona",
+"phone": "+34664162410",
+"website": "",
+"lat": 42.2894297,
+"lng": 3.2779027,
+"rating": 4.3,
+"votes": 7,
+"claimed": false
+},
+{
+"cid": "18153019497572580963",
+"title": "Es Podritxó Immobiliària",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Pl. des Portitxó, 9, 17488 Cadaqués, Girona",
+"phone": "+34972159255",
+"website": "http://www.cadaquesvillas.com/",
+"lat": 42.289134399999995,
+"lng": 3.2797126,
+"rating": 5,
+"votes": 14,
+"claimed": true
+},
+{
+"cid": "18162881343438717546",
+"title": "Llagurt Cadaqués",
+"cats": [
+"comer-y-beber",
+"heladerias"
+],
+"gcat": "Frozen yogurt shop",
+"address": "Sa Creperia, Avinguda Caritat Serinyana, 16, 17488 Cadaqués, Girona",
+"phone": "+34666799448",
+"website": "http://www.llagurt.cat/",
+"lat": 42.2899405,
+"lng": 3.2766305,
+"rating": 4,
+"votes": 4,
+"claimed": false
+},
+{
+"cid": "18167194126303656804",
+"title": "wecamp Cadaqués",
+"cats": [
+"dormir",
+"otros-alojamientos"
+],
+"gcat": "Campground",
+"address": "Av. de Salvador Dalí, 23, 17488 Cadaqués, Girona",
+"phone": "+34936268900",
+"website": "https://wecamp.net/destinos/cadaques?utm_source=google&utm_medium=organic&utm_campaign=google-my-business&utm_content=google-my-business",
+"lat": 42.2918573,
+"lng": 3.2833246,
+"rating": 3.8,
+"votes": 1711,
+"claimed": true
+},
+{
+"cid": "18184170015364387831",
+"title": "C. D. Q. HOTEL S.L.",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer del Doctor Bartomeus, 37, 17488 Cadaqués, Girona",
+"phone": "+34972251020",
+"website": "",
+"lat": 42.2830041,
+"lng": 3.2759266,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "18240000441656100962",
+"title": "Sa Punta Cadaqués",
+"cats": [
+"dormir",
+"casas-rurales"
+],
+"gcat": "Holiday home",
+"address": "Camí Rda. Ros Pere Fet, 18, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.sapuntacadaques.com/",
+"lat": 42.2829291,
+"lng": 3.2877199999999998,
+"rating": 5,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "18245633396609328090",
+"title": "Animas Cadaqués",
+"cats": [
+"dormir",
+"otros-alojamientos"
+],
+"gcat": "Cabin rental agency",
+"address": "Camí del Puig Ferrol, 9, 17488 Cadaqués, Girona",
+"phone": "+34696588208",
+"website": "http://animascadaques.com/",
+"lat": 42.293157699999995,
+"lng": 3.2757711,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "18267989220047751991",
+"title": "PEPA",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Plaça del Dr. Pont, 17488 Cadaqués, Girona",
+"phone": "+34972159231",
+"website": "https://www.pepacadaques.com/",
+"lat": 42.2875337,
+"lng": 3.275986,
+"rating": 4.4,
+"votes": 32,
+"claimed": true
+},
+{
+"cid": "1831670095304599659",
+"title": "Apartment Hibiscus",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer Moli des 13 Apartado 36, 17488 Cadaqués, Girona",
+"phone": "+34972258880",
+"website": "https://linda-recommends.com/apartment-hibiscus-cadaques-spain",
+"lat": 42.2868749,
+"lng": 3.291951,
+"rating": 4.7,
+"votes": 3,
+"claimed": false
+},
+{
+"cid": "18348342311422244271",
+"title": "Bellaire Cadaqués",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer Bellaire, 4, 17488 Cadaqués, Girona",
+"phone": "+34650664481",
+"website": "",
+"lat": 42.2886722,
+"lng": 3.2768219,
+"rating": 4.4,
+"votes": 113,
+"claimed": false
+},
+{
+"cid": "18425226578564122660",
+"title": "Espai Tony Keeler",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer des Call, 6, 17488 Cadaqués, Girona",
+"phone": "+34678457177",
+"website": "http://www.tonykeeler.com/",
+"lat": 42.288408499999996,
+"lng": 3.2765736999999997,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "1889270010603824152",
+"title": "Ulla & Paul Individual Scubadive",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Diving center",
+"address": "Carrer Punta de s'Oliguera, 14, 17488 Cadaqués, Girona",
+"phone": "+34609500175",
+"website": "http://www.divingcapdecreus.com/",
+"lat": 42.28696,
+"lng": 3.29676,
+"rating": 4.7,
+"votes": 86,
+"claimed": true
+},
+{
+"cid": "1945170551683251786",
+"title": "Galería Patrick J. Domken",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer Hort d'en Sanés, 11, 17488 Cadaqués, Girona",
+"phone": "+34654424772",
+"website": "",
+"lat": 42.2895544,
+"lng": 3.2815155999999996,
+"rating": 4.7,
+"votes": 68,
+"claimed": false
+},
+{
+"cid": "1955366103035543554",
+"title": "Divers Cadaqués Boutique",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Boutique",
+"address": "Plaça del Dr. Pont, 8, Bajo derecha, 17488 Cadaqués, Girona",
+"phone": "+34660990475",
+"website": "",
+"lat": 42.287549399999996,
+"lng": 3.2755897999999997,
+"rating": 4.5,
+"votes": 8,
+"claimed": true
+},
+{
+"cid": "1968732217111315431",
+"title": "Restaurant Vincle Cadaqués",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Carrer Vigilant, 8, 17488 Cadaqués, Girona",
+"phone": "+34623213155",
+"website": "http://www.restaurantvincle.com/",
+"lat": 42.2886832,
+"lng": 3.2769862,
+"rating": 4.8,
+"votes": 310,
+"claimed": true
+},
+{
+"cid": "1982919518592865283",
+"title": "Cadaqués photo",
+"cats": [
+"servicios",
+"fotografia"
+],
+"gcat": "Photographer",
+"address": "Carrer Curós, 6, 2º piso, 17488 Cadaqués, Girona",
+"phone": "+34696300900",
+"website": "http://www.cadaquesphoto.com/",
+"lat": 42.2880769,
+"lng": 3.2764583,
+"rating": 5,
+"votes": 24,
+"claimed": true
+},
+{
+"cid": "20964731796372998",
+"title": "Cadaqués",
+"cats": [
+"servicios",
+"alquiler-de-coches-motos-y-bicis"
+],
+"gcat": "Car rental agency",
+"address": "Riera de Sant Vicenç, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.289279,
+"lng": 3.2742564,
+"rating": 4.7,
+"votes": 20,
+"claimed": false
+},
+{
+"cid": "2120031343212663133",
+"title": "Expo Dalí",
+"cats": [
+"ocio-y-cultura",
+"museos"
+],
+"gcat": "Museum",
+"address": "Carrer de Santa Margarida, 24, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://www.expodalicadaques.com/",
+"lat": 42.2888229,
+"lng": 3.2760464,
+"rating": 4.6,
+"votes": 162,
+"claimed": true
+},
+{
+"cid": "2129732246798815331",
+"title": "S'estrop Restaurant",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Plaça del Passeig, 9, 17488 Cadaqués, Girona",
+"phone": "+34972259073",
+"website": "https://sestroprestaurant.com/",
+"lat": 42.289245,
+"lng": 3.2785062999999997,
+"rating": 4.4,
+"votes": 893,
+"claimed": true
+},
+{
+"cid": "216934047337642116",
+"title": "Sa Rosticería des Fornet",
+"cats": [
+"comprar",
+"panaderias-y-pastelerias"
+],
+"gcat": "Pastry shop",
+"address": "Carrer Miquel Rosset, 3, 17488 Cadaqués, Girona",
+"phone": "+34972159113",
+"website": "http://sarostisseria.com/",
+"lat": 42.289449999999995,
+"lng": 3.27778,
+"rating": 3.9,
+"votes": 409,
+"claimed": false
+},
+{
+"cid": "2196155998298786919",
+"title": "Pillo Pollo",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Chicken restaurant",
+"address": "Av. de Salvador Dalí, 8, derecha, 17488 Cadaqués, Girona",
+"phone": "+34972258464",
+"website": "",
+"lat": 42.2916145,
+"lng": 3.2820779,
+"rating": 4.2,
+"votes": 141,
+"claimed": true
+},
+{
+"cid": "2197910361325917634",
+"title": "Kampai Restaurant",
+"cats": [
+"comer-y-beber",
+"internacional"
+],
+"gcat": "Japanese restaurant",
+"address": "Riba Pitxot, 12, 17488 Cadaqués, Girona",
+"phone": "+34618679832",
+"website": "https://kampai-restaurant.com/",
+"lat": 42.286209199999995,
+"lng": 3.2764143,
+"rating": 4.4,
+"votes": 233,
+"claimed": true
+},
+{
+"cid": "2254532236587438874",
+"title": "Embolic",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Health food restaurant",
+"address": "Carrer Miquel Rosset, 5, 17488 Cadaqués, Girona",
+"phone": "+34697710841",
+"website": "",
+"lat": 42.2895839,
+"lng": 3.2778831,
+"rating": 4.6,
+"votes": 288,
+"claimed": true
+},
+{
+"cid": "2282023443431330793",
+"title": "Carnisseria Serraplà",
+"cats": [
+"comprar",
+"carnicerias-y-charcuterias"
+],
+"gcat": "Butcher shop",
+"address": "Sa Riera, s/n, 17488 Cadaqués, Girona",
+"phone": "+34972159295",
+"website": "",
+"lat": 42.289744899999995,
+"lng": 3.2766238999999997,
+"rating": 1,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "2315321007781663235",
+"title": "OceanusTerra",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "OceanusTerra, 17488 Cadaqués, Girona",
+"phone": "+34686127739",
+"website": "",
+"lat": 42.2886908,
+"lng": 3.2780270999999996,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "2330613538830071087",
+"title": "Repsol",
+"cats": [
+"servicios",
+"talleres"
+],
+"gcat": "Gas station",
+"address": "Avenida Caridad Seriñana, DE, 12, 17488 Cadaqués, Girona",
+"phone": "+34972259078",
+"website": "https://www.repsol.es/buscador-eess-y-puntos-de-recarga/girona/cadaques/avenida-caridad-serinana-12/",
+"lat": 42.2900284,
+"lng": 3.2761727,
+"rating": 3.6,
+"votes": 154,
+"claimed": true
+},
+{
+"cid": "2384293891512159544",
+"title": "Creuers Cadaqués",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Cruise agency",
+"address": "Casino, Platja Gran davant del, 17488 Cadaqués, Girona",
+"phone": "+34615636157",
+"website": "http://www.creuerscadaques.com/",
+"lat": 42.2883418,
+"lng": 3.2774091,
+"rating": 3.8,
+"votes": 101,
+"claimed": true
+},
+{
+"cid": "2416972806118702381",
+"title": "Sa Cadaquesenca",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Trilla, 7, 17488 Cadaqués, Girona",
+"phone": "+34972159118",
+"website": "http://www.sacadaquesenca.com/",
+"lat": 42.2887434,
+"lng": 3.2741643999999996,
+"rating": 4.4,
+"votes": 303,
+"claimed": true
+},
+{
+"cid": "2418933591256982792",
+"title": "Art (didac santjoan)",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://instagram.com/didacsantjoan?igshid=ZDdkNTZiNTM=",
+"lat": 42.2897561,
+"lng": 3.2775784999999997,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "2441933345646566709",
+"title": "Marketing Hostel",
+"cats": [
+"servicios",
+"informatica-y-moviles"
+],
+"gcat": "Marketing agency",
+"address": "Carrer Unió, 3, 17488 Cadaqués, Girona",
+"phone": "+34972159118",
+"website": "",
+"lat": 42.2888831,
+"lng": 3.2762835999999997,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "2452190279080940765",
+"title": "epic-costabrava",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Shared-use commercial kitchen",
+"address": "Carrer de Sant Antoni, 1, 17488 Cadaqués, Girona",
+"phone": "+34613403470",
+"website": "",
+"lat": 42.2894,
+"lng": 3.2796395,
+"rating": 3,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "2540880580447854243",
+"title": "Entrepans Tapes",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Avinguda Caritat Serinyana, 23, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2899928,
+"lng": 3.2753560999999998,
+"rating": 3.4,
+"votes": 5,
+"claimed": false
+},
+{
+"cid": "2596040055107072906",
+"title": "SOLPRAC NH SERVEIS S.L.",
+"cats": [
+"servicios",
+"limpieza-y-servicio-domestico"
+],
+"gcat": "Cleaners",
+"address": "POLIGON INDUSTRIAL PLA DELS, Calle St Llorens, S/N, 17488 Cadaqués, Girona",
+"phone": "+34972504271",
+"website": "",
+"lat": 42.291979999999995,
+"lng": 3.26984,
+"rating": 5,
+"votes": 2,
+"claimed": true
+},
+{
+"cid": "2599850811703471571",
+"title": "Tu & Jo Cadaqués",
+"cats": [
+"comprar",
+"joyerias"
+],
+"gcat": "Jewelry store",
+"address": "Carrer Unió, 4, 17488 Cadaqués, Girona",
+"phone": "+34722441442",
+"website": "https://tujocadaques.com/",
+"lat": 42.2889786,
+"lng": 3.2762954,
+"rating": 4.9,
+"votes": 7,
+"claimed": true
+},
+{
+"cid": "2607896089793152784",
+"title": "L'Atelier Boutique Cadaqués",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Boutique",
+"address": "Ses Galeries, Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2896885,
+"lng": 3.2772772999999997,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "2660572613195201988",
+"title": "Pavelló Municipal de Cadaqués",
+"cats": [
+"deporte-y-nautica",
+"instalaciones-deportivas"
+],
+"gcat": "Sports complex",
+"address": "17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.293369999999996,
+"lng": 3.2814479999999997,
+"rating": 3.8,
+"votes": 63,
+"claimed": false
+},
+{
+"cid": "2682271663819797311",
+"title": "Bar Melitón",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Plaça del Passeig, s/n, 17488 Cadaqués, Girona",
+"phone": "+34972258201",
+"website": "",
+"lat": 42.289082099999995,
+"lng": 3.2789425,
+"rating": 3.9,
+"votes": 403,
+"claimed": false
+},
+{
+"cid": "2685095524945055806",
+"title": "Hotel Restaurant Villa Salvador",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Camí de s'Arenella, 4, 17488 Cadaqués, Girona",
+"phone": "+34872208262",
+"website": "http://www.hotelvillasalvador.com/",
+"lat": 42.284323799999996,
+"lng": 3.2888462,
+"rating": 4.6,
+"votes": 129,
+"claimed": true
+},
+{
+"cid": "2751004517476235491",
+"title": "Barraca de Pescadors a Portlligat",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Serviced apartment",
+"address": "Passatge des Pescadors, 17488 Port Lligat, Girona",
+"phone": "+34972251006",
+"website": "https://www.somsgranados.com/detalle-del-alojamiento/alquiler-casa-de-pueblo-barraca-de-pescadors-a-port-lligat-cadaques-10289/",
+"lat": 42.293757899999996,
+"lng": 3.2859347,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "2785488846391395490",
+"title": "La Notta bar de tapas y frankfurt",
+"cats": [
+"comer-y-beber",
+"tapas-y-vermut"
+],
+"gcat": "Tapas bar",
+"address": "Riba Pitxot, 7, 17488 Cadaqués, Girona",
+"phone": "+34972159395",
+"website": "http://www.lanotta.es/",
+"lat": 42.2865906,
+"lng": 3.2762298,
+"rating": 4.1,
+"votes": 328,
+"claimed": true
+},
+{
+"cid": "2819022694144364186",
+"title": "Candela Cadaques",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Store",
+"address": "Avinguda Caritat Serinyana, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2899422,
+"lng": 3.2765564,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "2837979560338688363",
+"title": "Florencia Herrera Joyas",
+"cats": [
+"comprar",
+"joyerias"
+],
+"gcat": "Jewelry store",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "+34648050504",
+"website": "http://www.florenciajoyasartesanales.es/",
+"lat": 42.2897561,
+"lng": 3.2775784999999997,
+"rating": 5,
+"votes": 31,
+"claimed": true
+},
+{
+"cid": "2838082772818528641",
+"title": "El Boliche",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Miquel Rosset, 5, 17488 Cadaqués, Girona",
+"phone": "+34672714783",
+"website": "http://www.elboliche.cat/",
+"lat": 42.289583799999996,
+"lng": 3.2778929,
+"rating": 4.5,
+"votes": 171,
+"claimed": true
+},
+{
+"cid": "2964066399946037642",
+"title": "Carnisseria Serraplà",
+"cats": [
+"comprar",
+"carnicerias-y-charcuterias"
+],
+"gcat": "Butcher shop",
+"address": "Carrer del Dr. Callís, 12, 17488 Cadaqués, Girona",
+"phone": "+34972258340",
+"website": "",
+"lat": 42.2883797,
+"lng": 3.2767579,
+"rating": 4.3,
+"votes": 35,
+"claimed": true
+},
+{
+"cid": "2980679172052191659",
+"title": "Tao Natural Cadaques",
+"cats": [
+"comprar",
+"perfumeria-y-cosmetica"
+],
+"gcat": "Aromatherapy supply store",
+"address": "Carrer del Dr. Callís, 18, 17488 Cadaqués, Girona",
+"phone": "+34972251000",
+"website": "",
+"lat": 42.288117199999995,
+"lng": 3.2767052,
+"rating": 4.2,
+"votes": 29,
+"claimed": true
+},
+{
+"cid": "3029098524569240074",
+"title": "Mas Duran",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Mas Duran, S/N, 17488 Cadaqués, Girona",
+"phone": "+34623761746",
+"website": "https://artisanastays.com/es/mas-duran-cadaques",
+"lat": 42.302737,
+"lng": 3.274086,
+"rating": 4.6,
+"votes": 28,
+"claimed": true
+},
+{
+"cid": "3032996295404964255",
+"title": "Parking Saba Riera Sant Vicenç Cadaqués",
+"cats": [
+"servicios",
+"aparcamientos"
+],
+"gcat": "Parking lot",
+"address": "Carrer de ses Hortes, Riera de Sant Vicenç, 17489 Cadaqués, Girona",
+"phone": "+34935575627",
+"website": "https://www.saba.es/es/parking-cadaques/parking-saba-riera-sant-vicenc?utm_source=gbp&utm_medium=organic&utm_campaign=la-riera-sant-vicenc",
+"lat": 42.289001,
+"lng": 3.2742,
+"rating": 3.7,
+"votes": 1969,
+"claimed": true
+},
+{
+"cid": "3033733604654267661",
+"title": "Limpiezas GJ Cadaqués",
+"cats": [
+"servicios",
+"limpieza-y-servicio-domestico"
+],
+"gcat": "Cleaning service",
+"address": "Carrer de la Font Vella, 8, 1º 3ª, 17488 Cadaqués, Girona",
+"phone": "+34616882578",
+"website": "",
+"lat": 42.289858599999995,
+"lng": 3.2748882999999998,
+"rating": 3,
+"votes": 2,
+"claimed": false
+},
+{
+"cid": "3064973220516005560",
+"title": "Apartamento Palau Cadaques",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer Palau, 17, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://apartamento-palau-cadaques.webnode.es/",
+"lat": 42.290545099999996,
+"lng": 3.2787165,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "3068679578238651550",
+"title": "SA GELATERIA CADAQUES",
+"cats": [
+"comer-y-beber",
+"heladerias"
+],
+"gcat": "Ice cream shop",
+"address": "Riba des Poal, 17488 Cadaqués, Girona",
+"phone": "+34972258511",
+"website": "",
+"lat": 42.2887901,
+"lng": 3.2805755,
+"rating": 3.9,
+"votes": 402,
+"claimed": true
+},
+{
+"cid": "3086423658727718048",
+"title": "A LES 3 Studio | Tattoo Studio Cadaqués",
+"cats": [
+"servicios",
+"tatuajes"
+],
+"gcat": "Tattoo artist",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "+34608406933",
+"website": "https://www.alestresstudio.com/",
+"lat": 42.2896885,
+"lng": 3.2772772999999997,
+"rating": 5,
+"votes": 46,
+"claimed": true
+},
+{
+"cid": "3141967821506277221",
+"title": "Roca Ride SL - E-Bike Rental Cadaqués",
+"cats": [
+"servicios",
+"alquiler-de-coches-motos-y-bicis"
+],
+"gcat": "Bicycle rental service",
+"address": "17488 Cadaqués",
+"phone": "+34631826711",
+"website": "https://roca-ride.lokki.rent/",
+"lat": 42.287071999999995,
+"lng": 3.281341,
+"rating": 5,
+"votes": 19,
+"claimed": true
+},
+{
+"cid": "3158394189120370371",
+"title": "MAYA CUSELL",
+"cats": [
+"servicios",
+"arquitectura"
+],
+"gcat": "Architect",
+"address": "Carrer Unió, 10, 17488 Cadaqués, Girona",
+"phone": "+34630182236",
+"website": "http://dymaya.com/",
+"lat": 42.289069999999995,
+"lng": 3.27608,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "321771651550203845",
+"title": "Keep Smiling George Sl",
+"cats": [
+"comprar",
+"jugueterias"
+],
+"gcat": "Toy store",
+"address": "Paseo Mar, 4, 17488 Cadaqués, Girona",
+"phone": "+34972159910",
+"website": "",
+"lat": 42.289260299999995,
+"lng": 3.2781091,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "3231733038312861957",
+"title": "PUERTO SERVEIS MARITIMS PROMAR",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Marina",
+"address": "del Senyor, Polígon Industrial Plà, Llorenç, nau 405, 17488 Cadaqués, Girona",
+"phone": "+34972159143",
+"website": "https://serveismaritimspromar.com/",
+"lat": 42.2919268,
+"lng": 3.2682289,
+"rating": 2.5,
+"votes": 8,
+"claimed": true
+},
+{
+"cid": "3260255344994076323",
+"title": "Ceràmiques Clara Saló · Ceràmiques Cadaqués",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Pottery store",
+"address": "Avinguda Caritat Serinyana, 22, 17488 Cadaqués, Girona",
+"phone": "+34972258995",
+"website": "https://ceramiquesclarasalo.com/",
+"lat": 42.2901747,
+"lng": 3.27519,
+"rating": 4.9,
+"votes": 49,
+"claimed": true
+},
+{
+"cid": "3260278683549064510",
+"title": "Centre médical de première nécessité",
+"cats": [
+"salud",
+"centros-de-salud"
+],
+"gcat": "Medical Center",
+"address": "Carrer Nou, 6, 17488 Cadaqués, Girona",
+"phone": "+34972258807",
+"website": "",
+"lat": 42.2875,
+"lng": 3.27519,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "3279973528554450315",
+"title": "Bebere",
+"cats": [
+"comer-y-beber",
+"copas-y-noche"
+],
+"gcat": "Night club",
+"address": "Carrer Miquel Rosset, 17, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.290210599999995,
+"lng": 3.2781727,
+"rating": 3.7,
+"votes": 12,
+"claimed": true
+},
+{
+"cid": "3295919232829759921",
+"title": "Celeste",
+"cats": [
+"comer-y-beber",
+"pizzerias-e-italianos"
+],
+"gcat": "Italian restaurant",
+"address": "Carrer Nou, 1, 17488 Cadaqués, Girona",
+"phone": "+34722296891",
+"website": "",
+"lat": 42.287275,
+"lng": 3.2755123999999998,
+"rating": 4.8,
+"votes": 1675,
+"claimed": true
+},
+{
+"cid": "3296014103365984676",
+"title": "Mimoses Apartaments",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Serviced accommodation",
+"address": "Carrer de Ses Mimoses, 12, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2915662,
+"lng": 3.2751892,
+"rating": 4.5,
+"votes": 65,
+"claimed": false
+},
+{
+"cid": "3407183603162311202",
+"title": "A Rodolso",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Novelty store",
+"address": "Plaça del Passeig, 15, 17488 Cadaqués, Girona",
+"phone": "+34972259107",
+"website": "",
+"lat": 42.2890777,
+"lng": 3.2789348,
+"rating": 4,
+"votes": 6,
+"claimed": false
+},
+{
+"cid": "3462617025772019303",
+"title": "Llibreria Rahola",
+"cats": [
+"comprar",
+"librerias-y-papelerias"
+],
+"gcat": "Book store",
+"address": "Avinguda Caritat Serinyana, 2, 17488 Cadaqués, Girona",
+"phone": "+34972258349",
+"website": "",
+"lat": 42.2894181,
+"lng": 3.2776731999999997,
+"rating": 4.3,
+"votes": 55,
+"claimed": false
+},
+{
+"cid": "3516622978722728416",
+"title": "Restaurante Beirut",
+"cats": [
+"comer-y-beber",
+"internacional"
+],
+"gcat": "Lebanese restaurant",
+"address": "Carrer Miquel Rosset, 21, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.290437399999995,
+"lng": 3.2782215,
+"rating": 3.6,
+"votes": 100,
+"claimed": false
+},
+{
+"cid": "3539580698906047851",
+"title": "Rostisseria Supermercat-Panaderia-Carnisseria",
+"cats": [
+"comprar",
+"carnicerias-y-charcuterias"
+],
+"gcat": "Butcher shop",
+"address": "17488 Cadaqués, Girona",
+"phone": "+34972258464",
+"website": "",
+"lat": 42.2916065,
+"lng": 3.2820481999999997,
+"rating": 3.7,
+"votes": 11,
+"claimed": false
+},
+{
+"cid": "3546366402624926117",
+"title": "Bar Marina",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "GI-614, 19, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.289855599999996,
+"lng": 3.2761815999999997,
+"rating": 3.5,
+"votes": 100,
+"claimed": false
+},
+{
+"cid": "3579968527197859721",
+"title": "Hotel Blaumar",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer Massa D'or, 21, 17488 Cadaqués, Girona",
+"phone": "+34972159020",
+"website": "https://www.hotelblaumar.com/",
+"lat": 42.287553599999995,
+"lng": 3.2834195999999998,
+"rating": 4.6,
+"votes": 431,
+"claimed": true
+},
+{
+"cid": "36182595421898864",
+"title": "Taller Galeria Fort",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer Hort d'en Sanés, 9, 17488 Cadaqués, Girona",
+"phone": "+34972258549",
+"website": "http://www.miniprint.org/",
+"lat": 42.2894003,
+"lng": 3.2814215,
+"rating": 4.6,
+"votes": 47,
+"claimed": true
+},
+{
+"cid": "3690339846601349190",
+"title": "Hotel Nou Estrelles",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer de Sa Tarongeta, 3, 17488 Cadaqués, Girona",
+"phone": "+34972259100",
+"website": "http://www.hotelnouestrelles.com/",
+"lat": 42.2898845,
+"lng": 3.2737464999999997,
+"rating": 4.5,
+"votes": 257,
+"claimed": true
+},
+{
+"cid": "37313230936488637",
+"title": "Classic Boats Cadaqués",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "Cala de Portlligat, s/n, 17488 Cadaqués, Girona",
+"phone": "+34630548296",
+"website": "https://classicboatscadaques.com/",
+"lat": 42.29306,
+"lng": 3.2864722,
+"rating": 5,
+"votes": 40,
+"claimed": true
+},
+{
+"cid": "3739539985837758187",
+"title": "L'Hostalet De Cadaques",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer Miquel Rosset, 13, 17488 Cadaqués, Girona",
+"phone": "+34972258206",
+"website": "https://www.hostaletdecadaques.com/",
+"lat": 42.290128599999996,
+"lng": 3.27819,
+"rating": 4.2,
+"votes": 319,
+"claimed": true
+},
+{
+"cid": "3812173177208646308",
+"title": "Matis",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Handicraft",
+"address": "Carrer de l'Església, N°3, 17488 Cadaqués, Girona",
+"phone": "+34972159418",
+"website": "",
+"lat": 42.2882823,
+"lng": 3.2761647,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "3823262071638183657",
+"title": "Can Cabrisas",
+"cats": [
+"comprar",
+"panaderias-y-pastelerias"
+],
+"gcat": "Cake shop",
+"address": "Plaça Doctor Trèmols, 8, 17488 Cadaqués, Girona",
+"phone": "+34972258283",
+"website": "",
+"lat": 42.288557,
+"lng": 3.2771858999999997,
+"rating": 4.5,
+"votes": 199,
+"claimed": true
+},
+{
+"cid": "3841937955433980108",
+"title": "Hotel Tarongeta",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Paratge Tarongeta, s/n, 17488 Cadaqués, Girona",
+"phone": "+34972258289",
+"website": "https://www.hoteltarongeta.cat/",
+"lat": 42.29,
+"lng": 3.2736110999999997,
+"rating": 4.2,
+"votes": 623,
+"claimed": false
+},
+{
+"cid": "3843141079240007201",
+"title": "Cadena 88",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Hardware store",
+"address": "17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://cadena88.com/",
+"lat": 42.2899682,
+"lng": 3.2752825,
+"rating": 5,
+"votes": 4,
+"claimed": false
+},
+{
+"cid": "3922759395151358070",
+"title": "ALQUILER BARCOS COSTA BRAVA - CBRB - Alquiler Barcos Cadaqués",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "Carrer de Sant Pere, 1, 17488 Cadaqués, Girona",
+"phone": "+34657513428",
+"website": "https://book.costabravarentboat.com/",
+"lat": 42.288706499999996,
+"lng": 3.2812132999999997,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "3932437539404064716",
+"title": "Calacay",
+"cats": [
+"servicios",
+"arquitectura"
+],
+"gcat": "Interior designer",
+"address": "Riera de Sant Vicenç, 4, 17488 Cadaqués, Girona",
+"phone": "+34629544677",
+"website": "http://www.arxe.info/",
+"lat": 42.289251,
+"lng": 3.2770872,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "3999018155523337607",
+"title": "L'Allegro cdq",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Miquel Rosset, 12, 17488 Cadaqués, Girona",
+"phone": "+34872042920",
+"website": "https://www.instagram.com/lallegrocdq/",
+"lat": 42.289891,
+"lng": 3.2782530999999997,
+"rating": 4.8,
+"votes": 159,
+"claimed": true
+},
+{
+"cid": "4056325418317330008",
+"title": "Rutes gratuïtes al carrer de Cadaqués",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Artist",
+"address": "Carrer Puig Vidal, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.instagram.com/theinvisibleartist_streetart/",
+"lat": 42.2890612,
+"lng": 3.2795449999999997,
+"rating": 5,
+"votes": 11,
+"claimed": false
+},
+{
+"cid": "4086407199466981215",
+"title": "VETES ESPARDENYES",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Store",
+"address": "Sa Plaça, 3, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://instagram.com/vetes.espardenyes?igshid=YmMyMTA2M2Y=",
+"lat": 42.2878532,
+"lng": 3.2766417999999997,
+"rating": 5,
+"votes": 74,
+"claimed": true
+},
+{
+"cid": "4090137438546632671",
+"title": "Cadaquésrent | Boats and Motobikes | Caseta",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "muelle port d'alguer, Riba Nemesi Llorens, 17488 Cadaqués, Girona",
+"phone": "+34678431722",
+"website": "https://www.cadaquesrent.es/",
+"lat": 42.287463599999995,
+"lng": 3.2769405999999996,
+"rating": 4.8,
+"votes": 94,
+"claimed": true
+},
+{
+"cid": "4160486452634315431",
+"title": "SES BOLES",
+"cats": [
+"comer-y-beber",
+"heladerias"
+],
+"gcat": "Ice cream shop",
+"address": "Riba Nemesi Llorens, 3, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2891307,
+"lng": 3.2790603,
+"rating": 3.5,
+"votes": 90,
+"claimed": true
+},
+{
+"cid": "4238176797547535231",
+"title": "Llar d'Infants Municipal Es Papanell",
+"cats": [
+"educacion",
+"escuelas-infantiles"
+],
+"gcat": "Public educational institution",
+"address": "Carrer Vigilant, 2, 17488 Cadaqués, Girona",
+"phone": "+34972159282",
+"website": "http://www.xtec.cat/eei-espapanell/",
+"lat": 42.2887349,
+"lng": 3.2770609,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "4329816933748652733",
+"title": "Es saquet",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Avinguda Caritat Serinyana, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.289910299999995,
+"lng": 3.2767619,
+"rating": 3.9,
+"votes": 7,
+"claimed": false
+},
+{
+"cid": "437283867887044577",
+"title": "Porcion casera",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Grocery store",
+"address": "17488 Cadaqués",
+"phone": "+34670432984",
+"website": "",
+"lat": 42.287071999999995,
+"lng": 3.281341,
+"rating": 4.2,
+"votes": 5,
+"claimed": true
+},
+{
+"cid": "4378404833374897297",
+"title": "Apartament Cadaqués",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carr. de Cap de Creus, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2924034,
+"lng": 3.2804886,
+"rating": 4.9,
+"votes": 15,
+"claimed": false
+},
+{
+"cid": "4399176475556912044",
+"title": "Aparthotel L Eretat",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Calle President Maciá, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258848",
+"website": "",
+"lat": 42.289045099999996,
+"lng": 3.2779027,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "4408174596550914273",
+"title": "Parada 52",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer de la Pruna, 11, 17488 Cadaqués, Girona",
+"phone": "+34627679999",
+"website": "http://parada52web.wixstudio.com/parada52",
+"lat": 42.2874985,
+"lng": 3.2749805,
+"rating": 4.5,
+"votes": 1106,
+"claimed": true
+},
+{
+"cid": "4455219324027080726",
+"title": "Escoles Nacionals (Cadaqués)",
+"cats": [
+"educacion",
+"escuelas-de-primaria"
+],
+"gcat": "General education school",
+"address": "17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://agora.xtec.cat/iecadaques/",
+"lat": 42.290995099999996,
+"lng": 3.2760338,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "4510848068925492283",
+"title": "Baobab",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Women's clothing store",
+"address": "Carrer Unió, 16, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2892119,
+"lng": 3.2757388,
+"rating": 5,
+"votes": 8,
+"claimed": true
+},
+{
+"cid": "4555991255431900188",
+"title": "TONGAS PIZZA",
+"cats": [
+"comer-y-beber",
+"pizzerias-e-italianos"
+],
+"gcat": "Pizza takeaway",
+"address": "Riera de Sant Vicenç, 8, 17488 Cadaqués, Girona",
+"phone": "+34621206842",
+"website": "https://www.tongaspizza.com/",
+"lat": 42.2893881,
+"lng": 3.2768398999999997,
+"rating": 4.8,
+"votes": 178,
+"claimed": true
+},
+{
+"cid": "4562866769428796936",
+"title": "Freedive Cadaqués",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Diving center",
+"address": "Carrer Punta de s'Oliguera, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://www.freedivecadaques.es/",
+"lat": 42.2869617,
+"lng": 3.2967429999999998,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "4572329450288620770",
+"title": "Òptica Cadaqués 2",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Store",
+"address": "Passeig Nº, 1, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2890198,
+"lng": 3.2779266,
+"rating": 2,
+"votes": 4,
+"claimed": true
+},
+{
+"cid": "4728278220533386831",
+"title": "Crazy sheep",
+"cats": [
+"comprar",
+"mercerias"
+],
+"gcat": "Needlework shop",
+"address": "17488 Cadaqués, Girona",
+"phone": "+34646220215",
+"website": "",
+"lat": 42.2929228,
+"lng": 3.2784807999999996,
+"rating": 4.7,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "4783116041546094497",
+"title": "Gaia Apartments and Lofts Cadaqués",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer den Norio del, 1 al 3, 17488 Cadaqués, Girona",
+"phone": "+34972485410",
+"website": "https://www.gaia-apartmentsandlofts.com/",
+"lat": 42.2893178,
+"lng": 3.2818525,
+"rating": 4.5,
+"votes": 22,
+"claimed": true
+},
+{
+"cid": "4979915609071458825",
+"title": "Boutique Hotel Villa Gala",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer Solitari, 3, 17488 Cadaqués, Girona",
+"phone": "+34872228000",
+"website": "https://hotelvillagala.com/",
+"lat": 42.286890199999995,
+"lng": 3.2748939,
+"rating": 4.5,
+"votes": 202,
+"claimed": true
+},
+{
+"cid": "5036803665716583256",
+"title": "Ses Paelles de Cadaqués",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Carrer Miquel Rosset, 6, 17488 Cadaqués, Girona",
+"phone": "+34619941372",
+"website": "",
+"lat": 42.2895026,
+"lng": 3.2779667,
+"rating": 4.5,
+"votes": 2783,
+"claimed": true
+},
+{
+"cid": "5060324189694821574",
+"title": "El Jonquet",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Gift shop",
+"address": "Pl. des Portitxó, 4, 17488 Cadaqués, Girona",
+"phone": "+34972259183",
+"website": "",
+"lat": 42.2891543,
+"lng": 3.2791676,
+"rating": 2.9,
+"votes": 7,
+"claimed": false
+},
+{
+"cid": "512373408704119917",
+"title": "Tramuntana hotel",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer de la Torre, 9, 17488 Cadaqués, Girona",
+"phone": "+34972259270",
+"website": "https://www.tramuntanahotel.com/",
+"lat": 42.2886782,
+"lng": 3.2755151,
+"rating": 4.7,
+"votes": 202,
+"claimed": true
+},
+{
+"cid": "5196946884132733684",
+"title": "Hotel Boutique Es Blau",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer Vigilant, 12, 17488 Cadaqués, Girona",
+"phone": "+34621660981",
+"website": "https://www.esblaucdq.com/",
+"lat": 42.2888447,
+"lng": 3.2766783,
+"rating": 3.3,
+"votes": 57,
+"claimed": true
+},
+{
+"cid": "5223975124710653241",
+"title": "Restaurant Gula Cadaqués · Cuina Mediterrània i Creativa",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Horta d'en Sanés, 4, 17488, 17488 Cadaqués, Girona",
+"phone": "+34621252762",
+"website": "",
+"lat": 42.2892126,
+"lng": 3.2814082,
+"rating": 4.9,
+"votes": 355,
+"claimed": true
+},
+{
+"cid": "5228253079553339509",
+"title": "Pizzeria Plaza Cadaqués",
+"cats": [
+"comer-y-beber",
+"pizzerias-e-italianos"
+],
+"gcat": "Roman restaurant",
+"address": "Plaça del Passeig, 10, 17488 Cadaqués, Girona",
+"phone": "+34972159474",
+"website": "https://instagram.com/plaza.cadaques?igshid=YmMyMTA2M2Y=",
+"lat": 42.2893008,
+"lng": 3.2786998,
+"rating": 4.4,
+"votes": 1722,
+"claimed": true
+},
+{
+"cid": "5364609053702111360",
+"title": "MARITIM BAR",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Passeig Maritim, s/n, 17488 Cadaqués, Girona",
+"phone": "+34636198475",
+"website": "https://www.maritimbar.com/",
+"lat": 42.2887968,
+"lng": 3.2784605,
+"rating": 3.4,
+"votes": 1225,
+"claimed": true
+},
+{
+"cid": "5371916037441485108",
+"title": "Mõvenpick",
+"cats": [
+"comer-y-beber",
+"heladerias"
+],
+"gcat": "Ice cream shop",
+"address": "Riba Pitxot, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2872732,
+"lng": 3.2758062999999997,
+"rating": 2.3,
+"votes": 6,
+"claimed": false
+},
+{
+"cid": "5422152447580881912",
+"title": "Casa Neus",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer de les Creus, 19, 17488 Cadaqués, Girona",
+"phone": "+34619719199",
+"website": "http://casaneus.com/",
+"lat": 42.289626899999995,
+"lng": 3.2800192,
+"rating": 4.3,
+"votes": 11,
+"claimed": false
+},
+{
+"cid": "544070272943361958",
+"title": "Es Mas",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Hort d'en Sanés, 1, 17488 Cadaqués, Girona",
+"phone": "+34872206807",
+"website": "",
+"lat": 42.288988499999995,
+"lng": 3.2809614999999996,
+"rating": 4.4,
+"votes": 101,
+"claimed": true
+},
+{
+"cid": "5455048005636688415",
+"title": "Toc de Mar",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Plaça del Passeig, 4, 17488 Cadaqués, Girona",
+"phone": "+34620344899",
+"website": "https://www.facebook.com/TocdeMar",
+"lat": 42.2891622,
+"lng": 3.2781868,
+"rating": 4.4,
+"votes": 1068,
+"claimed": true
+},
+{
+"cid": "5478591245738546693",
+"title": "Espai d'Art Gallardo",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Painting studio",
+"address": "Carrer del Dr. Callís, 22, 17488 Cadaqués, Girona",
+"phone": "+34615983791",
+"website": "http://www.mercedesgallardo.com/",
+"lat": 42.2879544,
+"lng": 3.2765693999999996,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "5493029402583372592",
+"title": "CARBONIQUES R.FIGUERAS S.C.",
+"cats": [
+"comprar",
+"vinotecas-y-gourmet"
+],
+"gcat": "Mineral water company",
+"address": "Carrer Rierassa, 24, 17488 Cadaqués, Girona",
+"phone": "+34972258449",
+"website": "http://www.carboniquescadaques.es/",
+"lat": 42.29096,
+"lng": 3.27486,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "5527003067112341969",
+"title": "Can Tito",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Seafood restaurant",
+"address": "Carrer Vigilant, 8, 17488 Cadaqués, Girona",
+"phone": "+34972259070",
+"website": "",
+"lat": 42.288682699999995,
+"lng": 3.2769985999999998,
+"rating": 4.4,
+"votes": 440,
+"claimed": true
+},
+{
+"cid": "5567954345157540816",
+"title": "Restaurant L'Hostal",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Plaça del Passeig, 8, 17488 Cadaqués, Girona",
+"phone": "+34972258000",
+"website": "http://lhostalrestaurant.com/",
+"lat": 42.2892708,
+"lng": 3.2783735999999997,
+"rating": 3.8,
+"votes": 1524,
+"claimed": true
+},
+{
+"cid": "5580178032080405686",
+"title": "ReMei - Restaurant Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "RIBA DES PIANC, 11, 17488 Cadaqués, Girona",
+"phone": "+34621660317",
+"website": "https://re-mei.com/",
+"lat": 42.2874695,
+"lng": 3.281856,
+"rating": 4.8,
+"votes": 612,
+"claimed": true
+},
+{
+"cid": "558789214082694597",
+"title": "ONES CADAQUÉS, Platja Ses Oliveres",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Sailing school",
+"address": "Avinguda Victor Rahola, 41, 17488 Cadaqués, Girona",
+"phone": "+34635229022",
+"website": "http://www.onesclubcadaques.com/es/",
+"lat": 42.2859981,
+"lng": 3.285608,
+"rating": 4.8,
+"votes": 161,
+"claimed": true
+},
+{
+"cid": "5638862986096783790",
+"title": "Hotel Sol Ixent",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Av. de Sant Baldiri, 10, 17488 Cadaqués, Girona",
+"phone": "+34972251043",
+"website": "https://www.hotelsolixent.com/ca",
+"lat": 42.2845994,
+"lng": 3.2935597,
+"rating": 4.7,
+"votes": 1114,
+"claimed": true
+},
+{
+"cid": "5672045701719621323",
+"title": "TALLER MOTONÀUTICA. Montserrat",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat repair shop",
+"address": "Polígon Industrial Placita d'en Llorenç, 1, 17488 Cadaqués, Girona",
+"phone": "+34972159135",
+"website": "http://www.motonauticamanel.com/",
+"lat": 42.2915237,
+"lng": 3.2686888,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "5675957767755730991",
+"title": "Es Döner Kebab de Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Riera de Sant Vicenç, 8, 17488 Cadaqués, Girona",
+"phone": "+34972116784",
+"website": "",
+"lat": 42.2893919,
+"lng": 3.2768175,
+"rating": 2.5,
+"votes": 134,
+"claimed": true
+},
+{
+"cid": "5689759621939935199",
+"title": "Apartamento situado en un edificio modernista",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Serviced apartment",
+"address": "Carrer des Poal, 5, 17488 Cadaqués, Girona",
+"phone": "+34972251006",
+"website": "https://www.somsgranados.com/detalle-del-alojamiento/alquiler-apartamento-apartament-en-edifici-modernista-a-primera-linea-de-mar-davant-la-platja-d-es-poal-cadaques-10377/",
+"lat": 42.288858499999996,
+"lng": 3.2802808,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "5720936719842903377",
+"title": "SUPYOGA COSTA BRAVA (Cadaqués)",
+"cats": [
+"deporte-y-nautica",
+"gimnasios-yoga-pilates"
+],
+"gcat": "Yoga studio",
+"address": "Avinguda Victor Rahola, 41, 17488 Cadaqués, Girona",
+"phone": "+34670837095",
+"website": "http://www.supyogacostabrava.cat/",
+"lat": 42.2859988,
+"lng": 3.2856069999999997,
+"rating": 5,
+"votes": 6,
+"claimed": true
+},
+{
+"cid": "573806536877342009",
+"title": "Restaurant Norai",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Fish restaurant",
+"address": "Carrer del Doctor Bartomeus, 37, 17488 Cadaqués, Girona",
+"phone": "+34606891716",
+"website": "",
+"lat": 42.2828878,
+"lng": 3.2756919,
+"rating": 4.9,
+"votes": 340,
+"claimed": true
+},
+{
+"cid": "5814573404519417713",
+"title": "CASA MARGOT",
+"cats": [
+"dormir",
+"otros-alojamientos"
+],
+"gcat": "Lodging",
+"address": "Carrer de l'Heretat, 14, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.290836,
+"lng": 3.2776547,
+"rating": 4.2,
+"votes": 5,
+"claimed": false
+},
+{
+"cid": "5835115177748852146",
+"title": "Tiramisu Cadaqués",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Carrer Miquel Rosset, 8, 17488 Cadaqués, Girona",
+"phone": "+34662552130",
+"website": "http://www.facebook.com/tiramisucadaques",
+"lat": 42.2895474,
+"lng": 3.2780011,
+"rating": 4.3,
+"votes": 971,
+"claimed": true
+},
+{
+"cid": "5848591697507018890",
+"title": "Interior Cadaqués",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Home goods store",
+"address": "Riera de Sant Vicenç, 4, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.289289499999995,
+"lng": 3.2770872,
+"rating": 3.9,
+"votes": 7,
+"claimed": true
+},
+{
+"cid": "5912638865801554478",
+"title": "Cafe de la Habana",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Piano bar",
+"address": "Cafe De La Habana, Carrer del Doctor Bartomeus, 2, 17488 Cadaqués, Girona",
+"phone": "+34650948419",
+"website": "http://www.cafedelahabana.com/",
+"lat": 42.2858333,
+"lng": 3.2761111,
+"rating": 4.4,
+"votes": 386,
+"claimed": true
+},
+{
+"cid": "5948295303013969345",
+"title": "Sesvistes S.L.",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Calle De S'Alquería, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258902",
+"website": "",
+"lat": 42.289045099999996,
+"lng": 3.2779027,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "5965048883781605389",
+"title": "Galeria Marges - U",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer Unió, 12, 17488 Cadaqués, Girona",
+"phone": "+34687548455",
+"website": "http://www.galeriamargesu.com/",
+"lat": 42.2891274,
+"lng": 3.276026,
+"rating": 4.6,
+"votes": 8,
+"claimed": true
+},
+{
+"cid": "5978722416445741266",
+"title": "Tramuntana Republik (Cadaqués)",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Carrer del Dr. Callís, 20, 17488 Cadaqués, Girona",
+"phone": "+34972258618",
+"website": "http://www.tramuntanarepublik.com/",
+"lat": 42.2880999,
+"lng": 3.2766669999999998,
+"rating": 4.3,
+"votes": 106,
+"claimed": true
+},
+{
+"cid": "5981941748949545364",
+"title": "El MOON HAMBURGUER",
+"cats": [
+"comer-y-beber",
+"internacional"
+],
+"gcat": "American restaurant",
+"address": "Carrer Miquel Rosset, 18, 17488 Cadaqués, Girona",
+"phone": "+34633935050",
+"website": "https://temp-imvfxpshlpqhhfanytuw.webadorsite.com/",
+"lat": 42.29004,
+"lng": 3.2782899999999997,
+"rating": 4.6,
+"votes": 578,
+"claimed": true
+},
+{
+"cid": "5990708758752018820",
+"title": "Hotel Playa Sol",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Platja Pianc, 3, 17488 Cadaqués, Girona",
+"phone": "+34972258100",
+"website": "https://playasol.com/",
+"lat": 42.287698999999996,
+"lng": 3.282015,
+"rating": 4.7,
+"votes": 710,
+"claimed": true
+},
+{
+"cid": "6024065560130690935",
+"title": "Ses Vistes",
+"cats": [
+"dormir",
+"hostales-y-pensiones"
+],
+"gcat": "Guest house",
+"address": "Avenida, Carrer d'Emília Trèmols, No. 1, S'Alqueria, 17488 Port Lligat, Girona",
+"phone": "",
+"website": "https://sesvistes.com/",
+"lat": 42.2957823,
+"lng": 3.2877869,
+"rating": 4.7,
+"votes": 10,
+"claimed": true
+},
+{
+"cid": "6102925971666694833",
+"title": "Taller d'escultura Natàlia Tomàs",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Artist",
+"address": "Plaça del Dr. Pont, 7, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://etsy.com/es/shop/ateliernataliatomas",
+"lat": 42.2872856,
+"lng": 3.2756551,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "6178770252408617290",
+"title": "Ses Terrasses",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carr. de Roses, 30, 17488 Cadaqués, Girona",
+"phone": "+34679164619",
+"website": "http://www.sesterrasses.com/",
+"lat": 42.2906337,
+"lng": 3.2732897999999997,
+"rating": 5,
+"votes": 19,
+"claimed": true
+},
+{
+"cid": "6282124172761312830",
+"title": "Immobiliària Cap de Creus",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "+34680238128",
+"website": "http://www.immocapdecreus.cat/",
+"lat": 42.2897166,
+"lng": 3.2776178,
+"rating": 5,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "6318270252139939475",
+"title": "Parc de Bombers Voluntaris de Cadaqués",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Fire station",
+"address": "Carrer de Carles Rahola, 11, 17488 Cadaqués, Girona",
+"phone": "+34972258008",
+"website": "http://www.cadaques.cat/guia-del-poble/seguretat-i-sanitat/",
+"lat": 42.291974499999995,
+"lng": 3.2818335,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "6384789460500477174",
+"title": "Hostal Cristina Cadaqués",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Riera de Sant Vicenç, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258138",
+"website": "https://hostalcristina.com/",
+"lat": 42.288847,
+"lng": 3.27739,
+"rating": 4,
+"votes": 198,
+"claimed": true
+},
+{
+"cid": "6390596365379831310",
+"title": "El Beirut",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Miquel Rosset, 21, 17488 Cadaqués, Girona",
+"phone": "+34872203206",
+"website": "",
+"lat": 42.290437399999995,
+"lng": 3.2782215,
+"rating": 4.7,
+"votes": 94,
+"claimed": true
+},
+{
+"cid": "6421846094606555219",
+"title": "Restaurant La Sirena Cadaqués",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Carrer des Call, s/n, 17488 Cadaqués, Girona",
+"phone": "+34972258974",
+"website": "http://www.lasirenacadaques.com/",
+"lat": 42.288227,
+"lng": 3.2765136,
+"rating": 4.5,
+"votes": 1170,
+"claimed": true
+},
+{
+"cid": "6457240168097117023",
+"title": "Estètica Isabel",
+"cats": [
+"servicios",
+"estetica-y-bienestar"
+],
+"gcat": "Beauty salon",
+"address": "Carrer de la Font Vella, 8, 17488 Cadaqués, Girona",
+"phone": "+34630728383",
+"website": "",
+"lat": 42.2898868,
+"lng": 3.2748646,
+"rating": 4,
+"votes": 17,
+"claimed": false
+},
+{
+"cid": "6511700743432141190",
+"title": "Santiago Noguer Castaño",
+"cats": [
+"servicios",
+"fontaneria-y-climatizacion"
+],
+"gcat": "Heating contractor",
+"address": "Carrer de sa Tórtora, 88, 1º, 17488 Cadaqués, Girona",
+"phone": "+34610274972",
+"website": "",
+"lat": 42.2895994,
+"lng": 3.2812780999999998,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "656727719289503421",
+"title": "Cadaqués Bus Station",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Bus depot",
+"address": "Carrer de Sa Tarongeta, 29, 17488 Cadaqués, Girona",
+"phone": "+34902302025",
+"website": "http://www.moventis.es/es",
+"lat": 42.2896887,
+"lng": 3.2725961,
+"rating": 3.5,
+"votes": 190,
+"claimed": false
+},
+{
+"cid": "6622658986473410629",
+"title": "Perruqueria i Estètica Miralls",
+"cats": [
+"servicios",
+"peluquerias"
+],
+"gcat": "Hair salon",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "+34972159046",
+"website": "",
+"lat": 42.2897487,
+"lng": 3.2772859,
+"rating": 3.1,
+"votes": 14,
+"claimed": false
+},
+{
+"cid": "6748359397754246752",
+"title": "Bit Consulting",
+"cats": [
+"servicios",
+"asesorias-y-gestorias"
+],
+"gcat": "Consultant",
+"address": "Carrer de la Font Vella, 6, 17488 Cadaqués, Girona",
+"phone": "+34972159270",
+"website": "http://calculcadaques.cat/",
+"lat": 42.289765599999996,
+"lng": 3.2749989999999998,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "6815008807162522187",
+"title": "Sa Botiga",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Home goods store",
+"address": "Carrer del Dr. Callís, 2, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2885677,
+"lng": 3.2767581999999997,
+"rating": 2.5,
+"votes": 23,
+"claimed": false
+},
+{
+"cid": "6834378450563317455",
+"title": "Apartaments saTarongeta Sol - Ref. 101,40",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Serviced accommodation",
+"address": "Carrer de Sa Tarongeta, 4, 17488 Cadaqués, Girona",
+"phone": "+34972251006",
+"website": "http://www.cadaquesrent.cat/",
+"lat": 42.290413099999995,
+"lng": 3.2727695999999997,
+"rating": 4,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "6866636463363327279",
+"title": "MON NAUTIC RENT CADAQUES - ALQUILER DE BARCOS",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "17488 Cadaqués",
+"phone": "+34621283491",
+"website": "https://www.monnauticrent.com/",
+"lat": 42.287071999999995,
+"lng": 3.281341,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "6914900093596643000",
+"title": "Gastrobar Es Cantó",
+"cats": [
+"comer-y-beber",
+"tapas-y-vermut"
+],
+"gcat": "Bar & grill",
+"address": "Plaça Frederic Rahola, 1, 17488 Cadaqués, Girona",
+"phone": "+34666799448",
+"website": "https://www.instagram.com/gastrobar_escanto?igsh=MXU5cHVleTVvbGdvcw==",
+"lat": 42.289100999999995,
+"lng": 3.2773399999999997,
+"rating": 3.6,
+"votes": 157,
+"claimed": true
+},
+{
+"cid": "6925423808702266830",
+"title": "Blanco Mora",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer Bellaire, 6, 17488 Cadaqués, Girona",
+"phone": "+34626955051",
+"website": "http://www.blancomora.com/",
+"lat": 42.288642599999996,
+"lng": 3.2767223,
+"rating": 4.6,
+"votes": 21,
+"claimed": true
+},
+{
+"cid": "6926645417895226226",
+"title": "DigitalArtPrints",
+"cats": [
+"servicios",
+"imprentas-y-copisterias"
+],
+"gcat": "Digital printing service",
+"address": "17488 Cadaqués, Girona",
+"phone": "+34683567551",
+"website": "",
+"lat": 42.2886908,
+"lng": 3.2780270999999996,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "6934929092847142007",
+"title": "Restaurant La Villa by Hotel Villa Gala",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "C. Solitari, 3, 17488 Cadaqués, Girona",
+"phone": "+34872228000",
+"website": "https://hotelvillagala.com/restaurante/",
+"lat": 42.2869232,
+"lng": 3.2748584,
+"rating": 4.6,
+"votes": 101,
+"claimed": true
+},
+{
+"cid": "6960771322642810730",
+"title": "Enoteca MF",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Plaça des Poal, 3, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://www.cellermartinfaixo.com/",
+"lat": 42.288887599999995,
+"lng": 3.2810528,
+"rating": 4,
+"votes": 667,
+"claimed": false
+},
+{
+"cid": "6992489815268518517",
+"title": "BOUTIQUE HOTEL SPA CALMA BLANCA 4SUP",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Av. de Salvador Dalí, 8, 17488 Cadaqués, Girona",
+"phone": "+34972159356",
+"website": "",
+"lat": 42.291585999999995,
+"lng": 3.282434,
+"rating": 4.6,
+"votes": 30,
+"claimed": true
+},
+{
+"cid": "7001691211050976093",
+"title": "Restaurant El Barroco",
+"cats": [
+"comer-y-beber",
+"internacional"
+],
+"gcat": "Lebanese restaurant",
+"address": "Carrer des Pla d'en Retalla, 1, 17488 Cadaqués, Girona",
+"phone": "+34644258600",
+"website": "http://www.elbarrococadaques.com/",
+"lat": 42.2878968,
+"lng": 3.2748491,
+"rating": 4.5,
+"votes": 1268,
+"claimed": true
+},
+{
+"cid": "7005790568269364947",
+"title": "Batalla Taberna Marinera",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Seafood restaurant",
+"address": "Riba Pitxot, 10, 17488 Cadaqués, Girona",
+"phone": "+34872205238",
+"website": "https://tallabatalla.com/",
+"lat": 42.2864362,
+"lng": 3.2762441,
+"rating": 4.6,
+"votes": 605,
+"claimed": true
+},
+{
+"cid": "7012374908957153811",
+"title": "La Sal Es Xiringuito Ses Oliveres",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Avinguda Victor Rahola, 25, 17488 Cadaqués, Girona",
+"phone": "+34872204041",
+"website": "",
+"lat": 42.285746599999996,
+"lng": 3.2851119,
+"rating": 4.2,
+"votes": 1813,
+"claimed": true
+},
+{
+"cid": "7095170422527357686",
+"title": "Perruqueria Montse",
+"cats": [
+"servicios",
+"peluquerias"
+],
+"gcat": "Hairdresser",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "+34606644785",
+"website": "http://www.instagram.com/perruqueria_montse_cdq",
+"lat": 42.2897561,
+"lng": 3.2775784999999997,
+"rating": 5,
+"votes": 4,
+"claimed": false
+},
+{
+"cid": "7106476347651621970",
+"title": "Estudio Ramon Moscardó",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Painting studio",
+"address": "Carrer Hort d'en Sanés, 17 PB, 17488 Cadaqués, Girona",
+"phone": "+34675199115",
+"website": "http://www.moscardo.com/",
+"lat": 42.289715,
+"lng": 3.281714,
+"rating": 5,
+"votes": 14,
+"claimed": true
+},
+{
+"cid": "7125733954152286176",
+"title": "RMnàutica",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat repair shop",
+"address": "C/ Pla de Sant Llorenç, S/N, 17488 Cadaqués, Girona",
+"phone": "+34972258344",
+"website": "",
+"lat": 42.2917154,
+"lng": 3.2682938,
+"rating": 3,
+"votes": 2,
+"claimed": false
+},
+{
+"cid": "7132838542562475344",
+"title": "Totxanes S.L.",
+"cats": [
+"servicios",
+"reformas-y-construccion"
+],
+"gcat": "Building materials market",
+"address": "Polígon Industrial Pla del Senyor Llorenç, P-205, 17488, 17488 Cadaqués, Girona",
+"phone": "+34685745123",
+"website": "",
+"lat": 42.291436499999996,
+"lng": 3.268874,
+"rating": 4.5,
+"votes": 25,
+"claimed": true
+},
+{
+"cid": "7180199942871551865",
+"title": "Casa Nereta",
+"cats": [
+"dormir",
+"hoteles"
+],
+"gcat": "Hotel",
+"address": "Carrer Pintor Joan Ponç, 1, 17488 Cadaqués, Girona",
+"phone": "+34872221374",
+"website": "https://www.casanereta.com/",
+"lat": 42.2904391,
+"lng": 3.280474,
+"rating": 4,
+"votes": 76,
+"claimed": true
+},
+{
+"cid": "7207610682684943403",
+"title": "Teatre Art i Joia",
+"cats": [
+"ocio-y-cultura",
+"cines-y-teatros"
+],
+"gcat": "Performing arts theater",
+"address": "Carrer Vigilant, 11, 17488 Cadaqués, Girona",
+"phone": "+34972258231",
+"website": "",
+"lat": 42.289134399999995,
+"lng": 3.2764796,
+"rating": 4.6,
+"votes": 9,
+"claimed": false
+},
+{
+"cid": "7262337366945774774",
+"title": "Son Quimet",
+"cats": [
+"dormir",
+"otros-alojamientos"
+],
+"gcat": "Lodging",
+"address": "Carrer Puig Vidal, 13, 17488 Cadaqués, Girona",
+"phone": "+34690276048",
+"website": "http://www.sonquimet.com/",
+"lat": 42.2898372,
+"lng": 3.2791666999999998,
+"rating": 5,
+"votes": 4,
+"claimed": false
+},
+{
+"cid": "7302481671743824512",
+"title": "Restaurant Sa Gambina",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "C. Riba Nemesi Llorens, s/n, Avinguda Caritat Serinyana, 14, 17488 Cadaqués, Girona",
+"phone": "+34972258127",
+"website": "http://www.restaurantsagambina.com/",
+"lat": 42.2878671,
+"lng": 3.2770270999999997,
+"rating": 4.2,
+"votes": 1020,
+"claimed": true
+},
+{
+"cid": "7351916585033105137",
+"title": "Subministraments Canaleta",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Building materials store",
+"address": "Avinguda Caritat Serinyana, 21, BAJO, 17488 Cadaqués, Girona",
+"phone": "+34972258326",
+"website": "",
+"lat": 42.289958399999996,
+"lng": 3.2755009,
+"rating": 4.6,
+"votes": 30,
+"claimed": true
+},
+{
+"cid": "7368426106808641759",
+"title": "Restaurant Le bacoco",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer des Pla d'en Retalla, 1, 17488 Cadaqués, Girona",
+"phone": "+34644258601",
+"website": "",
+"lat": 42.2878982,
+"lng": 3.2749664,
+"rating": 4.7,
+"votes": 22,
+"claimed": false
+},
+{
+"cid": "7373003480895955804",
+"title": "MOKSHA in Cadaqués",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Rock shop",
+"address": "Avinguda Caritat Serinyana, 8, 17488 Cadaqués, Girona",
+"phone": "+34696613776",
+"website": "",
+"lat": 42.289659,
+"lng": 3.2773738,
+"rating": 4.8,
+"votes": 55,
+"claimed": true
+},
+{
+"cid": "7373569657247468107",
+"title": "Marinet Serveis Portuaris S.L",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "Riba des Poal, nº 7, 17488 Cadaqués, Girona",
+"phone": "+34618076725",
+"website": "http://marinetcadaques.com/",
+"lat": 42.288784899999996,
+"lng": 3.2802455,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "7415143822189521542",
+"title": "Carpe Diem Japonès",
+"cats": [
+"comer-y-beber",
+"internacional"
+],
+"gcat": "Japanese restaurant",
+"address": "Carr. de Cap de Creus, 1, 17488 Cadaqués, Girona",
+"phone": "+34639505540",
+"website": "https://www.carpediemjapones.es/",
+"lat": 42.2941146,
+"lng": 3.2796979,
+"rating": 4.8,
+"votes": 147,
+"claimed": true
+},
+{
+"cid": "7479337630118696529",
+"title": "Tattoo Cadaqués Studio | Horacio Bezunartea",
+"cats": [
+"servicios",
+"tatuajes"
+],
+"gcat": "Tattoo artist",
+"address": "Carr. de Roses, 12, 17488 Cadaqués, Girona",
+"phone": "+34664529541",
+"website": "https://tattoocadaques.com/",
+"lat": 42.2894523,
+"lng": 3.2715022,
+"rating": 5,
+"votes": 81,
+"claimed": true
+},
+{
+"cid": "758213714227417551",
+"title": "ESCURA XEMENEIES/ NETEJA XEMENEIES",
+"cats": [
+"servicios",
+"limpieza-y-servicio-domestico"
+],
+"gcat": "Chimney sweep",
+"address": "Carrer Lluís Aznarez, 17488 Cadaqués, Girona",
+"phone": "+34687022761",
+"website": "https://escuraxemeneiesalex.com/",
+"lat": 42.2929489,
+"lng": 3.2787455999999997,
+"rating": 5,
+"votes": 58,
+"claimed": true
+},
+{
+"cid": "7588983013300562249",
+"title": "CDQ Surf Shop & MARINET",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Riba des Poal, 7, 17488 Cadaqués, Girona",
+"phone": "+34618076725",
+"website": "https://marinetcadaques.com/",
+"lat": 42.2887993,
+"lng": 3.2802328,
+"rating": 3.3,
+"votes": 20,
+"claimed": true
+},
+{
+"cid": "7630845545171554219",
+"title": "Castañer Cadaqués",
+"cats": [
+"comprar",
+"zapaterias"
+],
+"gcat": "Shoe store",
+"address": "Plaça Frederic Rahola, 3, 17488 Cadaqués, Girona",
+"phone": "+34872025473",
+"website": "http://www.castaner.com/",
+"lat": 42.2892057,
+"lng": 3.2774300999999997,
+"rating": 3.4,
+"votes": 31,
+"claimed": true
+},
+{
+"cid": "7719171378185700241",
+"title": "Barca Adela Excursiones",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Boat tour agency",
+"address": "Unnamed Road, 17488 Cadaqués, Girona",
+"phone": "+34646242523",
+"website": "https://www.excursions-cadaques.com/",
+"lat": 42.2932281,
+"lng": 3.286279,
+"rating": 4.5,
+"votes": 73,
+"claimed": true
+},
+{
+"cid": "7724361722701588868",
+"title": "El Gato Azul",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer Curós, 10, 17488 Cadaqués, Girona",
+"phone": "+34972258844",
+"website": "https://www.instagram.com/elgatoazulcdq/",
+"lat": 42.288084999999995,
+"lng": 3.276306,
+"rating": 4.7,
+"votes": 676,
+"claimed": true
+},
+{
+"cid": "7787748577303017145",
+"title": "Galería EVA 4",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer des Call, 4, 17488 Cadaqués, Girona",
+"phone": "+34645464507",
+"website": "",
+"lat": 42.288396299999995,
+"lng": 3.2766237,
+"rating": 5,
+"votes": 3,
+"claimed": true
+},
+{
+"cid": "7814543002968167006",
+"title": "Món Nàutic Cadaqués",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat repair shop",
+"address": "Polígon industrial Pla del senyor Llorenç 110, 17488 Cadaqués, Girona",
+"phone": "+34665224191",
+"website": "http://www.monnauticcadaques.com/",
+"lat": 42.291319099999996,
+"lng": 3.2695100999999998,
+"rating": 5,
+"votes": 4,
+"claimed": true
+},
+{
+"cid": "7825859854247271209",
+"title": "Rentabit",
+"cats": [
+"servicios",
+"alquiler-de-coches-motos-y-bicis"
+],
+"gcat": "Motorcycle rental agency",
+"address": "Avinguda Caritat Serinyana, 9, 17488 Cadaqués, Girona",
+"phone": "+34972258226",
+"website": "http://www.rentabit.net/",
+"lat": 42.28958,
+"lng": 3.2771,
+"rating": 4,
+"votes": 64,
+"claimed": false
+},
+{
+"cid": "7829929334807056139",
+"title": "Zendrera Arquitectura (Pol Zendrera Agulló)",
+"cats": [
+"servicios",
+"arquitectura"
+],
+"gcat": "Architect",
+"address": "Carrer de s'Estrop, 12, 17488 Cadaqués, Girona",
+"phone": "+34630517921",
+"website": "https://www.instagram.com/zendreraarquitectura/",
+"lat": 42.283875099999996,
+"lng": 3.2911892,
+"rating": 5,
+"votes": 10,
+"claimed": true
+},
+{
+"cid": "787491309647393676",
+"title": "Assessoria Cadaqués - Tràmits i Serveis Cadaqués",
+"cats": [
+"servicios",
+"asesorias-y-gestorias"
+],
+"gcat": "Tax assessor",
+"address": "Avinguda Caritat Serinyana, 20, 17488 Cadaqués, Girona",
+"phone": "+34972258812",
+"website": "",
+"lat": 42.2902485,
+"lng": 3.2744733,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "7948420136183313962",
+"title": "Dron Cadaqués",
+"cats": [
+"servicios",
+"fotografia"
+],
+"gcat": "Photographer",
+"address": "Camí Port Lligat, 3, 17488 Cadaqués, Girona",
+"phone": "+34657050821",
+"website": "https://droncadaques.com/",
+"lat": 42.291988599999996,
+"lng": 3.2795240999999997,
+"rating": 5,
+"votes": 2,
+"claimed": true
+},
+{
+"cid": "7972544182983239400",
+"title": "Guanter Consultors S.L.",
+"cats": [
+"servicios",
+"seguros"
+],
+"gcat": "Insurance agency",
+"address": "Carrer Rierassa, 1, 17488 Cadaqués, Girona",
+"phone": "+34972258642",
+"website": "",
+"lat": 42.290295199999996,
+"lng": 3.2755212,
+"rating": 5,
+"votes": 4,
+"claimed": true
+},
+{
+"cid": "7990467772683402702",
+"title": "Enrocats",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothes and fabric manufacturer",
+"address": "Pl. des Portitxó, 9, 17488 Cadaqués, Girona",
+"phone": "+34667927821",
+"website": "http://enrocats.cat/",
+"lat": 42.2891955,
+"lng": 3.2797435,
+"rating": 4.5,
+"votes": 2,
+"claimed": false
+},
+{
+"cid": "7991380639948060471",
+"title": "ES FORNET. Forn de pa, Pastisseria i cafeteria",
+"cats": [
+"comprar",
+"panaderias-y-pastelerias"
+],
+"gcat": "Bakery",
+"address": "Avinguda Caritat Serinyana, 4, 17488 Cadaqués, Girona",
+"phone": "+34972159113",
+"website": "https://esfornet.com/",
+"lat": 42.2895074,
+"lng": 3.2775689,
+"rating": 3.6,
+"votes": 342,
+"claimed": true
+},
+{
+"cid": "8052967667992403475",
+"title": "Chirashi Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer de Sant Pere, 1, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2887079,
+"lng": 3.2812118,
+"rating": 4.6,
+"votes": 275,
+"claimed": true
+},
+{
+"cid": "8065147529410951266",
+"title": "Clínica Veterinària Cadaqués",
+"cats": [
+"salud",
+"veterinarios"
+],
+"gcat": "Veterinarian",
+"address": "Avinguda Caritat Serinyana, 23, 17488 Cadaqués, Girona",
+"phone": "+34691675643",
+"website": "https://www.veterinariacadaques.com/",
+"lat": 42.2900007,
+"lng": 3.2751579,
+"rating": 5,
+"votes": 64,
+"claimed": true
+},
+{
+"cid": "8080442854685290793",
+"title": "Natalia Villanueva",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Artist",
+"address": "Carrer Curós, 4, 17488 Cadaqués, Girona",
+"phone": "+34647131225",
+"website": "https://nataliavillanueva-art.com/",
+"lat": 42.2880214,
+"lng": 3.2765003,
+"rating": 4,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "8162630514279872886",
+"title": "Lua Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Carrer de Santa Maria, 1, 17488 Cadaqués, Girona",
+"phone": "+34972159452",
+"website": "https://instagram.com/lua_cadaques/",
+"lat": 42.2877966,
+"lng": 3.2767326,
+"rating": 4.6,
+"votes": 962,
+"claimed": true
+},
+{
+"cid": "818091088434685910",
+"title": "Supermercat Ca la Mama",
+"cats": [
+"comprar",
+"alimentacion"
+],
+"gcat": "Supermarket",
+"address": "Av. de Salvador Dalí, 8, 17488 Cadaqués, Girona",
+"phone": "+34972178317",
+"website": "",
+"lat": 42.291585999999995,
+"lng": 3.282434,
+"rating": 3.6,
+"votes": 46,
+"claimed": true
+},
+{
+"cid": "8183959792643841361",
+"title": "Galeria Cadaqués",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer Hort d'en Sanés, 7, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.galeriacadaques.com/",
+"lat": 42.289311,
+"lng": 3.2813049999999997,
+"rating": 4.5,
+"votes": 65,
+"claimed": false
+},
+{
+"cid": "8243087397288406969",
+"title": "Bar Mogambo",
+"cats": [
+"comer-y-beber",
+"bares-y-cocteleria"
+],
+"gcat": "Bar",
+"address": "Carrer des Maltret, 17488 Cadaqués, Girona",
+"phone": "+34972258808",
+"website": "",
+"lat": 42.2910008,
+"lng": 3.2799251999999997,
+"rating": 4.1,
+"votes": 100,
+"claimed": false
+},
+{
+"cid": "8260425683011197592",
+"title": "Xenxo Estilistes",
+"cats": [
+"servicios",
+"peluquerias"
+],
+"gcat": "Hair salon",
+"address": "Carrer de Ses Mimoses, 1, 17488 Cadaqués, Girona",
+"phone": "+34636189289",
+"website": "",
+"lat": 42.290252699999996,
+"lng": 3.2756722999999996,
+"rating": 5,
+"votes": 8,
+"claimed": false
+},
+{
+"cid": "8263630944634333544",
+"title": "Ceràmiques Joaquim Saló",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Pottery store",
+"address": "Plaça del Passeig, 12, 17488 Cadaqués, Girona",
+"phone": "+34972258218",
+"website": "",
+"lat": 42.289267599999995,
+"lng": 3.2788657,
+"rating": 4.8,
+"votes": 44,
+"claimed": true
+},
+{
+"cid": "8278015044401675884",
+"title": "CaixaBank Holabank",
+"cats": [
+"servicios",
+"bancos"
+],
+"gcat": "Bank",
+"address": "Plaza Frederic Rahola, 3, 17488 Cadaqués, Girona",
+"phone": "+34600404090",
+"website": "https://www.caixabank.es/es/app/caixamaps/girona/cadaques-pl-frederic-rahola-3/oficina?id=8126",
+"lat": 42.289018399999996,
+"lng": 3.2779254,
+"rating": 2.6,
+"votes": 5,
+"claimed": true
+},
+{
+"cid": "8282348125071341701",
+"title": "Cadaqués Habitatges S.L.",
+"cats": [
+"servicios",
+"inmobiliarias"
+],
+"gcat": "Real estate agency",
+"address": "Camí de s'Arenella, 0, 17488 Cadaqués, Girona",
+"phone": "+34972159316",
+"website": "",
+"lat": 42.283170899999995,
+"lng": 3.2893513999999997,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "8302536960118842219",
+"title": "Construccions Llach Llorens",
+"cats": [
+"servicios",
+"constructoras-y-promotoras"
+],
+"gcat": "Construction company",
+"address": "Carrer Rierassa, S/N, 17488 Cadaqués, Girona",
+"phone": "+34972258086",
+"website": "",
+"lat": 42.289740099999996,
+"lng": 3.2760295,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "8311678869434149202",
+"title": "CASA ANITA",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Calle miguel roset, 16, 17488 Cadaqués, Girona",
+"phone": "+34972258471",
+"website": "",
+"lat": 42.2899987,
+"lng": 3.2782940999999997,
+"rating": 4.4,
+"votes": 560,
+"claimed": true
+},
+{
+"cid": "8322699510635621483",
+"title": "Perruqueria i Estètica Riera",
+"cats": [
+"servicios",
+"peluquerias"
+],
+"gcat": "Hairdresser",
+"address": "Carrer de sa Bretxa, 8, 17488 Cadaqués, Girona",
+"phone": "+34972258089",
+"website": "",
+"lat": 42.2885924,
+"lng": 3.2769201,
+"rating": 4.5,
+"votes": 27,
+"claimed": true
+},
+{
+"cid": "8423458711935406853",
+"title": "Policia Local de Cadaqués",
+"cats": [
+"servicios",
+"administracion-publica"
+],
+"gcat": "Police station",
+"address": "Carrer de Carles Rahola, 9, 17488 Cadaqués, Girona",
+"phone": "+34972159343",
+"website": "https://cadaques.cat/guia-del-poble/seguretat-i-sanitat/",
+"lat": 42.2923311,
+"lng": 3.2816343999999997,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "8457246140506399937",
+"title": "Pastisseria Quer a Cadaqués",
+"cats": [
+"comprar",
+"panaderias-y-pastelerias"
+],
+"gcat": "Pastry shop",
+"address": "Avinguda Caritat Serinyana, 13, 17488 Cadaqués, Girona",
+"phone": "+34972258366",
+"website": "http://www.quercadaques.com/",
+"lat": 42.2897281,
+"lng": 3.2766922,
+"rating": 4.5,
+"votes": 104,
+"claimed": true
+},
+{
+"cid": "8517221500048461767",
+"title": "Can Pepitu",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Plaça del Passeig, 5, 17488 Cadaqués, Girona",
+"phone": "+34872204045",
+"website": "",
+"lat": 42.2893067,
+"lng": 3.2781862,
+"rating": 3.6,
+"votes": 27,
+"claimed": false
+},
+{
+"cid": "8540526155463410433",
+"title": "Òptica Cadaqués",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Store",
+"address": "Camí Port Lligat, 28, 17488 Cadaqués, Girona",
+"phone": "+34972258932",
+"website": "",
+"lat": 42.292995999999995,
+"lng": 3.278372,
+"rating": 4.5,
+"votes": 2,
+"claimed": true
+},
+{
+"cid": "8553493283071828651",
+"title": "Can Batlle",
+"cats": [
+"comprar",
+"hogar"
+],
+"gcat": "Variety store",
+"address": "Av. de Salvador Dalí, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://www.canbatlle.online/",
+"lat": 42.2897733,
+"lng": 3.2744358,
+"rating": 4.3,
+"votes": 27,
+"claimed": true
+},
+{
+"cid": "8584334235006976498",
+"title": "De Cap A Peus",
+"cats": [
+"servicios",
+"estetica-y-bienestar"
+],
+"gcat": "Beauty salon",
+"address": "Camí Port Lligat, 5, 17488 Cadaqués, Girona",
+"phone": "+34972258908",
+"website": "",
+"lat": 42.292006799999996,
+"lng": 3.2794081999999998,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "8625574023605296500",
+"title": "Ceibo Jardins",
+"cats": [
+"servicios",
+"jardineria"
+],
+"gcat": "Garden center",
+"address": "Carrer de Llanca, 9, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://ceibojardins.com/",
+"lat": 42.2863866,
+"lng": 3.2950176,
+"rating": 5,
+"votes": 11,
+"claimed": true
+},
+{
+"cid": "862607854706856369",
+"title": "Luna store",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Carrer del Dr. Callís, 18, 17488 Cadaqués, Girona",
+"phone": "+34633824463",
+"website": "",
+"lat": 42.288109999999996,
+"lng": 3.2766927999999997,
+"rating": 4.7,
+"votes": 15,
+"claimed": true
+},
+{
+"cid": "8638693016328217498",
+"title": "cruise ships Don Pancho",
+"cats": [
+"servicios",
+"agencias-de-viajes"
+],
+"gcat": "Travel agency",
+"address": "Carrer Eugeni d'Ors, 15, 17480 Cadaqués, Girona",
+"phone": "+34609359555",
+"website": "https://www.donpancho.org/de/contacte",
+"lat": 42.284769999999995,
+"lng": 3.27323,
+"rating": 4.1,
+"votes": 37,
+"claimed": true
+},
+{
+"cid": "8652928226604502732",
+"title": "CASA de U - S'alqueria",
+"cats": [
+"dormir",
+"hostales-y-pensiones"
+],
+"gcat": "Bed & breakfast",
+"address": "Avinguda Paratge S'Alqueria, 100, 17488 Cadaqués, Girona",
+"phone": "+33632148491",
+"website": "",
+"lat": 42.2988445,
+"lng": 3.2875444,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "8670792356905432134",
+"title": "Unic Homes Cadaques",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Carrer Eduard Marquina, 42, 17488 Cadaqués, Girona",
+"phone": "+34655095556",
+"website": "https://www.unichomescadaques.com/",
+"lat": 42.286037,
+"lng": 3.276207,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "8703566110110198939",
+"title": "Colomer Coll Pilar",
+"cats": [
+"salud",
+"farmacias"
+],
+"gcat": "Pharmacy",
+"address": "Camí Port Lligat, 28, 17488 Cadaqués, Girona",
+"phone": "+34972258932",
+"website": "",
+"lat": 42.292931599999996,
+"lng": 3.2782671,
+"rating": 4.2,
+"votes": 31,
+"claimed": true
+},
+{
+"cid": "8711133062620999694",
+"title": "Hostal Vehí",
+"cats": [
+"dormir",
+"hostales-y-pensiones"
+],
+"gcat": "Hostel",
+"address": "Carrer de l'Església, 6, 17488 Cadaqués, Girona",
+"phone": "+34972258470",
+"website": "http://www.hostalvehi.com/",
+"lat": 42.288320999999996,
+"lng": 3.2759867,
+"rating": 4.8,
+"votes": 226,
+"claimed": true
+},
+{
+"cid": "8747429533685090412",
+"title": "Taxi Pepe",
+"cats": [
+"servicios",
+"alquiler-de-coches-motos-y-bicis"
+],
+"gcat": "Taxi service",
+"address": "Plaça Frederic Rahola, 2, 17488 Cadaqués, Girona",
+"phone": "+34606067015",
+"website": "http://www.taxicadaques.com/",
+"lat": 42.289079699999995,
+"lng": 3.2773695,
+"rating": 3.9,
+"votes": 25,
+"claimed": true
+},
+{
+"cid": "875068105880454940",
+"title": "Diving Portlligat Cadaqués",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Diving center",
+"address": "Crta. Cap de Creus s/n, Carr. de Cap de Creus, 1, 17488 Cadaqués, Girona",
+"phone": "+34636759601",
+"website": "https://www.diveportlligat.com/",
+"lat": 42.2939164,
+"lng": 3.2787759,
+"rating": 4.8,
+"votes": 102,
+"claimed": true
+},
+{
+"cid": "8867299596667436770",
+"title": "SES GALERIES cadaqués",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Shopping mall",
+"address": "SES GALERIES, Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "+34633449912",
+"website": "",
+"lat": 42.2897561,
+"lng": 3.2775784999999997,
+"rating": 4.5,
+"votes": 10,
+"claimed": false
+},
+{
+"cid": "8900267780238569911",
+"title": "ESPAI SÈSAM",
+"cats": [
+"servicios",
+"estetica-y-bienestar"
+],
+"gcat": "Thai massage shop",
+"address": "Carrer Vigilant, 13, 17488 Cadaqués, Girona",
+"phone": "+34621286882",
+"website": "",
+"lat": 42.2887097,
+"lng": 3.2769038999999998,
+"rating": 5,
+"votes": 21,
+"claimed": true
+},
+{
+"cid": "8905116134592014661",
+"title": "JOIA",
+"cats": [
+"comer-y-beber",
+"heladerias"
+],
+"gcat": "Ice cream shop",
+"address": "Riba des Poal, 1, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "https://www.instagram.com/joia.cadaques?igsh=MW5sbTY1eTVkODM2bQ%3D%3D&utm_source=qr",
+"lat": 42.2888273,
+"lng": 3.2807228,
+"rating": 4.3,
+"votes": 978,
+"claimed": true
+},
+{
+"cid": "8911040029182919225",
+"title": "Webversatil Cadaqués",
+"cats": [
+"servicios",
+"informatica-y-moviles"
+],
+"gcat": "Website designer",
+"address": "Carrer Hort d'en Sanés, nº17, 17488 Cadaqués, Girona",
+"phone": "+34645974928",
+"website": "",
+"lat": 42.2897062,
+"lng": 3.2817013,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "9013509441813567676",
+"title": "Centre d’Atenció Primària Cadaqués",
+"cats": [
+"salud",
+"centros-de-salud"
+],
+"gcat": "Public medical center",
+"address": "Carrer Nou, 6-10, 6-10, 17488 Cadaqués, Girona",
+"phone": "+34972258807",
+"website": "http://www.icsgirona.cat/ca/contingut/primaria/326",
+"lat": 42.2875292,
+"lng": 3.2751957,
+"rating": 3.8,
+"votes": 24,
+"claimed": true
+},
+{
+"cid": "9028858909928323591",
+"title": "Casa Dionis",
+"cats": [
+"comer-y-beber",
+"tapas-y-vermut"
+],
+"gcat": "Tapas bar",
+"address": "Carrer Miquel Rosset, 2, 17488 Cadaqués, Girona",
+"phone": "+34620303066",
+"website": "",
+"lat": 42.2893907,
+"lng": 3.2778262999999996,
+"rating": 4.3,
+"votes": 207,
+"claimed": true
+},
+{
+"cid": "9037938730349642840",
+"title": "RAVIYU",
+"cats": [
+"comer-y-beber",
+"pizzerias-e-italianos"
+],
+"gcat": "Pizza restaurant",
+"address": "Avinguda Caritat Serinyana, 5, 17488 Cadaqués, Girona",
+"phone": "+34972259053",
+"website": "",
+"lat": 42.2894528,
+"lng": 3.2772555999999997,
+"rating": 4.5,
+"votes": 1410,
+"claimed": true
+},
+{
+"cid": "9042146834220046279",
+"title": "Casa del Capitán",
+"cats": [
+"dormir",
+"hostales-y-pensiones"
+],
+"gcat": "Guest house",
+"address": "DOMINI LA CAPITAINERIE, Camí Cau de sa Guineu, 9, 17488 Cadaqués, Girona",
+"phone": "+33687194865",
+"website": "http://www.casadelcapitan.es/",
+"lat": 42.296762699999995,
+"lng": 3.2902549,
+"rating": 5,
+"votes": 101,
+"claimed": true
+},
+{
+"cid": "9044577162650491922",
+"title": "Casa Europa",
+"cats": [
+"dormir",
+"otros-alojamientos"
+],
+"gcat": "Indoor lodging",
+"address": "Carretera Cap De Creus, 1 S N, 17488 Cadaqués, Girona",
+"phone": "+34972258813",
+"website": "",
+"lat": 42.289045099999996,
+"lng": 3.2779027,
+"rating": 3,
+"votes": 2,
+"claimed": false
+},
+{
+"cid": "906112573666929528",
+"title": "Espai Dos",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Carrer Hort d'en Sanés, 9, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://www.galeriacadaques.com/",
+"lat": 42.289395299999995,
+"lng": 3.2813691,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "913383812616378315",
+"title": "Taller Llumforn cdq",
+"cats": [
+"ocio-y-cultura",
+"centros-culturales"
+],
+"gcat": "Arts organization",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "+34647240652",
+"website": "https://www.xavidejuancreix.com/taller-llumforn-cdq",
+"lat": 42.2897561,
+"lng": 3.2775784,
+"rating": 5,
+"votes": 1,
+"claimed": false
+},
+{
+"cid": "9142768896632631540",
+"title": "Estudi Cadaqués. Arquitectura",
+"cats": [
+"servicios",
+"arquitectura"
+],
+"gcat": "Architect",
+"address": "Carrer de Carles Rahola, 1, 17488 Cadaqués, Girona",
+"phone": "+34666553021",
+"website": "",
+"lat": 42.292960099999995,
+"lng": 3.2810878,
+"rating": null,
+"votes": 0,
+"claimed": true
+},
+{
+"cid": "9147565598629409669",
+"title": "Sa Roca d'es Tamariu",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Pujada des Pianc, 2, 17488 Cadaqués, Girona",
+"phone": "+34972259002",
+"website": "http://nordestcadaques.es/",
+"lat": 42.2885724,
+"lng": 3.2811382,
+"rating": 4.5,
+"votes": 1717,
+"claimed": true
+},
+{
+"cid": "9197115406640825161",
+"title": "Motonàutica Manel",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat dealer",
+"address": "c/ Sa, Carrer Rierassa, 2, 17488 Cadaqués, Girona",
+"phone": "+34972159135",
+"website": "http://www.motonauticamanel.com/",
+"lat": 42.290066499999995,
+"lng": 3.2756401,
+"rating": 4.7,
+"votes": 42,
+"claimed": true
+},
+{
+"cid": "9255823104550745604",
+"title": "Blue Cadaqués",
+"cats": [
+"comer-y-beber",
+"restaurantes"
+],
+"gcat": "Restaurant",
+"address": "Platja Ses Oliveres, Avinguda Victor Rahola, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2858453,
+"lng": 3.2852902999999998,
+"rating": 3.6,
+"votes": 323,
+"claimed": true
+},
+{
+"cid": "9284151311819198119",
+"title": "Carnicería i charcuteria Sergi",
+"cats": [
+"comprar",
+"carnicerias-y-charcuterias"
+],
+"gcat": "Butcher shop",
+"address": "Avinguda Caritat Serinyana, 17488 Cadaqués, Girona",
+"phone": "+34666642189",
+"website": "",
+"lat": 42.2900919,
+"lng": 3.2743604,
+"rating": 5,
+"votes": 21,
+"claimed": true
+},
+{
+"cid": "93088239587682015",
+"title": "Es Gelat",
+"cats": [
+"comer-y-beber",
+"heladerias"
+],
+"gcat": "Ice cream shop",
+"address": "Riba Pitxot, 2, 17488 Cadaqués, Girona",
+"phone": "+34621193660",
+"website": "https://esgelat.com/",
+"lat": 42.2861166,
+"lng": 3.2764561,
+"rating": 4.4,
+"votes": 65,
+"claimed": true
+},
+{
+"cid": "9310156372237628057",
+"title": "Paz Vieyra Jewels",
+"cats": [
+"comprar",
+"joyerias"
+],
+"gcat": "Jewelry store",
+"address": "Carrer del Dr. Callís, 19, 17488 Cadaqués, Girona",
+"phone": "+34673135895",
+"website": "http://www.pazvieyrajewels.com/",
+"lat": 42.287997,
+"lng": 3.2766526,
+"rating": 5,
+"votes": 16,
+"claimed": true
+},
+{
+"cid": "9317938506473049358",
+"title": "TAXIBOAT CADAQUÉS",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Boat tour agency",
+"address": "Riba des Poal, 17488 Cadaqués, Girona",
+"phone": "+34666382852",
+"website": "http://www.taxiboatcadaques.com/",
+"lat": 42.2888765,
+"lng": 3.2800211,
+"rating": 5,
+"votes": 16,
+"claimed": true
+},
+{
+"cid": "9348281106776065549",
+"title": "Insta Acions Cadaqués S L",
+"cats": [
+"servicios",
+"reformas-y-construccion"
+],
+"gcat": "General contractor",
+"address": "Carrer Trilla, 13, 17488 Cadaqués, Girona",
+"phone": "+34972259901",
+"website": "",
+"lat": 42.2888441,
+"lng": 3.2736356,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "9355174852662538025",
+"title": "Cala d'or",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Catalonian restaurant",
+"address": "Carrer de la Fitora, 1, 17488 Cadaqués, Girona",
+"phone": "+34650184108",
+"website": "",
+"lat": 42.2893008,
+"lng": 3.2811586999999998,
+"rating": 4.3,
+"votes": 415,
+"claimed": true
+},
+{
+"cid": "9374777389746601137",
+"title": "Es Portitxó de Cadaqués",
+"cats": [
+"dormir",
+"otros-alojamientos"
+],
+"gcat": "Lodging",
+"address": "Carrer de Sant Antoni, 1, 17488 Cadaqués, Girona",
+"phone": "+34608498903",
+"website": "",
+"lat": 42.2894,
+"lng": 3.2796395,
+"rating": 3.7,
+"votes": 9,
+"claimed": false
+},
+{
+"cid": "9376929086185254366",
+"title": "CA LA NAT",
+"cats": [
+"comprar",
+"regalos-y-artesania"
+],
+"gcat": "Gift shop",
+"address": "Carrer de l'Església, 4, 17488 Cadaqués, Girona",
+"phone": "+34621184247",
+"website": "",
+"lat": 42.288378,
+"lng": 3.2761275999999997,
+"rating": 4.5,
+"votes": 11,
+"claimed": true
+},
+{
+"cid": "9379766801793858526",
+"title": "Centre de salut Cadaqués, Clases de Pilates y We ballet Fitness",
+"cats": [
+"salud",
+"centros-de-salud"
+],
+"gcat": "Public medical center",
+"address": "Camí Port Lligat, 48, 17488 Cadaqués, Girona",
+"phone": "+34653166555",
+"website": "",
+"lat": 42.2923888,
+"lng": 3.2769496,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "9487805503261716928",
+"title": "Perruqueria Anna",
+"cats": [
+"servicios",
+"peluquerias"
+],
+"gcat": "Hairdresser",
+"address": "Carrer del Dr. Callís, 16, 17488 Cadaqués, Girona",
+"phone": "+34972258331",
+"website": "",
+"lat": 42.28816,
+"lng": 3.2767,
+"rating": 4.9,
+"votes": 34,
+"claimed": false
+},
+{
+"cid": "9512397459953474896",
+"title": "Rutes Cadaqués",
+"cats": [
+"ocio-y-cultura",
+"excursiones-y-tours"
+],
+"gcat": "Tour agency",
+"address": "calle del coche, S/N, 17488 Cadaqués, Girona",
+"phone": "+34686492369",
+"website": "https://www.rutescadaques.com/",
+"lat": 42.288604299999996,
+"lng": 3.2780460999999996,
+"rating": 4.3,
+"votes": 2714,
+"claimed": true
+},
+{
+"cid": "9532695599037517129",
+"title": "N°7",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Carrer de l'Església, 3, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "",
+"lat": 42.2882758,
+"lng": 3.2761771,
+"rating": 4.6,
+"votes": 10,
+"claimed": false
+},
+{
+"cid": "9534910714785896893",
+"title": "Cadaqués Masnou Apartaments",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment",
+"address": "Carrer de la Miranda, 12, 17488 Cadaqués, Girona",
+"phone": "+34659930759",
+"website": "https://www.cadaquesmasnouapartaments.com/",
+"lat": 42.2894552,
+"lng": 3.2821173,
+"rating": 4.7,
+"votes": 15,
+"claimed": false
+},
+{
+"cid": "9624104598745670111",
+"title": "Es Fornet Sushi•Vins",
+"cats": [
+"comer-y-beber",
+"internacional"
+],
+"gcat": "Asian restaurant",
+"address": "Plaça Frederic Rahola, 7, 17488 Cadaqués, Girona",
+"phone": "+34972159113",
+"website": "",
+"lat": 42.2891982,
+"lng": 3.2777683,
+"rating": 3.5,
+"votes": 35,
+"claimed": false
+},
+{
+"cid": "9628866964612246449",
+"title": "Barbarroja",
+"cats": [
+"comer-y-beber",
+"arroces-y-marinera"
+],
+"gcat": "Mediterranean restaurant",
+"address": "Carrer de ses Hortes, 4 - 6, 17488 Cadaqués, Girona",
+"phone": "+34872599064",
+"website": "",
+"lat": 42.2891842,
+"lng": 3.2748391999999997,
+"rating": 4.5,
+"votes": 54,
+"claimed": true
+},
+{
+"cid": "9632306786715828458",
+"title": "Casa CL (Creativity Lab)",
+"cats": [
+"ocio-y-cultura",
+"centros-culturales"
+],
+"gcat": "Cultural center",
+"address": "Camí Vell de Sant Sebastià, 17488 Cadaqués, Girona",
+"phone": "+34678776502",
+"website": "",
+"lat": 42.2829276,
+"lng": 3.2732460999999997,
+"rating": 5,
+"votes": 1,
+"claimed": true
+},
+{
+"cid": "9720426572389519604",
+"title": "GALERIA RICHARD VANDERAA",
+"cats": [
+"comprar",
+"galerias-de-arte"
+],
+"gcat": "Art gallery",
+"address": "Avinguda Caritat Serinyana, 10, 17488 Cadaqués, Girona",
+"phone": "+34665287961",
+"website": "https://www.galeriarichardvanderaa.com/",
+"lat": 42.2896885,
+"lng": 3.2772772999999997,
+"rating": 4.9,
+"votes": 10,
+"claimed": true
+},
+{
+"cid": "9734424260485427431",
+"title": "Es Puig Cadaqués",
+"cats": [
+"dormir",
+"casas-rurales"
+],
+"gcat": "Villa",
+"address": "Carrer Puig Oliguera, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://www.espuigcadaques.com/",
+"lat": 42.2883247,
+"lng": 3.2817876999999998,
+"rating": 5,
+"votes": 14,
+"claimed": true
+},
+{
+"cid": "9735319826914291539",
+"title": "Voramar",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Clothing store",
+"address": "Riba Pitxot, 17488 Cadaqués, Girona",
+"phone": "+34676621746",
+"website": "https://www.instagram.com/voramar_boutique/",
+"lat": 42.287078,
+"lng": 3.2759373999999997,
+"rating": 4.7,
+"votes": 3,
+"claimed": false
+},
+{
+"cid": "9867356636230076815",
+"title": "Pilar Piqué – Centro de Estetica y Masajes en Cadaqués",
+"cats": [
+"servicios",
+"estetica-y-bienestar"
+],
+"gcat": "Massage therapist",
+"address": "Camí Port Lligat, 5, 17488 Cadaqués, Girona",
+"phone": "+34650867348",
+"website": "",
+"lat": 42.292006799999996,
+"lng": 3.2794081,
+"rating": 5,
+"votes": 79,
+"claimed": true
+},
+{
+"cid": "988428454416300862",
+"title": "onegraphicgirl",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Women's clothing store",
+"address": "Carrer del Dr. Callís, 18, 17488 Cadaqués, Girona",
+"phone": "+34972259228",
+"website": "",
+"lat": 42.28806,
+"lng": 3.2766599999999997,
+"rating": null,
+"votes": 0,
+"claimed": false
+},
+{
+"cid": "9928592741096426070",
+"title": "mo cadaqués",
+"cats": [
+"comprar",
+"moda-y-complementos"
+],
+"gcat": "Women's clothing store",
+"address": "Plaça del Dr. Pont, 7, 17488 Cadaqués, Girona",
+"phone": "+34972258830",
+"website": "http://www.mocadaques.com/",
+"lat": 42.2874128,
+"lng": 3.2756447,
+"rating": 2.5,
+"votes": 99,
+"claimed": true
+},
+{
+"cid": "993837692812644744",
+"title": "Cadaqués Charter",
+"cats": [
+"deporte-y-nautica",
+"nautica-y-barcos"
+],
+"gcat": "Boat rental service",
+"address": "Riba d'Es Poal, 17488 Cadaqués, Girona",
+"phone": "+34696189229",
+"website": "https://cadaquescharter.com/",
+"lat": 42.2887554,
+"lng": 3.2800846999999997,
+"rating": 4.8,
+"votes": 28,
+"claimed": true
+},
+{
+"cid": "9941599499326672744",
+"title": "This is not Dalí's House",
+"cats": [
+"dormir",
+"apartamentos-turisticos"
+],
+"gcat": "Holiday apartment rental",
+"address": "Av. de Salvador Dalí, 18, 17488 Cadaqués, Girona",
+"phone": "",
+"website": "http://www.thisisnotdalishouse.com/",
+"lat": 42.293616,
+"lng": 3.28559,
+"rating": 5,
+"votes": 22,
+"claimed": true
+}
+]
