@@ -520,7 +520,7 @@ function cqs_step_fichas() {
         if (preg_match('/^(osm|g):/', $src) && !isset($live[$src])) { $trashed[] = get_the_title($id); wp_trash_post($id); }
     }
     // Las que se pasaron a borrador en una revisión anterior se quedan en borrador
-    $drafts = []; foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'draft', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_key' => '_cqs_verif_estado', 'meta_value' => 'dudosa']) as $id) $drafts[(string)get_post_meta($id, '_ssi_source', true)] = $id;
+    $drafts = []; foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'draft', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_verif_estado', 'value' => ['dudosa', 'sin web'], 'compare' => 'IN']]]) as $id) $drafts[(string)get_post_meta($id, '_ssi_source', true)] = $id;
     $send = array_map(fn($x) => array_diff_key($x, array_flip(['_n', '_tags', '_edit', '_check', '_g', '_gv'])), $keep);
     $res = [];
     foreach (array_chunk($send, 40) as $ch) { $r = eiv_fichas_run(cqs_req(['fichas' => $ch])); $res = array_merge($res, (array)($r['fichas'] ?? [])); }
@@ -578,7 +578,7 @@ function cqs_step_verify() {
             if ($web === 'caida') { delete_post_meta($id, '_website'); $rep['web caida quitada'][] = $title.' · '.$w; }
             update_post_meta($id, '_cqs_verif_estado', $estado);
             update_post_meta($id, '_cqs_verif', ['fecha' => gmdate('Y-m-d'), 'web' => $web, 'osm_anos' => round($age, 1), 'google' => $goo]);
-            if ($estado === 'dudosa') wp_update_post(['ID' => $id, 'post_status' => 'draft']);
+            if ($estado === 'dudosa' || $estado === 'sin web') wp_update_post(['ID' => $id, 'post_status' => 'draft']); // sin confirmar (ni web, ni Google, ni dato reciente): a borrador, decisión de Alex 24-11-2026
             elseif (get_post_status($id) === 'draft') wp_update_post(['ID' => $id, 'post_status' => 'publish']);
             $rep[$estado][] = $title.' · web '.$web.($goo ? ' · en Google' : '').' · OSM hace '.($age >= 99 ? '?' : round($age, 1)).' años';
         }
