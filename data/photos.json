@@ -330,6 +330,968 @@
     "en": "Gala Dalí Castle, Púbol",
     "fr": "Château Gala Dalí de Púbol"
    }
+  },
+  "g_006": {
+   "try": [
+    "file:August Plaza Cadaques Cataluna Costa Brava - Mythos Spain Photography 1993 - panoramio.jpg"
+   ],
+   "once": true,
+   "grp": "centro",
+   "alt": {
+    "es": "Plaza del centro de Cadaqués en verano",
+    "ca": "Plaça del centre de Cadaqués a l’estiu",
+    "en": "A square in the centre of Cadaqués in summer",
+    "fr": "Une place du centre de Cadaqués en été"
+   }
+  },
+  "g_007": {
+   "try": [
+    "file:Cadaques - 12247522034.jpg"
+   ],
+   "once": true,
+   "grp": "bahia",
+   "alt": {
+    "es": "La bahía de Cadaqués al atardecer",
+    "ca": "La badia de Cadaqués al capvespre",
+    "en": "Cadaqués bay at dusk",
+    "fr": "La baie de Cadaqués au crépuscule"
+   }
+  },
+  "g_008": {
+   "try": [
+    "file:Cadaques - 18006297910.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria",
+   "alt": {
+    "es": "Santa Maria sobre las casas blancas, vista desde la playa",
+    "ca": "Santa Maria sobre les cases blanques, vista des de la platja",
+    "en": "Santa Maria above the white houses, seen from the beach",
+    "fr": "Santa Maria au-dessus des maisons blanches, vue depuis la plage"
+   }
+  },
+  "g_009": {
+   "try": [
+    "file:Cadaques Boat 2.jpeg"
+   ],
+   "once": true,
+   "grp": "bahia",
+   "alt": {
+    "es": "Velero fondeado en la bahía de Cadaqués",
+    "ca": "Veler fondejat a la badia de Cadaqués",
+    "en": "A sailing boat at anchor in Cadaqués bay",
+    "fr": "Voilier au mouillage dans la baie de Cadaqués"
+   }
+  },
+  "g_010": {
+   "try": [
+    "file:Cadaqués,Santa Maria,orgue2.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria-int",
+   "alt": {
+    "es": "El órgano barroco de la iglesia de Santa Maria",
+    "ca": "L’orgue barroc de l’església de Santa Maria",
+    "en": "The Baroque organ in Santa Maria church",
+    "fr": "L’orgue baroque de l’église Santa Maria"
+   }
+  },
+  "g_011": {
+   "try": [
+    "file:Cadaqués - panoramio (21).jpg"
+   ],
+   "once": true,
+   "grp": "casco",
+   "alt": {
+    "es": "Tejados y casas del casco antiguo frente al mar",
+    "ca": "Teulades i cases del nucli antic davant del mar",
+    "en": "Roofs and houses of the old town facing the sea",
+    "fr": "Toits et maisons de la vieille ville face à la mer"
+   }
+  },
+  "g_012": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-02-53.jpg"
+   ],
+   "once": true,
+   "grp": "centro",
+   "alt": {
+    "es": "Plaça de Frederic Rahola, junto al paseo",
+    "ca": "Plaça de Frederic Rahola, al costat del passeig",
+    "en": "Plaça de Frederic Rahola, by the seafront",
+    "fr": "La Plaça de Frederic Rahola, près du front de mer"
+   }
+  },
+  "g_013": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-05-39.jpg"
+   ],
+   "once": true,
+   "grp": "riba",
+   "alt": {
+    "es": "Casas de la Riba Nemesi Llorens",
+    "ca": "Cases de la Riba Nemesi Llorens",
+    "en": "Houses on Riba Nemesi Llorens",
+    "fr": "Maisons de la Riba Nemesi Llorens"
+   }
+  },
+  "g_014": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-07-21.jpg"
+   ],
+   "once": true,
+   "grp": "riba",
+   "alt": {
+    "es": "Fachada blanca en la Riba Nemesi Llorens",
+    "ca": "Façana blanca a la Riba Nemesi Llorens",
+    "en": "A white façade on Riba Nemesi Llorens",
+    "fr": "Façade blanche sur la Riba Nemesi Llorens"
+   }
+  },
+  "g_015": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-08-02.jpg"
+   ],
+   "once": true,
+   "grp": "riba",
+   "alt": {
+    "es": "El frente marítimo de la Riba Nemesi Llorens",
+    "ca": "El front marítim de la Riba Nemesi Llorens",
+    "en": "The waterfront on Riba Nemesi Llorens",
+    "fr": "Le front de mer de la Riba Nemesi Llorens"
+   }
+  },
+  "g_016": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-08-24.jpg"
+   ],
+   "once": true,
+   "grp": "riba",
+   "alt": {
+    "es": "Barca de pesca varada frente a las casas de la Riba",
+    "ca": "Barca de pesca varada davant les cases de la Riba",
+    "en": "A fishing boat pulled up in front of the houses on the Riba",
+    "fr": "Barque de pêche tirée sur la grève devant les maisons de la Riba"
+   }
+  },
+  "g_017": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-14-46.jpg"
+   ],
+   "once": true,
+   "grp": "vistas",
+   "alt": {
+    "es": "El pueblo y la bahía desde la iglesia de Santa Maria",
+    "ca": "El poble i la badia des de l’església de Santa Maria",
+    "en": "The village and the bay from Santa Maria church",
+    "fr": "Le village et la baie depuis l’église Santa Maria"
+   }
+  },
+  "g_018": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-40-48.jpg"
+   ],
+   "once": true,
+   "grp": "casco",
+   "alt": {
+    "es": "Carrer d’en Silvi Rahola, en el casco antiguo",
+    "ca": "Carrer d’en Silvi Rahola, al nucli antic",
+    "en": "Carrer d’en Silvi Rahola, in the old town",
+    "fr": "Le Carrer d’en Silvi Rahola, dans la vieille ville"
+   }
+  },
+  "g_019": {
+   "try": [
+    "file:Cadaqués BW 2019-10-08 11-44-03.jpg"
+   ],
+   "once": true,
+   "grp": "portalguer",
+   "alt": {
+    "es": "La playa de Port Alguer",
+    "ca": "La platja de Port Alguer",
+    "en": "Port Alguer beach",
+    "fr": "La plage de Port Alguer"
+   }
+  },
+  "g_020": {
+   "try": [
+    "file:Cap de Creus(Cape of the Cross) shipping beacon, Costa Brava, Spain. (16196465424).jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Baliza en la punta del Cap de Creus",
+    "ca": "Balisa a la punta del Cap de Creus",
+    "en": "Shipping beacon at the tip of Cap de Creus",
+    "fr": "Balise à la pointe du cap de Creus"
+   }
+  },
+  "g_023": {
+   "try": [
+    "file:Costa Cap de Creus des de Cap Norfeu.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "La costa del Cap de Creus desde el Cap Norfeu",
+    "ca": "La costa del Cap de Creus des del Cap Norfeu",
+    "en": "The Cap de Creus coast from Cap Norfeu",
+    "fr": "La côte du cap de Creus depuis le cap Norfeu"
+   }
+  },
+  "g_025": {
+   "try": [
+    "file:El Corral d'en Morell 2019 02.jpg"
+   ],
+   "once": true,
+   "grp": "piedraseca",
+   "alt": {
+    "es": "El Corral d’en Morell, construcción de piedra seca",
+    "ca": "El Corral d’en Morell, construcció de pedra seca",
+    "en": "Corral d’en Morell, a dry-stone building",
+    "fr": "Le Corral d’en Morell, construction en pierre sèche"
+   }
+  },
+  "g_026": {
+   "try": [
+    "file:Girl playing in shadows of Cadaques, Catalonia (4843335651).jpg"
+   ],
+   "once": true,
+   "grp": "casco",
+   "alt": {
+    "es": "Luces y sombras en una calle de Cadaqués",
+    "ca": "Llums i ombres en un carrer de Cadaqués",
+    "en": "Light and shade in a Cadaqués lane",
+    "fr": "Ombre et lumière dans une ruelle de Cadaqués"
+   }
+  },
+  "g_027": {
+   "try": [
+    "file:Messina CapDeCreus.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus-far",
+   "alt": {
+    "es": "El faro del Cap de Creus sobre el mar",
+    "ca": "El far del Cap de Creus sobre el mar",
+    "en": "Cap de Creus lighthouse above the sea",
+    "fr": "Le phare du cap de Creus au-dessus de la mer"
+   }
+  },
+  "g_028": {
+   "try": [
+    "file:Paisatge tot caminant cap a Portlligat (Cadaqués) - panoramio.jpg"
+   ],
+   "once": true,
+   "grp": "portlligat-camino",
+   "alt": {
+    "es": "Paisaje de terrazas camino de Portlligat",
+    "ca": "Paisatge de feixes camí de Portlligat",
+    "en": "Terraced landscape on the way to Portlligat",
+    "fr": "Paysage de terrasses sur le chemin de Portlligat"
+   }
+  },
+  "g_030": {
+   "try": [
+    "file:Portlligat-cadaques-2009 (2).JPG"
+   ],
+   "once": true,
+   "grp": "portlligat",
+   "alt": {
+    "es": "Barcas en la playa de Portlligat",
+    "ca": "Barques a la platja de Portlligat",
+    "en": "Boats on Portlligat beach",
+    "fr": "Barques sur la plage de Portlligat"
+   }
+  },
+  "g_031": {
+   "try": [
+    "file:Portlligat (Cadaqués) - panoramio.jpg"
+   ],
+   "once": true,
+   "grp": "portlligat",
+   "alt": {
+    "es": "La bahía de Portlligat y su isla",
+    "ca": "La badia de Portlligat i la seva illa",
+    "en": "Portlligat bay and its island",
+    "fr": "La baie de Portlligat et son île"
+   }
+  },
+  "g_032": {
+   "try": [
+    "file:Portlligat - panoramio (3).jpg"
+   ],
+   "once": true,
+   "grp": "portlligat",
+   "alt": {
+    "es": "Barcas de pesca en Portlligat",
+    "ca": "Barques de pesca a Portlligat",
+    "en": "Fishing boats in Portlligat",
+    "fr": "Barques de pêche à Portlligat"
+   }
+  },
+  "g_033": {
+   "try": [
+    "file:Salvador Dalí House Port Lligat outside.JPG"
+   ],
+   "once": true,
+   "grp": "dalihouse",
+   "alt": {
+    "es": "Exterior de la Casa-Museo Dalí en Portlligat",
+    "ca": "Exterior de la Casa-Museu Dalí a Portlligat",
+    "en": "Outside the Dalí House-Museum in Portlligat",
+    "fr": "Extérieur de la Maison-musée Dalí à Portlligat"
+   }
+  },
+  "g_034": {
+   "try": [
+    "file:Sant Sebastià de Pení (Cadaqués) 02.jpg"
+   ],
+   "once": true,
+   "grp": "santsebastia",
+   "alt": {
+    "es": "Ermita de Sant Sebastià, en la ladera del Pení",
+    "ca": "Ermita de Sant Sebastià, al vessant del Pení",
+    "en": "Sant Sebastià hermitage on the slopes of Pení",
+    "fr": "L’ermitage de Sant Sebastià, sur les pentes du Pení"
+   }
+  },
+  "g_035": {
+   "try": [
+    "file:Ses Voltes de Port Alguer P1130247.JPG"
+   ],
+   "once": true,
+   "grp": "portalguer",
+   "alt": {
+    "es": "Ses Voltes, los arcos de Port Alguer",
+    "ca": "Ses Voltes, les voltes de Port Alguer",
+    "en": "Ses Voltes, the arcades of Port Alguer",
+    "fr": "Ses Voltes, les arcades de Port Alguer"
+   }
+  },
+  "g_036": {
+   "try": [
+    "file:Spanien2013 Santa Maria Cadaques 2.JPG"
+   ],
+   "once": true,
+   "grp": "santamaria",
+   "alt": {
+    "es": "La iglesia de Santa Maria de Cadaqués",
+    "ca": "L’església de Santa Maria de Cadaqués",
+    "en": "Santa Maria church in Cadaqués",
+    "fr": "L’église Santa Maria de Cadaqués"
+   }
+  },
+  "g_037": {
+   "try": [
+    "file:Statue - Salvador Dalí - Cadaqués.jpg"
+   ],
+   "once": true,
+   "grp": "dali-estatua",
+   "alt": {
+    "es": "La estatua de Salvador Dalí en el paseo",
+    "ca": "L’estàtua de Salvador Dalí al passeig",
+    "en": "The statue of Salvador Dalí on the seafront",
+    "fr": "La statue de Salvador Dalí sur le front de mer"
+   }
+  },
+  "g_044": {
+   "try": [
+    "file:004 Casa Pont, Cadaqués.JPG"
+   ],
+   "once": true,
+   "grp": "modernista",
+   "alt": {
+    "es": "Casa Pont, una de las casas de indianos de Cadaqués",
+    "ca": "Casa Pont, una de les cases d’indians de Cadaqués",
+    "en": "Casa Pont, one of the «indianos» houses of Cadaqués",
+    "fr": "La Casa Pont, une des maisons d’« indianos » de Cadaqués"
+   }
+  },
+  "g_049": {
+   "try": [
+    "file:August Mysterious Light of Top Art Existentialism Panorama - Cadaques magic Cap de Creus 1992 Avenidas de Andre Breton - panoramio.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Calas y acantilados del Cap de Creus",
+    "ca": "Cales i penya-segats del Cap de Creus",
+    "en": "Coves and cliffs of Cap de Creus",
+    "fr": "Criques et falaises du cap de Creus"
+   }
+  },
+  "g_050": {
+   "try": [
+    "file:Cadaques Barockaltar 2.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria-int",
+   "alt": {
+    "es": "Detalle del retablo barroco dorado de Santa Maria",
+    "ca": "Detall del retaule barroc daurat de Santa Maria",
+    "en": "Detail of the gilded Baroque altarpiece in Santa Maria",
+    "fr": "Détail du retable baroque doré de Santa Maria"
+   }
+  },
+  "g_051": {
+   "try": [
+    "file:Cadaques casa dali 02.jpg"
+   ],
+   "once": true,
+   "grp": "dalihouse-int",
+   "alt": {
+    "es": "Interior de la Casa-Museo Dalí, con sus cisnes",
+    "ca": "Interior de la Casa-Museu Dalí, amb els seus cignes",
+    "en": "Inside the Dalí House-Museum, with its swans",
+    "fr": "Intérieur de la Maison-musée Dalí, avec ses cygnes"
+   }
+  },
+  "g_053": {
+   "try": [
+    "file:Cadaqués (Gerona) - panoramio (3).jpg"
+   ],
+   "once": true,
+   "grp": "bahia-hero",
+   "alt": {
+    "es": "Cadaqués desde el agua, con una barca tradicional",
+    "ca": "Cadaqués des de l’aigua, amb una barca tradicional",
+    "en": "Cadaqués from the water, with a traditional boat",
+    "fr": "Cadaqués vu de l’eau, avec une barque traditionnelle"
+   }
+  },
+  "g_054": {
+   "try": [
+    "file:Cadaqués - CS 14072008 182400 29109.jpg"
+   ],
+   "once": true,
+   "grp": "casco",
+   "alt": {
+    "es": "Callejón con buganvillas que baja al mar",
+    "ca": "Carreró amb buguenvíl·lees que baixa al mar",
+    "en": "A lane with bougainvillea leading down to the sea",
+    "fr": "Ruelle fleurie de bougainvilliers descendant vers la mer"
+   }
+  },
+  "g_055": {
+   "try": [
+    "file:Cadaqués - CS 14072008 185747 29177.jpg"
+   ],
+   "once": true,
+   "grp": "bahia",
+   "alt": {
+    "es": "Barcas fondeadas frente al pueblo",
+    "ca": "Barques fondejades davant del poble",
+    "en": "Boats moored in front of the village",
+    "fr": "Bateaux au mouillage devant le village"
+   }
+  },
+  "g_057": {
+   "try": [
+    "file:Cap de Creus 2.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Rocas y matorral en el Cap de Creus",
+    "ca": "Roques i matoll al Cap de Creus",
+    "en": "Rocks and scrub at Cap de Creus",
+    "fr": "Rochers et garrigue au cap de Creus"
+   }
+  },
+  "g_058": {
+   "try": [
+    "file:Cap de Creus 3.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus-far",
+   "alt": {
+    "es": "El faro del Cap de Creus",
+    "ca": "El far del Cap de Creus",
+    "en": "Cap de Creus lighthouse",
+    "fr": "Le phare du cap de Creus"
+   }
+  },
+  "g_059": {
+   "try": [
+    "file:Casa Turull P1130377.JPG"
+   ],
+   "once": true,
+   "grp": "modernista",
+   "alt": {
+    "es": "Casa Turull, con su fachada decorada",
+    "ca": "Casa Turull, amb la façana decorada",
+    "en": "Casa Turull and its decorated façade",
+    "fr": "La Casa Turull et sa façade décorée"
+   }
+  },
+  "g_061": {
+   "try": [
+    "file:El Gat at Cap Norfeu east side.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "El Gat, roca del Cap Norfeu",
+    "ca": "El Gat, roca del Cap Norfeu",
+    "en": "El Gat rock at Cap Norfeu",
+    "fr": "Le rocher El Gat au cap Norfeu"
+   }
+  },
+  "g_062": {
+   "try": [
+    "file:La cala Guillola - panoramio.jpg"
+   ],
+   "once": true,
+   "grp": "calas",
+   "alt": {
+    "es": "Cala Guillola",
+    "ca": "Cala Guillola",
+    "en": "Cala Guillola",
+    "fr": "Cala Guillola"
+   }
+  },
+  "g_063": {
+   "try": [
+    "file:Lligat3.JPG"
+   ],
+   "once": true,
+   "grp": "portlligat",
+   "alt": {
+    "es": "La casa de Dalí y el fondeadero de Portlligat",
+    "ca": "La casa de Dalí i el fondejador de Portlligat",
+    "en": "Dalí’s house and the Portlligat anchorage",
+    "fr": "La maison de Dalí et le mouillage de Portlligat"
+   }
+  },
+  "g_064": {
+   "try": [
+    "file:Maison-musée Dali à Port Lligat (5).jpg"
+   ],
+   "once": true,
+   "grp": "dalihouse",
+   "alt": {
+    "es": "Las cabezas del jardín de la casa de Dalí",
+    "ca": "Els caps del jardí de la casa de Dalí",
+    "en": "The heads in the garden of Dalí’s house",
+    "fr": "Les têtes du jardin de la maison de Dalí"
+   }
+  },
+  "g_065": {
+   "try": [
+    "file:Oratori de Sant Pius V 05.jpg"
+   ],
+   "once": true,
+   "grp": "patrimonio",
+   "alt": {
+    "es": "Oratorio de Sant Pius V",
+    "ca": "Oratori de Sant Pius V",
+    "en": "The oratory of Sant Pius V",
+    "fr": "L’oratoire de Sant Pius V"
+   }
+  },
+  "g_066": {
+   "try": [
+    "file:Panaromaica conjunt de Cadaques.jpg"
+   ],
+   "once": true,
+   "grp": "vistas",
+   "alt": {
+    "es": "Panorámica del conjunto histórico de Cadaqués",
+    "ca": "Panoràmica del conjunt històric de Cadaqués",
+    "en": "Panorama of historic Cadaqués",
+    "fr": "Panorama du centre historique de Cadaqués"
+   }
+  },
+  "g_067": {
+   "try": [
+    "file:Puig de s'Alqueria.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Puig de s’Alqueria, en el Cap de Creus",
+    "ca": "Puig de s’Alqueria, al Cap de Creus",
+    "en": "Puig de s’Alqueria, Cap de Creus",
+    "fr": "Le Puig de s’Alqueria, au cap de Creus"
+   }
+  },
+  "g_069": {
+   "try": [
+    "file:Salvador Dalí House Port Lligat inside.JPG"
+   ],
+   "once": true,
+   "grp": "dalihouse-int",
+   "alt": {
+    "es": "Una sala de la casa de Dalí en Portlligat",
+    "ca": "Una sala de la casa de Dalí a Portlligat",
+    "en": "A room in Dalí’s house in Portlligat",
+    "fr": "Une pièce de la maison de Dalí à Portlligat"
+   }
+  },
+  "g_070": {
+   "try": [
+    "file:Salvador dali -cadaques-2009 (14).JPG"
+   ],
+   "once": true,
+   "grp": "dalihouse-int",
+   "alt": {
+    "es": "Rincón de la Casa-Museo Dalí",
+    "ca": "Racó de la Casa-Museu Dalí",
+    "en": "A corner of the Dalí House-Museum",
+    "fr": "Un coin de la Maison-musée Dalí"
+   }
+  },
+  "g_078": {
+   "try": [
+    "file:Vue vers Port Lligat du Camí antic de Cap de Creus - panoramio.jpg"
+   ],
+   "once": true,
+   "grp": "portlligat-camino",
+   "alt": {
+    "es": "Portlligat desde el antiguo camino del Cap de Creus",
+    "ca": "Portlligat des de l’antic camí del Cap de Creus",
+    "en": "Portlligat from the old Cap de Creus path",
+    "fr": "Portlligat depuis l’ancien chemin du cap de Creus"
+   }
+  },
+  "g_079": {
+   "try": [
+    "file:Wreck of Llanishen1901-6.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus-mar",
+   "alt": {
+    "es": "Restos del vapor Llanishen bajo el agua, en el Cap de Creus",
+    "ca": "Restes del vapor Llanishen sota l’aigua, al Cap de Creus",
+    "en": "Wreck of the steamship Llanishen under water at Cap de Creus",
+    "fr": "L’épave du vapeur Llanishen sous l’eau, au cap de Creus"
+   }
+  },
+  "g_080": {
+   "try": [
+    "file:090-Parc Cap de Creus.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Rocas esculpidas por el viento en el Cap de Creus",
+    "ca": "Roques esculpides pel vent al Cap de Creus",
+    "en": "Wind-carved rocks at Cap de Creus",
+    "fr": "Rochers sculptés par le vent au cap de Creus"
+   }
+  },
+  "g_081": {
+   "try": [
+    "file:163-Parc Cap de Creus-Es conill de Culip.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Es Conill, la roca con forma de conejo de Cala Culip",
+    "ca": "Es Conill, la roca en forma de conill de Cala Culip",
+    "en": "Es Conill, the rabbit-shaped rock at Cala Culip",
+    "fr": "Es Conill, le rocher en forme de lapin de Cala Culip"
+   }
+  },
+  "g_084": {
+   "try": [
+    "file:August Masterview Cadaques - Mythos Spain Photography 1992 - panoramio.jpg"
+   ],
+   "once": true,
+   "grp": "bahia",
+   "alt": {
+    "es": "La bahía de Cadaqués desde las rocas",
+    "ca": "La badia de Cadaqués des de les roques",
+    "en": "Cadaqués bay seen from the rocks",
+    "fr": "La baie de Cadaqués vue des rochers"
+   }
+  },
+  "g_086": {
+   "try": [
+    "file:Cadaques 00001.jpg"
+   ],
+   "once": true,
+   "grp": "bahia",
+   "alt": {
+    "es": "Gaviota sobre una barca en la bahía",
+    "ca": "Gavina sobre una barca a la badia",
+    "en": "A gull on a boat in the bay",
+    "fr": "Une mouette sur une barque dans la baie"
+   }
+  },
+  "g_088": {
+   "try": [
+    "file:Cadaques Dali.jpeg"
+   ],
+   "once": true,
+   "grp": "dali-estatua",
+   "alt": {
+    "es": "Monumento a Salvador Dalí junto a la playa",
+    "ca": "Monument a Salvador Dalí al costat de la platja",
+    "en": "Monument to Salvador Dalí by the beach",
+    "fr": "Monument à Salvador Dalí près de la plage"
+   }
+  },
+  "g_090": {
+   "try": [
+    "file:Cadaqués,Santa Maria23.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria-int",
+   "alt": {
+    "es": "Interior de la iglesia de Santa Maria",
+    "ca": "Interior de l’església de Santa Maria",
+    "en": "Inside Santa Maria church",
+    "fr": "Intérieur de l’église Santa Maria"
+   }
+  },
+  "g_091": {
+   "try": [
+    "file:Cadaqués,Santa Maria25.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria-int",
+   "alt": {
+    "es": "Retablo pintado en la iglesia de Santa Maria",
+    "ca": "Retaule pintat a l’església de Santa Maria",
+    "en": "A painted altarpiece in Santa Maria church",
+    "fr": "Retable peint dans l’église Santa Maria"
+   }
+  },
+  "g_092": {
+   "try": [
+    "file:Cadaqués - CS 14072008 181956 29098.jpg"
+   ],
+   "once": true,
+   "grp": "riba",
+   "alt": {
+    "es": "El frente blanco del pueblo sobre el agua",
+    "ca": "El front blanc del poble sobre l’aigua",
+    "en": "The white waterfront of the village",
+    "fr": "Le front blanc du village au bord de l’eau"
+   }
+  },
+  "g_093": {
+   "try": [
+    "file:Cadaqués - CS 14072008 182925 29133.jpg"
+   ],
+   "once": true,
+   "grp": "casco",
+   "alt": {
+    "es": "Arco y calle empedrada del casco antiguo",
+    "ca": "Arc i carrer empedrat del nucli antic",
+    "en": "An archway and cobbled lane in the old town",
+    "fr": "Arche et ruelle pavée de la vieille ville"
+   }
+  },
+  "g_094": {
+   "try": [
+    "file:Cadaqués - CS 14072008 183919 29145.jpg"
+   ],
+   "once": true,
+   "grp": "casco",
+   "alt": {
+    "es": "Casa encalada con puerta verde en el casco antiguo",
+    "ca": "Casa emblanquinada amb porta verda al nucli antic",
+    "en": "A whitewashed house with a green door in the old town",
+    "fr": "Maison blanchie à la chaux à la porte verte"
+   }
+  },
+  "g_095": {
+   "try": [
+    "file:Cadaqués - CS 14072008 185951 29181.jpg"
+   ],
+   "once": true,
+   "grp": "santamaria",
+   "alt": {
+    "es": "Santa Maria vista desde el paseo",
+    "ca": "Santa Maria vista des del passeig",
+    "en": "Santa Maria seen from the seafront",
+    "fr": "Santa Maria vue depuis le front de mer"
+   }
+  },
+  "g_097": {
+   "try": [
+    "file:Cadaqués Costa Brava Catalunya.jpg"
+   ],
+   "once": true,
+   "grp": "hero-aerea",
+   "alt": {
+    "es": "Cadaqués y su bahía desde lo alto",
+    "ca": "Cadaqués i la seva badia des de dalt",
+    "en": "Cadaqués and its bay from above",
+    "fr": "Cadaqués et sa baie vus d’en haut"
+   }
+  },
+  "g_098": {
+   "try": [
+    "file:Cadaqués Sept 2017 (3).jpg"
+   ],
+   "once": true,
+   "grp": "hero-vista",
+   "alt": {
+    "es": "Vista de Cadaqués con la bahía y las calas",
+    "ca": "Vista de Cadaqués amb la badia i les cales",
+    "en": "View of Cadaqués with the bay and coves",
+    "fr": "Vue de Cadaqués avec la baie et les criques"
+   }
+  },
+  "g_100": {
+   "try": [
+    "file:Casa Costa P1130344.JPG"
+   ],
+   "once": true,
+   "grp": "modernista",
+   "alt": {
+    "es": "Casa Costa, junto al paseo",
+    "ca": "Casa Costa, al costat del passeig",
+    "en": "Casa Costa, by the seafront",
+    "fr": "La Casa Costa, près du front de mer"
+   }
+  },
+  "g_101": {
+   "try": [
+    "file:Casa Serinyana P1130276.JPG"
+   ],
+   "once": true,
+   "grp": "modernista",
+   "alt": {
+    "es": "Casa Serinyana y las casas del frente marítimo",
+    "ca": "Casa Serinyana i les cases del front marítim",
+    "en": "Casa Serinyana and the waterfront houses",
+    "fr": "La Casa Serinyana et les maisons du front de mer"
+   }
+  },
+  "g_105": {
+   "try": [
+    "file:El far de Calanans.jpg"
+   ],
+   "once": true,
+   "grp": "calanans-far",
+   "alt": {
+    "es": "El faro de Cala Nans, encendido por primera vez en 1864",
+    "ca": "El far de Cala Nans, encès per primer cop el 1864",
+    "en": "Cala Nans lighthouse, first lit in 1864",
+    "fr": "Le phare de Cala Nans, allumé pour la première fois en 1864"
+   }
+  },
+  "g_106": {
+   "try": [
+    "file:Església de Santa Maria de Cadaqués P1130215.JPG"
+   ],
+   "once": true,
+   "grp": "santamaria-int",
+   "alt": {
+    "es": "La nave de Santa Maria con el gran retablo",
+    "ca": "La nau de Santa Maria amb el gran retaule",
+    "en": "The nave of Santa Maria with the great altarpiece",
+    "fr": "La nef de Santa Maria et le grand retable"
+   }
+  },
+  "g_107": {
+   "try": [
+    "file:Església de Santa Maria de Cadaqués P1130278.JPG"
+   ],
+   "once": true,
+   "grp": "santamaria",
+   "alt": {
+    "es": "La iglesia de Santa Maria entre las casas",
+    "ca": "L’església de Santa Maria entre les cases",
+    "en": "Santa Maria church among the houses",
+    "fr": "L’église Santa Maria parmi les maisons"
+   }
+  },
+  "g_108": {
+   "try": [
+    "file:Far de cala Nans.jpg"
+   ],
+   "once": true,
+   "grp": "calanans-far",
+   "alt": {
+    "es": "El faro de Cala Nans al amanecer",
+    "ca": "El far de Cala Nans a l’alba",
+    "en": "Cala Nans lighthouse at dawn",
+    "fr": "Le phare de Cala Nans à l’aube"
+   }
+  },
+  "g_110": {
+   "try": [
+    "file:Illa Portaló - Paratge de Tudela Cap de Creus.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Illa Portaló, en el paraje de Tudela",
+    "ca": "Illa Portaló, al paratge de Tudela",
+    "en": "Illa Portaló in the Tudela area",
+    "fr": "L’île Portaló, dans le site de Tudela"
+   }
+  },
+  "g_112": {
+   "try": [
+    "file:La Riba d'en Pitxot Cadaques.JPG"
+   ],
+   "once": true,
+   "grp": "riba",
+   "alt": {
+    "es": "La Riba d’en Pitxot y Santa Maria",
+    "ca": "La Riba d’en Pitxot i Santa Maria",
+    "en": "Riba d’en Pitxot and Santa Maria",
+    "fr": "La Riba d’en Pitxot et Santa Maria"
+   }
+  },
+  "g_113": {
+   "try": [
+    "file:Paisatge camí Cala Calais (Cadaqués) - panoramio (2).jpg"
+   ],
+   "once": true,
+   "grp": "calas",
+   "alt": {
+    "es": "El camino de Cala Calis",
+    "ca": "El camí de Cala Calis",
+    "en": "The path to Cala Calis",
+    "fr": "Le chemin de Cala Calis"
+   }
+  },
+  "g_115": {
+   "try": [
+    "file:Puig Pelegrí.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Puig Pelegrí, sobre la costa del Cap de Creus",
+    "ca": "Puig Pelegrí, sobre la costa del Cap de Creus",
+    "en": "Puig Pelegrí above the Cap de Creus coast",
+    "fr": "Le Puig Pelegrí au-dessus de la côte du cap de Creus"
+   }
+  },
+  "g_118": {
+   "try": [
+    "file:Una mirada al Cap de Creus 12.jpg"
+   ],
+   "once": true,
+   "grp": "capcreus",
+   "alt": {
+    "es": "Una cala del Cap de Creus entre montañas",
+    "ca": "Una cala del Cap de Creus entre muntanyes",
+    "en": "A Cap de Creus cove between the hills",
+    "fr": "Une crique du cap de Creus entre les collines"
+   }
+  },
+  "g_119": {
+   "try": [
+    "file:Villa Gloria 2019 02.jpg"
+   ],
+   "once": true,
+   "grp": "modernista",
+   "alt": {
+    "es": "Villa Gloria",
+    "ca": "Villa Gloria",
+    "en": "Villa Gloria",
+    "fr": "La Villa Gloria"
+   }
   }
  },
  "hist": {

@@ -48,7 +48,7 @@ function cqs_build_run() {
         if (microtime(true) - $T0 > 90) { $ok = false; break; } // tandas cortas: el resto en la siguiente llamada
         $t = microtime(true);
         try { $log[$s] = call_user_func('cqs_step_'.$s); $done[$s] = 1; }
-        catch (Throwable $e) { $log[$s] = ['error' => $e->getMessage().' @ '.basename($e->getFile()).':'.$e->getLine()]; $ok = false; }
+        catch (Throwable $e) { $log[$s] = ['error' => $e->getMessage().' @ '.basename($e->getFile()).':'.$e->getLine()]; $ok = false; if ($s === 'photos') { cqs_out('build-log.json', $log); break; } } // las páginas esperan a que estén todas las fotos
         $log['t_'.$s] = round(microtime(true) - $t, 1);
         update_option('cqs_build_done', $done, false);
         cqs_out('build-log.json', $log);
@@ -189,6 +189,7 @@ function cqs_wm_ok($ii, $hist = false) {
     return true;
 }
 function cqs_wm_candidates($try) {
+    if (strpos($try, 'file:') === 0) return ['File:'.substr($try, 5)]; // archivo concreto elegido a mano
     if (strpos($try, 'wiki:') === 0) {
         [, $lang, $title] = explode(':', $try, 3);
         $j = cqs_wm_get("https://$lang.wikipedia.org/w/api.php?action=query&format=json&prop=pageimages&piprop=name&redirects=1&titles=".rawurlencode($title));
@@ -226,8 +227,11 @@ function cqs_step_photos() {
         update_post_meta($id, '_wp_attachment_image_alt', $u['alt']['es']);
         cqs_credit_set($k, $id, $u['alt'], $u['by'].' (Unsplash)', 'Unsplash', 'https://unsplash.com/photos/'.$u['id']); $rep[$k] = $id;
     }
+    $T0 = microtime(true); $prev = (array)(json_decode((string)@file_get_contents(SSI_DIR.'out/photos-report.json'), true) ?: []);
     foreach ($P['commons'] as $k => $c) {
         if (!empty($cr[$k]['id']) && get_post($cr[$k]['id'])) { $rep[$k] = 'ya estaba'; continue; }
+        if (($prev[$k] ?? '') === 'no encontrada' && !empty($c['once'])) { $rep[$k] = 'no encontrada'; continue; }
+        if (microtime(true) - $T0 > 75) { cqs_out('photos-report.json', $rep + $prev); throw new Exception('pendiente (fotos por tandas)'); } // el resto en la siguiente tanda
         $done = null;
         foreach ($c['try'] as $try) {
             $cands = array_slice(cqs_wm_candidates($try), 0, 12); if (!$cands) continue;
