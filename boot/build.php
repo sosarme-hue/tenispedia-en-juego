@@ -14,11 +14,11 @@ add_action('cqs_build_event', function () {
     $r = cqs_build_tick();
     // Si queda algo, vuelve a lanzarse solo (hasta 12 veces), llamando a wp-cron.php desde el propio servidor
     $n = (int)get_option('cqs_build_chain', 0);
-    if ($r === 'parcial' && $n < 12) {
+    if ($r === 'parcial' && $n < 40) {
         update_option('cqs_build_chain', $n + 1, false);
         wp_schedule_single_event(time() - 1, 'cqs_build_event');
         delete_transient('doing_cron');
-        wp_remote_post(site_url('wp-cron.php?doing_wp_cron='.sprintf('%.22F', microtime(true))), ['timeout' => 0.01, 'blocking' => false, 'sslverify' => false]);
+        wp_remote_post(site_url('wp-cron.php?doing_wp_cron='.sprintf('%.22F', microtime(true))), ['timeout' => 2, 'blocking' => true, 'sslverify' => false]);
     }
 });
 
@@ -227,6 +227,7 @@ function cqs_step_photos() {
         update_post_meta($id, '_wp_attachment_image_alt', $u['alt']['es']);
         cqs_credit_set($k, $id, $u['alt'], $u['by'].' (Unsplash)', 'Unsplash', 'https://unsplash.com/photos/'.$u['id']); $rep[$k] = $id;
     }
+    add_filter('intermediate_image_sizes_advanced', fn($sz) => array_intersect_key($sz, array_flip(['thumbnail', 'medium', 'medium_large', 'large']))); // menos copias: más rápido
     $T0 = microtime(true); $prev = (array)(json_decode((string)@file_get_contents(SSI_DIR.'out/photos-report.json'), true) ?: []);
     foreach ($P['commons'] as $k => $c) {
         if (!empty($cr[$k]['id']) && get_post($cr[$k]['id'])) { $rep[$k] = 'ya estaba'; continue; }
