@@ -181,3 +181,33 @@ add_filter('do_shortcode_tag', function ($out, $tag, $attr) {
     set_transient('cqs_ls_'.md5(cqs_cur_lang().wp_json_encode($attr).CQS_BUILD_VER.get_option('cqs_build')), $out, 6 * HOUR_IN_SECONDS);
     return $out;
 }, 10, 3);
+
+/* Fotos de Cadaqués en Wikimedia Commons: lista de candidatas (out/gallery-cands.json) para elegir las mejores. Solo lee, no descarga. */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_gal_scan') === '1' || get_transient('cqs_gal_lock') || !function_exists('cqs_wm_get')) return;
+    set_transient('cqs_gal_lock', 1, 600); @set_time_limit(300);
+    $api = 'https://commons.wikimedia.org/w/api.php?action=query&format=json';
+    $qs = ['deepcat:Cadaqués', 'deepcat:Portlligat', 'deepcat:"Cap de Creus"', 'Cadaqués', 'Portlligat', 'Cadaqués incategory:Quality_images', 'Cadaqués incategory:Featured_pictures_on_Wikimedia_Commons'];
+    $titles = [];
+    foreach ($qs as $q) for ($off = 0; $off < ($q === 'deepcat:Cadaqués' ? 600 : 200); $off += 50) {
+        $j = cqs_wm_get($api.'&list=search&srnamespace=6&srlimit=50&sroffset='.$off.'&srsearch='.rawurlencode($q.' filetype:bitmap'));
+        $r = (array)($j['query']['search'] ?? []); foreach ($r as $x) $titles[$x['title']] = $q;
+        if (count($r) < 50) break;
+    }
+    $out = []; $all = array_keys($titles);
+    for ($i = 0; $i < count($all); $i += 50) {
+        $j = cqs_wm_get($api.'&prop=imageinfo|categories&iiprop=url|mime|size|extmetadata&iiurlwidth=480&cllimit=max&clcategories='.rawurlencode('Category:Quality images|Category:Featured pictures on Wikimedia Commons|Category:Valued images').'&titles='.rawurlencode(implode('|', array_slice($all, $i, 50))));
+        foreach ((array)($j['query']['pages'] ?? []) as $p) {
+            $ii = $p['imageinfo'][0] ?? null; if (!$ii || ($ii['mime'] ?? '') !== 'image/jpeg' || ($ii['width'] ?? 0) < 1600) continue;
+            $m = $ii['extmetadata'] ?? []; $lic = (string)($m['LicenseShortName']['value'] ?? '');
+            if (!preg_match('/^(CC BY|CC-BY|CC0|Public domain|PD)/i', $lic) || preg_match('/NC|ND/', $lic)) continue;
+            $out[] = ['t' => $p['title'], 'th' => $ii['thumburl'] ?? '', 'w' => $ii['width'], 'h' => $ii['height'], 'lic' => $lic,
+                'by' => mb_substr(trim(wp_strip_all_tags(html_entity_decode((string)($m['Artist']['value'] ?? ''), ENT_QUOTES))), 0, 60),
+                'd' => mb_substr(strip_tags((string)($m['DateTimeOriginal']['value'] ?? '')), 0, 10),
+                'desc' => mb_substr(trim(wp_strip_all_tags(html_entity_decode((string)($m['ImageDescription']['value'] ?? ''), ENT_QUOTES))), 0, 140),
+                'q' => array_map(fn($c) => $c['title'], (array)($p['categories'] ?? [])), 'via' => $titles[$p['title']]];
+        }
+    }
+    cqs_out('gallery-cands.json', ['n_titles' => count($all), 'n_ok' => count($out), 'c' => $out]);
+    update_option('cqs_gal_scan', '1', false);
+}, 40);
