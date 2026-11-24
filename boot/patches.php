@@ -23,4 +23,6 @@ return [
     ['inc/i18n.php', "\$lang = \$lang ?: ssi_lang();", "\$lang = \$lang ?: (function_exists('cqs_cur_lang') ? cqs_cur_lang() : ssi_lang());"],
     ['inc/i18n.php', "foreach (['ca','en'] as \$l) { \$t = pll_get_post(\$ids[\$key], \$l);", "foreach (['ca','en','fr'] as \$l) { \$t = pll_get_post(\$ids[\$key], \$l);"],
     ['inc/i18n.php', "return \$s[\$key][\$l] ?? (\$s[\$key]['es'] ?? \$key);", "if (function_exists('cqs_fr_t') && (\$f = cqs_fr_t(\$key)) !== null) return \$f; return \$s[\$key][\$l] ?? (\$s[\$key]['es'] ?? \$key);"],
+    // Fichas en francés: _ssi_title_fr / _ssi_content_fr; si faltan, el inglés
+    ['inc/listing-i18n.php', 'return trim((string)get_post_meta($id, "_ssi_{$field}_{$l}", true));', 'if (function_exists(\'cqs_cur_lang\') && cqs_cur_lang() === \'fr\' && ($fr = trim((string)get_post_meta($id, "_ssi_{$field}_fr", true))) !== \'\') return $fr; return trim((string)get_post_meta($id, "_ssi_{$field}_{$l}", true));'],
 ];

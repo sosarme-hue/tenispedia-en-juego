@@ -484,7 +484,7 @@ function cqs_step_fichas() {
         $gn++;
         $f[] = ['key' => 'g:'.$g['cid'], 'title' => $g['title'], 'title_ca' => $g['title'], 'title_en' => $g['title'], 'content' => '', 'cats' => $g['cats'], 'location' => 'Cadaqués',
             'address' => $g['address'], 'phone' => $g['phone'], 'website' => $g['website'], 'email' => '', 'hours' => '', 'lat' => $g['lat'], 'lng' => $g['lng'],
-            '_n' => cqs_norm_name($g['title']), '_tags' => -1, '_edit' => '', '_check' => '', '_g' => $g['cid'], '_gv' => (int)$g['votes']];
+            '_n' => cqs_norm_name($g['title']), '_tags' => -1, '_edit' => '', '_check' => '', '_g' => $g['cid'], '_gv' => (int)$g['votes'], '_gc' => $g['gcat'] ?? ''];
     }
     // Duplicados: mismo nombre normalizado (o uno contenido en el otro) a menos de 200 m, o misma web o mismo teléfono a menos de 200 m.
     // Se queda la ficha con más datos y se le pasan los que le falten.
@@ -510,7 +510,7 @@ function cqs_step_fichas() {
         }
         if ($hit === null) { $keep[] = $x; continue; }
         foreach (['phone', 'website', 'email', 'hours'] as $m) if (empty($keep[$hit][$m]) && !empty($x[$m])) $keep[$hit][$m] = $x[$m];
-        if (!empty($x['_g']) && empty($keep[$hit]['_g'])) { $keep[$hit]['_g'] = $x['_g']; $keep[$hit]['_gv'] = $x['_gv']; if (!preg_match('/\d/', explode(',', $keep[$hit]['address'])[0]) && preg_match('/\d/', $x['address'])) $keep[$hit]['address'] = $x['address']; }
+        if (!empty($x['_g']) && empty($keep[$hit]['_g'])) { $keep[$hit]['_g'] = $x['_g']; $keep[$hit]['_gv'] = $x['_gv']; $keep[$hit]['_gc'] = $x['_gc'] ?? ''; if (!preg_match('/\d/', explode(',', $keep[$hit]['address'])[0]) && preg_match('/\d/', $x['address'])) $keep[$hit]['address'] = $x['address']; }
         if ($x['_edit'] > $keep[$hit]['_edit']) $keep[$hit]['_edit'] = $x['_edit'];
         $dups[] = $x['title'].' = '.$keep[$hit]['title'];
     }
@@ -528,7 +528,7 @@ function cqs_step_fichas() {
     }
     // Las que se pasaron a borrador en una revisión anterior se quedan en borrador
     $drafts = []; foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'draft', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_verif_estado', 'value' => ['dudosa', 'sin web'], 'compare' => 'IN']]]) as $id) $drafts[(string)get_post_meta($id, '_ssi_source', true)] = $id;
-    $send = array_map(fn($x) => array_diff_key($x, array_flip(['_n', '_tags', '_edit', '_check', '_g', '_gv'])), $keep);
+    $send = array_map(fn($x) => array_diff_key($x, array_flip(['_n', '_tags', '_edit', '_check', '_g', '_gv', '_gc'])), $keep);
     $res = [];
     foreach (array_chunk($send, 40) as $ch) { $r = eiv_fichas_run(cqs_req(['fichas' => $ch])); $res = array_merge($res, (array)($r['fichas'] ?? [])); }
     foreach ($keep as $x) { $id = $drafts[$x['key']] ?? 0;
@@ -536,11 +536,24 @@ function cqs_step_fichas() {
             if ($x['website'] !== '' && (string)get_post_meta($y['id'], '_website', true) === '') update_post_meta($y['id'], '_website', $x['website']); // recupera webs quitadas por error
             if (!empty($x['_g'])) { update_post_meta($y['id'], '_cqs_google', $x['_g']); update_post_meta($y['id'], '_cqs_google_votes', $x['_gv']); } else delete_post_meta($y['id'], '_cqs_google'); }
         if ($id) wp_update_post(['ID' => $id, 'post_status' => 'draft']); }
+    // Descripción corta en los cuatro idiomas (tipo de negocio + pueblo). El nombre del negocio no se traduce nunca.
+    // Solo se escribe si la ficha no tiene texto propio (o el que tiene es el automático anterior).
+    $D = (array)cqs_json('desc.json'); $inL = ['es' => 'en Cadaqués', 'ca' => 'a Cadaqués', 'en' => 'in Cadaqués', 'fr' => 'à Cadaqués']; $ndesc = 0; global $wpdb;
+    foreach ($keep as $x) foreach ($res as $y) if (($y['key'] ?? '') === $x['key'] && !empty($y['id'])) {
+        $ph = $D['g'][$x['_gc'] ?? ''] ?? ($D['sub'][$x['cats'][1] ?? ''] ?? null); if (!$ph) break;
+        $txt = []; foreach (['es', 'ca', 'en', 'fr'] as $i => $l) $txt[$l] = '<p>'.$ph[$i].' '.$inL[$l].'.</p>';
+        $cur = (string)get_post_field('post_content', $y['id']); $auto = (string)get_post_meta($y['id'], '_cqs_desc_auto', true);
+        if (trim($cur) !== '' && $cur !== $auto) break;
+        if ($cur !== $txt['es']) $wpdb->update($wpdb->posts, ['post_content' => $txt['es']], ['ID' => $y['id']]);
+        update_post_meta($y['id'], '_cqs_desc_auto', $txt['es']);
+        foreach (['ca', 'en', 'fr'] as $l) { $old = (string)get_post_meta($y['id'], "_ssi_content_$l", true); if ($old === '' || $old === (string)get_post_meta($y['id'], "_cqs_desc_auto_$l", true)) { update_post_meta($y['id'], "_ssi_content_$l", $txt[$l]); update_post_meta($y['id'], "_cqs_desc_auto_$l", $txt[$l]); } }
+        clean_post_cache($y['id']); $ndesc++; break;
+    }
     $err = array_values(array_filter($res, fn($x) => isset($x['error'])));
     $byc = []; foreach ($keep as $x) { $byc[$x['cats'][1]] = ($byc[$x['cats'][1]] ?? 0) + 1; } arsort($byc);
     delete_option('cqs_verify_pos');
     $gk = count(array_filter($keep, fn($x) => strpos($x['key'], 'g:') === 0)); $gm = count(array_filter($keep, fn($x) => strpos($x['key'], 'osm:') === 0 && !empty($x['_g'])));
-    $rep = ['osm' => count($els), 'google' => $gn, 'google_nuevas' => $gk, 'osm_confirmadas_en_google' => $gm, 'fichas' => count($keep), 'duplicados' => $dups, 'cerrados_en_osm' => $closed, 'a_la_papelera' => $trashed, 'sin_direccion' => $noaddr, 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
+    $rep = ['osm' => count($els), 'google' => $gn, 'google_nuevas' => $gk, 'osm_confirmadas_en_google' => $gm, 'fichas' => count($keep), 'descripciones_4_idiomas' => $ndesc, 'duplicados' => $dups, 'cerrados_en_osm' => $closed, 'a_la_papelera' => $trashed, 'sin_direccion' => $noaddr, 'descartados' => $skip, 'errores' => array_slice($err, 0, 10), 'por_categoria' => $byc];
     cqs_out('fichas-report.json', $rep);
     return array_merge($rep, ['duplicados' => count($dups), 'cerrados_en_osm' => count($closed), 'a_la_papelera' => count($trashed), 'sin_direccion' => count($noaddr)]);
 }
