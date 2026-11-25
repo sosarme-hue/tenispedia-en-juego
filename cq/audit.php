@@ -650,3 +650,24 @@ add_action('wp_loaded', function () {
     if (empty($r['error'])) update_option('cqs_vc1', 'v1', false);
     do_action('litespeed_purge_all');
 }, 90);
+
+/* Tras importar la agenda oficial (25/11/2026): el Aplec del Sol Ixent y Sant Sebastià ya vienen de visitcadaques.org con hora, lugar y programa,
+   así que las fichas hechas a mano se pasan a la papelera para no duplicar; la Festa Major d'Hivern remite a su programa ya publicado */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_ev4') === 'e1' || get_option('cqs_vc1') !== 'v1' || !function_exists('cqs_out')) return;
+    update_option('cqs_ev4', 'e1', false);
+    $rep = [];
+    $find = fn($k) => get_posts(['post_type' => 'tribe_events', 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => $k, 'suppress_filters' => true, 'lang' => '']);
+    foreach (['primer-sol-2027', 'sant-sebastia-2027'] as $k) if ($x = $find($k)) { wp_trash_post((int)$x[0]); $rep[$k] = 'papelera'; }
+    if ($x = $find('fm-hivern-2026')) {
+        $id = (int)$x[0];
+        $C = ['es' => '<p><strong>Estado: confirmado</strong> (18–20 de diciembre de 2026). El programa ya está publicado: cada acto (oficio solemne, sardanas, baile, conciertos, quina, dinar popular…) aparece en la agenda con su hora y su lugar.</p><p>La fiesta mayor de invierno, en honor a Santa Esperança.</p><p>Organiza: Ajuntament de Cadaqués.</p>',
+              'ca' => '<p><strong>Estat: confirmat</strong> (18–20 de desembre de 2026). El programa ja és publicat: cada acte (ofici solemne, sardanes, ball, concerts, quina, dinar popular…) surt a l’agenda amb la seva hora i el seu lloc.</p><p>La festa major d’hivern, en honor de Santa Esperança.</p><p>Organitza: Ajuntament de Cadaqués.</p>',
+              'en' => '<p><strong>Status: confirmed</strong> (18–20 December 2026). The programme is out: each event (solemn mass, sardanas, dance, concerts, bingo, community lunch…) is listed in the calendar with its time and place.</p><p>The winter festival in honour of Santa Esperança.</p><p>Organised by: Ajuntament de Cadaqués.</p>',
+              'fr' => '<p><strong>Statut : confirmé</strong> (18–20 décembre 2026). Le programme est publié : chaque activité (grand-messe, sardanes, bal, concerts, loto, repas populaire…) figure dans l’agenda avec son heure et son lieu.</p><p>La fête d’hiver en l’honneur de Santa Esperança.</p><p>Organisé par : Ajuntament de Cadaqués.</p>'];
+        wp_update_post(['ID' => $id, 'post_content' => $C['es']]); foreach (['ca', 'en', 'fr'] as $L) update_post_meta($id, '_ssi_content_'.$L, $C[$L]);
+        $rep['fm'] = $id;
+    }
+    cqs_out('audit-ev4.json', $rep);
+    do_action('litespeed_purge_all');
+}, 95);
