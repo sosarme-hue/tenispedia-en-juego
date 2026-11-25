@@ -495,8 +495,8 @@ add_action('wp_loaded', function () {
 /* Prueba real de los 16 formularios (24/11/2026, pedida por Alex): envía cada uno por la misma vía que un visitante
    (API de Contact Form 7) con datos marcados «PRUEBA» y anota el resultado en out/forms-test.json. Una sola vez por versión. */
 add_action('wp_loaded', function () {
-    $v = 't4'; if (get_option('cqs_formtest') === $v || get_transient('cqs_formtest_lock4') || !class_exists('WPCF7_ContactForm') || !function_exists('cqs_out')) return;
-    set_transient('cqs_formtest_lock4', 1, 900); update_option('cqs_formtest', $v, false); @set_time_limit(300);
+    $v = 't5'; if (get_option('cqs_formtest') === $v || get_transient('cqs_formtest_lock5') || !class_exists('WPCF7_ContactForm') || !function_exists('cqs_out')) return;
+    set_transient('cqs_formtest_lock5', 1, 900); update_option('cqs_formtest', $v, false); @set_time_limit(300);
     $fail = []; add_action('wp_mail_failed', function ($e) use (&$fail) { $fail[] = $e->get_error_message(); });
     $rep = ['ts' => wp_date('c')];
     $rep['wp_mail_directo'] = false && wp_mail('info@cadaques.si', 'PRUEBA envío de la web (SMTP web@)', 'Correo de prueba enviado por cadaques.si a través de web@cadaques.si. Se puede borrar.');
