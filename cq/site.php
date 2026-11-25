@@ -495,11 +495,13 @@ add_action('wp_loaded', function () {
 /* Prueba real de los 16 formularios (24/11/2026, pedida por Alex): envía cada uno por la misma vía que un visitante
    (API de Contact Form 7) con datos marcados «PRUEBA» y anota el resultado en out/forms-test.json. Una sola vez por versión. */
 add_action('wp_loaded', function () {
-    $v = 't2'; if (get_option('cqs_formtest') === $v || get_transient('cqs_formtest_lock2') || !class_exists('WPCF7_ContactForm') || !function_exists('cqs_out')) return;
-    set_transient('cqs_formtest_lock2', 1, 900); update_option('cqs_formtest', $v, false); @set_time_limit(300);
+    $v = 't3'; if (get_option('cqs_formtest') === $v || get_transient('cqs_formtest_lock3') || !class_exists('WPCF7_ContactForm') || !function_exists('cqs_out')) return;
+    set_transient('cqs_formtest_lock3', 1, 900); update_option('cqs_formtest', $v, false); @set_time_limit(300);
     $fail = []; add_action('wp_mail_failed', function ($e) use (&$fail) { $fail[] = $e->get_error_message(); });
     $rep = ['ts' => wp_date('c')];
+    $rep['wp_mail_directo'] = wp_mail('info@cadaques.si', 'PRUEBA envío de la web (SMTP web@)', 'Correo de prueba enviado por cadaques.si a través de web@cadaques.si. Se puede borrar.');
     foreach ((array)get_option('cqs_cf7', []) as $kind => $byL) foreach ((array)$byL as $l => $id) {
+        if ($l !== 'es') continue; // una prueba por tipo de formulario
         $cf = WPCF7_ContactForm::get_instance((int)$id); if (!$cf) { $rep[$kind][$l] = 'no existe'; continue; }
         $ts = time() - 30;
         $data = ['_wpcf7' => $id, '_wpcf7_version' => defined('WPCF7_VERSION') ? WPCF7_VERSION : '', '_wpcf7_locale' => '', '_wpcf7_unit_tag' => 'wpcf7-f'.$id.'-test-o1', '_wpcf7_container_post' => 0,
@@ -565,3 +567,18 @@ add_filter('gettext', function ($tr, $text, $domain) {
     static $fr = ['There are no reviews yet. Be the first one to write one.' => 'Pas encore d’avis. Les premiers arriveront avec les fiches de l’annuaire.', 'Select a Rating' => 'Choisissez une note'];
     return $fr[$text] ?? $tr;
 }, 20, 3);
+
+/* Envío de correo por SMTP con el buzón web@cadaques.si (25/11/2026, elegido por Alex). Las credenciales están en
+   wp-content/cqs-smtp.php, en el servidor y fuera del repositorio. Sin ese archivo, WordPress envía como antes. */
+function cqs_smtp_conf() { static $c = null; if ($c === null) { $f = WP_CONTENT_DIR.'/cqs-smtp.php'; $c = is_readable($f) ? (array)include $f : []; } return $c; }
+add_action('phpmailer_init', function ($m) {
+    $c = cqs_smtp_conf(); if (empty($c['user']) || empty($c['pass'])) return;
+    $m->isSMTP(); $m->Host = $c['host']; $m->Port = (int)$c['port']; $m->SMTPSecure = $c['secure']; $m->SMTPAuth = true;
+    $m->Username = $c['user']; $m->Password = $c['pass'];
+    $m->setFrom($c['user'], 'Cadaqués Sí', false); $m->Sender = $c['user'];
+}, 99);
+add_action('wp_mail_failed', function ($e) {
+    if (!function_exists('cqs_out')) return;
+    $f = SSI_DIR.'out/mail-fail.json'; $a = (array)json_decode((string)@file_get_contents($f), true);
+    $a[] = ['ts' => wp_date('c'), 'error' => $e->get_error_message()]; cqs_out('mail-fail.json', array_slice($a, -20));
+});
