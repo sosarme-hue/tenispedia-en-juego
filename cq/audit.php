@@ -437,7 +437,11 @@ function cqs_audit_dedupe() {
     return $rep;
 }
 add_action('wp_loaded', function () {
-    if (!defined('CQS_BUILD_VER') || get_option('cqs_build') !== CQS_BUILD_VER || get_option('cqs_dedupe') === CQS_BUILD_VER.'d2' || get_transient('cqs_dedupe_lock') || !function_exists('cqs_out')) return;
+    if (!defined('CQS_BUILD_VER') || get_option('cqs_dedupe') === CQS_BUILD_VER.'d2' || get_transient('cqs_dedupe_lock') || !function_exists('cqs_out')) return;
+    if (get_option('cqs_build') !== CQS_BUILD_VER) { // en pleno montaje: en cuanto ha pasado el paso de fichas
+        $bl = json_decode((string)@file_get_contents(SSI_DIR.'out/build-log.json'), true);
+        if (!is_array($bl) || ($bl['ver'] ?? '') !== CQS_BUILD_VER || !isset($bl['t_fichas'])) return;
+    }
     set_transient('cqs_dedupe_lock', 1, 300); update_option('cqs_dedupe', CQS_BUILD_VER.'d2', false);
     try { $r = cqs_audit_dedupe(); } catch (Throwable $e) { $r = ['error' => $e->getMessage().' @'.$e->getLine()]; }
     cqs_out('audit-dedupe.json', $r);
