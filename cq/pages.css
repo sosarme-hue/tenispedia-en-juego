@@ -126,3 +126,20 @@ body{background:var(--eiv-cal)}
 .cq-norev{font-size:13px;color:#5b6770;font-weight:400}
 .cqs-contact{text-align:center;font-size:14px;margin:6px 0 0}
 .cqs-contact a{color:inherit}
+/* «Esta guía la hacemos entre todos» con cuatro tarjetas, como en sitges.si (25/11/2026) */
+.cq-joinband{background:#0b5a85!important;color:#fff}
+.cq-joinband .ssi-h2{color:#fff;font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:8px}
+.cq-joinband .ssi-lead-mute{color:#e3eef6!important;margin-bottom:24px}
+.cq-joinband .cq-eyebrow{color:#cfe3f1;text-transform:uppercase;letter-spacing:.08em;font-size:.8rem;font-weight:700;margin:0 0 6px}
+.cq-join{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.cq-join-card{display:flex;flex-direction:column;gap:6px;background:#fff;color:#14232e!important;border-radius:14px;padding:22px 20px;text-decoration:none!important;min-height:130px;transition:transform .15s,box-shadow .15s}
+.cq-join-card strong{font-size:1.15rem;line-height:1.3}
+.cq-join-card span{font-size:.9rem;color:#4a5a66;line-height:1.45}
+.cq-join-card:hover,.cq-join-card:focus-visible{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.18)}
+.cq-join-card--hl{background:#a24b23;color:#fff!important}
+.cq-join-card--hl strong{color:#2a1208}
+.cq-join-card--hl span{color:#fff}
+@media (max-width:900px){.cq-join{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.cq-join{grid-template-columns:1fr}}
+/* Los enlaces a #idea, #ficha, #evento y #formulario no quedan tapados por la cabecera fija */
+.ssi-formcard,#idea,#ficha,#evento,#opiniones,#formulario{scroll-margin-top:110px}

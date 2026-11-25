@@ -537,7 +537,7 @@ add_action('wp_loaded', function () {
 
 /* ---------- 7. Comprobación desde fuera (out/audit-*.html y out/audit-check.json), una vez por versión ---------- */
 add_action('wp_loaded', function () {
-    $v = 'c8'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
+    $v = 'c9'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_x4') !== 'x1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
     set_transient('cqs_audit_clock', 1, 600);
     $U = [];
     $s = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'tax_query' => [['taxonomy' => 'at_biz_dir-category', 'field' => 'slug', 'terms' => ['apartamentos-turisticos', 'hoteles', 'dormir'], 'include_children' => true]]]);
@@ -549,6 +549,7 @@ add_action('wp_loaded', function () {
     $U['fm-en'] = ($fm = get_posts(['post_type' => 'tribe_events', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => 'fm-hivern-2026', 'suppress_filters' => true, 'lang' => ''])) ? ssi_xl_permalink($fm[0], 'en') : '';
     $dir = function_exists('ssi_link') ? ssi_link('directory', 'fr') : ''; if ($dir) $U['dir-fr-p2'] = trailingslashit($dir).'page/2/';
     $U['dir-es'] = function_exists('ssi_link') ? ssi_link('directory', 'es') : '';
+    $U['home-es'] = home_url('/'); $U['collab-es'] = home_url('/colabora/'); $U['collab-fr'] = function_exists('ssi_link') ? ssi_link('collab', 'fr') : '';
     $out = [];
     foreach (array_filter($U) as $k => $u) {
         $r = wp_remote_get(add_query_arg('nocache', time(), $u), ['timeout' => 40, 'sslverify' => false]);
@@ -563,3 +564,18 @@ add_action('wp_loaded', function () {
     $out['t'] = gmdate('c'); cqs_out('audit-check.json', $out);
     update_option('cqs_audit_check', $v, false);
 }, 80);
+
+/* Colabora como sitges.si y bloque «Esta guía la hacemos entre todos» con cuatro tarjetas (25/11/2026):
+   crea el formulario «colabora» y vuelve a escribir las páginas desde data/pages.json, sin repetir todo el montaje */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_x4') === 'x1' || !function_exists('cqs_step_forms') || !function_exists('cqs_step_pages') || get_transient('cqs_x4_lock')) return;
+    if (get_option('cqs_build') !== CQS_BUILD_VER) return; // no pisa un montaje en marcha
+    set_transient('cqs_x4_lock', 1, 300);
+    if (!get_current_user_id()) wp_set_current_user(1);
+    $rep = ['t' => gmdate('c')];
+    try { $rep['forms'] = cqs_step_forms(); $rep['pages'] = cqs_step_pages(); update_option('cqs_x4', 'x1', false); }
+    catch (Throwable $e) { $rep['error'] = $e->getMessage(); }
+    wp_set_current_user(0);
+    cqs_out('audit-x4.json', $rep);
+    do_action('litespeed_purge_all');
+}, 30);
