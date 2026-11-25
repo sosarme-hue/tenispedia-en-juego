@@ -579,3 +579,37 @@ add_action('wp_loaded', function () {
     cqs_out('audit-x4.json', $rep);
     do_action('litespeed_purge_all');
 }, 30);
+
+/* Agenda (3.ª vuelta, 25/11/2026): tres estados claros (confirmado, tradición anual, pendiente de confirmar),
+   la cabalgata pasa a «pendiente de confirmar» y se añade la fiesta de Sant Sebastià (20 de enero, tradición anual) */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_ev3') === 'e1' || !function_exists('cqs_out') || !function_exists('tribe_create_event')) return;
+    update_option('cqs_ev3', 'e1', false);
+    $rep = [];
+    $find = fn($k) => get_posts(['post_type' => 'tribe_events', 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => $k, 'suppress_filters' => true, 'lang' => '']);
+    // Cabalgata de Reyes: pendiente de confirmar, sin hora
+    $C = ['es' => '<p><strong>Estado: pendiente de confirmar.</strong> Es una tradición anual, pero el Ayuntamiento aún no ha publicado la hora ni el recorrido; no indicamos ninguna hora hasta que se confirme.</p><p>Los Reyes Magos llegan a Cadaqués la tarde del 5 de enero.</p><p>Lugar: recorrido por el centro del pueblo, pendiente de confirmar.</p><p>Organiza: Ajuntament de Cadaqués.</p>',
+          'ca' => '<p><strong>Estat: pendent de confirmar.</strong> És una tradició anual, però l’Ajuntament encara no ha publicat l’hora ni el recorregut; no indiquem cap hora fins que es confirmi.</p><p>Els Reis d’Orient arriben a Cadaqués la tarda del 5 de gener.</p><p>Lloc: recorregut pel centre del poble, pendent de confirmar.</p><p>Organitza: Ajuntament de Cadaqués.</p>',
+          'en' => '<p><strong>Status: to be confirmed.</strong> It is an annual tradition, but the Town Hall has not yet published the time or the route; we will not give a time until it is confirmed.</p><p>The Three Kings arrive in Cadaqués on the evening of 5 January.</p><p>Place: a route through the village centre, to be confirmed.</p><p>Organised by: Ajuntament de Cadaqués.</p>',
+          'fr' => '<p><strong>Statut : à confirmer.</strong> C’est une tradition annuelle, mais la mairie n’a pas encore publié l’heure ni le parcours ; nous n’indiquons aucune heure avant confirmation.</p><p>Les Rois mages arrivent à Cadaqués le soir du 5 janvier.</p><p>Lieu : parcours dans le centre du village, à confirmer.</p><p>Organisé par : Ajuntament de Cadaqués.</p>'];
+    if ($x = $find('reis-2027')) { $id = (int)$x[0]; wp_update_post(['ID' => $id, 'post_content' => $C['es']]); foreach (['ca', 'en', 'fr'] as $L) update_post_meta($id, '_ssi_content_'.$L, $C[$L]); update_post_meta($id, '_cqs_status', 'pendiente'); $rep['reis'] = $id; }
+    // Sant Sebastià: aplec en la ermita, cada 20 de enero
+    if (!$find('sant-sebastia-2027')) {
+        $C = ['es' => '<p><strong>Estado: tradición anual</strong>, pendiente de programa. Se celebra cada 20 de enero; la hora de la misa se confirmará más cerca de la fecha.</p><p>Aplec en la ermita de Sant Sebastià, en la montaña del Pení: se sube a pie desde el pueblo, hay misa en honor al santo, sardanas y comida popular al aire libre. La ermita es privada y solo se abre este día.</p><p>Lugar: ermita de Sant Sebastià (Pení), Cadaqués.</p>',
+              'ca' => '<p><strong>Estat: tradició anual</strong>, pendent de programa. Se celebra cada 20 de gener; l’hora de la missa es confirmarà més a prop de la data.</p><p>Aplec a l’ermita de Sant Sebastià, a la muntanya del Pení: s’hi puja a peu des del poble, hi ha missa en honor del sant, sardanes i dinar popular a l’aire lliure. L’ermita és privada i només s’obre aquest dia.</p><p>Lloc: ermita de Sant Sebastià (Pení), Cadaqués.</p>',
+              'en' => '<p><strong>Status: annual tradition</strong>, programme to come. It takes place every 20 January; the time of the mass will be confirmed nearer the date.</p><p>A gathering at the hermitage of Sant Sebastià on Pení mountain: people walk up from the village for a mass in honour of the saint, sardanas and an open-air community lunch. The hermitage is private and only opens on this day.</p><p>Place: Sant Sebastià hermitage (Pení), Cadaqués.</p>',
+              'fr' => '<p><strong>Statut : tradition annuelle</strong>, programme à venir. Elle a lieu chaque 20 janvier ; l’heure de la messe sera confirmée à l’approche de la date.</p><p>Rassemblement à l’ermitage de Sant Sebastià, sur le mont Pení : on y monte à pied depuis le village pour une messe en l’honneur du saint, des sardanes et un repas populaire en plein air. L’ermitage est privé et n’ouvre que ce jour-là.</p><p>Lieu : ermitage de Sant Sebastià (Pení), Cadaqués.</p>'];
+        $id = tribe_create_event(['post_title' => 'Fiesta de Sant Sebastià', 'post_content' => $C['es'], 'post_status' => 'publish', 'EventStartDate' => '2027-01-20', 'EventEndDate' => '2027-01-20', 'EventAllDay' => 'yes', 'EventTimezone' => 'Europe/Madrid',
+            'Venue' => ['Venue' => 'Ermita de Sant Sebastià (Pení)', 'City' => 'Cadaqués', 'Country' => 'Spain', 'Province' => 'Girona', 'Zip' => '17488']]);
+        if ($id && !is_wp_error($id)) {
+            update_post_meta($id, '_cqs_key', 'sant-sebastia-2027'); update_post_meta($id, '_cqs_status', 'tradicion');
+            update_post_meta($id, '_cqs_loc', ['name' => 'Ermita de Sant Sebastià (Pení)']);
+            foreach (['ca' => 'Festa de Sant Sebastià', 'en' => 'Sant Sebastià festival', 'fr' => 'Fête de Sant Sebastià'] as $L => $t) { update_post_meta($id, '_ssi_title_'.$L, $t); update_post_meta($id, '_ssi_content_'.$L, $C[$L]); }
+            wp_set_object_terms($id, ['fiestas', 'cadaques'], 'tribe_events_cat');
+            $rep['sant-sebastia'] = $id;
+        } else $rep['sant-sebastia'] = 'error';
+    }
+    delete_option('cqs_agenda_last'); // relanza la importación automática con el nuevo formato
+    cqs_out('audit-ev3.json', $rep);
+    do_action('litespeed_purge_all');
+}, 35);

@@ -702,7 +702,7 @@ function cqs_step_menu() {
     $menus = (array)($o['nav_menus'][$theme]['primary'] ?? []);
     if (!$menus) { $tm = (array)get_theme_mod('nav_menu_locations', []); if (!empty($tm['primary'])) $menus = ['es' => $tm['primary']]; }
     // Sin menú todavía: se crea uno por idioma con las secciones de la guía (como en las otras guías de la red)
-    if (!$menus || get_option('cqs_menu_v') !== '3') {
+    if (!$menus || get_option('cqs_menu_v') !== '4') {
         $T = ['visit' => ['Qué ver', 'Què veure', 'What to see', 'Que voir'], 'beaches' => ['Playas y calas', 'Platges i cales', 'Beaches and coves', 'Plages et criques'],
               'capcreus' => ['Cap de Creus', 'Cap de Creus', 'Cap de Creus', 'Cap de Creus'], 'dali' => ['Dalí y Portlligat', 'Dalí i Portlligat', 'Dalí and Portlligat', 'Dalí et Portlligat'],
               'history' => ['Historia', 'Història', 'History', 'Histoire'], 'routes' => ['Rutas y excursiones', 'Rutes i excursions', 'Walks and trips', 'Randonnées'],
@@ -712,7 +712,8 @@ function cqs_step_menu() {
               'live' => ['Info práctica', 'Info pràctica', 'Practical info', 'Infos pratiques'], 'transport' => ['Transporte', 'Transport', 'Getting around', 'Transports'],
               'parking' => ['Aparcar', 'Aparcar', 'Parking', 'Se garer'], 'health' => ['Salud', 'Salut', 'Health', 'Santé'], 'housing' => ['Vivienda', 'Habitatge', 'Housing', 'Logement']];
         // Menú plano, sin submenús (en el móvil los submenús abiertos lo desordenaban): como en las otras guías
-        $tree = ['visit' => [], 'beaches' => [], 'routes' => [], 'sports' => [], 'eat' => [], 'sleep' => [], 'agenda' => [], 'live' => []];
+        // Siete grupos (25/11/2026): rutas, deportes y cultura cuelgan de «Qué ver»; transporte, aparcamiento y salud, de «Info práctica»
+        $tree = ['visit' => [], 'beaches' => [], 'eat' => [], 'sleep' => [], 'shop' => [], 'agenda' => [], 'live' => []];
         $langs = function_exists('pll_languages_list') ? (array)pll_languages_list(['fields' => 'slug']) : ['es'];
         $li = ['es' => 0, 'ca' => 1, 'en' => 2, 'fr' => 3]; $byL = [];
         foreach ($langs as $l) {
@@ -733,7 +734,7 @@ function cqs_step_menu() {
         $menus = $byL; $created = true;
     }
     $rep = ['theme' => $theme, 'menus' => $menus];
-    $want = [['routes', 'visit'], ['sports', 'routes'], ['culture', 'agenda'], ['shop', 'sleep']];
+    $want = []; // el menú ya trae los siete grupos
     $lbl = ['routes' => ['es' => 'Rutas y excursiones', 'ca' => 'Rutes i excursions', 'en' => 'Walks and day trips', 'fr' => 'Randonnées'],
             'sports' => ['es' => 'Deportes', 'ca' => 'Esports', 'en' => 'Sports', 'fr' => 'Sports'],
             'transport' => ['es' => 'Transporte', 'ca' => 'Transport', 'en' => 'Getting around', 'fr' => 'Transports'],
