@@ -577,6 +577,8 @@ add_action('phpmailer_init', function ($m) {
     $m->isSMTP(); $m->Host = $c['host']; $m->Port = (int)$c['port']; $m->SMTPSecure = $c['secure']; $m->SMTPAuth = true;
     $m->Username = $c['user']; $m->Password = $c['pass'];
     $m->setFrom($c['user'], 'Cadaqués Sí', false); $m->Sender = $c['user'];
+    // Un Reply-To con una dirección del propio dominio (p. ej. info@ escrito en el formulario) hace que el filtro lo mande a Spam: se quita
+    foreach (array_keys($m->getReplyToAddresses()) as $rt) if (preg_match('/@cadaques\.si$/i', $rt)) { $m->clearReplyTos(); break; }
 }, 99);
 add_action('wp_mail_failed', function ($e) {
     if (!function_exists('cqs_out')) return;
