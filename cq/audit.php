@@ -182,7 +182,12 @@ function cqs_audit_fr_head($h) {
         foreach (['content', 'title'] as $f) {
             $en = trim((string)get_post_meta($id, '_ssi_'.$f.'_en', true)); $fr = trim((string)get_post_meta($id, '_ssi_'.$f.'_fr', true));
             if ($en === '' || $fr === '') continue;
-            foreach (array_unique([$en, wptexturize($en), esc_html($en), esc_html(wptexturize($en))]) as $v) $h = str_replace($v, $f === 'title' && $v !== $en ? esc_html($fr) : $fr, $h);
+            if ($f === 'content') { // párrafo a párrafo (wpautop añade saltos de línea entre ellos)
+                preg_match_all('#<p>(.*?)</p>#s', $en, $pe); preg_match_all('#<p>(.*?)</p>#s', $fr, $pf);
+                foreach ($pe[1] as $i => $pp) if (isset($pf[1][$i])) foreach (array_unique([$pp, wptexturize($pp)]) as $v) $h = str_replace('<p>'.$v.'</p>', '<p>'.$pf[1][$i].'</p>', $h);
+                continue;
+            }
+            foreach (array_unique([$en, wptexturize($en), esc_html($en), esc_html(wptexturize($en))]) as $v) $h = str_replace($v, $v !== $en ? esc_html($fr) : $fr, $h);
         }
     }
     $h = str_replace(['"inLanguage":"en"', 'og:locale" content="en_GB"'], ['"inLanguage":"fr-FR"', 'og:locale" content="fr_FR"'], $h);
@@ -320,7 +325,7 @@ add_action('wp_loaded', function () {
 
 /* ---------- 7. Comprobación desde fuera (out/audit-*.html y out/audit-check.json), una vez por versión ---------- */
 add_action('wp_loaded', function () {
-    $v = 'c2'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
+    $v = 'c3'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
     set_transient('cqs_audit_clock', 1, 600);
     $U = [];
     $s = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'tax_query' => [['taxonomy' => 'at_biz_dir-category', 'field' => 'slug', 'terms' => ['apartamentos-turisticos', 'hoteles', 'dormir'], 'include_children' => true]]]);
