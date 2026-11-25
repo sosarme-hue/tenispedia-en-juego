@@ -157,6 +157,15 @@ function cqs_audit_ob($h) {
     // «0.0 (0)» en las tarjetas del directorio
     $nr = ['es' => 'Sin valoraciones', 'ca' => 'Sense valoracions', 'en' => 'No reviews yet', 'fr' => 'Aucun avis'][$l] ?? 'Sin valoraciones';
     $h = preg_replace('#<span class="directorist-rating-avg">\s*0\.0\s*</span>\s*<span class="directorist-total-review">\s*\(0\)\s*</span>#', '<span class="directorist-rating-avg cq-norev">'.$nr.'</span>', $h);
+    // Eventos: meta descripción en el idioma de la página (salía en castellano)
+    if ($l !== 'es' && function_exists('ssi_xl_request') && ($xr = ssi_xl_request()) && $xr['type'] === 'tribe_events' && ($ev = get_page_by_path($xr['slug'], OBJECT, 'tribe_events'))) {
+        $c = trim((string)get_post_meta($ev->ID, '_ssi_content_'.$l, true));
+        if ($c !== '') {
+            $t = trim(preg_replace('/\s+/u', ' ', wp_strip_all_tags(preg_replace('#</p>#', ' ', html_entity_decode($c, ENT_QUOTES, 'UTF-8')))));
+            if (mb_strlen($t) > 158) { $t = mb_substr($t, 0, 157); $t = mb_substr($t, 0, (int)mb_strrpos($t, ' ')).'…'; }
+            $h = preg_replace_callback('#(<meta (?:name="description"|property="og:description"|name="twitter:description") content=")[^"]*"#', fn($mm) => $mm[1].esc_attr($t).'"', $h);
+        }
+    }
     // Ficha actualizada frente a datos comprobados con el establecimiento
     if (is_singular('at_biz_dir')) {
         $id = get_queried_object_id();
@@ -172,7 +181,8 @@ function cqs_audit_ob($h) {
     $up = wp_upload_dir(); $base = $up['baseurl']; $bdir = $up['basedir'];
     $h = preg_replace_callback('#<img\b([^>]*)>#i', function ($m) use (&$n, &$C, &$dirty, &$budget, $base, $bdir) {
         $a = $m[1];
-        if (!preg_match('#\bsrc="(https?://[^"]*?/wp-content/uploads/[^"?]+\.(?:jpe?g|png|webp|gif))(?:\?[^"]*)?"#i', $a, $sm)) return $m[0];
+        if (!preg_match('#\bsrc="(https?://[^"]*?/wp-content/(?:uploads|plugins|themes)/[^"?]+\.(?:jpe?g|png|webp|gif))(?:\?[^"]*)?"#i', $a, $sm)) return $m[0];
+        $isUp = strpos($sm[1], '/wp-content/uploads/') !== false;
         $src = preg_replace('#^https?:#', '', $sm[1]); $n++;
         $hasW = (bool)preg_match('/\bwidth=/', $a); $hasS = (bool)preg_match('/\bsrcset=/', $a);
         if ($hasW && $hasS) return $m[0];
@@ -181,13 +191,13 @@ function cqs_audit_ob($h) {
                 $w = 0; $hh = 0; $set = '';
                 if (preg_match('/-(\d{2,4})x(\d{2,4})\.[a-z]+$/i', $src, $dm)) { $w = (int)$dm[1]; $hh = (int)$dm[2]; }
                 $orig = preg_replace('/-\d{2,4}x\d{2,4}(\.[a-z]+)$/i', '$1', $sm[1]);
-                $id = attachment_url_to_postid($orig);
+                $id = $isUp ? attachment_url_to_postid($orig) : 0;
                 if ($id) {
                     $md = wp_get_attachment_metadata($id);
                     if (!$w && !empty($md['width'])) { $w = (int)$md['width']; $hh = (int)$md['height']; }
                     if ($w) $set = (string)wp_calculate_image_srcset([$w, $hh], $sm[1], $md, $id);
                 }
-                if (!$w) { $f = $bdir.substr($sm[1], strpos($sm[1], '/wp-content/uploads') + strlen('/wp-content/uploads')); $gs = @getimagesize($f); if ($gs) { $w = $gs[0]; $hh = $gs[1]; } }
+                if (!$w) { $f = WP_CONTENT_DIR.substr($sm[1], strpos($sm[1], '/wp-content') + strlen('/wp-content')); $gs = @getimagesize($f); if ($gs) { $w = $gs[0]; $hh = $gs[1]; } }
                 $C[$src] = [$w, $hh, $set]; $dirty = true;
             }
         }
@@ -456,7 +466,7 @@ add_action('wp_loaded', function () {
 
 /* ---------- 7. Comprobación desde fuera (out/audit-*.html y out/audit-check.json), una vez por versión ---------- */
 add_action('wp_loaded', function () {
-    $v = 'c6'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
+    $v = 'c7'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
     set_transient('cqs_audit_clock', 1, 600);
     $U = [];
     $s = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'tax_query' => [['taxonomy' => 'at_biz_dir-category', 'field' => 'slug', 'terms' => ['apartamentos-turisticos', 'hoteles', 'dormir'], 'include_children' => true]]]);
