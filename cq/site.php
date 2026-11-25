@@ -444,7 +444,7 @@ add_action('wp_loaded', function () {
 
 /* Copia del HTML de algunas páginas (out/snap-*.html) para revisarlas desde fuera; una vez por versión */
 add_action('wp_loaded', function () {
-    $v = 's6'; if (get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
+    $v = 's7'; if (get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
     set_transient('cqs_snap_lock', 1, 600);
     $P = ['home' => home_url('/'), 'visit' => function_exists('cqs_voice_url') ? '' : ''];
     $x = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'visit:es']]]);
@@ -452,6 +452,8 @@ add_action('wp_loaded', function () {
     $y = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'dali:es']]]);
     if ($y) $P['dali'] = get_permalink($y[0]);
     foreach (['voice:es' => 'voice-es', 'voice:ca' => 'voice-ca', 'voice:en' => 'voice-en', 'voice:fr' => 'voice-fr'] as $kk => $nm) { $z = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => $kk]]]); if ($z) $P[$nm] = get_permalink($z[0]); }
+    $lz = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => 'es', 'orderby' => 'title', 'order' => 'ASC']);
+    if ($lz) $P['listing'] = get_permalink($lz[0]);
     foreach (array_filter($P) as $k => $u) {
         $r = wp_remote_get(add_query_arg('nocache', time(), $u), ['timeout' => 30, 'sslverify' => false]);
         if (!is_wp_error($r)) @file_put_contents(SSI_DIR.'out/snap-'.$k.'.html', wp_remote_retrieve_body($r));
@@ -612,3 +614,11 @@ add_action('wp_loaded', function () {
     }
     delete_option('cqs_formtest'); // vuelve a probar los formularios con el nuevo destino
 }, 69);
+
+/* Correo público de contacto (25/11/2026, decisión de Alex): en toda la web se anuncia su correo de administrador en lugar de info@cadaques.si. */
+define('CQS_PUBLIC_MAIL', 'partenopides@gmail.com');
+add_action('template_redirect', function () {
+    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) return;
+    ob_start(fn($h) => str_ireplace('info@cadaques.si', CQS_PUBLIC_MAIL, $h));
+}, 1);
+add_filter('wpcf7_display_message', fn($m) => str_ireplace('info@cadaques.si', CQS_PUBLIC_MAIL, $m));
