@@ -108,3 +108,11 @@ body{background:var(--eiv-cal)}
 @media (max-width:699px){.ssi-band>.wp-block-group__inner-container>.ssi-in{padding-top:26px!important;padding-bottom:26px!important}
  .ssi-hero .ssi-in,.ssi-voice .ssi-in,.ssi-pagehead .ssi-in{padding-top:30px!important;padding-bottom:30px!important}
  .entry-content .ssi-band p,.entry-content .ssi-band li{line-height:1.5}}
+/* Webs hermanas .si al pie */
+.cqs-sisters{background:var(--ssi-ink);color:#D6E6F2;border-top:1px solid rgba(214,230,242,.18);font-size:14px;line-height:1.6}
+.cqs-sisters .ssi-wrap{padding-top:14px;padding-bottom:18px}
+.cqs-sisters a{color:#D6E6F2!important;text-decoration:underline;text-underline-offset:2px;display:inline-block;padding:4px 0}
+.cqs-sisters__t{font-weight:700;margin-right:4px}
+/* Tarjetas con foto también en los bloques de datos (25/11/2026: sin huecos azules) */
+.gsi-facts .ssi-card.cq-img{padding-top:0!important}
+.gsi-facts .ssi-card.cq-img::before{display:block!important;content:""!important;width:calc(100% + 48px);margin:0 -24px 14px;aspect-ratio:16/7;height:auto;background:#DCEFFA var(--img) center/cover no-repeat!important;-webkit-mask:none!important;mask:none!important}

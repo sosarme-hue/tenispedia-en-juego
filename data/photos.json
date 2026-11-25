@@ -1825,6 +1825,42 @@
     "en": "The old pharmacy and the square",
     "fr": "L’ancienne pharmacie et la place"
    }
+  },
+  "cm_roses": {
+   "try": [
+    "wiki:ca:Ciutadella de Roses",
+    "search:Roses Girona bay"
+   ],
+   "alt": {
+    "es": "La bahía de Roses",
+    "ca": "La badia de Roses",
+    "en": "The bay of Roses",
+    "fr": "La baie de Roses"
+   }
+  },
+  "cm_aiguamolls": {
+   "try": [
+    "wiki:ca:Parc Natural dels Aiguamolls de l'Empordà",
+    "search:Aiguamolls de l'Empordà"
+   ],
+   "alt": {
+    "es": "Parque Natural dels Aiguamolls de l’Empordà",
+    "ca": "Parc Natural dels Aiguamolls de l’Empordà",
+    "en": "Aiguamolls de l’Empordà Natural Park",
+    "fr": "Parc naturel des Aiguamolls de l’Empordà"
+   }
+  },
+  "cm_empuries": {
+   "try": [
+    "wiki:ca:Empúries",
+    "search:Empúries ruins"
+   ],
+   "alt": {
+    "es": "Las ruinas griegas y romanas de Empúries",
+    "ca": "Les ruïnes gregues i romanes d’Empúries",
+    "en": "The Greek and Roman ruins of Empúries",
+    "fr": "Les ruines grecques et romaines d’Empúries"
+   }
   }
  },
  "hist": {

@@ -624,3 +624,13 @@ add_action('wp_loaded', function () {
 
 /* Correo público de contacto: info@cadaques.si (Alex, 25/11/2026: se mantiene info@, con reenvío a su Gmail; lo revisará en 6 meses).
    Los formularios siguen llegando directos al Gmail de administrador (opción cqs_forms_to). */
+
+/* Webs hermanas .si al pie de todas las páginas (Alex, 25/11/2026) */
+add_action('kadence_footer', function () {
+    $l = function_exists('cqs_cur_lang') ? cqs_cur_lang() : 'es';
+    $lab = ['es' => 'Otras guías .si', 'ca' => 'Altres guies .si', 'en' => 'Other .si guides', 'fr' => 'Autres guides .si'][$l] ?? 'Otras guías .si';
+    $S = ['sitges.si' => 'Sitges', 'vilanova.si' => 'Vilanova i la Geltrú', 'santperederibes.si' => 'Sant Pere de Ribes', 'garraf.si' => 'Garraf', 'castelldefels.si' => 'Castelldefels', 'santcugat.si' => 'Sant Cugat', 'eivissa.si' => 'Eivissa'];
+    $a = [];
+    foreach ($S as $d => $n) $a[] = '<a href="https://'.$d.'/" rel="noopener">'.esc_html($n).' Sí</a>';
+    echo '<nav class="cqs-sisters" aria-label="'.esc_attr($lab).'"><div class="ssi-wrap"><span class="cqs-sisters__t">'.esc_html($lab).':</span> '.implode('<span aria-hidden="true"> · </span>', $a).'</div></nav>';
+}, 11);
