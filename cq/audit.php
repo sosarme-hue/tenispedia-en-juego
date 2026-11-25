@@ -176,6 +176,15 @@ add_action('template_redirect', function () {
 function cqs_audit_fr_head($h) {
     if (stripos($h, '<html') === false) return $h;
     $h = preg_replace('#<html lang="en-GB"#', '<html lang="fr-FR"', $h, 1);
+    // Eventos: título y texto en francés (_ssi_title_fr / _ssi_content_fr en lugar del inglés)
+    if (is_singular('tribe_events')) {
+        $id = get_queried_object_id();
+        foreach (['content', 'title'] as $f) {
+            $en = trim((string)get_post_meta($id, '_ssi_'.$f.'_en', true)); $fr = trim((string)get_post_meta($id, '_ssi_'.$f.'_fr', true));
+            if ($en === '' || $fr === '') continue;
+            foreach (array_unique([$en, wptexturize($en), esc_html($en), esc_html(wptexturize($en))]) as $v) $h = str_replace($v, $f === 'title' && $v !== $en ? esc_html($fr) : $fr, $h);
+        }
+    }
     $h = str_replace(['"inLanguage":"en"', 'og:locale" content="en_GB"'], ['"inLanguage":"fr-FR"', 'og:locale" content="fr_FR"'], $h);
     // Las líneas hreflang se protegen: la de en-GB debe seguir apuntando a /en/
     $keep = [];
@@ -202,7 +211,7 @@ add_action('template_redirect', function () {
 
 /* Pie: correo de contacto público */
 add_action('kadence_footer', function () {
-    echo '<p class="cqs-contact">'.esc_html(['es' => 'Contacto', 'ca' => 'Contacte', 'en' => 'Contact', 'fr' => 'Contact'][function_exists('cqs_cur_lang') ? cqs_cur_lang() : 'es'] ?? 'Contacto').': <a href="mailto:info@cadaques.si">info@cadaques.si</a></p>';
+    echo '<p class="cqs-contact">'.esc_html(['es' => 'Contacto', 'ca' => 'Contacte', 'en' => 'Contact', 'fr' => 'Contact'][function_exists('cqs_cur_lang') ? cqs_cur_lang() : 'es'] ?? 'Contacto').((function_exists('cqs_cur_lang') && cqs_cur_lang() === 'fr') ? ' : ' : ': ').'<a href="mailto:info@cadaques.si">info@cadaques.si</a></p>';
 }, 12);
 
 /* ---------- 6. Tareas de una vez: menú, privacidad, eventos, duplicados, fuentes ---------- */
@@ -311,7 +320,7 @@ add_action('wp_loaded', function () {
 
 /* ---------- 7. Comprobación desde fuera (out/audit-*.html y out/audit-check.json), una vez por versión ---------- */
 add_action('wp_loaded', function () {
-    $v = 'c1'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
+    $v = 'c2'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
     set_transient('cqs_audit_clock', 1, 600);
     $U = [];
     $s = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'tax_query' => [['taxonomy' => 'at_biz_dir-category', 'field' => 'slug', 'terms' => ['apartamentos-turisticos', 'hoteles', 'dormir'], 'include_children' => true]]]);
