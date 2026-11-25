@@ -665,7 +665,7 @@ function cqs_fr_tr($s) {
 function cqs_fr_ob($h) {
     if (stripos($h, '<html') === false) return $h;
     $root = untrailingslashit(home_url());
-    $h = str_replace([$root.'/en/directory/', $root.'/en/event/', '"/en/directory/'], [$root.'/fr/directory/', $root.'/fr/event/', '"/fr/directory/'], $h); // fichas y eventos en su versión francesa
+    $h = str_replace([$root.'/en/directory/', $root.'/en/event/', '"/en/directory/', '.si\\/en\\/directory\\/'], [$root.'/fr/directory/', $root.'/fr/event/', '"/fr/directory/', '.si\\/fr\\/directory\\/'], $h); // fichas y eventos en su versión francesa
     return preg_replace_callback('#(<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>|<textarea\b[^>]*>.*?</textarea>)|>([^<>]+)(?=<)|\b(placeholder|aria-label|title|data-label)="([^"]*)"|(<input\b[^>]*\btype="(?:submit|button)"[^>]*\bvalue=")([^"]*)"#is', function ($m) {
         if (!empty($m[1])) return $m[0];
         if (isset($m[2]) && $m[2] !== '' && empty($m[3]) && empty($m[5])) return '>'.cqs_fr_tr($m[2]);
