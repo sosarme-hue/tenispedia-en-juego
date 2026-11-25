@@ -452,7 +452,7 @@ add_action('wp_loaded', function () {
 
 /* Copia del HTML de algunas páginas (out/snap-*.html) para revisarlas desde fuera; una vez por versión */
 add_action('wp_loaded', function () {
-    $v = 's11'; if (get_option('cqs_build') !== CQS_BUILD_VER || get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
+    $v = 's12'; if (get_option('cqs_build') !== CQS_BUILD_VER || get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
     set_transient('cqs_snap_lock', 1, 600);
     $P = ['home' => home_url('/'), 'visit' => function_exists('cqs_voice_url') ? '' : ''];
     $x = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'visit:es']]]);
@@ -664,6 +664,8 @@ function cqs_fr_tr($s) {
 }
 function cqs_fr_ob($h) {
     if (stripos($h, '<html') === false) return $h;
+    $root = untrailingslashit(home_url());
+    $h = str_replace([$root.'/en/directory/', $root.'/en/event/', '"/en/directory/'], [$root.'/fr/directory/', $root.'/fr/event/', '"/fr/directory/'], $h); // fichas y eventos en su versión francesa
     return preg_replace_callback('#(<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>|<textarea\b[^>]*>.*?</textarea>)|>([^<>]+)(?=<)|\b(placeholder|aria-label|title|data-label)="([^"]*)"|(<input\b[^>]*\btype="(?:submit|button)"[^>]*\bvalue=")([^"]*)"#is', function ($m) {
         if (!empty($m[1])) return $m[0];
         if (isset($m[2]) && $m[2] !== '' && empty($m[3]) && empty($m[5])) return '>'.cqs_fr_tr($m[2]);
