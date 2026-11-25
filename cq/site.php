@@ -586,3 +586,15 @@ add_action('wp_mail_failed', function ($e) {
 
 /* Formularios con el mismo estilo que sitges.si (25/11/2026): Contact Form 7 no ponía la clase ssi-form y los campos salían sin diseño. */
 add_filter('wpcf7_form_class_attr', fn($c) => strpos($c, 'ssi-form') === false ? $c.' ssi-form' : $c);
+
+/* Diagnóstico de spam (25/11/2026): tres variantes del correo de un formulario para ver cuál envía el filtro a Spam. Una sola vez. */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_spamtest') === 'x1' || get_transient('cqs_spamtest_lock') || !function_exists('cqs_out')) return;
+    set_transient('cqs_spamtest_lock', 1, 900); update_option('cqs_spamtest', 'x1', false);
+    $body = "Cadaqués Sí · Propón una idea (es)\n\nidea-title: PRUEBA\nidea-topic: Otro\nyour-message: Prueba de entrega. Se puede borrar.\nyour-name: Prueba\nyour-email: %s\n\n--\nhttps://cadaques.si/tu-opinion/";
+    $r = [];
+    $r['A_replyto_info'] = wp_mail('info@cadaques.si', 'Cadaqués Sí · Prueba A', sprintf($body, 'info@cadaques.si'), ['Reply-To: info@cadaques.si']); sleep(3);
+    $r['B_sin_replyto'] = wp_mail('info@cadaques.si', 'Cadaqués Sí · Prueba B', sprintf($body, '-')); sleep(3);
+    $r['C_replyto_web'] = wp_mail('info@cadaques.si', 'Cadaqués Sí · Prueba C', sprintf($body, 'web@cadaques.si'), ['Reply-To: web@cadaques.si']);
+    $r['ts'] = wp_date('c'); cqs_out('spam-test.json', $r);
+}, 71);
