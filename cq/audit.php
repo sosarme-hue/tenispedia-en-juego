@@ -177,8 +177,10 @@ function cqs_audit_fr_head($h) {
     if (stripos($h, '<html') === false) return $h;
     $h = preg_replace('#<html lang="en-GB"#', '<html lang="fr-FR"', $h, 1);
     // Eventos: título y texto en francés (_ssi_title_fr / _ssi_content_fr en lugar del inglés)
-    if (is_singular('tribe_events')) {
-        $id = get_queried_object_id();
+    $xr = function_exists('ssi_xl_request') ? ssi_xl_request() : false;
+    $ev = ($xr && $xr['type'] === 'tribe_events') ? get_page_by_path($xr['slug'], OBJECT, 'tribe_events') : null;
+    if ($ev) {
+        $id = (int)$ev->ID;
         foreach (['content', 'title'] as $f) {
             $en = trim((string)get_post_meta($id, '_ssi_'.$f.'_en', true)); $fr = trim((string)get_post_meta($id, '_ssi_'.$f.'_fr', true));
             if ($en === '' || $fr === '') continue;
@@ -325,7 +327,7 @@ add_action('wp_loaded', function () {
 
 /* ---------- 7. Comprobación desde fuera (out/audit-*.html y out/audit-check.json), una vez por versión ---------- */
 add_action('wp_loaded', function () {
-    $v = 'c3'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
+    $v = 'c4'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
     set_transient('cqs_audit_clock', 1, 600);
     $U = [];
     $s = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'tax_query' => [['taxonomy' => 'at_biz_dir-category', 'field' => 'slug', 'terms' => ['apartamentos-turisticos', 'hoteles', 'dormir'], 'include_children' => true]]]);
