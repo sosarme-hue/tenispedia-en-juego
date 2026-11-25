@@ -437,6 +437,7 @@ function cqs_agenda_run() {
     $new = 0; $max = (new DateTimeImmutable('today', $tz))->modify('+180 days'); $list = [];
     foreach ($evs as $ev) { if (empty($ev['title']) || $ev['start'] > $max) continue; $list[] = $ev['start']->format('Y-m-d').' · '.$ev['title']; if (eiv_import_event('gencat', $ev, $f)) $new++; }
     $out = ['ts' => wp_date('c'), 'fuente' => $rep, 'filas' => count($rows), 'fuera_de_cadaques' => $skip, 'actos' => count($evs), 'nuevos' => $new, 'lista' => array_slice($list, 0, 40), 'campos' => $keys];
+    $out['visitcadaques'] = function_exists('cqs_vc_run') ? cqs_vc_run() : null; if (!empty($out['visitcadaques']['nuevos'])) $new += $out['visitcadaques']['nuevos'];
     update_option('cqs_agenda_last', time(), false);
     if ($new && function_exists('cqs_purge_all')) cqs_purge_all(); elseif ($new) do_action('litespeed_purge_all');
     if (function_exists('cqs_out')) cqs_out('agenda-auto.json', $out);
@@ -748,3 +749,97 @@ JS;
     }
     return $h;
 });
+
+/* Agenda de Turisme de Cadaqués (visitcadaques.org), aprobada por Alex el 25/11/2026.
+   Cada vez que corre la agenda automática (cada 3 días) se leen el mes en curso y los tres siguientes, en catalán, castellano e inglés,
+   y cada acto se crea o se actualiza como evento con su estado («confirmado»), hora, lugar y enlace a la fuente. Informe en out/agenda-vc.json. */
+function cqs_vc_month($y, $m, $lang) {
+    $u = "https://visitcadaques.org/?ano=$y&lang=$lang&mes=$m&sec=agenda";
+    $r = wp_remote_get($u, ['timeout' => 25, 'redirection' => 3, 'user-agent' => 'Mozilla/5.0 (compatible; CadaquesSi/1.0; +https://cadaques.si)']);
+    if (is_wp_error($r) || wp_remote_retrieve_response_code($r) !== 200) return null;
+    $b = wp_remote_retrieve_body($r);
+    if (!preg_match('/^(?:\xEF\xBB\xBF)?/u', $b) || !mb_check_encoding($b, 'UTF-8')) $b = mb_convert_encoding($b, 'UTF-8', 'ISO-8859-1');
+    $i = strpos($b, 'id="contingut"'); if ($i === false) return [];
+    $b = substr($b, $i);
+    $parts = preg_split('/<div id="cal_(esq|drt)"[^>]*>/', $b, -1, PREG_SPLIT_DELIM_CAPTURE);
+    $out = []; $day = 0; $n = 0;
+    for ($k = 1; $k < count($parts); $k += 2) {
+        $kind = $parts[$k]; $chunk = $parts[$k + 1] ?? '';
+        if ($kind === 'esq') { if (preg_match('/<span>(\d{1,2})<\/span>/', $chunk, $mm)) { $day = (int)$mm[1]; $n = 0; } continue; }
+        if (!$day || !preg_match('/<h3>(.*?)<\/h3>/s', $chunk, $t)) continue;
+        $clean = fn($s) => trim(preg_replace('/\s+/u', ' ', html_entity_decode(wp_strip_all_tags((string)$s), ENT_QUOTES | ENT_HTML5, 'UTF-8')), " \u{a0}");
+        $title = $clean($t[1]); if ($title === '') continue;
+        $hora = preg_match('/<span>\s*(?:HORA|HORARIO|TIME|HEURE)\s*:\s*(.*?)<\/span>/si', $chunk, $h) ? $clean($h[1]) : '';
+        $lloc = preg_match('/<span>\s*(?:LLOC|LUGAR|PLACE|VENUE|LIEU)\s*:\s*(.*?)<\/span>/si', $chunk, $p) ? $clean($p[1]) : '';
+        $desc = [];
+        if (preg_match_all('/<p>(.*?)<\/p>/s', $chunk, $ps)) foreach ($ps[1] as $x) { $x = $clean($x); if ($x !== '') $desc[] = $x; }
+        $out[] = ['day' => $day, 'i' => $n++, 'title' => $title, 'hora' => $hora, 'lloc' => $lloc, 'desc' => array_values(array_unique($desc)), 'url' => $u];
+    }
+    return $out;
+}
+function cqs_vc_case($s) {
+    // Palabras en mayúsculas a minúsculas (salvo números romanos: III, VI…); el resto se deja como viene
+    $s = preg_replace_callback('/[\p{Lu}][\p{Lu}\'’·]+/u', fn($m) => preg_match('/^[IVXLC]+$/', $m[0]) ? $m[0] : mb_strtolower($m[0]), $s);
+    $s = preg_replace_callback('/\b([ivxlc]+)\b(?= (?:torneig|concurs|edició|torneo|concurso|edición|tournament|competition))/iu', fn($m) => mb_strtoupper($m[1]), $s);
+    $s = mb_strtoupper(mb_substr($s, 0, 1)).mb_substr($s, 1);
+    $s = preg_replace_callback('/(?<=\p{Ll} )([IAOYE])(?= )/u', fn($m) => mb_strtolower($m[1]), $s); // «Nadal I ball» → «Nadal i ball»
+    $s = preg_replace_callback('/\/([A-Z])\b/u', fn($m) => '/'.mb_strtolower($m[1]), $s);
+    $P = ['Cadaqués', 'Sant Sebastià', 'Sant Sebastián', 'Cap de Creus', 'Nadal', 'Navidad', 'Christmas', 'Reis', 'Reyes', 'Kings', 'Melcior', 'Gaspar', 'Gasspar', 'Baltasar', 'Melchor',
+          'Es Poal', 'Es Llané', 'Portlligat', 'Dalí', 'Art i Joia', 'Unió Esportiva', 'Heribert Gispert', 'Santa Esperança', 'Sol Ixent', 'Orient', 'Oriente', 'Gaudí', 'Sant Silvestre', 'San Silvestre',
+          'Festa Major d’Hivern', 'Festa Major', 'Fiesta Mayor', 'Barcelona City Ballet', 'Ràdio Cap de Creus', 'Radio Cap de Creus'];
+    foreach ($P as $w) { $re = preg_quote($w, '/'); $re = strtr($re, ['’' => "['’]", "'" => "['’]"]); $s = preg_replace('/(?<![\p{L}])'.$re.'(?![\p{L}])/iu', $w, $s); }
+    $s = str_replace("d'Hivern", 'd’Hivern', $s);
+    $s = mb_strtoupper(mb_substr($s, 0, 1)).mb_substr($s, 1);
+    return $s;
+}
+function cqs_vc_run() {
+    if (!function_exists('tribe_create_event')) return ['error' => 'sin The Events Calendar'];
+    $tz = wp_timezone(); $now = new DateTimeImmutable('first day of this month', $tz); $rep = ['ts' => wp_date('c'), 'meses' => []]; $new = 0; $upd = 0;
+    $ST = ['es' => 'Estado: confirmado. Publicado en la agenda de Turisme de Cadaqués', 'ca' => 'Estat: confirmat. Publicat a l’agenda de Turisme de Cadaqués',
+           'en' => 'Status: confirmed. Published in the Turisme de Cadaqués events calendar', 'fr' => 'Statut : confirmé. Publié dans l’agenda de Turisme de Cadaqués'];
+    $LB = ['es' => ['Hora', 'Lugar', 'Fuente'], 'ca' => ['Hora', 'Lloc', 'Font'], 'en' => ['Time', 'Place', 'Source'], 'fr' => ['Heure', 'Lieu', 'Source']];
+    for ($k = 0; $k < 4; $k++) {
+        $d = $now->modify("+$k month"); $y = (int)$d->format('Y'); $m = (int)$d->format('n');
+        $ca = cqs_vc_month($y, $m, 'cat'); if ($ca === null) { $rep['meses']["$y-$m"] = 'error'; continue; }
+        $es = cqs_vc_month($y, $m, 'es') ?: []; $en = cqs_vc_month($y, $m, 'uk') ?: [];
+        $idx = function ($rows) { $o = []; foreach ($rows as $r) $o[$r['day'].'-'.$r['i']] = $r; return $o; };
+        $es = $idx($es); $en = $idx($en); $cnt = 0;
+        foreach ($ca as $r) {
+            if ($r['day'] > (int)$d->format('t')) continue;
+            $date = sprintf('%04d-%02d-%02d', $y, $m, $r['day']);
+            if ($date < wp_date('Y-m-d')) continue;
+            if ($m === 12 && preg_match('/\b(REIS|REYES|KINGS|ROIS)\b/u', mb_strtoupper($r['title']))) continue; // la llegada de los Reyes es el 5 de enero: en diciembre es un error de la fuente
+            $tr = ['ca' => $r, 'es' => $es[$r['day'].'-'.$r['i']] ?? $r, 'en' => $en[$r['day'].'-'.$r['i']] ?? $r];
+            $tr['fr'] = $tr['en'];
+            $hh = preg_match('/\b([01]?\d|2[0-3])[:.]([0-5]\d)/', $r['hora'], $x) ? sprintf('%02d:%02d', $x[1], $x[2]) : '';
+            $key = 'vc:'.$date.':'.md5(mb_strtolower($r['title']));
+            $T = []; $C = [];
+            foreach ($tr as $L => $row) {
+                $T[$L] = cqs_vc_case($row['title']);
+                $c = '<p><strong>'.esc_html($ST[$L]).'</strong> (<a href="'.esc_url($r['url']).'" target="_blank" rel="noopener">visitcadaques.org</a>).</p>';
+                if ($row['hora'] !== '') $c .= '<p>'.$LB[$L][0].': '.esc_html($row['hora']).'</p>';
+                if ($row['lloc'] !== '') $c .= '<p>'.$LB[$L][1].': '.esc_html($row['lloc']).', Cadaqués</p>';
+                foreach ($row['desc'] as $p) $c .= '<p>'.esc_html($p).'</p>';
+                $C[$L] = $c;
+            }
+            $venue = $r['lloc'] !== '' ? $r['lloc'] : 'Cadaqués';
+            $args = ['post_title' => $T['es'], 'post_content' => $C['es'], 'post_status' => 'publish', 'EventStartDate' => $date, 'EventEndDate' => $date, 'EventTimezone' => 'Europe/Madrid',
+                     'Venue' => ['Venue' => $venue, 'City' => 'Cadaqués', 'Country' => 'Spain', 'Province' => 'Girona', 'Zip' => '17488']];
+            if ($hh) { $e = (new DateTimeImmutable("$date $hh", $tz))->modify('+2 hours'); $args += ['EventStartHour' => substr($hh, 0, 2), 'EventStartMinute' => substr($hh, 3, 2), 'EventEndHour' => $e->format('H'), 'EventEndMinute' => $e->format('i')];
+                       if ($e->format('Y-m-d') !== $date) { $args['EventEndHour'] = '23'; $args['EventEndMinute'] = '59'; } }
+            else $args['EventAllDay'] = 'yes';
+            $ex = get_posts(['post_type' => 'tribe_events', 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => $key, 'suppress_filters' => true, 'lang' => '']);
+            if ($ex) { $id = (int)$ex[0]; tribe_update_event($id, $args); $upd++; }
+            else { $id = tribe_create_event($args); if (!$id || is_wp_error($id)) continue; update_post_meta($id, '_cqs_key', $key); $new++; }
+            update_post_meta($id, '_cqs_status', 'confirmado'); update_post_meta($id, '_cqs_src', $r['url']);
+            update_post_meta($id, '_cqs_loc', ['name' => $venue]);
+            foreach (['ca', 'en', 'fr'] as $L) { update_post_meta($id, '_ssi_title_'.$L, $T[$L]); update_post_meta($id, '_ssi_content_'.$L, $C[$L]); }
+            wp_set_object_terms($id, ['cadaques'], 'tribe_events_cat', true);
+            $cnt++;
+        }
+        $rep['meses']["$y-$m"] = $cnt;
+    }
+    $rep['nuevos'] = $new; $rep['actualizados'] = $upd;
+    if (function_exists('cqs_out')) cqs_out('agenda-vc.json', $rep);
+    return $rep;
+}

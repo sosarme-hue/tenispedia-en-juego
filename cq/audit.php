@@ -640,3 +640,13 @@ add_action('wp_loaded', function () {
     }
     update_option('cqs_snapq', $v, false);
 }, 85);
+
+/* Primera importación de visitcadaques.org ahora mismo (luego sigue sola cada 3 días) */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_vc1') === 'v1' || !function_exists('cqs_vc_run') || get_transient('cqs_vc1_lock')) return;
+    set_transient('cqs_vc1_lock', 1, 600); @set_time_limit(240);
+    if (!get_current_user_id()) wp_set_current_user(1);
+    $r = cqs_vc_run(); wp_set_current_user(0);
+    if (empty($r['error'])) update_option('cqs_vc1', 'v1', false);
+    do_action('litespeed_purge_all');
+}, 90);
