@@ -116,3 +116,6 @@ body{background:var(--eiv-cal)}
 /* Tarjetas con foto también en los bloques de datos (25/11/2026: sin huecos azules) */
 .gsi-facts .ssi-card.cq-img{padding-top:0!important}
 .gsi-facts .ssi-card.cq-img::before{display:block!important;content:""!important;width:calc(100% + 48px);margin:0 -24px 14px;aspect-ratio:16/7;height:auto;background:#DCEFFA var(--img) center/cover no-repeat!important;-webkit-mask:none!important;mask:none!important}
+/* Aviso destacado (p. ej. recoger entradas en la Casa-Museu Dalí) */
+.cq-note{background:#FFF6DC;border-left:5px solid #E0A400;border-radius:10px;padding:16px 20px;margin:0;font-size:17px;line-height:1.55;color:#1d2a33}
+.cq-note strong{color:#7a4f00}
