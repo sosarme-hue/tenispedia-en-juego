@@ -629,3 +629,14 @@ add_action('wp_loaded', function () {
     }
     cqs_out('agraw.json', $o); update_option('cqs_ag_raw', $v, false);
 }, 70);
+
+/* Copia rápida de páginas concretas (out/q-*.html), una vez por versión de la lista */
+add_action('wp_loaded', function () {
+    $v = 'q1'; if (get_option('cqs_snapq') === $v || get_transient('cqs_snapq_lock') || !function_exists('cqs_out')) return;
+    set_transient('cqs_snapq_lock', 1, 300);
+    foreach (['beaches-es' => '/playas-y-calas/', 'beaches-en' => '/en/beaches-and-coves/'] as $k => $p) {
+        $r = wp_remote_get(add_query_arg('nocache', time(), home_url($p)), ['timeout' => 40, 'sslverify' => false]);
+        if (!is_wp_error($r)) @file_put_contents(SSI_DIR.'out/q-'.$k.'.html', wp_remote_retrieve_body($r));
+    }
+    update_option('cqs_snapq', $v, false);
+}, 85);
