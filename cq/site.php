@@ -444,7 +444,7 @@ add_action('wp_loaded', function () {
 
 /* Copia del HTML de algunas páginas (out/snap-*.html) para revisarlas desde fuera; una vez por versión */
 add_action('wp_loaded', function () {
-    $v = 's5'; if (get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
+    $v = 's6'; if (get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
     set_transient('cqs_snap_lock', 1, 600);
     $P = ['home' => home_url('/'), 'visit' => function_exists('cqs_voice_url') ? '' : ''];
     $x = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'visit:es']]]);
@@ -495,11 +495,11 @@ add_action('wp_loaded', function () {
 /* Prueba real de los 16 formularios (24/11/2026, pedida por Alex): envía cada uno por la misma vía que un visitante
    (API de Contact Form 7) con datos marcados «PRUEBA» y anota el resultado en out/forms-test.json. Una sola vez por versión. */
 add_action('wp_loaded', function () {
-    $v = 't3'; if (get_option('cqs_formtest') === $v || get_transient('cqs_formtest_lock3') || !class_exists('WPCF7_ContactForm') || !function_exists('cqs_out')) return;
-    set_transient('cqs_formtest_lock3', 1, 900); update_option('cqs_formtest', $v, false); @set_time_limit(300);
+    $v = 't4'; if (get_option('cqs_formtest') === $v || get_transient('cqs_formtest_lock4') || !class_exists('WPCF7_ContactForm') || !function_exists('cqs_out')) return;
+    set_transient('cqs_formtest_lock4', 1, 900); update_option('cqs_formtest', $v, false); @set_time_limit(300);
     $fail = []; add_action('wp_mail_failed', function ($e) use (&$fail) { $fail[] = $e->get_error_message(); });
     $rep = ['ts' => wp_date('c')];
-    $rep['wp_mail_directo'] = wp_mail('info@cadaques.si', 'PRUEBA envío de la web (SMTP web@)', 'Correo de prueba enviado por cadaques.si a través de web@cadaques.si. Se puede borrar.');
+    $rep['wp_mail_directo'] = false && wp_mail('info@cadaques.si', 'PRUEBA envío de la web (SMTP web@)', 'Correo de prueba enviado por cadaques.si a través de web@cadaques.si. Se puede borrar.');
     foreach ((array)get_option('cqs_cf7', []) as $kind => $byL) foreach ((array)$byL as $l => $id) {
         if ($l !== 'es') continue; // una prueba por tipo de formulario
         $cf = WPCF7_ContactForm::get_instance((int)$id); if (!$cf) { $rep[$kind][$l] = 'no existe'; continue; }
@@ -511,6 +511,7 @@ add_action('wp_loaded', function () {
             if ($b === 'email') $data[$t->name] = 'info@cadaques.si';
             elseif ($b === 'url') $data[$t->name] = home_url('/');
             elseif ($b === 'tel') $data[$t->name] = '972000000';
+            elseif ($b === 'date') $data[$t->name] = wp_date('Y-m-d', time() + 30 * DAY_IN_SECONDS);
             elseif ($b === 'acceptance') $data[$t->name] = '1';
             elseif (in_array($b, ['select', 'radio', 'checkbox'], true)) { $vals = $t->values ?: $t->labels; $data[$t->name] = $b === 'checkbox' ? [$vals[0] ?? ''] : ($vals[0] ?? ''); }
             else $data[$t->name] = 'PRUEBA automática del formulario «'.$kind.'» ('.$l.'). Se puede borrar.';
