@@ -707,3 +707,44 @@ add_action('init', function () {
     }
     if (function_exists('cqs_out')) cqs_out('fr-urls.txt', implode("\n", $rep));
 }, 1);
+
+/* El tiempo en Cadaqués en la portada (25/11/2026): [cqs_tiempo lang="es"]. Previsión de Open-Meteo (sin clave), en los cuatro idiomas.
+   El servidor guarda los datos una hora; además el navegador los vuelve a pedir al cargar, así la página en caché nunca enseña una previsión vieja. */
+function cqs_wx_data() {
+    $c = get_transient('cqs_wx1'); if ($c !== false) return $c;
+    $u = 'https://api.open-meteo.com/v1/forecast?latitude=42.2886&longitude=3.2776&current=temperature_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FMadrid&forecast_days=5';
+    $r = wp_remote_get($u, ['timeout' => 10]);
+    if (is_wp_error($r) || wp_remote_retrieve_response_code($r) !== 200) return get_option('cqs_wx_last', []);
+    $d = json_decode(wp_remote_retrieve_body($r), true); if (empty($d['daily'])) return get_option('cqs_wx_last', []);
+    $d['_t'] = time(); set_transient('cqs_wx1', $d, HOUR_IN_SECONDS); update_option('cqs_wx_last', $d, false);
+    return $d;
+}
+add_shortcode('cqs_tiempo', function ($a) {
+    $a = shortcode_atts(['lang' => ''], $a); $l = $a['lang'] ?: (function_exists('cqs_cur_lang') ? cqs_cur_lang() : 'es');
+    if (!in_array($l, ['es', 'ca', 'en', 'fr'], true)) $l = 'es';
+    $T = ['es' => ['Ahora', 'Viento', 'Prob. lluvia', 'Previsión de Open-Meteo. Actualizada a las', 'Despejado|Poco nuboso|Nublado|Niebla|Llovizna|Lluvia|Nieve|Chubascos|Tormenta', 'es-ES'],
+          'ca' => ['Ara', 'Vent', 'Prob. pluja', 'Previsió d’Open-Meteo. Actualitzada a les', 'Serè|Poc ennuvolat|Ennuvolat|Boira|Plugim|Pluja|Neu|Xàfecs|Tempesta', 'ca-ES'],
+          'en' => ['Now', 'Wind', 'Chance of rain', 'Forecast by Open-Meteo. Updated at', 'Clear|Partly cloudy|Cloudy|Fog|Drizzle|Rain|Snow|Showers|Thunderstorm', 'en-GB'],
+          'fr' => ['Maintenant', 'Vent', 'Risque de pluie', 'Prévisions Open-Meteo. Mises à jour à', 'Dégagé|Peu nuageux|Nuageux|Brouillard|Bruine|Pluie|Neige|Averses|Orage', 'fr-FR']][$l];
+    $d = cqs_wx_data();
+    $cfg = esc_attr(wp_json_encode(['t' => $T, 'd' => $d]));
+    $h = '<div class="cq-wx" data-wx="'.$cfg.'"><div class="cq-wx__row"></div><p class="cq-wx__src"></p></div>';
+    static $js = false;
+    if (!$js) { $js = true; $h .= <<<'JS'
+<script>(function(){
+var ic=[[0,'☀️',0],[2,'⛅',1],[3,'☁️',2],[48,'🌫️',3],[57,'🌦️',4],[67,'🌧️',5],[77,'❄️',6],[82,'🌦️',7],[86,'❄️',6],[99,'⛈️',8]];
+function code(c,n){for(var i=0;i<ic.length;i++)if(c<=ic[i][0])return[ic[i][1],n[ic[i][2]]];return['',''];}
+function draw(el,d){var c=JSON.parse(el.getAttribute('data-wx')),T=c.t,n=T[4].split('|');d=d||c.d;if(!d||!d.daily)return;
+var f=function(s,o){return new Date(s).toLocaleDateString(T[5],o);},h='',k=code(d.current.weather_code,n);
+h+='<div class="cq-wx__d cq-wx__now"><b>'+T[0]+'</b><span class="i">'+k[0]+'</span><span class="mx">'+Math.round(d.current.temperature_2m)+'°</span><small>'+k[1]+' · '+T[1]+' '+Math.round(d.current.wind_speed_10m)+' km/h</small></div>';
+for(var i=0;i<d.daily.time.length;i++){k=code(d.daily.weather_code[i],n);h+='<div class="cq-wx__d"><b>'+f(d.daily.time[i]+'T12:00',{weekday:'short',day:'numeric'})+'</b><span class="i">'+k[0]+'</span><span class="mx">'+Math.round(d.daily.temperature_2m_max[i])+'°</span> <span class="mn">'+Math.round(d.daily.temperature_2m_min[i])+'°</span><small>'+k[1]+' · '+T[2]+' '+(d.daily.precipitation_probability_max[i]|0)+'%</small></div>';}
+el.querySelector('.cq-wx__row').innerHTML=h;var t=d._t?new Date(d._t*1000):new Date();
+el.querySelector('.cq-wx__src').textContent=T[3]+' '+t.toLocaleTimeString(T[5],{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'})+'.';}
+document.querySelectorAll('.cq-wx').forEach(function(el){draw(el);
+fetch('https://api.open-meteo.com/v1/forecast?latitude=42.2886&longitude=3.2776&current=temperature_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FMadrid&forecast_days=5')
+.then(function(r){return r.json();}).then(function(d){if(d&&d.daily){d._t=Date.now()/1000;draw(el,d);}}).catch(function(){});});
+})();</script>
+JS;
+    }
+    return $h;
+});

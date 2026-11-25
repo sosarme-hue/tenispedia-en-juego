@@ -143,3 +143,14 @@ body{background:var(--eiv-cal)}
 @media (max-width:520px){.cq-join{grid-template-columns:1fr}}
 /* Los enlaces a #idea, #ficha, #evento y #formulario no quedan tapados por la cabecera fija */
 .ssi-formcard,#idea,#ficha,#evento,#opiniones,#formulario{scroll-margin-top:110px}
+/* El tiempo en Cadaqués (portada) */
+.cq-wx__row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+.cq-wx__d{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:14px 10px;text-align:center;display:flex;flex-direction:column;gap:4px}
+.cq-wx__d b{font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;color:#5e554c}
+.cq-wx__d .i{font-size:1.8rem;line-height:1}
+.cq-wx__d .mx{font-weight:700;font-size:1.2rem}.cq-wx__d .mn{color:#6b7780}
+.cq-wx__d small{font-size:.78rem;color:#4a5a66;line-height:1.35}
+.cq-wx__now{background:#eef5f7;border-color:#cfe1ea}
+.cq-wx__src{font-size:.82rem;color:#5e6a72;margin-top:10px}
+@media (max-width:900px){.cq-wx__row{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:480px){.cq-wx__row{grid-template-columns:repeat(2,minmax(0,1fr))}}
