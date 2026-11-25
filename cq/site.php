@@ -451,7 +451,7 @@ add_action('wp_loaded', function () {
 
 /* Copia del HTML de algunas páginas (out/snap-*.html) para revisarlas desde fuera; una vez por versión */
 add_action('wp_loaded', function () {
-    $v = 's8'; if (get_option('cqs_build') !== CQS_BUILD_VER || get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
+    $v = 's9'; if (get_option('cqs_build') !== CQS_BUILD_VER || get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
     set_transient('cqs_snap_lock', 1, 600);
     $P = ['home' => home_url('/'), 'visit' => function_exists('cqs_voice_url') ? '' : ''];
     $x = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'visit:es']]]);
