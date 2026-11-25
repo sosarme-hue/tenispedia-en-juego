@@ -16,7 +16,7 @@
 .gsi-note{font-size:14px;opacity:.75;margin-top:14px}
 .gsi-bigbtn .wp-block-button__link{font-size:18px;padding:14px 26px;background:#0B3A66;color:#fff}
 .gsi-secnav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 0}.gsi-secnav a{display:inline-block;padding:7px 14px;border-radius:999px;border:1px solid rgba(31,120,180,.35);background:#fff;color:#0B2545;font-size:14px;font-weight:600;text-decoration:none}.gsi-secnav a:hover{background:#e0f3f4}.gsi-secnav a[aria-current]{background:#0B3A66;border-color:#0B3A66;color:#fff}
-.ssi-band{margin-bottom:0!important}.ssi-band>.wp-block-group__inner-container>.ssi-in{padding-top:44px!important;padding-bottom:44px!important}
+.ssi-band{margin-bottom:0!important}.ssi-band>.wp-block-group__inner-container>.ssi-in{padding-top:36px!important;padding-bottom:36px!important}
 .ssi-credits{font-size:13px;margin-top:10px!important}
 .ssi-vcard--colabora a,.ssi-vcard--colabora p{color:#fff!important}
 /* Identidad propia de eivissa.si: azul marino y azul celeste sobre blanco, titulares con serifa */
@@ -91,3 +91,20 @@ body{background:var(--eiv-cal)}
   .ssi-nav__list a{font-size:15px!important;padding:12px 0 10px}
   .ssi-brand__tag{display:block}
 }
+/* Portada compacta como sitges.si (25/11/2026): «Explora» con 9 tarjetas de foto corta, 2 columnas en el móvil */
+.ssi-explore-grid .ssi-card.cq-img{padding:0 0 18px!important}
+.ssi-explore-grid .ssi-card.cq-img::before{width:100%;margin:0;aspect-ratio:auto;height:150px}
+.ssi-explore-grid .ssi-card h3,.ssi-explore-grid .ssi-card p{padding-left:20px;padding-right:20px}
+.ssi-explore-grid .ssi-card h3{margin:16px 0 6px}
+.ssi-explore-grid .ssi-card p{font-size:15px;line-height:1.5;margin:0}
+@media (max-width:699px){.ssi-explore-grid .ssi-card.cq-img{padding:0!important}.ssi-explore-grid .ssi-card.cq-img::before{height:96px}}
+@media (max-width:699px){.ssi-explore-grid .gsi-c-directory{grid-column:1/-1}}
+/* Menos aire entre bloques y líneas, como sitges.si (25/11/2026) */
+.ssi-hero .ssi-in,.ssi-voice .ssi-in{padding-top:44px!important;padding-bottom:44px!important}
+.ssi-pagehead .ssi-in{padding-top:40px!important;padding-bottom:40px!important;gap:12px}
+.entry-content .ssi-band h2{margin-top:0;margin-bottom:.45em}
+.entry-content .ssi-band h3{margin-top:1.1em;margin-bottom:.35em}
+.entry-content .ssi-band li{margin-bottom:.25em}
+@media (max-width:699px){.ssi-band>.wp-block-group__inner-container>.ssi-in{padding-top:26px!important;padding-bottom:26px!important}
+ .ssi-hero .ssi-in,.ssi-voice .ssi-in,.ssi-pagehead .ssi-in{padding-top:30px!important;padding-bottom:30px!important}
+ .entry-content .ssi-band p,.entry-content .ssi-band li{line-height:1.5}}

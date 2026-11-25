@@ -316,6 +316,13 @@ add_action('wp_footer', function () {
     var claim=a.closest('.ssi-claim')&&!a.closest('.ssi-claim__more');
     a.href=B+(claim?'&verificar=1':'')+'#ficha';
   });
+  /* «¿Es tu negocio y prefieres no aparecer? Solicita la baja →» debajo de «Propón una corrección», como en sitges.si */
+  if(!document.querySelector('.ssi-baja')){
+    var fx=document.querySelector('.ssi-listing__aside p.ssi-more a[href*="#ficha"]');
+    if(fx){var pp=document.createElement('p');pp.className='ssi-more ssi-baja';pp.style.marginTop='-.6rem';
+      var ba=document.createElement('a');ba.href=B+'&baja=1#ficha';ba.rel='nofollow';ba.style.color='#5b6b75';ba.textContent=<?php echo wp_json_encode(['es' => '¿Es tu negocio y prefieres no aparecer? Solicita la baja →', 'ca' => 'És el teu negoci i prefereixes no sortir-hi? Sol·licita la baixa →', 'en' => 'Is this your business and you’d rather not be listed? Request removal →', 'fr' => 'C’est votre établissement et vous préférez ne pas apparaître ? Demandez le retrait →'][$l]); ?>;
+      pp.appendChild(ba);fx.parentNode.parentNode.insertBefore(pp,fx.parentNode.nextSibling);}
+  }
 })();
 </script>
 <?php
