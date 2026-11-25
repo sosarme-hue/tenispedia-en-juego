@@ -813,6 +813,10 @@ function cqs_vc_run() {
             $tr['fr'] = $tr['en'];
             $hh = preg_match('/\b([01]?\d|2[0-3])[:.]([0-5]\d)/', $r['hora'], $x) ? sprintf('%02d:%02d', $x[1], $x[2]) : '';
             $key = 'vc:'.$date.':'.md5(mb_strtolower($r['title']));
+            $VN = ['Iglesi' => 'Església de Santa Maria', 'Iglesia' => 'Església de Santa Maria', 'Església' => 'Església de Santa Maria', 'Church' => 'Església de Santa Maria'];
+            $r['lloc'] = $VN[$r['lloc']] ?? str_replace(['Plaja ', 'Iglesi '], ['Platja ', 'Església de Santa Maria '], $r['lloc']);
+            foreach (['es', 'en', 'fr'] as $L) if (isset($tr[$L]['lloc'])) $tr[$L]['lloc'] = $VN[$tr[$L]['lloc']] ?? str_replace(['Plaja ', 'Iglesi '], ['Platja ', 'Església de Santa Maria '], $tr[$L]['lloc']);
+            $tr['ca'] = $r;
             $T = []; $C = [];
             foreach ($tr as $L => $row) {
                 $T[$L] = cqs_vc_case($row['title']);

@@ -712,6 +712,31 @@ function cqs_r4_ob($h) {
     $root = untrailingslashit(home_url());
     // 3) Lugares de los eventos en el idioma de la página, también dentro de las listas («fecha · lugar»)
     if ($l !== 'es') { $x = cqs_audit_xmap()[$l] ?? []; foreach ($x as $a => $b) if (mb_strlen($a) > 20) $h = str_replace([$a, esc_html($a)], [$b, esc_html($b)], $h); }
+    if ($l === 'fr') { $X = cqs_audit_xmap(); foreach ($X['fr'] as $a => $b) if (mb_strlen($a) > 20 && !empty($X['en'][$a])) $h = str_replace([$X['en'][$a], esc_html($X['en'][$a])], [$b, esc_html($b)], $h); } // en francés el núcleo da el nombre inglés
+    // 5) Enlaces a categorías de eventos de TEC → agenda del idioma de la página
+    $ag = cqs_r4_url('agenda', $l);
+    $h = preg_replace('#href="(?:'.preg_quote($root, '#').')?/(?:(?:ca|en|fr)/)?events?/categor(?:ia|ie|y)/[^"]*"#', 'href="'.esc_url($ag).'"', $h) ?? $h;
+    // 4) Eventos con el mismo título que otros (actos que se repiten): la fecha va en el título de la pestaña
+    if (function_exists('ssi_xl_request') && ($xr = ssi_xl_request()) && $xr['type'] === 'tribe_events' && ($ev = get_page_by_path($xr['slug'], OBJECT, 'tribe_events'))) {
+        global $wpdb;
+        $n = (int)$wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->posts} WHERE post_type='tribe_events' AND post_status='publish' AND post_title=%s", $ev->post_title));
+        if ($n > 1 && ($sd = get_post_meta($ev->ID, '_EventStartDate', true))) {
+            $ts = strtotime($sd);
+            $MN = ['es' => ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'],
+                   'ca' => ['de gener', 'de febrer', 'de març', 'd’abril', 'de maig', 'de juny', 'de juliol', 'd’agost', 'de setembre', 'd’octubre', 'de novembre', 'de desembre'],
+                   'en' => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                   'fr' => ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre']];
+            $mi = (int)date('n', $ts) - 1; $dd = (int)date('j', $ts);
+            $ds = ['es' => "$dd de {$MN['es'][$mi]}", 'ca' => "$dd {$MN['ca'][$mi]}", 'en' => "$dd {$MN['en'][$mi]}", 'fr' => "$dd {$MN['fr'][$mi]}"][$l] ?? '';
+            if ($ds !== '') $h = preg_replace_callback('#<title>(.*?)</title>#s', function ($m) use ($ds) {
+                $t = html_entity_decode($m[1], ENT_QUOTES, 'UTF-8');
+                $parts = preg_split('/ (–|\||-) (?!.* (–|\||-) )/u', $t, 2);
+                if (count($parts) < 2) return '<title>'.esc_html($t.', '.$ds).'</title>';
+                $sep = mb_substr($t, mb_strlen($parts[0]), mb_strlen($t) - mb_strlen($parts[0]) - mb_strlen($parts[1]));
+                return '<title>'.esc_html($parts[0].', '.$ds.$sep.$parts[1]).'</title>';
+            }, $h, 1) ?? $h;
+        }
+    }
     // 4) Mes de las insignias de fecha de la agenda
     $M = ['es' => ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'], 'ca' => ['gen', 'febr', 'març', 'abr', 'maig', 'juny', 'jul', 'ag', 'set', 'oct', 'nov', 'des'],
           'en' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], 'fr' => ['janv', 'févr', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc']];
@@ -768,3 +793,13 @@ add_action('wp_loaded', function () {
     }
     if (function_exists('cqs_out')) cqs_out('audit-r4.json', $rep);
 });
+
+/* Ronda 5: la importación de visitcadaques.org se repite ya (lugares normalizados, «Iglesi» → «Església de Santa Maria») */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_vc1') !== 'v1' || get_option('cqs_vc2') === 'v1' || !function_exists('cqs_vc_run') || get_transient('cqs_vc2_lock')) return;
+    set_transient('cqs_vc2_lock', 1, 600); @set_time_limit(240);
+    if (!get_current_user_id()) wp_set_current_user(1);
+    $r = cqs_vc_run(); wp_set_current_user(0);
+    if (empty($r['error'])) update_option('cqs_vc2', 'v1', false);
+    do_action('litespeed_purge_all');
+}, 91);
