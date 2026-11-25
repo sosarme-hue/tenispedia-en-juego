@@ -671,3 +671,100 @@ add_action('wp_loaded', function () {
     cqs_out('audit-ev4.json', $rep);
     do_action('litespeed_purge_all');
 }, 95);
+
+/* ---------- Ronda 4 de la auditoría (25/11/2026) ---------- */
+/* Direcciones de cada página por idioma (sacadas de data/pages.json una vez por versión) */
+function cqs_r4_pages() {
+    static $m = null; if ($m !== null) return $m;
+    $v = CQS_BUILD_VER.'-'.@filemtime(SSI_DIR.'data/pages.json');
+    $o = get_option('cqs_r4_pages');
+    if (is_array($o) && ($o['_v'] ?? '') === $v) return $m = $o;
+    $d = function_exists('cqs_json') ? cqs_json('pages.json') : json_decode((string)@file_get_contents(SSI_DIR.'data/pages.json'), true);
+    $m = ['_v' => $v];
+    foreach ((array)$d as $k => $by) foreach ((array)$by as $l => $p) $m[$k][$l] = $k === 'home' ? ($l === 'es' ? '/' : "/$l/") : ($l === 'es' ? '/'.$p['slug'].'/' : "/$l/".$p['slug'].'/');
+    update_option('cqs_r4_pages', $m, false);
+    return $m;
+}
+function cqs_r4_url($k, $l) { $m = cqs_r4_pages(); return home_url($m[$k][$l] ?? ($m[$k]['es'] ?? '/')); }
+
+/* 5) Enlaces rotos: eventos pasados a la papelera, ?p= de eventos borrados y categorías de eventos → agenda del idioma */
+add_action('template_redirect', function () {
+    if (!is_404()) return;
+    $p = trim((string)parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH), '/');
+    $l = preg_match('#^(ca|en|fr)/#', $p, $lm) ? $lm[1] : 'es';
+    $go = '';
+    if (preg_match('#(?:^|/)events?/categori[ae]/#', $p)) $go = cqs_r4_url('agenda', $l);
+    elseif (preg_match('#(?:^|/)event/([a-z0-9-]+)/?$#', $p, $m)) {
+        $t = get_posts(['post_type' => 'tribe_events', 'post_status' => 'trash', 'numberposts' => 1, 'name' => $m[1].'__trashed', 'suppress_filters' => true, 'lang' => ''])
+          ?: get_posts(['post_type' => 'tribe_events', 'post_status' => 'trash', 'numberposts' => 1, 'name' => $m[1], 'suppress_filters' => true, 'lang' => '']);
+        $alt = ['fiesta-de-sant-sebastia' => 'sant-sebastia', 'primer-sol-del-ano-en-el-cap-de-creus' => 'xxxv-aplec-del-sol-ixent'];
+        if (isset($alt[$m[1]]) && ($e = get_page_by_path($alt[$m[1]], OBJECT, 'tribe_events')) && $e->post_status === 'publish')
+            $go = function_exists('ssi_xl_permalink') ? ssi_xl_permalink($e->ID, $l) : get_permalink($e);
+        elseif ($t || isset($alt[$m[1]])) $go = cqs_r4_url('agenda', $l);
+    } elseif (!empty($_GET['p']) && ($pp = get_post((int)$_GET['p'])) && $pp->post_type === 'tribe_events') $go = cqs_r4_url('agenda', $l);
+    if ($go) { wp_safe_redirect($go, 301); exit; }
+}, 1);
+
+/* Último retoque del HTML (se ejecuta después de las traducciones) */
+function cqs_r4_ob($h) {
+    if (stripos($h, '<html') === false) return $h;
+    $l = function_exists('cqs_cur_lang') ? cqs_cur_lang() : 'es';
+    $root = untrailingslashit(home_url());
+    // 3) Lugares de los eventos en el idioma de la página, también dentro de las listas («fecha · lugar»)
+    if ($l !== 'es') { $x = cqs_audit_xmap()[$l] ?? []; foreach ($x as $a => $b) if (mb_strlen($a) > 20) $h = str_replace([$a, esc_html($a)], [$b, esc_html($b)], $h); }
+    // 4) Mes de las insignias de fecha de la agenda
+    $M = ['es' => ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'], 'ca' => ['gen', 'febr', 'març', 'abr', 'maig', 'juny', 'jul', 'ag', 'set', 'oct', 'nov', 'des'],
+          'en' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], 'fr' => ['janv', 'févr', 'mars', 'avr', 'mai', 'juin', 'juil', 'août', 'sept', 'oct', 'nov', 'déc']];
+    $src = ['jan' => 0, 'ene' => 0, 'gen' => 0, 'janv' => 0, 'feb' => 1, 'febr' => 1, 'févr' => 1, 'mar' => 2, 'març' => 2, 'mars' => 2, 'apr' => 3, 'abr' => 3, 'avr' => 3, 'may' => 4, 'maig' => 4, 'mai' => 4,
+            'jun' => 5, 'juny' => 5, 'juin' => 5, 'jul' => 6, 'juil' => 6, 'aug' => 7, 'ago' => 7, 'ag' => 7, 'août' => 7, 'sep' => 8, 'set' => 8, 'sept' => 8, 'oct' => 9, 'nov' => 10, 'dec' => 11, 'dic' => 11, 'des' => 11, 'déc' => 11];
+    $h = preg_replace_callback('#(<span class="ssi-badge[^"]*"[^>]*><span>)([^<]{2,6})(</span>)#u', function ($m) use ($M, $src, $l) {
+        $k = rtrim(mb_strtolower(trim($m[2])), '.'); return isset($src[$k]) ? $m[1].$M[$l][$src[$k]].$m[3] : $m[0]; }, $h) ?? $h;
+    if ($l === 'fr') {
+        // 1) «English» en el pie de las fichas y eventos franceses: a la versión inglesa, y «Français» como idioma actual
+        $h = preg_replace_callback('#<a href="([^"]*)" lang="en" aria-current="true">#', fn($m) => '<a href="'.str_replace(['/fr/directory/', '/fr/event/'], ['/en/directory/', '/en/event/'], $m[1]).'" lang="en">', $h) ?? $h;
+        $h = preg_replace('#(<a href="[^"]*" lang="fr")>#', '$1 aria-current="true">', $h, 1);
+        // 2) Enlaces a páginas inglesas desde páginas francesas (pie: «Collaborez avec le projet», «Crédits photo»…)
+        $keep = [];
+        $h = preg_replace_callback('#<link rel="alternate" hreflang="[^"]+" href="[^"]*"\s*/?>|<a href="[^"]*" lang="en"[^>]*>#', function ($m) use (&$keep) { $k = '<!--cqr4'.count($keep).'-->'; $keep[$k] = $m[0]; return $k; }, $h) ?? $h;
+        $map = [];
+        foreach (cqs_r4_pages() as $k => $by) { if ($k === '_v' || $k === 'home' || empty($by['en']) || empty($by['fr'])) continue; $map['href="'.$root.$by['en'].'"'] = 'href="'.$root.$by['fr'].'"'; $map['href="'.$by['en'].'"'] = 'href="'.$by['fr'].'"'; }
+        $h = strtr(strtr($h, $map), $keep);
+    }
+    // 6) Título de la pestaña: como mucho 65 caracteres (después de traducir), se recorta el nombre y se deja la marca
+    $h = preg_replace_callback('#<title>(.*?)</title>#s', function ($m) {
+        $t = html_entity_decode($m[1], ENT_QUOTES, 'UTF-8'); if (mb_strlen($t) <= 65) return $m[0];
+        $parts = preg_split('/ (–|\||-) (?!.* (–|\||-) )/u', $t, 2);
+        if (count($parts) < 2) { $c = mb_substr($t, 0, 64); return '<title>'.esc_html(rtrim($c).'…').'</title>'; }
+        $sep = mb_substr($t, mb_strlen($parts[0]), mb_strlen($t) - mb_strlen($parts[0]) - mb_strlen($parts[1]));
+        $room = 65 - mb_strlen($sep) - mb_strlen($parts[1]) - 1; $c = mb_substr($parts[0], 0, max(10, $room)); $sp = mb_strrpos($c, ' ');
+        if ($sp > $room * 0.6) $c = mb_substr($c, 0, $sp);
+        return '<title>'.esc_html(rtrim($c, " ,·|–-:").'…'.$sep.$parts[1]).'</title>';
+    }, $h, 1) ?? $h;
+    // 7) Imágenes sin srcset (marcadores de Directorist y miniaturas de un solo tamaño): srcset con su único tamaño
+    $h = preg_replace_callback('#(<script\b[^>]*>.*?</script>)|<img\b([^>]*)>#is', function ($m) {
+        if (!empty($m[1])) return $m[0];
+        $a = $m[2]; if (stripos($a, 'srcset=') !== false || !preg_match('/\bsrc="([^"]+)"/', $a, $s) || !preg_match('/\bwidth="(\d+)"/', $a, $w) || strpos($s[1], 'data:') === 0) return $m[0];
+        $a = rtrim($a); $sl = substr($a, -1) === '/' ? ' /' : ''; if ($sl) $a = rtrim(substr($a, 0, -1));
+        return '<img'.$a.' srcset="'.esc_attr($s[1]).' '.$w[1].'w"'.$sl.'>';
+    }, $h) ?? $h;
+    return $h;
+}
+add_action('template_redirect', function () {
+    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) return;
+    ob_start('cqs_r4_ob');
+}, -5);
+
+/* 3) Recintos de TEC con nombre traducido (también en catalán e inglés desde el núcleo) */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_r4v') === 'v1') return;
+    update_option('cqs_r4v', 'v1', false);
+    $x = cqs_audit_xmap(); $rep = [];
+    foreach (array_keys($x['ca']) as $name) {
+        if (mb_strlen($name) < 20) continue;
+        foreach (get_posts(['post_type' => 'tribe_venue', 'post_status' => 'any', 'numberposts' => -1, 'title' => $name, 'suppress_filters' => true, 'lang' => '']) as $v) {
+            foreach (['ca', 'en', 'fr'] as $L) if (!empty($x[$L][$name])) update_post_meta($v->ID, '_ssi_title_'.$L, $x[$L][$name]);
+            $rep[$name][] = $v->ID;
+        }
+    }
+    if (function_exists('cqs_out')) cqs_out('audit-r4.json', $rep);
+});

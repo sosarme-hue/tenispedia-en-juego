@@ -264,7 +264,7 @@ body.cq-lb-on{overflow:hidden}
   }
   function build(){
     lb=document.createElement('div'); lb.className='cq-lb'; lb.setAttribute('role','dialog'); lb.setAttribute('aria-modal','true'); lb.setAttribute('aria-label',T[0]);
-    lb.innerHTML='<button type="button" class="cq-lb__x" aria-label="'+T[1]+'">×</button><button type="button" class="cq-lb__p" aria-label="'+T[2]+'">‹</button><img alt=""><p class="cq-lb__cap"></p><button type="button" class="cq-lb__n" aria-label="'+T[3]+'">›</button>';
+    lb.innerHTML='<button type="button" class="cq-lb__x" aria-label="'+T[1]+'">×</button><button type="button" class="cq-lb__p" aria-label="'+T[2]+'">‹</button><'+'img alt=""><p class="cq-lb__cap"></p><button type="button" class="cq-lb__n" aria-label="'+T[3]+'">›</button>';
     document.body.appendChild(lb); im=lb.querySelector('img'); cap=lb.querySelector('.cq-lb__cap');
     lb.querySelector('.cq-lb__x').onclick=close; lb.querySelector('.cq-lb__p').onclick=function(){go(-1)}; lb.querySelector('.cq-lb__n').onclick=function(){go(1)};
     lb.addEventListener('click',function(e){if(e.target===lb)close();});
