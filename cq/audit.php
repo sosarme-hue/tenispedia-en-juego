@@ -44,15 +44,40 @@ add_action('template_redirect', function () {
         }
     }
 }, 0);
+/* Sin enlaces oEmbed en fichas y eventos (en francés apuntaban a la URL inglesa y daban 404) */
+add_action('wp', function () { if (is_singular(['at_biz_dir', 'tribe_events'])) remove_action('wp_head', 'wp_oembed_add_discovery_links'); });
+/* JSON-LD de eventos: descripción y nombre en el idioma de la página, lugar y organizador */
+add_filter('tribe_json_ld_event_object', function ($data, $args = [], $post = null) {
+    if (!is_object($data) || !($post instanceof WP_Post)) return $data;
+    $l = function_exists('cqs_cur_lang') ? cqs_cur_lang() : 'es';
+    if ($l !== 'es') {
+        $c = trim((string)get_post_meta($post->ID, '_ssi_content_'.$l, true)); $t = trim((string)get_post_meta($post->ID, '_ssi_title_'.$l, true));
+        if ($c !== '') $data->description = wp_html_excerpt(trim(preg_replace('/\s+/u', ' ', wp_strip_all_tags(preg_replace('#</p>#', ' ', $c)))), 300, '…');
+        if ($t !== '') $data->name = $t;
+    }
+    $loc = get_post_meta($post->ID, '_cqs_loc', true);
+    if (is_array($loc)) {
+        $pl = ['@type' => 'Place', 'name' => $loc['name'], 'address' => (object)['@type' => 'PostalAddress', 'addressLocality' => 'Cadaqués', 'postalCode' => '17488', 'addressRegion' => 'Girona', 'addressCountry' => 'ES']];
+        if (!empty($loc['lat'])) $pl['geo'] = (object)['@type' => 'GeoCoordinates', 'latitude' => $loc['lat'], 'longitude' => $loc['lng']];
+        $data->location = (object)$pl;
+    }
+    $org = (string)get_post_meta($post->ID, '_cqs_org', true);
+    if ($org !== '') $data->organizer = (object)['@type' => 'Organization', 'name' => $org, 'url' => 'https://www.cadaques.cat/'];
+    $data->eventStatus = 'https://schema.org/EventScheduled';
+    return $data;
+}, 30, 3);
 /* Sin enlaces a feeds de comentarios de cada ficha (daban 404) */
 add_action('wp', function () { if (is_singular(['at_biz_dir', 'tribe_events'])) remove_action('wp_head', 'feed_links_extra', 3); });
 
-/* ---------- 3. Títulos de pestaña de hasta 65 caracteres ---------- */
+/* ---------- 3. Títulos de pestaña: con la marca de cada idioma y como mucho 65 caracteres (se recorta el nombre, no la marca) ---------- */
 add_filter('document_title_parts', function ($p) {
-    if (empty($p['title'])) return $p;
+    if (empty($p['title']) || is_front_page() || (function_exists('ssi_is_home_page') && ssi_is_home_page())) return $p;
+    $l = function_exists('cqs_cur_lang') ? cqs_cur_lang() : 'es';
+    $site = ['es' => 'Cadaqués Sí', 'ca' => 'Guia Cadaqués Sí', 'en' => 'Cadaqués Sí guide', 'fr' => 'Guide Cadaqués Sí'][$l] ?? 'Cadaqués Sí';
+    unset($p['tagline']); $p['site'] = $site;
     $t = html_entity_decode(wp_strip_all_tags($p['title']), ENT_QUOTES, 'UTF-8');
-    if (!empty($p['site']) && mb_strlen($t) + 3 + mb_strlen($p['site']) > 65) unset($p['site'], $p['tagline']);
-    if (mb_strlen($t) > 65) { $c = mb_substr($t, 0, 64); $s = mb_strrpos($c, ' '); $p['title'] = rtrim($s > 40 ? mb_substr($c, 0, $s) : $c, " ,·|–-").'…'; }
+    $room = 65 - 3 - mb_strlen($site) - (isset($p['page']) ? mb_strlen((string)$p['page']) + 3 : 0);
+    if (mb_strlen($t) > $room) { $c = mb_substr($t, 0, $room - 1); $sp = mb_strrpos($c, ' '); $p['title'] = rtrim($sp > $room * 0.6 ? mb_substr($c, 0, $sp) : $c, " ,·|–-:").'…'; }
     return $p;
 }, 200);
 
@@ -142,12 +167,39 @@ function cqs_audit_ob($h) {
               'fr' => ['Fiche mise à jour', 'Données vérifiées auprès de l’établissement', 'Données issues de sources publiques, pas encore vérifiées auprès de l’établissement']][$l];
         $h = preg_replace_callback('#(<div class="ssi-listing__meta">\s*)<span>[^<:]+:\s*([^<]+)</span>#u', fn($m) => $m[1].'<span>'.$L[0].($l === 'fr' ? ' : ' : ': ').cqs_audit_months(trim($m[2]), $l).'</span> <span class="cq-check'.($ok ? ' is-ok' : '').'">'.($ok ? '✓ '.$L[1] : $L[2]).'</span>', $h, 1);
     }
-    // Imágenes con tamaño conocido por el nombre del archivo (-300x200.jpg): width/height para que no salte la página
-    $n = 0;
-    $h = preg_replace_callback('#<img\b(?![^>]*\bwidth=)([^>]*?\bsrc="[^"]*-(\d{2,4})x(\d{2,4})\.(?:jpe?g|png|webp)(?:\?[^"]*)?")([^>]*)>#i', function ($m) use (&$n) {
-        $n++; $lazy = ($n > 3 && stripos($m[0], 'loading=') === false) ? ' loading="lazy"' : '';
-        return '<img width="'.$m[2].'" height="'.$m[3].'"'.$lazy.(stripos($m[0], 'decoding=') === false ? ' decoding="async"' : '').$m[1].$m[4].'>';
-    }, $h);
+    // Imágenes de la biblioteca: width/height y srcset (tamaño por el nombre del archivo o por el adjunto; caché en cqs_imgdims)
+    $n = 0; static $C = null; if ($C === null) $C = (array)get_option('cqs_imgdims', []); $dirty = false; $budget = 40;
+    $up = wp_upload_dir(); $base = $up['baseurl']; $bdir = $up['basedir'];
+    $h = preg_replace_callback('#<img\b([^>]*)>#i', function ($m) use (&$n, &$C, &$dirty, &$budget, $base, $bdir) {
+        $a = $m[1];
+        if (!preg_match('#\bsrc="(https?://[^"]*?/wp-content/uploads/[^"?]+\.(?:jpe?g|png|webp|gif))(?:\?[^"]*)?"#i', $a, $sm)) return $m[0];
+        $src = preg_replace('#^https?:#', '', $sm[1]); $n++;
+        $hasW = (bool)preg_match('/\bwidth=/', $a); $hasS = (bool)preg_match('/\bsrcset=/', $a);
+        if ($hasW && $hasS) return $m[0];
+        if (!isset($C[$src])) {
+            if ($budget-- <= 0) { $C2 = null; } else {
+                $w = 0; $hh = 0; $set = '';
+                if (preg_match('/-(\d{2,4})x(\d{2,4})\.[a-z]+$/i', $src, $dm)) { $w = (int)$dm[1]; $hh = (int)$dm[2]; }
+                $orig = preg_replace('/-\d{2,4}x\d{2,4}(\.[a-z]+)$/i', '$1', $sm[1]);
+                $id = attachment_url_to_postid($orig);
+                if ($id) {
+                    $md = wp_get_attachment_metadata($id);
+                    if (!$w && !empty($md['width'])) { $w = (int)$md['width']; $hh = (int)$md['height']; }
+                    if ($w) $set = (string)wp_calculate_image_srcset([$w, $hh], $sm[1], $md, $id);
+                }
+                if (!$w) { $f = $bdir.substr($sm[1], strpos($sm[1], '/wp-content/uploads') + strlen('/wp-content/uploads')); $gs = @getimagesize($f); if ($gs) { $w = $gs[0]; $hh = $gs[1]; } }
+                $C[$src] = [$w, $hh, $set]; $dirty = true;
+            }
+        }
+        $d = $C[$src] ?? null; if (!$d || !$d[0]) return $m[0];
+        $add = '';
+        if (!$hasW) $add .= ' width="'.$d[0].'" height="'.$d[1].'"';
+        if (!$hasS && $d[2] !== '') $add .= ' srcset="'.esc_attr($d[2]).'" sizes="(max-width: 600px) 100vw, (max-width: 1100px) 50vw, 400px"';
+        if ($n > 3 && stripos($a, 'loading=') === false) $add .= ' loading="lazy"';
+        if (stripos($a, 'decoding=') === false) $add .= ' decoding="async"';
+        return '<img'.$add.$a.'>';
+    }, $h) ?? $h;
+    if ($dirty) { if (count($C) > 8000) $C = array_slice($C, -6000, null, true); update_option('cqs_imgdims', $C, false); }
     // Textos fuera de scripts: formulario de opiniones (es/ca) y meses (ca)
     if (in_array($l, ['es', 'ca'], true)) {
         $U = cqs_audit_ui()[$l];
@@ -173,6 +225,25 @@ add_action('template_redirect', function () {
 }, 1);
 
 /* Francés: idioma, títulos, datos estructurados y canonical (se ejecuta antes del traductor de cq/site.php) */
+function cqs_audit_fr_desc($id) {
+    $D = function_exists('cqs_fr_ui') ? cqs_fr_ui()['d'] : [];
+    $name = html_entity_decode(get_the_title($id), ENT_QUOTES, 'UTF-8'); $cat = '';
+    $terms = get_the_terms($id, 'at_biz_dir-category');
+    if ($terms && !is_wp_error($terms)) {
+        usort($terms, fn($a, $b) => (int)($b->parent > 0) - (int)($a->parent > 0)); $t = $terms[0];
+        if ($t->slug !== 'otras-actividades') { $map = function_exists('ssi_dir_cat_names') ? ssi_dir_cat_names() : []; $en = $map[$t->slug][1] ?? ''; $cat = $D[$en] ?? ''; }
+    }
+    $head = $name.' : '.($cat !== '' ? mb_strtolower(mb_substr($cat, 0, 1)).mb_substr($cat, 1).' ' : '').'à Cadaqués.';
+    $tail = 'Adresse, horaires, téléphone et itinéraire.';
+    $body = trim((string)get_post_meta($id, '_ssi_content_fr', true));
+    $body = trim(preg_replace('/\s+/u', ' ', wp_strip_all_tags(html_entity_decode($body, ENT_QUOTES, 'UTF-8'))));
+    if ($body !== '') {
+        $first = trim(preg_split('/(?<=[.!?])\s+/u', $body)[0]); if (!preg_match('/[.!?…]$/u', $first)) $first .= '.';
+        foreach ([$head.' '.$first.' '.$tail, $head.' '.$first] as $c) if (mb_strlen($c) <= 160) return $c;
+        return mb_substr($head.' '.$first, 0, 157).'…';
+    }
+    return $head.' '.$tail;
+}
 function cqs_audit_fr_head($h) {
     if (stripos($h, '<html') === false) return $h;
     $h = preg_replace('#<html lang="en-GB"#', '<html lang="fr-FR"', $h, 1);
@@ -204,9 +275,17 @@ function cqs_audit_fr_head($h) {
     if (!$keep && is_page() && ($pg = (int)get_query_var('paged')) > 1 && function_exists('pll_get_post')) {
         $id = get_queried_object_id(); $add = '';
         foreach (['es' => 'es-ES', 'ca' => 'ca', 'en' => 'en-GB', 'fr' => 'fr-FR'] as $L => $hl) { $t = pll_get_post($id, $L); if ($t) $add .= '<link rel="alternate" hreflang="'.$hl.'" href="'.esc_url(trailingslashit(get_permalink($t)).'page/'.$pg.'/').'">'."\n"; }
+        $te = pll_get_post($id, 'es'); if ($te) $add .= '<link rel="alternate" hreflang="x-default" href="'.esc_url(trailingslashit(get_permalink($te)).'page/'.$pg.'/').'">'."\n";
+        $self = trailingslashit(get_permalink($id)).'page/'.$pg.'/';
+        $h = preg_replace('#<link rel="canonical" href="[^"]*"#', '<link rel="canonical" href="'.esc_url($self).'"', $h, 1);
         if ($add) $h = preg_replace('#</head>#', $add.'</head>', $h, 1);
     }
     $h = strtr($h, $keep);
+    // Fichas: meta descripción entera en francés
+    if ($xr && $xr['type'] === 'at_biz_dir' && preg_match('#<meta name="description" content="([^"]*)"#', $h, $dm) && ($lp = get_page_by_path($xr['slug'], OBJECT, 'at_biz_dir'))) {
+        $nd = cqs_audit_fr_desc($lp->ID);
+        if ($nd !== '') $h = str_replace('content="'.$dm[1].'"', 'content="'.esc_attr($nd).'"', $h);
+    }
     // Meses y días de la semana en inglés (fichas y eventos)
     $h = preg_replace_callback('#(<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>)|>([^<>]*\d[^<>]*|[^<>]*\b(?:All day|All Day)\b[^<>]*)(?=<)#is', fn($m) => !empty($m[1]) ? $m[0] : '>'.cqs_audit_months($m[2], 'fr'), $h) ?? $h;
     return $h;
@@ -274,33 +353,7 @@ function cqs_audit_once() {
         $rep['eventos'][$k] = $r ? 'ok' : 'error';
     }
 
-    // Fichas duplicadas (La Gritta, Sa Botiga, Galeria Cadaqués): se queda la más completa; las otras a la papelera con redirección
-    global $wpdb;
-    $norm = fn($t) => preg_replace('/[^a-z0-9]+/', '', strtolower(remove_accents(html_entity_decode($t, ENT_QUOTES, 'UTF-8'))));
-    $rows = $wpdb->get_results("SELECT ID, post_title, post_name FROM {$wpdb->posts} WHERE post_type='at_biz_dir' AND post_status='publish' AND (post_title LIKE '%Gritta%' OR post_title LIKE '%Botiga%' OR post_title LIKE '%Galer%Cadaqu%')");
-    $grp = [];
-    foreach ($rows as $r) { $n = $norm($r->post_title); if (preg_match('/gritta|^sabotiga$|^galeriacadaques$/', $n)) $grp[preg_match('/gritta/', $n) ? 'gritta' : $n][] = $r; }
-    $map = (array)get_option('cqs_dup_map', []);
-    foreach ($grp as $g => $list) {
-        $info = [];
-        foreach ($list as $r) {
-            $m = fn($k) => trim((string)get_post_meta($r->ID, $k, true));
-            $score = strlen($m('_phone')) > 3 ? 3 : 0; $score += $m('_website') ? 3 : 0; $score += $m('_email') ? 1 : 0; $score += (get_post_thumbnail_id($r->ID) || $m('_listing_prv_img')) ? 2 : 0;
-            $score += min(3, (int)(strlen(wp_strip_all_tags((string)get_post_field('post_content', $r->ID))) / 150)); $score += (int)get_comments_number($r->ID) * 5;
-            $info[] = ['id' => (int)$r->ID, 't' => $r->post_title, 'slug' => $r->post_name, 'lat' => (float)$m('_manual_lat'), 'lng' => (float)$m('_manual_lng'), 'tel' => preg_replace('/\D/', '', $m('_phone')), 'web' => preg_replace('#^https?://(www\.)?|/$#', '', $m('_website')), 'addr' => $m('_address'), 'score' => $score];
-        }
-        usort($info, fn($a, $b) => $b['score'] <=> $a['score'] ?: $a['id'] <=> $b['id']);
-        $keep = array_shift($info); $done = [];
-        foreach ($info as $d) {
-            $near = $keep['lat'] && $d['lat'] && abs($keep['lat'] - $d['lat']) < 0.0008 && abs($keep['lng'] - $d['lng']) < 0.001;
-            $same = $near || ($d['tel'] && $d['tel'] === $keep['tel']) || ($d['web'] && $d['web'] === $keep['web']) || ($d['addr'] && $norm($d['addr']) === $norm($keep['addr']));
-            if (!$same) { $done[] = ['id' => $d['id'], 'accion' => 'se mantiene (otro lugar)', 'addr' => $d['addr']]; continue; }
-            wp_trash_post($d['id']); $map[$d['slug']] = $keep['id'];
-            $done[] = ['id' => $d['id'], 'accion' => 'papelera → '.$keep['id'], 'addr' => $d['addr']];
-        }
-        $rep['duplicados'][$g] = ['queda' => $keep, 'otras' => $done];
-    }
-    update_option('cqs_dup_map', $map, false);
+    $rep['duplicados'] = cqs_audit_dedupe();
 
     // Fuentes que daban 404 (uploads/fonts/*-latin.woff2): se descargan de Google Fonts
     $up = wp_upload_dir(); $dir = trailingslashit($up['basedir']).'fonts/'; wp_mkdir_p($dir);
@@ -317,6 +370,78 @@ function cqs_audit_once() {
     flush_rewrite_rules(false);
     return $rep;
 }
+/* Agenda (2.ª vuelta): lugar exacto y organizador en cada evento, también en el JSON-LD */
+add_action('wp_loaded', function () {
+    if (get_option('cqs_ev2') === 'e1' || !function_exists('cqs_out')) return;
+    update_option('cqs_ev2', 'e1', false);
+    $E = [
+      'fm-hivern-2026' => ['loc' => ['name' => 'Església de Santa Maria de Cadaqués y otros espacios del pueblo'], 'org' => 'Ajuntament de Cadaqués',
+        'p' => ['es' => '<p>Lugar: el oficio solemne de la Mare de Déu de l’Esperança, en la Església de Santa Maria; los demás actos, en distintos espacios del pueblo que indicará el programa.</p>',
+                'ca' => '<p>Lloc: l’ofici solemne de la Mare de Déu de l’Esperança, a l’Església de Santa Maria; la resta d’actes, en diferents espais del poble que indicarà el programa.</p>',
+                'en' => '<p>Place: the solemn mass of Our Lady of Hope at the Church of Santa Maria; the other events at various spots in the village, as set out in the programme.</p>',
+                'fr' => '<p>Lieu : la grand-messe de Notre-Dame de l’Espérance à l’église Santa Maria ; les autres activités dans différents lieux du village indiqués dans le programme.</p>']],
+      'primer-sol-2027' => ['loc' => ['name' => 'Far del Cap de Creus', 'lat' => 42.3189, 'lng' => 3.3158], 'org' => '', 'p' => []],
+      'reis-2027' => ['loc' => ['name' => 'Cadaqués (recorrido por el centro del pueblo, pendiente de confirmar)'], 'org' => 'Ajuntament de Cadaqués', 'p' => []],
+    ];
+    $rep = [];
+    foreach ($E as $k => $e) {
+        $x = get_posts(['post_type' => 'tribe_events', 'post_status' => 'any', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => $k, 'suppress_filters' => true, 'lang' => '']);
+        if (!$x) { $rep[$k] = 'no está'; continue; } $id = (int)$x[0];
+        update_post_meta($id, '_cqs_loc', $e['loc']); if ($e['org'] !== '') update_post_meta($id, '_cqs_org', $e['org']);
+        if (function_exists('tribe_create_venue')) { $vid = tribe_create_venue(['Venue' => $e['loc']['name'], 'City' => 'Cadaqués', 'Country' => 'Spain', 'Province' => 'Girona', 'Zip' => '17488']); if ($vid) update_post_meta($id, '_EventVenueID', $vid); }
+        if ($e['org'] !== '' && function_exists('tribe_create_organizer')) { $oid = tribe_create_organizer(['Organizer' => $e['org'], 'Website' => 'https://www.cadaques.cat/']); if ($oid) update_post_meta($id, '_EventOrganizerID', $oid); }
+        foreach ($e['p'] as $L => $par) {
+            if ($L === 'es') { $c = (string)get_post_field('post_content', $id); if (strpos($c, 'Lugar:') === false) wp_update_post(['ID' => $id, 'post_content' => preg_replace('#(</p>)#', '$1'.$par, $c, 1)]); continue; }
+            $c = (string)get_post_meta($id, '_ssi_content_'.$L, true); if ($c !== '' && strpos($c, wp_strip_all_tags(mb_substr($par, 3, 10))) === false) update_post_meta($id, '_ssi_content_'.$L, preg_replace('#(</p>)#', '$1'.$par, $c, 1));
+        }
+        $rep[$k] = 'ok';
+    }
+    cqs_out('audit-ev2.json', $rep);
+}, 71);
+/* Fichas duplicadas: se repite tras cada montaje (el montaje recupera fichas de la papelera) */
+function cqs_audit_dedupe() {
+    // Fichas duplicadas (La Gritta, Sa Botiga, Galeria Cadaqués): se queda la más completa; las otras a la papelera con redirección
+    global $wpdb;
+    $norm = fn($t) => preg_replace('/[^a-z0-9]+/', '', strtolower(remove_accents(html_entity_decode($t, ENT_QUOTES, 'UTF-8'))));
+    $rows = $wpdb->get_results("SELECT ID, post_title, post_name FROM {$wpdb->posts} WHERE post_type='at_biz_dir' AND post_status='publish' AND (post_title LIKE '%Gritta%' OR post_title LIKE '%Botiga%' OR post_title LIKE '%Galer%Cadaqu%')");
+    $grp = [];
+    foreach ($rows as $r) { $n = $norm($r->post_title); if (preg_match('/gritta|^sabotiga$|^galeriacadaques$/', $n)) $grp[preg_match('/gritta/', $n) ? 'gritta' : $n][] = $r; }
+    $map = (array)get_option('cqs_dup_map', []); $blk = (array)get_option('cqs_dup_keys', []); $rep = [];
+    foreach ($grp as $g => $list) {
+        $info = [];
+        foreach ($list as $r) {
+            $m = fn($k) => trim((string)get_post_meta($r->ID, $k, true));
+            $score = strlen($m('_phone')) > 3 ? 3 : 0; $score += $m('_website') ? 3 : 0; $score += $m('_email') ? 1 : 0; $score += (get_post_thumbnail_id($r->ID) || $m('_listing_prv_img')) ? 2 : 0;
+            $score += min(3, (int)(strlen(wp_strip_all_tags((string)get_post_field('post_content', $r->ID))) / 150)); $score += (int)get_comments_number($r->ID) * 5;
+            $info[] = ['id' => (int)$r->ID, 't' => $r->post_title, 'slug' => $r->post_name, 'lat' => (float)$m('_manual_lat'), 'lng' => (float)$m('_manual_lng'), 'tel' => preg_replace('/\D/', '', $m('_phone')), 'web' => preg_replace('#^https?://(www\.)?|/$#', '', $m('_website')), 'addr' => $m('_address'), 'score' => $score];
+        }
+        usort($info, fn($a, $b) => $b['score'] <=> $a['score'] ?: (int)preg_match('/-\d+$/', $a['slug']) <=> (int)preg_match('/-\d+$/', $b['slug']) ?: $a['id'] <=> $b['id']);
+        $keep = array_shift($info); $done = [];
+        foreach ($info as $d) {
+            $near = $keep['lat'] && $d['lat'] && abs($keep['lat'] - $d['lat']) < 0.0008 && abs($keep['lng'] - $d['lng']) < 0.001;
+            $same = $near || ($d['tel'] && $d['tel'] === $keep['tel']) || ($d['web'] && $d['web'] === $keep['web']) || ($d['addr'] && $norm($d['addr']) === $norm($keep['addr']));
+            if (!$same) { $done[] = ['id' => $d['id'], 'accion' => 'se mantiene (otro lugar)', 'addr' => $d['addr']]; continue; }
+            $src = (string)get_post_meta($d['id'], '_ssi_source', true); if ($src !== '') $blk[$src] = 1; // el montaje no la vuelve a sacar de la papelera
+            wp_trash_post($d['id']); $map[$d['slug']] = $keep['id'];
+            // La que queda se queda con la dirección sin «-2»
+            if (preg_match('/^(.+)-\d+$/', $keep['slug'], $mm) && $mm[1] === preg_replace('/__trashed$/', '', $d['slug'])) {
+                $r = wp_update_post(['ID' => $keep['id'], 'post_name' => $mm[1]], true);
+                if (!is_wp_error($r)) { $map[$keep['slug']] = $keep['id']; $keep['slug'] = get_post_field('post_name', $keep['id']); }
+            }
+            $done[] = ['id' => $d['id'], 'accion' => 'papelera → '.$keep['id'], 'addr' => $d['addr']];
+        }
+        $rep[$g] = ['queda' => $keep, 'otras' => $done];
+    }
+    foreach ($map as $sl => $kid) if (get_post_status($kid) === 'publish' && get_post_field('post_name', $kid) === $sl) unset($map[$sl]);
+    update_option('cqs_dup_map', $map, false); update_option('cqs_dup_keys', $blk, false);
+    return $rep;
+}
+add_action('wp_loaded', function () {
+    if (!defined('CQS_BUILD_VER') || get_option('cqs_build') !== CQS_BUILD_VER || get_option('cqs_dedupe') === CQS_BUILD_VER.'d2' || get_transient('cqs_dedupe_lock') || !function_exists('cqs_out')) return;
+    set_transient('cqs_dedupe_lock', 1, 300); update_option('cqs_dedupe', CQS_BUILD_VER.'d2', false);
+    try { $r = cqs_audit_dedupe(); } catch (Throwable $e) { $r = ['error' => $e->getMessage().' @'.$e->getLine()]; }
+    cqs_out('audit-dedupe.json', $r);
+}, 69);
 add_action('wp_loaded', function () {
     if (get_option('cqs_audit_once') === 'o1' || get_transient('cqs_audit_lock') || !function_exists('cqs_out')) return;
     set_transient('cqs_audit_lock', 1, 300);
@@ -327,7 +452,7 @@ add_action('wp_loaded', function () {
 
 /* ---------- 7. Comprobación desde fuera (out/audit-*.html y out/audit-check.json), una vez por versión ---------- */
 add_action('wp_loaded', function () {
-    $v = 'c4'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
+    $v = 'c5'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
     set_transient('cqs_audit_clock', 1, 600);
     $U = [];
     $s = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'tax_query' => [['taxonomy' => 'at_biz_dir-category', 'field' => 'slug', 'terms' => ['apartamentos-turisticos', 'hoteles', 'dormir'], 'include_children' => true]]]);
@@ -335,6 +460,8 @@ add_action('wp_loaded', function () {
     $ev = get_posts(['post_type' => 'tribe_events', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => 'primer-sol-2027', 'suppress_filters' => true, 'lang' => '']);
     if ($ev) { $U['event-fr'] = ssi_xl_permalink($ev[0], 'fr'); $U['event-ca'] = ssi_xl_permalink($ev[0], 'ca'); }
     $U['home-en'] = home_url('/en/');
+    $U['repsol-fr'] = home_url('/fr/directory/repsol/'); $U['notaria-es'] = home_url('/directory/notaria-de-cadaques-maria-del-carmen-rusinol-riba/'); $U['visit-ca'] = home_url('/ca/que-visitar/');
+    $U['fm-en'] = ($fm = get_posts(['post_type' => 'tribe_events', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => 'fm-hivern-2026', 'suppress_filters' => true, 'lang' => ''])) ? ssi_xl_permalink($fm[0], 'en') : '';
     $dir = function_exists('ssi_link') ? ssi_link('directory', 'fr') : ''; if ($dir) $U['dir-fr-p2'] = trailingslashit($dir).'page/2/';
     $U['dir-es'] = function_exists('ssi_link') ? ssi_link('directory', 'es') : '';
     $out = [];
@@ -343,7 +470,7 @@ add_action('wp_loaded', function () {
         if (is_wp_error($r)) { $out[$k] = $r->get_error_message(); continue; }
         @file_put_contents(SSI_DIR.'out/audit-'.$k.'.html', wp_remote_retrieve_body($r)); $out[$k] = [$u, wp_remote_retrieve_response_code($r)];
     }
-    foreach (['/fr/directory/', '/en/privacy-policy-2/', '/en/privacy-policy/', '/wp-sitemap.xml', '/wp-sitemap-ssilistings-fr-1.xml', '/wp-content/uploads/fonts/figtree-latin.woff2', '/wp-content/uploads/fonts/bricolage-grotesque-latin.woff2'] as $p) {
+    foreach (['/fr/directory/', '/en/privacy-policy-2/', '/en/privacy-policy/', '/wp-sitemap.xml', '/wp-sitemap-ssilistings-fr-1.xml', '/wp-content/uploads/fonts/figtree-latin.woff2', '/wp-content/uploads/fonts/bricolage-grotesque-latin.woff2', '/directory/la-gritta-2/', '/directory/sa-botiga-2/', '/directory/galeria-cadaques-2/', '/directory/la-gritta/', '/directory/sa-botiga/', '/directory/galeria-cadaques/', '/fr/directory/la-gritta-2/'] as $p) {
         $r = wp_remote_get(home_url($p), ['timeout' => 30, 'sslverify' => false, 'redirection' => 0]);
         $out['head'][$p] = is_wp_error($r) ? $r->get_error_message() : wp_remote_retrieve_response_code($r).' '.wp_remote_retrieve_header($r, 'location').' '.strlen(wp_remote_retrieve_body($r));
     }

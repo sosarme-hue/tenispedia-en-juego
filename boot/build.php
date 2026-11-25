@@ -549,6 +549,8 @@ function cqs_step_fichas() {
         $first = trim(explode(',', (string)$x['address'])[0]);
         if ($first === '' || preg_match('/^\d{5}\b|^(Cadaqu|Girona|Spain|España)/iu', $first)) { $noaddr[] = $x['title']; return false; }
         return true; }));
+    // Duplicadas quitadas a mano (cq/audit.php): no vuelven
+    $blk = (array)get_option('cqs_dup_keys', []); $keep = array_values(array_filter($keep, fn($x) => !isset($blk[$x['key']])));
     // Las que se enviaron a la papelera y vuelven a estar en la guía (p. ej. ahora con dirección): se recuperan en vez de duplicarlas
     $want = array_flip(array_column($keep, 'key')); $restored = 0;
     foreach (get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'trash', 'numberposts' => -1, 'fields' => 'ids', 'suppress_filters' => true, 'meta_query' => [['key' => '_ssi_source', 'compare' => 'REGEXP', 'value' => '^(osm|g):']]]) as $id)
