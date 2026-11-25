@@ -57,7 +57,7 @@ add_filter('tribe_json_ld_event_object', function ($data, $args = [], $post = nu
     }
     $loc = get_post_meta($post->ID, '_cqs_loc', true);
     if (is_array($loc)) {
-        $pl = ['@type' => 'Place', 'name' => $loc['name'], 'address' => (object)['@type' => 'PostalAddress', 'addressLocality' => 'Cadaqués', 'postalCode' => '17488', 'addressRegion' => 'Girona', 'addressCountry' => 'ES']];
+        $pl = ['@type' => 'Place', 'name' => cqs_audit_xmap()[$l][$loc['name']] ?? $loc['name'], 'address' => (object)['@type' => 'PostalAddress', 'addressLocality' => 'Cadaqués', 'postalCode' => '17488', 'addressRegion' => 'Girona', 'addressCountry' => 'ES']];
         if (!empty($loc['lat'])) $pl['geo'] = (object)['@type' => 'GeoCoordinates', 'latitude' => $loc['lat'], 'longitude' => $loc['lng']];
         $data->location = (object)$pl;
     }
@@ -66,6 +66,24 @@ add_filter('tribe_json_ld_event_object', function ($data, $args = [], $post = nu
     $data->eventStatus = 'https://schema.org/EventScheduled';
     return $data;
 }, 30, 3);
+/* Sitemap de eventos en catalán, inglés y francés (wp-sitemap-ssievents-ca-1.xml…) */
+add_action('init', function () {
+    if (!class_exists('WP_Sitemaps_Provider') || !function_exists('wp_register_sitemap_provider') || !function_exists('ssi_xl_permalink') || class_exists('CQS_Sitemap_Events')) return;
+    class CQS_Sitemap_Events extends WP_Sitemaps_Provider {
+        public function __construct() { $this->name = 'ssievents'; $this->object_type = 'post'; }
+        public function get_object_subtypes() { return ['ca' => (object)['name' => 'ca'], 'en' => (object)['name' => 'en'], 'fr' => (object)['name' => 'fr']]; }
+        public function get_url_list($page_num, $subtype = '') {
+            if (!in_array($subtype, ['ca', 'en', 'fr'], true)) return [];
+            $q = new WP_Query(['post_type' => 'tribe_events', 'post_status' => 'publish', 'posts_per_page' => 500, 'paged' => max(1, (int)$page_num), 'orderby' => 'ID', 'order' => 'ASC', 'no_found_rows' => true, 'lang' => '', 'suppress_filters' => true]);
+            $out = []; foreach ($q->posts as $p) { $u = ssi_xl_permalink($p, $subtype); if ($u) $out[] = ['loc' => $u, 'lastmod' => wp_date(DATE_W3C, strtotime($p->post_modified_gmt.' UTC'))]; }
+            return $out;
+        }
+        public function get_max_num_pages($subtype = '') { $c = wp_count_posts('tribe_events'); return (int)ceil(max(1, (int)($c->publish ?? 0)) / 500); }
+    }
+    wp_register_sitemap_provider('ssievents', new CQS_Sitemap_Events());
+}, 20);
+add_filter('wp_sitemaps_add_provider', function ($p, $name = '') { if ($p instanceof CQS_Sitemap_Events) $GLOBALS['cqs_sm_events'] = $p; return $p; }, 5, 2);
+add_filter('wp_sitemaps_add_provider', function ($p, $name = '') { return ($name === 'ssievents' && !empty($GLOBALS['cqs_sm_events'])) ? $GLOBALS['cqs_sm_events'] : $p; }, 50, 2);
 /* Sin enlaces a feeds de comentarios de cada ficha (daban 404) */
 add_action('wp', function () { if (is_singular(['at_biz_dir', 'tribe_events'])) remove_action('wp_head', 'feed_links_extra', 3); });
 
@@ -132,6 +150,19 @@ add_action('init', function () {
     update_option('site_reviews', $o); update_option('cqs_sr_mail', 'm1', false);
 }, 30);
 
+/* Textos sueltos por idioma (lugares de eventos, país, categorías de eventos, alta de negocio) */
+function cqs_audit_xmap() {
+    $V1 = 'Església de Santa Maria de Cadaqués y otros espacios del pueblo'; $V2 = 'Cadaqués (recorrido por el centro del pueblo, pendiente de confirmar)'; $V3 = 'Cadaqués (calles y plazas del pueblo)';
+    return [
+        'es' => ['Save & Next' => 'Guardar y seguir', 'Website' => 'Web', 'Spain' => 'España', 'fiestas' => 'Fiestas', 'cadaques' => 'Cadaqués'],
+        'ca' => ['Save & Next' => 'Desa i continua', 'Website' => 'Web', 'Spain' => 'Espanya', 'fiestas' => 'Festes', 'cadaques' => 'Cadaqués',
+                 $V1 => 'Església de Santa Maria de Cadaqués i altres espais del poble', $V2 => 'Cadaqués (recorregut pel centre del poble, pendent de confirmar)', $V3 => 'Cadaqués (carrers i places del poble)'],
+        'en' => ['fiestas' => 'Festivities', 'cadaques' => 'Cadaqués',
+                 $V1 => 'Church of Santa Maria, Cadaqués, and other spots in the village', $V2 => 'Cadaqués (route through the village centre, to be confirmed)', $V3 => 'Cadaqués (streets and squares of the village)'],
+        'fr' => ['Spain' => 'Espagne', 'fiestas' => 'Fêtes', 'cadaques' => 'Cadaqués',
+                 $V1 => 'Église Santa Maria de Cadaqués et autres lieux du village', $V2 => 'Cadaqués (parcours dans le centre du village, à confirmer)', $V3 => 'Cadaqués (rues et places du village)'],
+    ];
+}
 /* ---------- 5. Ajustes del HTML de cada página (todas las lenguas) ---------- */
 function cqs_audit_months($s, $l) {
     $en = ['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -177,7 +208,7 @@ function cqs_audit_ob($h) {
         $h = preg_replace_callback('#(<div class="ssi-listing__meta">\s*)<span>[^<:]+:\s*([^<]+)</span>#u', fn($m) => $m[1].'<span>'.$L[0].($l === 'fr' ? ' : ' : ': ').cqs_audit_months(trim($m[2]), $l).'</span> <span class="cq-check'.($ok ? ' is-ok' : '').'">'.($ok ? '✓ '.$L[1] : $L[2]).'</span>', $h, 1);
     }
     // Imágenes de la biblioteca: width/height y srcset (tamaño por el nombre del archivo o por el adjunto; caché en cqs_imgdims)
-    $n = 0; static $C = null; if ($C === null) $C = (array)get_option('cqs_imgdims', []); $dirty = false; $budget = 40;
+    $n = 0; static $C = null; if ($C === null) $C = (array)get_option('cqs_imgdims', []); $dirty = false; $budget = 150;
     $up = wp_upload_dir(); $base = $up['baseurl']; $bdir = $up['basedir'];
     $h = preg_replace_callback('#<img\b([^>]*)>#i', function ($m) use (&$n, &$C, &$dirty, &$budget, $base, $bdir) {
         $a = $m[1];
@@ -211,17 +242,22 @@ function cqs_audit_ob($h) {
     }, $h) ?? $h;
     if ($dirty) { if (count($C) > 8000) $C = array_slice($C, -6000, null, true); update_option('cqs_imgdims', $C, false); }
     // Textos fuera de scripts: formulario de opiniones (es/ca) y meses (ca)
-    if (in_array($l, ['es', 'ca'], true)) {
-        $U = cqs_audit_ui()[$l];
-        $h = preg_replace_callback('#(<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>|<textarea\b[^>]*>.*?</textarea>)|>([^<>]+)(?=<)|\b(placeholder|aria-label|title|data-label)="([^"]*)"#is', function ($m) use ($U, $l) {
+    $U = (in_array($l, ['es', 'ca'], true) ? cqs_audit_ui()[$l] : []) + (cqs_audit_xmap()[$l] ?? []);
+    if ($U) {
+        $h = preg_replace_callback('#(<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>|<textarea\b[^>]*>.*?</textarea>)|>([^<>]+)(?=<)|\b(placeholder|aria-label|title|data-label)="([^"]*)"|(<(?:input|button)\b[^>]*\bvalue=")([^"]*)"#is', function ($m) use ($U, $l) {
             if (!empty($m[1])) return $m[0];
             if (!empty($m[3])) { $v = html_entity_decode($m[4], ENT_QUOTES, 'UTF-8'); return isset($U[$v]) ? $m[3].'="'.esc_attr($U[$v]).'"' : $m[0]; }
+            if (!empty($m[5])) { $v = html_entity_decode($m[6], ENT_QUOTES, 'UTF-8'); return isset($U[$v]) ? $m[5].esc_attr($U[$v]).'"' : $m[0]; }
+            if (!isset($m[2]) || $m[2] === '') return $m[0];
             $raw = $m[2]; $t = trim(html_entity_decode($raw, ENT_QUOTES, 'UTF-8'), " \t\n\r\0\x0B\xC2\xA0");
             if ($t === '') return $m[0];
             if (isset($U[$t])) return '>'.str_replace($t, esc_html($U[$t]), html_entity_decode($raw, ENT_QUOTES, 'UTF-8'));
             if ($l === 'ca' && preg_match('/\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/', $raw)) return '>'.cqs_audit_months($raw, 'ca');
             return $m[0];
         }, $h) ?? $h;
+    }
+    if (in_array($l, ['es', 'ca'], true)) {
+        $U = cqs_audit_ui()[$l];
         // Textos de validación del formulario (van en un script)
         $h = preg_replace_callback('#GLSR\.validation_strings=\{.*?\};#s', function ($m) use ($U) { $s = $m[0]; foreach ($U as $a => $b) $s = str_replace('"'.$a.'"', '"'.addslashes($b).'"', $s); return $s; }, $h);
         $h = str_replace('GLSR.text={"close_modal":"Close Modal"}', 'GLSR.text={"close_modal":"'.$U['Close Modal'].'"}', $h);
@@ -408,6 +444,40 @@ add_action('wp_loaded', function () {
     }
     cqs_out('audit-ev2.json', $rep);
 }, 71);
+/* Tercera vuelta: textos de las calas (Cala Nans y francés), nombre francés de la Casa-Museu Dalí, índice A–Z sin fichas «-2» */
+function cqs_audit_beaches_fr() {
+    return ['platja-gran' => 'La plage du village, de galets, face au front de mer.', 'es-poal' => 'Petite plage à côté de la Platja Gran, entre les maisons de pêcheurs.',
+            'es-llane' => 'Crique au sud du village, aux eaux claires, à quelques minutes à pied.', 'sa-conca' => 'Crique abritée sur le chemin de Portlligat, idéale pour nager.',
+            'portlligat' => 'La baie de Dalí, avec des barques de pêche et la maison-musée au fond.', 'cala-nans' => 'Près du phare de Cala Nans, par le sentier côtier (1 h – 1 h 15).',
+            'cala-guillola' => 'Dans le parc naturel du Cap de Creus, fond de sable et eau transparente.', 'cala-culip' => 'Crique du Cap de Creus, idéale pour le snorkeling.'];
+}
+add_action('wp_loaded', function () {
+    if (get_option('cqs_x3') === 'x1' || !function_exists('cqs_out')) return;
+    update_option('cqs_x3', 'x1', false);
+    $rep = [];
+    foreach (cqs_audit_beaches_fr() as $k => $fr) {
+        $x = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'suppress_filters' => true, 'lang' => '', 'meta_key' => '_ssi_source', 'meta_value' => 'cqs:platja:'.$k]);
+        if (!$x) { $rep[$k] = 'no está'; continue; } $id = (int)$x[0];
+        update_post_meta($id, '_ssi_content_fr', '<p>'.$fr.'</p>');
+        if ($k === 'cala-nans') {
+            wp_update_post(['ID' => $id, 'post_content' => '<p>Junto al faro de Cala Nans, por el camino de ronda (1 h – 1 h 15).</p>']);
+            update_post_meta($id, '_ssi_content_ca', '<p>Al costat del far de Cala Nans, pel camí de ronda (1 h – 1 h 15).</p>');
+            update_post_meta($id, '_ssi_content_en', '<p>By Cala Nans lighthouse, along the coastal path (1 hr – 1 hr 15).</p>');
+        }
+        $rep[$k] = $id;
+    }
+    global $wpdb;
+    foreach ($wpdb->get_results("SELECT p.ID, p.post_title, m.meta_value AS en FROM {$wpdb->posts} p JOIN {$wpdb->postmeta} m ON m.post_id=p.ID AND m.meta_key='_ssi_title_en' WHERE p.post_type='at_biz_dir' AND p.post_status='publish' AND m.meta_value<>'' AND m.meta_value<>p.post_title") as $r) {
+        if (trim((string)get_post_meta($r->ID, '_ssi_title_fr', true)) !== '') continue;
+        $fr = function_exists('cqs_fr_ui') ? (cqs_fr_ui()['d'][$r->en] ?? '') : '';
+        if (stripos($r->en, 'House-Museum Salvador Dal') !== false || stripos($r->en, 'Salvador Dalí House-Museum') !== false) $fr = 'Maison-musée Salvador Dalí';
+        if ($fr !== '') update_post_meta($r->ID, '_ssi_title_fr', $fr);
+        $rep['titulos_en'][] = $r->post_title.' | '.$r->en.' → '.($fr ?: '(sin cambio)');
+    }
+    foreach (['es', 'ca', 'en', 'fr'] as $L) delete_transient('cqs_idx_'.$L.'_'.CQS_BUILD_VER);
+    if (function_exists('litespeed_purge_all')) litespeed_purge_all(); else do_action('litespeed_purge_all');
+    cqs_out('audit-x3.json', $rep);
+}, 72);
 /* Fichas duplicadas: se repite tras cada montaje (el montaje recupera fichas de la papelera) */
 function cqs_audit_dedupe() {
     // Fichas duplicadas (La Gritta, Sa Botiga, Galeria Cadaqués): se queda la más completa; las otras a la papelera con redirección
@@ -444,6 +514,7 @@ function cqs_audit_dedupe() {
     }
     foreach ($map as $sl => $kid) if (get_post_status($kid) === 'publish' && get_post_field('post_name', $kid) === $sl) unset($map[$sl]);
     update_option('cqs_dup_map', $map, false); update_option('cqs_dup_keys', $blk, false);
+    foreach (['es', 'ca', 'en', 'fr'] as $L) delete_transient('cqs_idx_'.$L.'_'.CQS_BUILD_VER);
     return $rep;
 }
 add_action('wp_loaded', function () {
@@ -466,14 +537,14 @@ add_action('wp_loaded', function () {
 
 /* ---------- 7. Comprobación desde fuera (out/audit-*.html y out/audit-check.json), una vez por versión ---------- */
 add_action('wp_loaded', function () {
-    $v = 'c7'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
+    $v = 'c8'; if (get_option('cqs_audit_once') !== 'o1' || get_option('cqs_audit_check') === $v || get_transient('cqs_audit_lock') || get_transient('cqs_audit_clock') || !function_exists('cqs_out')) return;
     set_transient('cqs_audit_clock', 1, 600);
     $U = [];
     $s = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'tax_query' => [['taxonomy' => 'at_biz_dir-category', 'field' => 'slug', 'terms' => ['apartamentos-turisticos', 'hoteles', 'dormir'], 'include_children' => true]]]);
     if ($s) { foreach (['es', 'ca', 'en', 'fr'] as $L) $U['sleep-'.$L] = ssi_xl_permalink($s[0], $L); }
     $ev = get_posts(['post_type' => 'tribe_events', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => 'primer-sol-2027', 'suppress_filters' => true, 'lang' => '']);
     if ($ev) { $U['event-fr'] = ssi_xl_permalink($ev[0], 'fr'); $U['event-ca'] = ssi_xl_permalink($ev[0], 'ca'); }
-    $U['home-en'] = home_url('/en/');
+    $U['home-en'] = home_url('/en/'); $U['calanans-fr'] = home_url('/fr/directory/cala-nans/'); $U['add-es'] = function_exists('ssi_link') ? ssi_link('add', 'es') : '';
     $U['repsol-fr'] = home_url('/fr/directory/repsol/'); $U['notaria-es'] = home_url('/directory/notaria-de-cadaques-maria-del-carmen-rusinol-riba/'); $U['visit-ca'] = home_url('/ca/que-visitar/');
     $U['fm-en'] = ($fm = get_posts(['post_type' => 'tribe_events', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => 'fm-hivern-2026', 'suppress_filters' => true, 'lang' => ''])) ? ssi_xl_permalink($fm[0], 'en') : '';
     $dir = function_exists('ssi_link') ? ssi_link('directory', 'fr') : ''; if ($dir) $U['dir-fr-p2'] = trailingslashit($dir).'page/2/';
@@ -484,11 +555,11 @@ add_action('wp_loaded', function () {
         if (is_wp_error($r)) { $out[$k] = $r->get_error_message(); continue; }
         @file_put_contents(SSI_DIR.'out/audit-'.$k.'.html', wp_remote_retrieve_body($r)); $out[$k] = [$u, wp_remote_retrieve_response_code($r)];
     }
-    foreach (['/fr/directory/', '/en/privacy-policy-2/', '/en/privacy-policy/', '/wp-sitemap.xml', '/wp-sitemap-ssilistings-fr-1.xml', '/wp-content/uploads/fonts/figtree-latin.woff2', '/wp-content/uploads/fonts/bricolage-grotesque-latin.woff2', '/directory/la-gritta-2/', '/directory/sa-botiga-2/', '/directory/galeria-cadaques-2/', '/directory/la-gritta/', '/directory/sa-botiga/', '/directory/galeria-cadaques/', '/fr/directory/la-gritta-2/'] as $p) {
+    foreach (['/fr/directory/', '/en/privacy-policy-2/', '/en/privacy-policy/', '/wp-sitemap.xml', '/wp-sitemap-ssilistings-fr-1.xml', '/wp-content/uploads/fonts/figtree-latin.woff2', '/wp-content/uploads/fonts/bricolage-grotesque-latin.woff2', '/directory/la-gritta-2/', '/directory/sa-botiga-2/', '/directory/galeria-cadaques-2/', '/directory/la-gritta/', '/directory/sa-botiga/', '/directory/galeria-cadaques/', '/fr/directory/la-gritta-2/', '/wp-sitemap-ssievents-fr-1.xml'] as $p) {
         $r = wp_remote_get(home_url($p), ['timeout' => 30, 'sslverify' => false, 'redirection' => 0]);
         $out['head'][$p] = is_wp_error($r) ? $r->get_error_message() : wp_remote_retrieve_response_code($r).' '.wp_remote_retrieve_header($r, 'location').' '.strlen(wp_remote_retrieve_body($r));
     }
     if ($s) { $r = wp_remote_get(trailingslashit(get_permalink($s[0])).'feed/', ['timeout' => 30, 'sslverify' => false, 'redirection' => 0]); $out['head']['feed'] = is_wp_error($r) ? $r->get_error_message() : wp_remote_retrieve_response_code($r).' '.wp_remote_retrieve_header($r, 'location'); }
-    cqs_out('audit-check.json', $out);
+    $out['t'] = gmdate('c'); cqs_out('audit-check.json', $out);
     update_option('cqs_audit_check', $v, false);
 }, 80);

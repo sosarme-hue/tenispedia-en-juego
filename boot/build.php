@@ -655,7 +655,7 @@ function cqs_step_beaches() {
      ['es-llane', 'Es Llané Gran', 42.2843, 3.2779, ['Cala al sur del pueblo, de aguas claras, a pocos minutos a pie.', 'Cala al sud del poble, d’aigües clares, a pocs minuts a peu.', 'Clear-water cove south of the village, a few minutes’ walk.']],
      ['sa-conca', 'Sa Conca', 42.2947, 3.2822, ['Cala abrigada camino de Portlligat, buena para nadar.', 'Cala arrecerada camí de Portlligat, bona per nedar.', 'Sheltered cove on the way to Portlligat, good for swimming.']],
      ['portlligat', 'Platja de Portlligat', 42.2928, 3.2878, ['La bahía de Dalí, con barcas de pesca y la casa-museo al fondo.', 'La badia de Dalí, amb barques de pesca i la casa-museu al fons.', 'Dalí’s bay, with fishing boats and the house-museum behind.']],
-     ['cala-nans', 'Cala Nans', 42.2727, 3.2856, ['Junto al faro de Cala Nans, por el camino de ronda (unos 45 min).', 'Al costat del far de Cala Nans, pel camí de ronda (uns 45 min).', 'By Cala Nans lighthouse, along the coastal path (about 45 min).']],
+     ['cala-nans', 'Cala Nans', 42.2727, 3.2856, ['Junto al faro de Cala Nans, por el camino de ronda (1 h – 1 h 15).', 'Al costat del far de Cala Nans, pel camí de ronda (1 h – 1 h 15).', 'By Cala Nans lighthouse, along the coastal path (1 hr – 1 hr 15).']],
      ['cala-guillola', 'Cala Guillola', 42.3060, 3.2934, ['En el Parque Natural del Cap de Creus, fondo de arena y agua transparente.', 'Al Parc Natural del Cap de Creus, fons de sorra i aigua transparent.', 'In Cap de Creus Natural Park, sandy bottom and clear water.']],
      ['cala-culip', 'Cala Culip', 42.3226, 3.3034, ['Cala del Cap de Creus, ideal para esnórquel.', 'Cala del Cap de Creus, ideal per fer snorkel.', 'A Cap de Creus cove, ideal for snorkelling.']],
     ];
@@ -671,6 +671,7 @@ function cqs_step_beaches() {
     $r = eiv_fichas_run(cqs_req(['fichas' => $f]));
     $pub = (array)get_option('ssi_public_listings', []);
     foreach ($r['fichas'] ?? [] as $x) if (!empty($x['id'])) $pub[] = get_post_field('post_name', $x['id']);
+    if (function_exists('cqs_audit_beaches_fr')) foreach ($r['fichas'] ?? [] as $x) if (!empty($x['id']) && preg_match('/^cqs:platja:(.+)$/', (string)($x['key'] ?? ''), $bk) && isset(cqs_audit_beaches_fr()[$bk[1]])) update_post_meta($x['id'], '_ssi_content_fr', '<p>'.cqs_audit_beaches_fr()[$bk[1]].'</p>');
     update_option('ssi_public_listings', array_values(array_unique($pub)));
     return ['calas' => count($f), 'coordenadas_osm' => $found];
 }
