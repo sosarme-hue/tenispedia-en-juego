@@ -622,10 +622,5 @@ add_action('wp_loaded', function () {
     delete_option('cqs_formtest'); // vuelve a probar los formularios con el nuevo destino
 }, 69);
 
-/* Correo público de contacto (25/11/2026, decisión de Alex): en toda la web se anuncia su correo de administrador en lugar de info@cadaques.si. */
-define('CQS_PUBLIC_MAIL', 'partenopides@gmail.com');
-add_action('template_redirect', function () {
-    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST)) return;
-    ob_start(fn($h) => str_ireplace('info@cadaques.si', CQS_PUBLIC_MAIL, $h));
-}, 1);
-add_filter('wpcf7_display_message', fn($m) => str_ireplace('info@cadaques.si', CQS_PUBLIC_MAIL, $m));
+/* Correo público de contacto: info@cadaques.si (Alex, 25/11/2026: se mantiene info@, con reenvío a su Gmail; lo revisará en 6 meses).
+   Los formularios siguen llegando directos al Gmail de administrador (opción cqs_forms_to). */
