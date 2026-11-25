@@ -17,6 +17,7 @@ add_shortcode('eiv_ferry', '__return_empty_string');
 
 /* Francés: idioma real de la página (el núcleo trabaja con es, ca y en; en las páginas en francés usa el inglés como base) */
 function cqs_cur_lang() {
+    if (function_exists('ssi_xl_request') && ($x = ssi_xl_request())) return !empty($x['fr']) ? 'fr' : $x['lang']; // fichas y eventos: el idioma va en la URL
     $l = function_exists('pll_current_language') ? pll_current_language('slug') : '';
     return in_array($l, ['es', 'ca', 'en', 'fr'], true) ? $l : 'es';
 }
@@ -451,7 +452,7 @@ add_action('wp_loaded', function () {
 
 /* Copia del HTML de algunas páginas (out/snap-*.html) para revisarlas desde fuera; una vez por versión */
 add_action('wp_loaded', function () {
-    $v = 's10'; if (get_option('cqs_build') !== CQS_BUILD_VER || get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
+    $v = 's11'; if (get_option('cqs_build') !== CQS_BUILD_VER || get_option('cqs_snap') === $v || get_transient('cqs_snap_lock') || !function_exists('cqs_out')) return;
     set_transient('cqs_snap_lock', 1, 600);
     $P = ['home' => home_url('/'), 'visit' => function_exists('cqs_voice_url') ? '' : ''];
     $x = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => 'visit:es']]]);
@@ -461,7 +462,7 @@ add_action('wp_loaded', function () {
     foreach (['voice:es' => 'voice-es', 'voice:ca' => 'voice-ca', 'voice:en' => 'voice-en', 'voice:fr' => 'voice-fr'] as $kk => $nm) { $z = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => $kk]]]); if ($z) $P[$nm] = get_permalink($z[0]); }
     $lz = get_posts(['post_type' => 'at_biz_dir', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'lang' => 'es', 'orderby' => 'title', 'order' => 'ASC']);
     if ($lz) $P['listing'] = get_permalink($lz[0]);
-    if ($lz && function_exists('ssi_xl_permalink')) { $P['listing-fr'] = ssi_xl_permalink($lz[0], 'fr'); $P['listing-en'] = ssi_xl_permalink($lz[0], 'en'); }
+    if ($lz && function_exists('ssi_xl_permalink')) { $P['listing-fr'] = home_url('/fr/directory/'.get_post_field('post_name', $lz[0]).'/'); $P['listing-en'] = ssi_xl_permalink($lz[0], 'en'); }
     foreach (['add:fr' => 'add-fr', 'services:fr' => 'services-fr', 'directory:fr' => 'directory-fr'] as $kk => $nm) { $z = get_posts(['post_type' => 'page', 'numberposts' => 1, 'fields' => 'ids', 'lang' => '', 'suppress_filters' => true, 'meta_query' => [['key' => '_cqs_key', 'value' => $kk]]]); if ($z) $P[$nm] = get_permalink($z[0]); }
     foreach (array_filter($P) as $k => $u) {
         $r = wp_remote_get(add_query_arg('nocache', time(), $u), ['timeout' => 30, 'sslverify' => false]);
@@ -636,3 +637,66 @@ add_action('kadence_footer', function () {
     foreach ($S as $d => $n) $a[] = '<a href="https://'.$d.'/" rel="noopener">'.esc_html($n).' Sí</a>';
     echo '<nav class="cqs-sisters" aria-label="'.esc_attr($lab).'"><div class="ssi-wrap"><span class="cqs-sisters__t">'.esc_html($lab).':</span> '.implode('<span aria-hidden="true"> · </span>', $a).'</div></nav>';
 }, 11);
+
+/* Francés en fichas, directorio, alta de negocio y opiniones (25/11/2026).
+   El núcleo y los plugins usan el inglés como base para el francés; aquí se traducen al vuelo los textos de la interfaz
+   (solo nodos de texto y placeholder/aria-label/title/botones; nunca scripts ni estilos). Diccionario: data/fr-ui.json */
+function cqs_fr_ui() { static $x = null; if ($x === null) { $x = json_decode((string)@file_get_contents(SSI_DIR.'data/fr-ui.json'), true) ?: ['d' => [], 'm' => []]; } return $x; }
+function cqs_fr_tr($s) {
+    $X = cqs_fr_ui(); $D = $X['d']; if (trim($s) === '') return $s;
+    $all = html_entity_decode($s, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    if (!preg_match('/^([\s\x{00A0}]*)(.*?)([\s\x{00A0}]*)$/su', $all, $w)) return $s;
+    $pre = esc_html($w[1]); $post = esc_html($w[3]); $dec = $w[2]; if ($dec === '') return $s;
+    $r = null;
+    if (isset($D[$dec])) $r = $D[$dec];
+    elseif (preg_match('/^(.+?) →$/u', $dec, $m) && isset($D[$m[1]])) $r = $D[$m[1]].' →';
+    elseif (preg_match('/^More in (.+)$/u', $dec, $m)) $r = 'Plus dans la catégorie '.($D[$m[1]] ?? $m[1]);
+    elseif (preg_match('/^(.*) — Created and run by$/u', $dec, $m)) $r = $m[1].' — Créé et géré par';
+    elseif (preg_match('/^(\d+) places?$/u', $dec, $m)) $r = $m[1].' lieux';
+    elseif (preg_match('/^(\d+) of (\d+) on the map(.*)$/u', $dec, $m)) $r = $m[1].' sur '.$m[2].' sur la carte'.$m[3];
+    elseif (strpos($dec, ' · ') !== false) { $p = explode(' · ', $dec); $ch = false; foreach ($p as &$q) if (isset($D[$q])) { $q = $D[$q]; $ch = true; } unset($q); if ($ch) $r = implode(' · ', $p); }
+    if ($r === null && preg_match('/\b(January|February|March|April|May|June|July|August|September|October|November|December)\b/', $dec)) {
+        $r = preg_replace_callback('/\b(\d{1,2}) (January|February|March|April|May|June|July|August|September|October|November|December) (\d{4})\b/', fn($m) => $m[1].' '.$X['m'][$m[2]].' '.$m[3], $dec);
+        $r = preg_replace('/^Updated:/', 'Mis à jour :', $r);
+        if ($r === $dec) $r = null;
+    }
+    return $r === null ? $s : $pre.esc_html($r).$post;
+}
+function cqs_fr_ob($h) {
+    if (stripos($h, '<html') === false) return $h;
+    return preg_replace_callback('#(<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>|<textarea\b[^>]*>.*?</textarea>)|>([^<>]+)(?=<)|\b(placeholder|aria-label|title|data-label)="([^"]*)"|(<input\b[^>]*\btype="(?:submit|button)"[^>]*\bvalue=")([^"]*)"#is', function ($m) {
+        if (!empty($m[1])) return $m[0];
+        if (isset($m[2]) && $m[2] !== '' && empty($m[3]) && empty($m[5])) return '>'.cqs_fr_tr($m[2]);
+        if (!empty($m[3])) { $r = cqs_fr_tr($m[4]); return $m[3].'="'.esc_attr(html_entity_decode(trim($r), ENT_QUOTES, 'UTF-8')).'"'; }
+        if (!empty($m[5])) { $r = cqs_fr_tr($m[6]); return $m[5].esc_attr(html_entity_decode(trim($r), ENT_QUOTES, 'UTF-8')).'"'; }
+        return $m[0];
+    }, $h) ?? $h;
+}
+add_action('template_redirect', function () {
+    if (is_admin() || wp_doing_ajax() || (defined('REST_REQUEST') && REST_REQUEST) || cqs_cur_lang() !== 'fr') return;
+    ob_start('cqs_fr_ob');
+}, 0);
+
+/* Fichas en francés con su propia dirección (/fr/directory/x/) en lugar de la inglesa (25/11/2026).
+   Cambio puntual de inc/lang-urls.php, aplicado una vez (y también en boot/patches.php para futuras copias del núcleo). */
+function cqs_fr_url_patches() {
+    return [
+        ['inc/lang-urls.php', "\$re = '#^(ca|en)/('", "\$re = '#^(ca|en|fr)/('"],
+        ['inc/lang-urls.php', "\$m = preg_match(\$re, \$path, \$x) ? ['lang'=>\$x[1],", "\$m = preg_match(\$re, \$path, \$x) ? ['lang'=>(\$x[1] === 'fr' ? 'en' : \$x[1]), 'fr'=>(\$x[1] === 'fr'),"],
+        ['inc/lang-urls.php', "if (preg_match('#^(ca|en)/#', \$rest)) \$rest = substr(\$rest, 3);", "\$rest = preg_replace('#^((ca|en|fr)/)+#', '', \$rest);"],
+        ['inc/lang-urls.php', "return ssi_xl_url(\$url, \$GLOBALS['ssi_force_lang'] ?? ssi_lang());", "return ssi_xl_url(\$url, \$GLOBALS['ssi_force_lang'] ?? (function_exists('cqs_cur_lang') ? cqs_cur_lang() : ssi_lang()));"],
+        ['inc/lang-urls.php', "\$rest = preg_replace('#^(ca|en)/#', '', substr(\$u, strlen(\$root)));", "\$rest = preg_replace('#^((ca|en|fr)/)+#', '', substr(\$u, strlen(\$root)));"],
+        ['inc/lang-urls.php', "foreach (['es'=>'es-ES','ca'=>'ca','en'=>'en-GB'] as \$l=>\$h)", "foreach (['es'=>'es-ES','ca'=>'ca','en'=>'en-GB','fr'=>'fr-FR'] as \$l=>\$h)"],
+    ];
+}
+add_action('init', function () {
+    if (get_option('cqs_fr_urls') === 'u1') return;
+    update_option('cqs_fr_urls', 'u1', false);
+    $rep = [];
+    foreach (cqs_fr_url_patches() as $i => [$f, $a, $b]) {
+        $p = SSI_DIR.$f; $c = (string)@file_get_contents($p); $n = substr_count($c, $a);
+        if ($n) file_put_contents($p, str_replace($a, $b, $c));
+        $rep[] = "#$i ".($n ? "$n cambio(s)" : (strpos($c, $b) !== false ? 'ya estaba' : 'NO ENCAJA'));
+    }
+    if (function_exists('cqs_out')) cqs_out('fr-urls.txt', implode("\n", $rep));
+}, 1);

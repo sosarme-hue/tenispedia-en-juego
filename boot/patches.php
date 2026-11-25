@@ -34,4 +34,11 @@ return [
     ['inc/listing.php', 'if ($la < 38.62 || $la > 39.14 || $ln < 1.14 || $ln > 1.66) continue;', 'if ($la < 42.20 || $la > 42.40 || $ln < 3.10 || $ln > 3.40) continue;'],
     ['inc/addform.php', "'viewbox' => '1.14,39.14,1.66,38.62'", "'viewbox' => '3.10,42.40,3.40,42.20'"],
     ['assets/cadaques-si.js', '.setView([38.8700,1.4000],10)', '.setView([42.2886,3.2776],14)'],
+    // Fichas en francés con dirección propia /fr/directory/x/ (25/11/2026; también se aplica una vez desde cq/site.php)
+    ['inc/lang-urls.php', "\$re = '#^(ca|en)/('", "\$re = '#^(ca|en|fr)/('"],
+    ['inc/lang-urls.php', "\$m = preg_match(\$re, \$path, \$x) ? ['lang'=>\$x[1],", "\$m = preg_match(\$re, \$path, \$x) ? ['lang'=>(\$x[1] === 'fr' ? 'en' : \$x[1]), 'fr'=>(\$x[1] === 'fr'),"],
+    ['inc/lang-urls.php', "if (preg_match('#^(ca|en)/#', \$rest)) \$rest = substr(\$rest, 3);", "\$rest = preg_replace('#^((ca|en|fr)/)+#', '', \$rest);"],
+    ['inc/lang-urls.php', "return ssi_xl_url(\$url, \$GLOBALS['ssi_force_lang'] ?? ssi_lang());", "return ssi_xl_url(\$url, \$GLOBALS['ssi_force_lang'] ?? (function_exists('cqs_cur_lang') ? cqs_cur_lang() : ssi_lang()));"],
+    ['inc/lang-urls.php', "\$rest = preg_replace('#^(ca|en)/#', '', substr(\$u, strlen(\$root)));", "\$rest = preg_replace('#^((ca|en|fr)/)+#', '', substr(\$u, strlen(\$root)));"],
+    ['inc/lang-urls.php', "foreach (['es'=>'es-ES','ca'=>'ca','en'=>'en-GB'] as \$l=>\$h)", "foreach (['es'=>'es-ES','ca'=>'ca','en'=>'en-GB','fr'=>'fr-FR'] as \$l=>\$h)"],
 ];
