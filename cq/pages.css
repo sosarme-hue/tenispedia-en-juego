@@ -119,3 +119,10 @@ body{background:var(--eiv-cal)}
 /* Aviso destacado (p. ej. recoger entradas en la Casa-Museu Dalí) */
 .cq-note{background:#FFF6DC;border-left:5px solid #E0A400;border-radius:10px;padding:16px 20px;margin:0;font-size:17px;line-height:1.55;color:#1d2a33}
 .cq-note strong{color:#7a4f00}
+
+/* Auditoría 25/11/2026 */
+.cq-check{display:inline-block;margin-left:8px;font-size:13px;color:#5b6770}
+.cq-check.is-ok{color:#1d7a46;font-weight:600}
+.cq-norev{font-size:13px;color:#5b6770;font-weight:400}
+.cqs-contact{text-align:center;font-size:14px;margin:6px 0 0}
+.cqs-contact a{color:inherit}

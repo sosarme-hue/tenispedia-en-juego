@@ -719,7 +719,7 @@ function cqs_step_menu() {
         $menus = $byL; $created = true;
     }
     $rep = ['theme' => $theme, 'menus' => $menus];
-    $want = [['routes', 'visit'], ['sports', 'routes'], ['transport', 'live'], ['culture', 'agenda'], ['shop', 'sleep']];
+    $want = [['routes', 'visit'], ['sports', 'routes'], ['culture', 'agenda'], ['shop', 'sleep']];
     $lbl = ['routes' => ['es' => 'Rutas y excursiones', 'ca' => 'Rutes i excursions', 'en' => 'Walks and day trips', 'fr' => 'Randonnées'],
             'sports' => ['es' => 'Deportes', 'ca' => 'Esports', 'en' => 'Sports', 'fr' => 'Sports'],
             'transport' => ['es' => 'Transporte', 'ca' => 'Transport', 'en' => 'Getting around', 'fr' => 'Transports'],

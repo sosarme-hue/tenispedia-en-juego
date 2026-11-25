@@ -30,5 +30,6 @@ function ssi_town($a) {
 if (CQS_CORE && file_exists(SSI_DIR.'inc/i18n.php')) {
     foreach (cqs_core_files() as $f) if (file_exists(SSI_DIR.'inc/'.$f.'.php')) require_once SSI_DIR.'inc/'.$f.'.php';
     require_once SSI_DIR.'cq/site.php';
+    require_once SSI_DIR.'cq/audit.php';
     require_once SSI_DIR.'boot/build.php';
 }

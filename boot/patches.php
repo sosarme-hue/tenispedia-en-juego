@@ -41,4 +41,10 @@ return [
     ['inc/lang-urls.php', "return ssi_xl_url(\$url, \$GLOBALS['ssi_force_lang'] ?? ssi_lang());", "return ssi_xl_url(\$url, \$GLOBALS['ssi_force_lang'] ?? (function_exists('cqs_cur_lang') ? cqs_cur_lang() : ssi_lang()));"],
     ['inc/lang-urls.php', "\$rest = preg_replace('#^(ca|en)/#', '', substr(\$u, strlen(\$root)));", "\$rest = preg_replace('#^((ca|en|fr)/)+#', '', substr(\$u, strlen(\$root)));"],
     ['inc/lang-urls.php', "foreach (['es'=>'es-ES','ca'=>'ca','en'=>'en-GB'] as \$l=>\$h)", "foreach (['es'=>'es-ES','ca'=>'ca','en'=>'en-GB','fr'=>'fr-FR'] as \$l=>\$h)"],
+    // Auditoría 25/11/2026 (también se aplica una vez desde cq/audit.php)
+    ['inc/i18n.php', "if (!isset(\$ids[\$key]) && \$key === 'services') \$key = 'shop';", "if (!isset(\$ids[\$key]) && \$key === 'services') \$key = 'shop';\n    if (!isset(\$ids[\$key]) && \$key === 'stay') \$key = 'sleep';"],
+    ['inc/seo.php', "return ['ca' => (object)['name' => 'ca'], 'en' => (object)['name' => 'en']]; }", "return ['ca' => (object)['name' => 'ca'], 'en' => (object)['name' => 'en'], 'fr' => (object)['name' => 'fr']]; }"],
+    ['inc/seo.php', "if (!in_array(\$subtype, ['ca', 'en'], true)) return [];", "if (!in_array(\$subtype, ['ca', 'en', 'fr'], true)) return [];"],
+    ['inc/seo.php', "'#^((?:ca|en)/)?directory/([^/]+)\$#'", "'#^((?:ca|en|fr)/)?directory/([^/]+)\$#'"],
+    ['inc/dir-i18n.php', "'psiquiatria'=>['Psiquiatria','Psychiatry'],", "'psiquiatria'=>['Psiquiatria','Psychiatry'],\n   'alimentacion-y-mercados'=>['Alimentació i mercats','Food and markets'],'mercadillos'=>['Mercats ambulants','Street markets'],'naturaleza-y-rutas'=>['Natura i rutes','Nature and trails'],'playas-y-calas'=>['Platges i cales','Beaches and coves'],'centros-de-salud'=>['Centres de salut','Health centres'],'hospitales'=>['Hospitals','Hospitals'],'urgencias'=>['Urgències','Emergencies'],"],
 ];

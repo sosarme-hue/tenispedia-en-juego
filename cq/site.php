@@ -149,7 +149,7 @@ add_action('wp_footer', function () { ?>
 add_filter('document_title_parts', function ($p) {
     if (is_front_page() || (function_exists('ssi_is_home_page') && ssi_is_home_page())) return $p;
     // Cada idioma con su propio título (la auditoría veía títulos repetidos entre ES/CA/EN/FR: fichas, Agenda, Mapa…)
-    $l = function_exists('ssi_lang') ? ssi_lang() : cqs_cur_lang(); if (!in_array($l, ['es', 'ca', 'en', 'fr'], true)) $l = cqs_cur_lang();
+    $l = cqs_cur_lang(); // ssi_lang() da 'en' en las páginas en francés
     $site = ['es' => 'Cadaqués Sí', 'ca' => 'Guia Cadaqués Sí', 'en' => 'Cadaqués Sí guide', 'fr' => 'Guide Cadaqués Sí'][$l];
     if (!empty($p['title'])) {
         if ($l === 'es' && is_singular('at_biz_dir') && mb_strlen(wp_strip_all_tags($p['title'])) > 44) unset($p['site']);
@@ -301,7 +301,7 @@ function cqs_voice_url($l) {
 }
 add_action('wp_footer', function () {
     if (!is_singular('at_biz_dir')) return;
-    $l = function_exists('ssi_lang') ? ssi_lang() : cqs_cur_lang(); if (!in_array($l, ['es', 'ca', 'en', 'fr'], true)) $l = cqs_cur_lang();
+    $l = cqs_cur_lang(); // ssi_lang() da 'en' en las páginas en francés
     $voice = cqs_voice_url($l) ?: cqs_voice_url('es'); if (!$voice) return;
     $id = get_queried_object_id();
     $link = function_exists('ssi_xl_permalink') ? ssi_xl_permalink($id, $l) : get_permalink($id);
@@ -665,7 +665,10 @@ function cqs_fr_tr($s) {
 function cqs_fr_ob($h) {
     if (stripos($h, '<html') === false) return $h;
     $root = untrailingslashit(home_url());
+    $keep = []; // las líneas hreflang no se tocan (la de en-GB debe seguir en /en/)
+    $h = preg_replace_callback('#<link rel="alternate" hreflang="[^"]+" href="[^"]*"\s*/?>#', function ($m) use (&$keep) { $k = '<!--cqfr'.count($keep).'-->'; $keep[$k] = $m[0]; return $k; }, $h);
     $h = str_replace([$root.'/en/directory/', $root.'/en/event/', '"/en/directory/', '.si\\/en\\/directory\\/'], [$root.'/fr/directory/', $root.'/fr/event/', '"/fr/directory/', '.si\\/fr\\/directory\\/'], $h); // fichas y eventos en su versión francesa
+    $h = strtr($h, $keep);
     return preg_replace_callback('#(<script\b[^>]*>.*?</script>|<style\b[^>]*>.*?</style>|<textarea\b[^>]*>.*?</textarea>)|>([^<>]+)(?=<)|\b(placeholder|aria-label|title|data-label)="([^"]*)"|(<input\b[^>]*\btype="(?:submit|button)"[^>]*\bvalue=")([^"]*)"#is', function ($m) {
         if (!empty($m[1])) return $m[0];
         if (isset($m[2]) && $m[2] !== '' && empty($m[3]) && empty($m[5])) return '>'.cqs_fr_tr($m[2]);
