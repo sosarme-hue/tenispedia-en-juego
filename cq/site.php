@@ -600,3 +600,15 @@ add_action('wp_loaded', function () {
     $r['C_replyto_web'] = wp_mail('info@cadaques.si', 'Cadaqués Sí · Prueba C', sprintf($body, 'web@cadaques.si'), ['Reply-To: web@cadaques.si']);
     $r['ts'] = wp_date('c'); cqs_out('spam-test.json', $r);
 }, 71);
+
+/* Destino de los formularios (25/11/2026, decisión de Alex): su correo de administrador. Se aplica una vez a los 16 formularios. */
+add_action('wp_loaded', function () {
+    $to = 'partenopides@gmail.com';
+    if (get_option('cqs_forms_to') === $to || !class_exists('WPCF7_ContactForm')) return;
+    update_option('cqs_forms_to', $to);
+    foreach ((array)get_option('cqs_cf7', []) as $byL) foreach ((array)$byL as $id) {
+        $cf = WPCF7_ContactForm::get_instance((int)$id); if (!$cf) continue;
+        $m = $cf->prop('mail'); $m['recipient'] = $to; $cf->set_properties(['mail' => $m]); $cf->save();
+    }
+    delete_option('cqs_formtest'); // vuelve a probar los formularios con el nuevo destino
+}, 69);
