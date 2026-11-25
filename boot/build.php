@@ -233,6 +233,8 @@ function cqs_step_photos() {
         if (!empty($cr[$k]['id']) && get_post($cr[$k]['id'])) { $rep[$k] = 'ya estaba'; continue; }
         if (($prev[$k] ?? '') === 'no encontrada' && !empty($c['once'])) { $rep[$k] = 'no encontrada'; continue; }
         if (microtime(true) - $T0 > 75) { cqs_out('photos-report.json', $rep + $prev); throw new Exception('pendiente (fotos por tandas)'); } // el resto en la siguiente tanda
+        if (get_option('cqs_photo_try') === $k) { $rep[$k] = 'no encontrada'; delete_option('cqs_photo_try'); cqs_out('photos-report.json', $rep + $prev); continue; } // la anterior se colgó con esta: saltarla
+        update_option('cqs_photo_try', $k, false);
         $done = null;
         foreach ($c['try'] as $try) {
             $cands = array_slice(cqs_wm_candidates($try), 0, 12); if (!$cands) continue;
@@ -242,6 +244,7 @@ function cqs_step_photos() {
                 $done = cqs_wm_sideload($k, $t, $ii, $c['alt']); if ($done) { $done['via'] = $try; $used[$ii['descriptionurl'] ?? ''] = 1; break 2; } }
         }
         $rep[$k] = $done ?: 'no encontrada';
+        delete_option('cqs_photo_try'); cqs_out('photos-report.json', $rep + $prev);
     }
     // Fotos antiguas para Historia: solo si el archivo es de Cadaqués (quita las de otros pueblos de tandas anteriores)
     $isCq = fn($t) => (bool)preg_match('/cadaqu/i', remove_accents(rawurldecode((string)$t)));
