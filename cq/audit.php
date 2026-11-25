@@ -613,3 +613,19 @@ add_action('wp_loaded', function () {
     cqs_out('audit-ev3.json', $rep);
     do_action('litespeed_purge_all');
 }, 35);
+
+/* Agenda de visitcadaques.org (25/11/2026, aprobado por Alex): copia del HTML de sus meses para preparar la importación semanal */
+add_action('wp_loaded', function () {
+    $v = 'g1'; if (get_option('cqs_ag_raw') === $v || get_transient('cqs_ag_raw_lock') || !function_exists('cqs_out')) return;
+    set_transient('cqs_ag_raw_lock', 1, 600); @set_time_limit(200);
+    $U = ['vc-2026-12' => 'https://visitcadaques.org/?ano=2026&lang=cat&mes=12&sec=agenda', 'vc-2027-01' => 'https://visitcadaques.org/?ano=2027&lang=cat&mes=1&sec=agenda',
+          'vc-2026-01' => 'https://visitcadaques.org/?ano=2026&lang=cat&mes=1&sec=agenda'];
+    $o = [];
+    foreach ($U as $k => $u) {
+        $r = wp_remote_get($u, ['timeout' => 25, 'redirection' => 5, 'user-agent' => 'Mozilla/5.0 (compatible; CadaquesSi/1.0; +https://cadaques.si)']);
+        if (is_wp_error($r)) { $o[$k] = $r->get_error_message(); continue; }
+        $b = wp_remote_retrieve_body($r); $o[$k] = [wp_remote_retrieve_response_code($r), strlen($b)];
+        cqs_out('agraw-'.$k.'.html', $b);
+    }
+    cqs_out('agraw.json', $o); update_option('cqs_ag_raw', $v, false);
+}, 70);
