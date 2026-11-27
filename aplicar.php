@@ -140,6 +140,14 @@ foreach (recorrer($dom, ['html', 'htm'], saltar_base($dom)) as $rel) {
 }
 inf("[celebraciones] $nf archivos · $nn notas quitadas de tarjetas · $nv filas de valoración cambiadas por enlace ($sinpid sin place_id, quitadas) · Ej.: " . implode(', ', $ej));
 if ($quedan) inf("  aviso: aún quedan notas en: " . implode(', ', $quedan));
+// datos públicos: fichas.json guarda nota y votos de Google; se dejan en null
+$fj = raiz($dom) . '/fichas.json';
+if (file_exists($fj)) {
+  $s = file_get_contents($fj);
+  $t = preg_replace('#"(rating|votos)":\s*[0-9.]+#', '"$1": null', $s, -1, $c);
+  if ($c) guardar($dom, 'fichas.json', $t, 'celebraciones');
+  inf("  fichas.json: $c valores de nota/votos puestos a null");
+}
 // generadores que podrían volver a ponerlas
 $gen = [];
 foreach (recorrer($dom, ['php', 'js', 'json', 'py'], saltar_base($dom)) as $rel) {
