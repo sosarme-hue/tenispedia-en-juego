@@ -60,10 +60,12 @@ function saltar_base($dom) {
 }
 
 $ops = json_decode(file_get_contents("$AQUI/ops.json"), true);
+$SOLO = $orden['solo'] ?? null; // lista de secciones a ejecutar; null = licencia, dia y celebraciones
+function toca($sec) { global $SOLO; return $SOLO === null ? $sec !== 'extra' : in_array($sec, $SOLO); }
 inf("Arreglos Mariano · id $ID · modo $MODO · " . date('c'));
 
 // 1) Licencia: sustituciones literales en todo el árbol
-foreach ($ops['licencia']['dominios'] as $dom) {
+foreach (toca('licencia') ? $ops['licencia']['dominios'] : [] as $dom) {
   if (!is_dir(raiz($dom))) { inf("[licencia] $dom: NO EXISTE"); continue; }
   $n = 0; $nf = 0; $lista = [];
   foreach (recorrer($dom, $ops['licencia']['ext'], saltar_base($dom)) as $rel) {
@@ -82,7 +84,7 @@ foreach ($ops['licencia']['dominios'] as $dom) {
 
 // 2) Bloques del día: operaciones por archivo
 $porArchivo = [];
-foreach ($ops['dia'] as $o) $porArchivo[$o['dominio'] . '|' . $o['archivo']][] = $o;
+foreach (toca('dia') ? $ops['dia'] : [] as $o) $porArchivo[$o['dominio'] . '|' . $o['archivo']][] = $o;
 foreach ($porArchivo as $k => $lista) {
   [$dom, $rel] = explode('|', $k); $f = raiz($dom) . "/$rel";
   if (!file_exists($f)) { inf("[dia] $dom/$rel: NO EXISTE"); continue; }
@@ -117,6 +119,7 @@ foreach ($porArchivo as $k => $lista) {
 }
 
 // 3) Celebraciones: quitar notas de Google guardadas
+if (toca('celebraciones')) {
 $cel = $ops['celebraciones']; $dom = $cel['dominio'];
 $nf = 0; $nn = 0; $nv = 0; $sinpid = 0; $ej = []; $quedan = [];
 foreach (recorrer($dom, ['html', 'htm'], saltar_base($dom)) as $rel) {
@@ -155,6 +158,17 @@ foreach (recorrer($dom, ['php', 'js', 'json', 'py'], saltar_base($dom)) as $rel)
   if (preg_match('#(opiniones en Google|opinions a Google|Google reviews|userRatingCount|"rating")#', $s)) $gen[] = $rel;
 }
 inf("  archivos de código o datos que mencionan valoraciones: " . ($gen ? implode(', ', array_slice($gen, 0, 30)) : 'ninguno'));
+}
+// 4) Extra: sustituciones literales por dominio (solo con "solo": ["extra"])
+foreach (toca('extra') ? ($ops['extra'] ?? []) : [] as $x) {
+  $dom = $x['dominio']; $nf = 0; $n = 0;
+  foreach (recorrer($dom, $x['ext'], saltar_base($dom)) as $rel) {
+    $s = file_get_contents(raiz($dom) . "/$rel"); $t = $s; $k = 0;
+    foreach ($x['pares'] as [$a, $b]) { if (strpos($t, $b) !== false) continue; $t = str_replace($a, $b, $t, $c); $k += $c; }
+    if ($k) { $nf++; $n += $k; guardar($dom, $rel, $t, 'extra'); }
+  }
+  inf("[extra] $dom: $nf archivos, $n cambios");
+}
 
 $r = implode("\n", $INF) . "\nArchivos escritos: $ESCRITOS\n";
 file_put_contents("$AQUI/informes/$ID.txt", $r);
