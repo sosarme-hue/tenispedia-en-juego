@@ -66,6 +66,40 @@ add_filter('tribe_json_ld_event_object', function ($data, $args = [], $post = nu
     $data->eventStatus = 'https://schema.org/EventScheduled';
     return $data;
 }, 30, 3);
+/* JSON-LD de eventos (28/11/2026, aviso de Search Console): image, offers y organizer en todos los eventos.
+   image: la foto del evento o, si no tiene, una foto de la guía del lugar o tipo de acto. offers: enlace a la fuente, en euros, precio 0 solo si el texto dice que es gratuito.
+   organizer: el que consta en el evento; si no, la entidad que aparece en el título; si no, el Ajuntament de Cadaqués, que publica la agenda municipal. */
+function cqs_ev_img_for($post) {
+    $im = (array)get_option('cqs_imgs', []);
+    $txt = mb_strtolower($post->post_title.' '.(is_array($l = get_post_meta($post->ID, '_cqs_loc', true)) ? ($l['name'] ?? '') : '').' '.wp_strip_all_tags($post->post_content));
+    $pick = [['/cap de creus|sol ixent|far |torre de les creus|camins/u', 'cm_capfar'], ['/missa|ofici|esglés|iglesi|iglesia|gospel|coral|canta/u', 'cm_church'],
+             ['/platja|plaja|capbussada|llané|mar\b/u', 'cm_llane'], ['/portlligat|dalí/u', 'cm_portlligat'], ['/sardan|festa major|ball|passeig|portal/u', 'cm_statue']];
+    $k = 'hero'; foreach ($pick as [$re, $kk]) if (preg_match($re, $txt)) { $k = $kk; break; }
+    foreach ([$k, 'hero', 'cm_church'] as $kk) if (!empty($im[$kk]) && ($u = wp_get_attachment_image_url((int)$im[$kk], 'large'))) return $u;
+    return '';
+}
+add_filter('tribe_json_ld_event_object', function ($data, $args = [], $post = null) {
+    if (!is_object($data) || !($post instanceof WP_Post)) return $data;
+    if (empty($data->image)) {
+        $u = has_post_thumbnail($post) ? get_the_post_thumbnail_url($post, 'large') : cqs_ev_img_for($post);
+        if ($u) $data->image = [$u];
+    }
+    if (empty($data->organizer)) {
+        $all = $post->post_title.' '.wp_strip_all_tags($post->post_content);
+        $known = ['Unió Esportiva Cadaqués', 'Societat l’Amistat', "Societat l'Amistat", 'Escola de Música de Cadaqués', 'Fundació Hospital de Cadaqués', 'Ràdio Cap de Creus', 'Art i Joia'];
+        $org = ''; foreach ($known as $k) if (mb_stripos($post->post_title, $k) !== false) { $org = str_replace("'", '’', $k); break; }
+        $data->organizer = $org !== '' ? (object)['@type' => 'Organization', 'name' => $org]
+                                       : (object)['@type' => 'Organization', 'name' => 'Ajuntament de Cadaqués', 'url' => 'https://www.cadaques.cat/'];
+    }
+    if (empty($data->offers)) {
+        $txt = mb_strtolower(wp_strip_all_tags($post->post_content.' '.get_post_meta($post->ID, '_ssi_content_ca', true).' '.get_post_meta($post->ID, '_EventCost', true)));
+        $o = ['@type' => 'Offer', 'url' => (string)(get_post_meta($post->ID, '_cqs_src', true) ?: get_permalink($post)), 'priceCurrency' => 'EUR',
+              'availability' => 'https://schema.org/InStock', 'validFrom' => get_post_time('c', true, $post)];
+        if (preg_match('/gratu[iï]t|gratuita|gratis|gratuito|\bfree\b|entrada lliure|entrada libre|accés lliure|acceso libre|obert a tothom/u', $txt)) $o['price'] = '0';
+        $data->offers = (object)$o;
+    }
+    return $data;
+}, 40, 3);
 /* Sitemap de eventos en catalán, inglés y francés (wp-sitemap-ssievents-ca-1.xml…) */
 add_action('init', function () {
     if (!class_exists('WP_Sitemaps_Provider') || !function_exists('wp_register_sitemap_provider') || !function_exists('ssi_xl_permalink') || class_exists('CQS_Sitemap_Events')) return;
@@ -632,9 +666,13 @@ add_action('wp_loaded', function () {
 
 /* Copia rápida de páginas concretas (out/q-*.html), una vez por versión de la lista */
 add_action('wp_loaded', function () {
-    $v = 'q1'; if (get_option('cqs_snapq') === $v || get_transient('cqs_snapq_lock') || !function_exists('cqs_out')) return;
+    $v = 'q2'; if (get_option('cqs_snapq') === $v || get_transient('cqs_snapq_lock') || !function_exists('cqs_out')) return;
     set_transient('cqs_snapq_lock', 1, 300);
-    foreach (['beaches-es' => '/playas-y-calas/', 'beaches-en' => '/en/beaches-and-coves/'] as $k => $p) {
+    $ev = get_posts(['post_type' => 'tribe_events', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_src', 'meta_compare' => 'EXISTS', 'suppress_filters' => true, 'lang' => '', 'orderby' => 'ID', 'order' => 'DESC']);
+    $Q = ['home-es' => '/'];
+    if ($ev && function_exists('ssi_xl_permalink')) { $Q['ev-es'] = wp_make_link_relative(ssi_xl_permalink($ev[0], 'es')); $Q['ev-fr'] = wp_make_link_relative(ssi_xl_permalink($ev[0], 'fr')); }
+    if ($fm = get_posts(['post_type' => 'tribe_events', 'post_status' => 'publish', 'numberposts' => 1, 'fields' => 'ids', 'meta_key' => '_cqs_key', 'meta_value' => 'fm-hivern-2026', 'suppress_filters' => true, 'lang' => ''])) $Q['ev-fm'] = wp_make_link_relative(get_permalink($fm[0]));
+    foreach ($Q as $k => $p) {
         $r = wp_remote_get(add_query_arg('nocache', time(), home_url($p)), ['timeout' => 40, 'sslverify' => false]);
         if (!is_wp_error($r)) @file_put_contents(SSI_DIR.'out/q-'.$k.'.html', wp_remote_retrieve_body($r));
     }
